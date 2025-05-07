@@ -55,10 +55,10 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance, ~ignoreLayer)) {
             Debug.Log(hit.collider.name);
-            Interact grab = hit.collider.GetComponent<Interact>();
+            IInteract grab = hit.collider.GetComponent<IInteract>();
 
             if (grab != null) {
-                grab.Pickup();
+                grab.Interact(gameObject);
             }
         }
     }

@@ -4,7 +4,7 @@ using System.Collections;
 
 //Put this Script on any object to be picked up by the player//
 
-public class InteractScript : MonoBehaviour, Interact
+public class InteractScript : MonoBehaviour, IInteract
 {
     [SerializeField] Renderer model;
 
@@ -22,7 +22,7 @@ public class InteractScript : MonoBehaviour, Interact
         
     }
 
-    public void Pickup()
+    public void Interact(GameObject item)
     {
         StartCoroutine(FlashColor());
     }
