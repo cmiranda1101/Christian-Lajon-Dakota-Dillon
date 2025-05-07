@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2790331831195721896}
   - component: {fileID: 6586301590535105592}
   - component: {fileID: 6424166112582740086}
+  - component: {fileID: 8919729240593498748}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -109,6 +110,22 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5295801228899495335}
   m_Enabled: 1
+--- !u!114 &8919729240593498748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5295801228899495335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59de84142c233c846a127a828062a0a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sens: 300
+  lockVertMin: -90
+  lockVertMax: 90
+  invertY: 0
 --- !u!1 &6374008597755258018
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,10 +136,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6243271664613544961}
   - component: {fileID: 630162919537611489}
-  - component: {fileID: 4564405297631183533}
   - component: {fileID: 6751032025218997563}
   - component: {fileID: 3482579366448131116}
   - component: {fileID: 2994383251808035004}
+  - component: {fileID: 2728863688780039371}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -158,33 +175,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0474c6058150e4e4eaa1c98299c5802c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 4564405297631183533}
+  characterController: {fileID: 2728863688780039371}
+  flashlight: {fileID: 0}
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 8
   speed: 5
---- !u!143 &4564405297631183533
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6374008597755258018}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  grabDistance: 10
 --- !u!33 &6751032025218997563
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -260,4 +257,29 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!143 &2728863688780039371
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6374008597755258018}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
