@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         MovePlayer();
+        SwapWeapons();
 
         if (Input.GetButtonDown("Toggle Flashlight"))
         {
@@ -75,26 +76,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void SwapWeapons(int _numKeyPressed)
+    void SwapWeapons()
     {
-        switch (_numKeyPressed)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && heldWeapon != pistol)
         {
-        case 1:
-            if (heldWeapon != pistol)
-            {
-                heldWeapon.SetActive(false);
-                pistol.SetActive(true);
-                heldWeapon = pistol;
-            }
-            break;
-        case 2:
-            if (heldWeapon != rifle)
-            {
-                heldWeapon.SetActive(false);
-                rifle.SetActive(true);
-                heldWeapon = rifle;
-            }
-            break;
+            heldWeapon.SetActive(false);
+            pistol.SetActive(true);
+            heldWeapon = pistol;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) && heldWeapon != rifle)
+        {
+            heldWeapon.SetActive(false);
+            rifle.SetActive(true);
+            heldWeapon = rifle;
         }
     }
 }
