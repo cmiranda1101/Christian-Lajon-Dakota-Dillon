@@ -8,23 +8,27 @@ public class GunBase : MonoBehaviour
     [SerializeField] float fireRate;
 
     int currentBullets;
+    int magCount = 3;
     float shotTimer = 0;
+
+
+    GameObject enemyHit;
+    EnemyAI enemyScript;
 
     void Start()
     {
         currentBullets = magSize;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * range, Color.blue);
         shotTimer += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && currentBullets > 0)
+        if (Input.GetButtonDown("Fire1") && currentBullets > 0 && shotTimer > fireRate)
         {
             Fire();
         }
-        if (Input.GetButton("Reload") && currentBullets != magSize)
+        if (Input.GetButton("Reload") && currentBullets != magSize && magCount > 0)
         {
             Reload();
         }
@@ -32,15 +36,18 @@ public class GunBase : MonoBehaviour
 
     void Fire()
     {
-        if (shotTimer > fireRate)
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
+            Debug.Log(hit.collider.name);
+            if (hit.transform.CompareTag("Enemy"))
             {
-                Debug.Log(hit.collider.name);
+                enemyHit = hit.transform.gameObject;
+                enemyScript = enemyHit.GetComponent<EnemyAI>();
+                enemyScript.takeDamage(damage);
             }
-            currentBullets--;
         }
+        currentBullets--;
         if (currentBullets <= 0)
         {
             Debug.Log("Out of bullets");
@@ -50,6 +57,7 @@ public class GunBase : MonoBehaviour
     void Reload()
     {
         currentBullets = magSize;
-        Debug.Log("Reloaded");
+        magCount--;
+        Debug.Log("Reloaded " + magCount + " magazines remaining");
     }
 }

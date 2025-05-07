@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] CharacterController characterController;
-    [SerializeField] GameObject flashlight;
+
 
     [SerializeField] LayerMask ignoreLayer;
 
@@ -12,19 +12,30 @@ public class PlayerController : MonoBehaviour
 
     Vector3 moveDirection;
 
+    GameObject flashlight;
+    GameObject pistol;
+    GameObject rifle;
+    GameObject heldWeapon;
+
     void Start()
     {
-
+        flashlight = GameObject.Find("FlashLight");
+        pistol = transform.GetChild(1).gameObject;
+        rifle = transform.GetChild(2).gameObject;
+        heldWeapon = pistol;
     }
 
     void Update()
     {
         MovePlayer();
+        SwapWeapons();
 
-        if (Input.GetButtonDown("Toggle Flashlight")) {
+        if (Input.GetButtonDown("Toggle Flashlight"))
+        {
             ToggleFlashlight();
         }
-        else if (Input.GetButtonDown("Interact")) {
+        else if (Input.GetButtonDown("Interact"))
+        {
             GrabObject();
         }
 
@@ -39,10 +50,12 @@ public class PlayerController : MonoBehaviour
 
     void ToggleFlashlight()
     {
-        if (flashlight.gameObject.activeSelf == true) {
+        if (flashlight.gameObject.activeSelf == true)
+        {
             flashlight.SetActive(false);
         }
-        else {
+        else
+        {
             flashlight.SetActive(true);
         }
     }
@@ -51,13 +64,31 @@ public class PlayerController : MonoBehaviour
     {
         //Check if something is grabbed
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance, ~ignoreLayer)) {
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance, ~ignoreLayer))
+        {
             Debug.Log(hit.collider.name);
             Interact grab = hit.collider.GetComponent<Interact>();
 
-            if (grab != null) {
+            if (grab != null)
+            {
                 grab.Pickup();
             }
+        }
+    }
+
+    void SwapWeapons()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && heldWeapon != pistol)
+        {
+            heldWeapon.SetActive(false);
+            pistol.SetActive(true);
+            heldWeapon = pistol;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) && heldWeapon != rifle)
+        {
+            heldWeapon.SetActive(false);
+            rifle.SetActive(true);
+            heldWeapon = rifle;
         }
     }
 }
