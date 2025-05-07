@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 52049985}
   - component: {fileID: 52049984}
   - component: {fileID: 52049983}
-  - component: {fileID: 52049986}
   m_Layer: 5
   m_Name: HotbarSlot2
   m_TagString: Untagged
@@ -211,22 +210,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52049981}
   m_CullTransparentMesh: 1
---- !u!114 &52049986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 52049981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9900b91dce6f305468c37aa39208b4b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  weaponPrefab: {fileID: 0}
-  equippedWeapon: {fileID: 0}
-  hotkey: 50
 --- !u!1 &71601138
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,20 +417,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1792572183259483164, guid: 3f96a7fa00383004c97a0ff33c25a197, type: 3}
+    - {fileID: 1513371557381549950, guid: 3f96a7fa00383004c97a0ff33c25a197, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f96a7fa00383004c97a0ff33c25a197, type: 3}
---- !u!1 &204748202 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4610580412531050131, guid: 3f96a7fa00383004c97a0ff33c25a197, type: 3}
-  m_PrefabInstance: {fileID: 204748201}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &204748203 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6374008597755258018, guid: 3f96a7fa00383004c97a0ff33c25a197, type: 3}
-  m_PrefabInstance: {fileID: 204748201}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &452559486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -727,6 +701,7 @@ RectTransform:
   - {fileID: 1584698671}
   - {fileID: 667394247}
   - {fileID: 1250945068}
+  - {fileID: 1245602992}
   m_Father: {fileID: 191141082633152675}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -760,6 +735,81 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1245602991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1245602992}
+  - component: {fileID: 1245602994}
+  - component: {fileID: 1245602993}
+  m_Layer: 5
+  m_Name: Rifle-IMG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1245602992
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245602991}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1045833466}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 100.25, y: -39.5}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1245602993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245602991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 210f7077cfba5a24ea12012ab413fb06, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1245602994
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245602991}
+  m_CullTransparentMesh: 1
 --- !u!1 &1250945067
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,7 +897,6 @@ GameObject:
   - component: {fileID: 1262701375}
   - component: {fileID: 1262701374}
   - component: {fileID: 1262701373}
-  - component: {fileID: 1262701376}
   m_Layer: 5
   m_Name: HotbarSlot1
   m_TagString: Untagged
@@ -927,22 +976,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262701371}
   m_CullTransparentMesh: 1
---- !u!114 &1262701376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262701371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9900b91dce6f305468c37aa39208b4b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 204748203}
-  weaponPrefab: {fileID: 4493368667877536924, guid: ea978309a52dc714cacb3ab0643ebcf2, type: 3}
-  equippedWeapon: {fileID: 204748202}
-  hotkey: 49
 --- !u!1 &1584698670
 GameObject:
   m_ObjectHideFlags: 0
