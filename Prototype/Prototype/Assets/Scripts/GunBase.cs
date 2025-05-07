@@ -30,7 +30,7 @@ public class GunBase : MonoBehaviour
         }
     }
 
-    void Fire()
+    public void Fire()
     {
         if (shotTimer > fireRate)
         {
