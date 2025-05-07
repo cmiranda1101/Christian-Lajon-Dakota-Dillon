@@ -34,7 +34,7 @@ public class GunBase : MonoBehaviour
         }
     }
 
-    void Fire()
+    public void Fire()
     {
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
