@@ -5,22 +5,29 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CharacterController characterController;
     [SerializeField] GameObject flashlight;
 
+    [SerializeField] LayerMask ignoreLayer;
+
     [SerializeField] int speed;
+    [SerializeField] int grabDistance;
 
     Vector3 moveDirection;
 
     void Start()
     {
-        
+
     }
 
     void Update()
     {
         MovePlayer();
-        if (Input.GetButtonDown("Toggle Flashlight"))
-        {
+
+        if (Input.GetButtonDown("Toggle Flashlight")) {
             ToggleFlashlight();
         }
+        else if (Input.GetButtonDown("Interact")) {
+            GrabObject();
+        }
+
     }
 
     void MovePlayer()
@@ -29,15 +36,28 @@ public class PlayerController : MonoBehaviour
         characterController.Move(moveDirection * speed * Time.deltaTime);
     }
 
+
     void ToggleFlashlight()
     {
-        if (flashlight.gameObject.activeSelf == true)
-        {
+        if (flashlight.gameObject.activeSelf == true) {
             flashlight.SetActive(false);
         }
-        else
-        {
+        else {
             flashlight.SetActive(true);
+        }
+    }
+
+    void GrabObject()
+    {
+        //Check if something is grabbed
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance, ~ignoreLayer)) {
+            Debug.Log(hit.collider.name);
+            Interact grab = hit.collider.GetComponent<Interact>();
+
+            if (grab != null) {
+                grab.Pickup();
+            }
         }
     }
 }
