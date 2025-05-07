@@ -21,13 +21,14 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
 
-        if (Input.GetButtonDown("Toggle Flashlight")) {
-            ToggleFlashlight();
-        }
-        else if (Input.GetButtonDown("Interact")) {
+        if (Input.GetButtonDown("Interact")) {
             GrabObject();
         }
-
+    
+        if (Input.GetButtonDown("Toggle Flashlight"))
+        {
+            ToggleFlashlight();
+        }
     }
 
     void MovePlayer()
@@ -36,13 +37,14 @@ public class PlayerController : MonoBehaviour
         characterController.Move(moveDirection * speed * Time.deltaTime);
     }
 
-
     void ToggleFlashlight()
     {
-        if (flashlight.gameObject.activeSelf == true) {
+        if (flashlight.gameObject.activeSelf == true)
+        {
             flashlight.SetActive(false);
         }
-        else {
+        else
+        {
             flashlight.SetActive(true);
         }
     }
