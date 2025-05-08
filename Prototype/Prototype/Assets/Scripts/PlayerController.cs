@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         flashlight = GameObject.Find("FlashLight");
         pistol = transform.GetChild(1).gameObject;
-        rifle = transform.GetChild(2).gameObject;
+        //rifle = transform.GetChild(2).gameObject;
         heldWeapon = pistol;
     }
 
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         {
             ToggleFlashlight();
         }
-        else if (Input.GetButtonDown("Interact"))
+        if (Input.GetButtonDown("Interact"))
         {
             GrabObject();
         }
@@ -67,11 +67,11 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance, ~ignoreLayer))
         {
             Debug.Log(hit.collider.name);
-            Interact grab = hit.collider.GetComponent<Interact>();
+            IInteract grab = hit.collider.GetComponent<IInteract>();
 
             if (grab != null)
             {
-                grab.Pickup();
+                grab.Interact(gameObject);
             }
         }
     }
