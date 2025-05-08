@@ -7,7 +7,9 @@ using System.Collections;
 public class InteractScript : MonoBehaviour, IInteract
 {
     [SerializeField] Renderer model;
-    public GameObject item;
+
+    [SerializeField] int healthAmount;
+    [SerializeField] int ammoAmount;
 
     Color originColor;
 
@@ -28,18 +30,23 @@ public class InteractScript : MonoBehaviour, IInteract
         StartCoroutine(FlashColor());
 
         if (item.CompareTag("Health")) {
-            GameManager.instance.playerScript.Heal(10);
+            GameManager.instance.playerScript.Heal(healthAmount);
+        }
+        else if (item.CompareTag("Ammo")) {
+            GameManager.instance.weaponScript.PickUpAmmo();
         }
     }
 
     IEnumerator FlashColor()
     {
         //Give feedback on interaction
-        model.material.color = Color.green;
+        model.material.color = Color.white;
         yield return new WaitForSeconds(0.2f);
         model.material.color = originColor;
 
         //Destroy obj
         Destroy(gameObject);
     }
+
+
 }
