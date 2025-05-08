@@ -60,4 +60,9 @@ public class GunBase : MonoBehaviour
         magCount--;
         Debug.Log("Reloaded " + magCount + " magazines remaining");
     }
+
+    public void PickUpAmmo()
+    {
+        magCount++;
+    }
 }

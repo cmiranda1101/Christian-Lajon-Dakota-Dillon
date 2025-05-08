@@ -5,7 +5,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public GameObject player;
+    public GameObject weapon;
     public PlayerController playerScript;
+    public GunBase weaponScript;
 
 
 
@@ -14,7 +16,9 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
+        weapon = GameObject.FindWithTag("Weapon");
         playerScript = player.GetComponent<PlayerController>();
+        weaponScript = weapon.GetComponent<GunBase>();
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
