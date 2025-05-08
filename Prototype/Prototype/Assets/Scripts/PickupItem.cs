@@ -9,7 +9,6 @@ public class InteractScript : MonoBehaviour, IInteract
     [SerializeField] Renderer model;
 
     [SerializeField] int healthAmount;
-    [SerializeField] int ammoAmount;
 
     Color originColor;
 
@@ -25,16 +24,17 @@ public class InteractScript : MonoBehaviour, IInteract
         
     }
 
-    public void Interact(GameObject item)
+    public void Interact()
     {
-        StartCoroutine(FlashColor());
-
-        if (item.CompareTag("Health")) {
+        if (gameObject.CompareTag("Health")) {
             GameManager.instance.playerScript.Heal(healthAmount);
+            Debug.Log("Healed " + healthAmount + " health.");
         }
-        else if (item.CompareTag("Ammo")) {
+        else if (gameObject.CompareTag("Ammo")) {
             GameManager.instance.weaponScript.PickUpAmmo();
         }
+
+        StartCoroutine(FlashColor());
     }
 
     IEnumerator FlashColor()
