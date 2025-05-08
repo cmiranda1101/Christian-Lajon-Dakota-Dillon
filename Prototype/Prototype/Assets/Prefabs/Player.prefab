@@ -260,7 +260,7 @@ MonoBehaviour:
   characterController: {fileID: 4564405297631183533}
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   speed: 5
   grabDistance: 5
   HP: 10

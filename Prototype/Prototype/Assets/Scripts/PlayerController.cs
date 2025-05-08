@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
             if (grab != null)
             {
-                grab.Interact(gameObject);
+                grab.Interact();
             }
         }
     }
