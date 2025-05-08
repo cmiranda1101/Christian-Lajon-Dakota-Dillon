@@ -85,12 +85,12 @@ public class PlayerController : MonoBehaviour
             pistol.SetActive(true);
             heldWeapon = pistol;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && heldWeapon != rifle)
-        {
-            heldWeapon.SetActive(false);
-            rifle.SetActive(true);
-            heldWeapon = rifle;
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha2) && heldWeapon != rifle)
+        //{
+        //    heldWeapon.SetActive(false);
+        //    rifle.SetActive(true);
+        //    heldWeapon = rifle;
+        //}
     }
 
     public void Heal(int amount)
