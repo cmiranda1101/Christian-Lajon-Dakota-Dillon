@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] int speed;
     [SerializeField] int grabDistance;
+    [SerializeField] int HP;
 
     Vector3 moveDirection;
 
@@ -90,5 +91,10 @@ public class PlayerController : MonoBehaviour
             rifle.SetActive(true);
             heldWeapon = rifle;
         }
+    }
+
+    public void Heal(int amount)
+    {
+        HP += amount;
     }
 }

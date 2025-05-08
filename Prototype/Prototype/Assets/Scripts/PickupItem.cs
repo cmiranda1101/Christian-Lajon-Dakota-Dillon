@@ -7,6 +7,7 @@ using System.Collections;
 public class InteractScript : MonoBehaviour, IInteract
 {
     [SerializeField] Renderer model;
+    public GameObject item;
 
     Color originColor;
 
@@ -25,6 +26,10 @@ public class InteractScript : MonoBehaviour, IInteract
     public void Interact(GameObject item)
     {
         StartCoroutine(FlashColor());
+
+        if (item.CompareTag("Health")) {
+            GameManager.instance.playerScript.Heal(10);
+        }
     }
 
     IEnumerator FlashColor()
