@@ -11,8 +11,6 @@ public class GunBase : MonoBehaviour
     int magCount = 3;
     float shotTimer = 0;
 
-
-
     void Start()
     {
         currentBullets = magSize;
