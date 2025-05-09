@@ -1,107 +1,108 @@
 using UnityEngine;
+using UnityEngine.AI;
 using System.Collections;
 
-public class EnemyAI : MonoBehaviour, IDamage
+public class EnemyAIMelee : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
+    [SerializeField] NavMeshAgent agent;
+
     [SerializeField] int HP;
-    [SerializeField] float moveSpeed;
     [SerializeField] float meleeRange;
     [SerializeField] float meleeDamage;
     [SerializeField] float meleeCooldown;
-    [SerializeField] float nextMeleeTime;
 
+    float nextMeleeTime;
+    Color originalColor;
 
-    bool isAttacking = false;
-
+    bool playerInRange;
     Transform player;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        originalColor = model.material.color;
+        player = GameManager.instance.player.transform;
+        GameManager.instance.UpdateGameGoal(1);
     }
 
     void Update()
     {
-        if (player == null) return;
+        if (player == null || !playerInRange) return;
 
-        
-        MoveToPlayer();
-        melee();
-    }
+        // Move toward player
+        agent.SetDestination(player.position);
 
-    // Function to move the enemy toward the player
-    void MoveToPlayer()
-    {
-        // Calculate target position, keeping only X and Z for movement on the plane
-        Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, player.position.z);
-
-        // Move towards the player
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
-        // Rotate the enemy to face the player
-        Vector3 direction = (targetPosition - transform.position).normalized;
-        if (direction != Vector3.zero)
+        // Face the player if close enough
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            FacePlayer();
+            TryMeleeAttack();
         }
     }
 
-    
+    void FacePlayer()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    }
+
+    void TryMeleeAttack()
+    {
+        float distance = Vector3.Distance(transform.position, player.position);
+        if (Time.time >= nextMeleeTime && distance <= meleeRange)
+        {
+            IDamage damageable = player.GetComponent<IDamage>();
+            if (damageable != null)
+            {
+                damageable.takeDamage((int)meleeDamage);
+                Debug.Log($"Enemy melee hit {player.name} for {meleeDamage} damage.");
+            }
+            else
+            {
+                Debug.LogWarning($"Target {player.name} does not have an IDamage component.");
+            }
+
+            nextMeleeTime = Time.time + meleeCooldown;
+        }
+    }
+
     public void takeDamage(int damageAmount)
     {
         HP -= damageAmount;
+        agent.SetDestination(player.position);
 
-        // destroy if HP drops below or equal to 0
         if (HP <= 0)
         {
+            GameManager.instance.UpdateGameGoal(-1);
             Destroy(gameObject);
-        }
-
-        
-        StartCoroutine(FlashRed());
-    }
-
-    
-    IEnumerator FlashRed()
-    {
-        if (model != null)
-        {
-            Color originalColor = model.material.color;
-            model.material.color = Color.red;
-            yield return new WaitForSeconds(0.05f);
-            model.material.color = originalColor;
-        }
-    }
-    IEnumerator ResetAttack()
-    {
-        yield return new WaitForSeconds(meleeCooldown);
-        isAttacking = false;
-    }
-    void melee()
-    {
-        // attack range = enemy position - player position
-
-        // if attack range is >= vec3.distance(enemy position, player position
-
-        if (isAttacking) return; // prevent attack if already attacking
-
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        if (distanceToPlayer <= meleeRange&& Time.time >= nextMeleeTime)
-        {
-            IDamage damageable = player.GetComponent<IDamage>();
-            Debug.Log($"Enemy hit {player.name} for {meleeDamage} damage.");
         }
         else
         {
-            Debug.LogWarning($"Target {player.name} does not have an IDamage component.");
+            StartCoroutine(FlashRed());
         }
+    }
 
-        isAttacking = true;
-        nextMeleeTime = Time.time + meleeCooldown;
-        StartCoroutine(ResetAttack());
+    IEnumerator FlashRed()
+    {
+        model.material.color = Color.red;
+        yield return new WaitForSeconds(0.05f);
+        model.material.color = originalColor;
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
     }
 }
