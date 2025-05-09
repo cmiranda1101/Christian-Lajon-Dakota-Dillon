@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuHotbar;
+    [SerializeField] GameObject menuShop;
 
     public GameObject player;
     public GameObject weapon;
@@ -73,5 +74,19 @@ public class GameManager : MonoBehaviour
         gameGoalCount += amount;
 
         
+    }
+
+    public void OpenShop()
+    {
+        StatePause();
+        menuShop.SetActive(true);
+        menuActive = menuShop;
+        menuActive.SetActive(isPaused);
+    }
+
+    public void CloseShop()
+    {
+        StateUnpause();
+        menuShop.SetActive(false);
     }
 }
