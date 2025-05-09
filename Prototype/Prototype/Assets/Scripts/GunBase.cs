@@ -29,7 +29,7 @@ public class GunBase : MonoBehaviour
         {
             Fire();
         }
-        if (Input.GetButton("Reload") && currentBullets != magSize && magCount > 0)
+        if (Input.GetButtonDown("Reload") && currentBullets != magSize && magCount > 0)
         {
             Reload();
         }
@@ -38,6 +38,7 @@ public class GunBase : MonoBehaviour
     public void Fire()
     {
         RaycastHit hit;
+        shotTimer = 0;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
         {
             Debug.Log(hit.collider.name);
