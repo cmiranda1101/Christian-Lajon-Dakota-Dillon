@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(false);
         menuActive = null;
     }
-    public void updateGameGoal(int amount)
+    public void UpdateGameGoal(int amount)
     {
         gameGoalCount += amount;
 

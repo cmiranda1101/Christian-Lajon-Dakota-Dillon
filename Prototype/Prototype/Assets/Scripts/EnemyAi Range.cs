@@ -28,7 +28,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = model.material.color;
-        GameManager.instance.updateGameGoal(1);
+        GameManager.instance.UpdateGameGoal(1);
     }
 
     // Update is called once per frame
@@ -72,7 +72,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            GameManager.instance.updateGameGoal(-1);
+            GameManager.instance.UpdateGameGoal(-1);
             Destroy(gameObject);
         }
         else
