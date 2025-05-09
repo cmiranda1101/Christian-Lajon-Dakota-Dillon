@@ -4,7 +4,7 @@ using System.Collections;
 
 //Put this Script on any object to be picked up by the player//
 
-public class InteractScript : MonoBehaviour, IInteract
+public class PickUpItem : MonoBehaviour, IInteract
 {
     [SerializeField] Renderer model;
 
