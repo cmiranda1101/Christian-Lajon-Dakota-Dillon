@@ -4,9 +4,9 @@ using System.Collections;
 
 //Put this Script on any object to be picked up by the player//
 
-public class InteractScript : MonoBehaviour, IInteract
+public class PickUpItem : MonoBehaviour, IInteract
 {
-    [SerializeField] Renderer model;
+    [SerializeField] Renderer itemModel;
 
     [SerializeField] int healthAmount;
 
@@ -15,7 +15,7 @@ public class InteractScript : MonoBehaviour, IInteract
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        originColor = model.material.color;
+        originColor = itemModel.material.color;
     }
 
     // Update is called once per frame
@@ -40,9 +40,9 @@ public class InteractScript : MonoBehaviour, IInteract
     IEnumerator FlashColor()
     {
         //Give feedback on interaction
-        model.material.color = Color.white;
+        itemModel.material.color = Color.white;
         yield return new WaitForSeconds(0.2f);
-        model.material.color = originColor;
+        itemModel.material.color = originColor;
 
         //Destroy obj
         Destroy(gameObject);
