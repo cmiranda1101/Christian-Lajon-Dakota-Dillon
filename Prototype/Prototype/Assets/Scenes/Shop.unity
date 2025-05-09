@@ -317,6 +317,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1487130218744782926, guid: f7b2aed4fc16cfc40a2e498bc5bbb57e, type: 3}
+      propertyPath: menuPause
+      value: 
+      objectReference: {fileID: 1083487957}
     - target: {fileID: 9214835478406400877, guid: f7b2aed4fc16cfc40a2e498bc5bbb57e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -761,6 +765,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
   m_PrefabInstance: {fileID: 979736297}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1083487957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1225977342762366656, guid: f7b2aed4fc16cfc40a2e498bc5bbb57e, type: 3}
+  m_PrefabInstance: {fileID: 649649929}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1126853406
 PrefabInstance:
