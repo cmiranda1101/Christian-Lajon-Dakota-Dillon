@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
 
     float timeScaleOrig;
-    int gameGoalCount;
+    [SerializeField] int gameGoalCount;
 
     void Awake()
     {
@@ -49,10 +49,6 @@ public class GameManager : MonoBehaviour
                 menuActive = null;
             }
        }
-       if (gameGoalCount <= 0)
-       {
-            Win();
-       }
     }
 
     public void StatePause()
@@ -77,7 +73,10 @@ public class GameManager : MonoBehaviour
     public void UpdateGameGoal(int amount)
     {
         gameGoalCount += amount;
-
+        if (gameGoalCount <= 0)
+        {
+            Win();
+        }
         
     }
 
@@ -98,7 +97,7 @@ public class GameManager : MonoBehaviour
     public void Win()
     {
         StatePause();
-        menuWin.SetActive(true);
         menuActive = menuWin;
+        menuWin.SetActive(true);
     }
 }
