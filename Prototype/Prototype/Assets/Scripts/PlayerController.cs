@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController characterController;
 
@@ -99,5 +99,16 @@ public class PlayerController : MonoBehaviour
     public void Heal(int amount)
     {
         HP += amount;
+    }
+
+    public void takeDamage(int amount)
+    {
+        HP -= amount;
+
+        //Need to check for death
+        if (HP <= 0) {
+            //TODO uncomment below when we have a lose screen
+            //GameManager.instance.YouLose();
+        }
     }
 }

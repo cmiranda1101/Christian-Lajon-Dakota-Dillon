@@ -9,8 +9,6 @@ public class PickUpItem : MonoBehaviour, IInteract
     [SerializeField] Renderer itemModel;
     [SerializeField] Renderer playerModel;
 
-    [SerializeField] GameObject weaponPrefab;
-
     [SerializeField] int healthAmount;
 
     Color originColorItem;
@@ -41,10 +39,6 @@ public class PickUpItem : MonoBehaviour, IInteract
         else if (gameObject.CompareTag("Ammo")) {
             GameManager.instance.weaponScript.PickUpAmmo();
             StartCoroutine(ItemPickupFlash());
-        }
-        else if (gameObject.name == "Pistol") {
-            Instantiate(weaponPrefab, GameManager.instance.playerScript.pistolSpot.position, transform.rotation);
-            Destroy(gameObject);
         }
         
     }
