@@ -45,11 +45,10 @@ public class GunBase : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
         {
             Debug.Log(hit.collider.name);
-            if (hit.transform.CompareTag("Enemy"))
+            IDamage damaged = hit.collider.GetComponent<IDamage>();
+            if (damaged != null)
             {
-                enemyHit = hit.transform.gameObject;
-                enemyScript = enemyHit.GetComponent<EnemyAI>();
-                enemyScript.takeDamage(damage);
+                damaged.takeDamage(damage);
             }
         }
         currentBullets--;
