@@ -70,7 +70,6 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     public void takeDamage(int damageAmount)
     {
         HP -= damageAmount;
-        agent.SetDestination(player.position);
 
         if (HP <= 0)
         {
@@ -80,6 +79,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
         else
         {
             StartCoroutine(FlashRed());
+            agent.SetDestination(player.position);
         }
     }
 

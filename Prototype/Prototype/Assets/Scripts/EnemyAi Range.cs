@@ -68,7 +68,6 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
-        agent.SetDestination(GameManager.instance.player.transform.position);
 
         if (HP <= 0)
         {
@@ -78,6 +77,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         else
         {
             StartCoroutine(flashRed());
+            agent.SetDestination(GameManager.instance.player.transform.position);
         }
     }
     IEnumerator flashRed()

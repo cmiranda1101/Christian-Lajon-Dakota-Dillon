@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4534623975024576809}
   - component: {fileID: 503464093865810129}
   - component: {fileID: 5146449179131958151}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Health
   m_TagString: Health
   m_Icon: {fileID: 0}
@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemModel: {fileID: 503464093865810129}
+  playerModel: {fileID: 0}
+  weaponPrefab: {fileID: 0}
   healthAmount: 10
 --- !u!33 &4534623975024576809
 MeshFilter:
