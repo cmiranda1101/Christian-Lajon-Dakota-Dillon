@@ -9,6 +9,8 @@ public class PickUpItem : MonoBehaviour, IInteract
     [SerializeField] Renderer itemModel;
     [SerializeField] Renderer playerModel;
 
+    [SerializeField] GameObject weaponPrefab;
+
     [SerializeField] int healthAmount;
 
     Color originColorItem;
@@ -41,7 +43,7 @@ public class PickUpItem : MonoBehaviour, IInteract
             StartCoroutine(ItemPickupFlash());
         }
         else if (gameObject.name == "Pistol") {
-            Instantiate(gameObject, GameManager.instance.playerScript.pistolSpot.position, transform.rotation);
+            Instantiate(weaponPrefab, GameManager.instance.playerScript.pistolSpot.position, transform.rotation);
             Destroy(gameObject);
         }
         
