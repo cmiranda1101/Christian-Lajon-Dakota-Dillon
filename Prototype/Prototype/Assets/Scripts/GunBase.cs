@@ -13,7 +13,7 @@ public class GunBase : MonoBehaviour
 
 
     GameObject enemyHit;
-    EnemyAI enemyScript;
+    
 
     void Start()
     {
