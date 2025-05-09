@@ -7,15 +7,19 @@ using System.Collections;
 public class PickUpItem : MonoBehaviour, IInteract
 {
     [SerializeField] Renderer itemModel;
+    [SerializeField] Renderer playerModel;
 
     [SerializeField] int healthAmount;
 
-    Color originColor;
+    Color originColorItem;
+    Color originColorPlayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        originColor = itemModel.material.color;
+        originColorItem = itemModel.material.color;
+        playerModel = GameObject.FindWithTag("Player").GetComponent<Renderer>();
+        originColorPlayer = playerModel.material.color;
     }
 
     // Update is called once per frame
@@ -28,24 +32,37 @@ public class PickUpItem : MonoBehaviour, IInteract
     {
         if (gameObject.CompareTag("Health")) {
             GameManager.instance.playerScript.Heal(healthAmount);
+            StartCoroutine(PlayerHealFlash());
             Debug.Log("Healed " + healthAmount + " health.");
+            StartCoroutine(ItemPickupFlash());
         }
         else if (gameObject.CompareTag("Ammo")) {
             GameManager.instance.weaponScript.PickUpAmmo();
+            StartCoroutine(ItemPickupFlash());
         }
-
-        StartCoroutine(FlashColor());
+        else if (gameObject.name == "Pistol") {
+            Instantiate(gameObject, GameManager.instance.playerScript.pistolSpot.position, transform.rotation);
+            Destroy(gameObject);
+        }
+        
     }
 
-    IEnumerator FlashColor()
+    IEnumerator ItemPickupFlash()
     {
         //Give feedback on interaction
         itemModel.material.color = Color.white;
         yield return new WaitForSeconds(0.2f);
-        itemModel.material.color = originColor;
+        itemModel.material.color = originColorItem;
 
         //Destroy obj
         Destroy(gameObject);
+    }
+    IEnumerator PlayerHealFlash()
+    {
+        //Give feedback on interaction
+        playerModel.material.color = Color.green;
+        yield return new WaitForSeconds(0.1f);
+        playerModel.material.color = originColorPlayer;
     }
 
 

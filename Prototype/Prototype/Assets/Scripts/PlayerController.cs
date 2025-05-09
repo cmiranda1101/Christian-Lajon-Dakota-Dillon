@@ -4,6 +4,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] CharacterController characterController;
 
+    [SerializeField] public Transform pistolSpot;
+    [SerializeField] public Transform rifleSpot;
+    [SerializeField] public Transform Holster;
 
     [SerializeField] LayerMask ignoreLayer;
 
