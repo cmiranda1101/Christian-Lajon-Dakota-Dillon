@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     float timeScaleOrig;
 
-    void Start()
+    void Awake()
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
