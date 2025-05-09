@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9053791432133069024}
   - component: {fileID: 5404623320771832367}
   - component: {fileID: 3074565613221102559}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ammo
   m_TagString: Ammo
   m_Icon: {fileID: 0}
@@ -122,4 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemModel: {fileID: 9053791432133069024}
+  playerModel: {fileID: 0}
+  weaponPrefab: {fileID: 0}
   healthAmount: 0
