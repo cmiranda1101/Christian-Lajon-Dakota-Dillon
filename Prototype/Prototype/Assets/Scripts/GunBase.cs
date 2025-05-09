@@ -11,10 +11,6 @@ public class GunBase : MonoBehaviour
     int magCount = 3;
     float shotTimer = 0;
 
-
-    GameObject enemyHit;
-    EnemyAI enemyScript;
-
     void Start()
     {
         currentBullets = magSize;
