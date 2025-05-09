@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
+    [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuHotbar;
     [SerializeField] GameObject menuShop;
 
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
        if(Input.GetButtonDown("Cancel"))
-        {
+       {
             if (menuActive == null)
             {
                StatePause();
@@ -47,7 +48,11 @@ public class GameManager : MonoBehaviour
                 StateUnpause();
                 menuActive = null;
             }
-        }
+       }
+       if (gameGoalCount <= 0)
+       {
+            Win();
+       }
     }
 
     public void StatePause()
@@ -88,5 +93,12 @@ public class GameManager : MonoBehaviour
     {
         StateUnpause();
         menuShop.SetActive(false);
+    }
+
+    public void Win()
+    {
+        StatePause();
+        menuWin.SetActive(true);
+        menuActive = menuWin;
     }
 }
