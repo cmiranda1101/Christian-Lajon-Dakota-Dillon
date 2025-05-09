@@ -121,5 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdb328925ffaf64a98eade9dbe3e2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 9053791432133069024}
+  itemModel: {fileID: 9053791432133069024}
   healthAmount: 0

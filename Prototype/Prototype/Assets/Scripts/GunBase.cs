@@ -12,8 +12,6 @@ public class GunBase : MonoBehaviour
     float shotTimer = 0;
 
 
-    GameObject enemyHit;
-    EnemyAI enemyScript;
 
     void Start()
     {
