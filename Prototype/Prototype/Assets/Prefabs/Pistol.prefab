@@ -118,7 +118,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5838261704378798685}
   - component: {fileID: 1488202061103521137}
-  - component: {fileID: 3317996899319975060}
   m_Layer: 3
   m_Name: Pistol
   m_TagString: Weapon
@@ -159,27 +158,6 @@ MonoBehaviour:
   range: 25
   magSize: 9
   fireRate: 0.25
---- !u!65 &3317996899319975060
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4493368667877536924}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7475466874817635727
 GameObject:
   m_ObjectHideFlags: 0
