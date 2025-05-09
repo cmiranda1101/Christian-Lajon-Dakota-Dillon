@@ -11,12 +11,14 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     [SerializeField] float meleeRange;
     [SerializeField] float meleeDamage;
     [SerializeField] float meleeCooldown;
+    [SerializeField] int facePlayerSpeed;
 
     float nextMeleeTime;
     Color originalColor;
 
     bool playerInRange;
     Transform player;
+    Vector3 playerDir;
 
     void Start()
     {
@@ -29,25 +31,30 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     {
         if (player == null || !playerInRange) return;
 
-        // Move toward player
+        playerDir = player.position - transform.position;
+
+        // Move toward the player
         agent.SetDestination(player.position);
 
-        // Face the player if close enough
+        // If close enough, face and attack
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             FacePlayer();
-            TryMeleeAttack();
+            MeleeAttack();
         }
     }
 
     void FacePlayer()
     {
-        Vector3 direction = (player.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        Vector3 lookDirection = new Vector3(playerDir.x, 0, playerDir.z);
+        if (lookDirection != Vector3.zero)
+        {
+            Quaternion rot = Quaternion.LookRotation(lookDirection);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
+        }
     }
 
-    void TryMeleeAttack()
+    void MeleeAttack()
     {
         float distance = Vector3.Distance(transform.position, player.position);
         if (Time.time >= nextMeleeTime && distance <= meleeRange)
