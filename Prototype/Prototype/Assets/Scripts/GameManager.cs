@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
 
     float timeScaleOrig;
+    int gameGoalCount;
 
     void Awake()
     {
@@ -66,5 +67,11 @@ public class GameManager : MonoBehaviour
         menuHotbar.SetActive(true);
         menuActive.SetActive(false);
         menuActive = null;
+    }
+    public void updateGameGoal(int amount)
+    {
+        gameGoalCount += amount;
+
+        
     }
 }
