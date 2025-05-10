@@ -374,6 +374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ba00d65ec80064d981deaae5a0ddad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rifle: {fileID: 2960120504364758208}
+  pistol: {fileID: 4493368667877536924, guid: ea978309a52dc714cacb3ab0643ebcf2, type: 3}
   damage: 3
   range: 40
   magSize: 12

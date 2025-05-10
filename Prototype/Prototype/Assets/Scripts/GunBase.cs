@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class GunBase : MonoBehaviour
 {
-    [SerializeField] GameObject prefab;
+    [SerializeField] GameObject rifle;
+    [SerializeField] GameObject pistol;
 
     [SerializeField] int damage;
     [SerializeField] int range;
@@ -69,13 +70,8 @@ public class GunBase : MonoBehaviour
         magCount++;
     }
 
-    public void Equip(string weaponName)
+    public void EquipRifle()
     {
-        if(prefab.name == "Rifle") {
-            Instantiate(prefab, GameManager.instance.playerScript.rifleSpot.position, GameManager.instance.playerScript.rifleSpot.rotation);
-        }
-        else if(prefab.name == "Pistol") {
-            Instantiate(prefab, GameManager.instance.playerScript.pistolSpot.position, GameManager.instance.playerScript.pistolSpot.rotation);
-        }
+        Instantiate(rifle, GameManager.instance.playerScript.rifleSpot.position, GameManager.instance.playerScript.rifleSpot.rotation, GameManager.instance.playerScript.rifleSpot);
     }
 }

@@ -16,11 +16,11 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Quit()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
             Application.Quit();
-        #endif
+#endif
     }
 
     public void Close()
@@ -28,11 +28,10 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.CloseShop();
     }
 
-    public void Buy()
+    public void BuyRifle()
     {
-        string weaponName = transform.parent.name;
         if (GameManager.instance.playerScript.money >= 100) {
-            GameManager.instance.weaponScript.Equip(weaponName);
+            GameManager.instance.weaponScript.EquipRifle();
         }
     }
 }
