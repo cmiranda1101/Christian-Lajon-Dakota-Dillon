@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour, IDamage
         //Need to check for death
         if (HP <= 0) {
             //TODO uncomment below when we have a lose screen
-            //GameManager.instance.YouLose();
+            GameManager.instance.YouLose();
         }
     }
 }

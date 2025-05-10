@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject menuGameOver;
     [SerializeField] GameObject menuHotbar;
     [SerializeField] GameObject menuShop;
 
@@ -99,5 +100,12 @@ public class GameManager : MonoBehaviour
         StatePause();
         menuActive = menuWin;
         menuWin.SetActive(true);
+    }
+
+    public void YouLose()
+    {
+        StatePause();
+        menuActive = menuGameOver;
+        menuGameOver.SetActive(true);
     }
 }
