@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
-        weapon = GameObject.FindWithTag("Weapon");
+        weapon = GameObject.FindWithTag("Pistol");
         playerScript = player.GetComponent<PlayerController>();
         weaponScript = weapon.GetComponent<GunBase>();
         timeScaleOrig = Time.timeScale;
