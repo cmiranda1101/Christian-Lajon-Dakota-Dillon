@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
 
     float timeScaleOrig;
-    [SerializeField] int gameGoalCount;
+    int gameGoalCount;
 
     void Awake()
     {
@@ -31,9 +31,9 @@ public class GameManager : MonoBehaviour
         timeScaleOrig = Time.timeScale;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        LevelStart();
     }
 
-    
     void Update()
     {
        if(Input.GetButtonDown("Cancel"))
@@ -107,5 +107,15 @@ public class GameManager : MonoBehaviour
         StatePause();
         menuActive = menuGameOver;
         menuGameOver.SetActive(true);
+    }
+
+    public void LevelStart()
+    {
+        isPaused = false;
+        timeScaleOrig = 1;
+        Time.timeScale = timeScaleOrig;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        menuHotbar.SetActive(true);
     }
 }
