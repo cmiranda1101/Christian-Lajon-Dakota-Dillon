@@ -27,4 +27,12 @@ public class ButtonFunctions : MonoBehaviour
     {
         GameManager.instance.CloseShop();
     }
+
+    public void Buy()
+    {
+        string weaponName = transform.parent.name;
+        if (GameManager.instance.playerScript.money >= 100) {
+            GameManager.instance.weaponScript.Equip(weaponName);
+        }
+    }
 }

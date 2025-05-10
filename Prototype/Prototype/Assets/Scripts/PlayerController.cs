@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int speed;
     [SerializeField] int grabDistance;
     [SerializeField] int HP;
+    [SerializeField] public int money;
 
     Vector3 moveDirection;
 
