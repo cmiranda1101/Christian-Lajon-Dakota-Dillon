@@ -2212,7 +2212,7 @@ GameObject:
   - component: {fileID: 6030255317783822244}
   - component: {fileID: 7233214682917865128}
   m_Layer: 5
-  m_Name: Next Level Button
+  m_Name: Go to Shop Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2322,7 +2322,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6352650565608554055}
         m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: GoToShop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3398,7 +3398,7 @@ MonoBehaviour:
   menuActive: {fileID: 0}
   menuPause: {fileID: 1225977342762366656}
   menuWin: {fileID: 6247575073667017126}
-  menuGameOver: {fileID: 0}
+  menuGameOver: {fileID: 541420684957081878}
   menuHotbar: {fileID: 8494426942481023511}
   menuShop: {fileID: 2372957891866589578}
   player: {fileID: 0}
@@ -4185,7 +4185,7 @@ GameObject:
   - component: {fileID: 4396764736451472688}
   - component: {fileID: 260712445156923764}
   m_Layer: 5
-  m_Name: Next Level Button Text
+  m_Name: Go to Shop Button Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4238,7 +4238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Next Level
+  m_text: Go to Shop
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
