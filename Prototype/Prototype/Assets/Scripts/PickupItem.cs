@@ -8,24 +8,36 @@ public class PickUpItem : MonoBehaviour, IInteract
 {
     [SerializeField] Renderer itemModel;
     [SerializeField] Renderer playerModel;
+    [SerializeField] GameObject pickUpText;
 
     [SerializeField] int healthAmount;
 
     Color originColorItem;
     Color originColorPlayer;
 
+    float distanceFromPlayer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         originColorItem = itemModel.material.color;
-        playerModel = GameObject.FindWithTag("Player").GetComponent<Renderer>();
+        playerModel = GameObject.FindGameObjectWithTag("Player").GetComponent<Renderer>();
         originColorPlayer = playerModel.material.color;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        distanceFromPlayer = Vector3.Distance(transform.position, GameManager.instance.player.transform.position);
+
+        if (distanceFromPlayer <= GameManager.instance.playerScript.grabDistance)
+        {
+            pickUpText.SetActive(true);
+        }
+        else
+        {
+            pickUpText.SetActive(false);
+        }
     }
 
     public void Interact()

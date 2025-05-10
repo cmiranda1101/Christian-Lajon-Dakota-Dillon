@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] LayerMask ignoreLayer;
 
     [SerializeField] int speed;
-    [SerializeField] int grabDistance;
+    [SerializeField] public int grabDistance;
     [SerializeField] int HP;
     [SerializeField] public int money;
 

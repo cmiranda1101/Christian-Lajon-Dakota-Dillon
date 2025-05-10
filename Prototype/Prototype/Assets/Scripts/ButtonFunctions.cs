@@ -37,6 +37,6 @@ public class ButtonFunctions : MonoBehaviour
 
     public void GoToShop()
     {
-        SceneManager.LoadScene("Shop");
+        SceneManager.LoadSceneAsync("Shop");
     }
 }
