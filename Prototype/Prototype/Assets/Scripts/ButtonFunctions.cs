@@ -34,4 +34,9 @@ public class ButtonFunctions : MonoBehaviour
             GameManager.instance.weaponScript.EquipRifle();
         }
     }
+
+    public void GoToShop()
+    {
+        SceneManager.LoadScene("Shop");
+    }
 }
