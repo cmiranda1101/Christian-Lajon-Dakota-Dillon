@@ -8,6 +8,8 @@ TagManager:
   - Health
   - Weapon
   - Ammo
+  - Pistol
+  - Rifle
   layers:
   - Default
   - TransparentFX
