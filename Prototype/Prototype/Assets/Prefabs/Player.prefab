@@ -332,7 +332,7 @@ MonoBehaviour:
     m_Bits: 8
   speed: 5
   grabDistance: 5
-  HP: 10
+  currentHP: 10
   money: 1000
   pistolPrefab: {fileID: 4493368667877536924, guid: ea978309a52dc714cacb3ab0643ebcf2, type: 3}
   rifle: {fileID: 2960120504364758208, guid: 24a9d49ca7ab275429dc4f39cdfb91b6, type: 3}

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject hotBarPistol;
     public GameObject hotbarRifle;
+    public GameObject healthBar;
 
     public GameObject player;
     public GameObject weapons;
