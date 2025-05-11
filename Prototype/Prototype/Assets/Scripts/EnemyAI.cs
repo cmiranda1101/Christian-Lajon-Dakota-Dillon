@@ -46,12 +46,8 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
 
     void FacePlayer()
     {
-        Vector3 lookDirection = new Vector3(playerDir.x, 0, playerDir.z);
-        if (lookDirection != Vector3.zero)
-        {
-            Quaternion rot = Quaternion.LookRotation(lookDirection);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
-        }
+        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
     }
 
     void MeleeAttack()
