@@ -299,6 +299,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemModel: {fileID: 9053791432133069024}
-  playerModel: {fileID: 0}
+  playerModel: {fileID: 3482579366448131116, guid: 3f96a7fa00383004c97a0ff33c25a197, type: 3}
   pickUpText: {fileID: 1732665420928794663}
   healthAmount: 0

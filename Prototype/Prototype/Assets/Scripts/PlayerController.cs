@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -118,5 +119,12 @@ public class PlayerController : MonoBehaviour, IDamage
             float scale = currentHP / maxHP;
             GameManager.instance.healthBar.transform.localScale = new Vector3(scale, .75f, 1);
         }
+    }
+
+    public IEnumerator MuzzleFlash()
+    {
+        heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.01f);
+        heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(false);
     }
 }

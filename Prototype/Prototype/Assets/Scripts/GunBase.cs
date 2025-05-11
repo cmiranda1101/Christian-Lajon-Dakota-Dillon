@@ -31,6 +31,7 @@ public class GunBase : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && currentBullets > 0 && shotTimer > fireRate)
         {
             Fire();
+            StartCoroutine(GameManager.instance.playerScript.MuzzleFlash());
         }
         if (Input.GetButtonDown("Reload") && currentBullets != magSize && magCount > 0)
         {
