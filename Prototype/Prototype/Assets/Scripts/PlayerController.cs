@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     [SerializeField] public GameObject pistolSpot;
     [SerializeField] public GameObject rifleSpot;
+
     [SerializeField] public GameObject Holster;
 
     [SerializeField] LayerMask ignoreLayer;
@@ -23,7 +24,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] GameObject pistolPrefab;
     GameObject flashlight;
     GameObject pistol;
-    public GameObject rifle;
+    //Dynamic Creation DO NOT set in Inspector or unhide
+    [HideInInspector] public GameObject rifle;
     GameObject heldWeapon;
 
     float maxHP;
@@ -87,10 +89,7 @@ public class PlayerController : MonoBehaviour, IDamage
             pistol.SetActive(true);
             heldWeapon = pistol;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && heldWeapon != rifle) {
-            if (rifle == null) {
-                return;
-            }
+        if (rifle != null && Input.GetKeyDown(KeyCode.Alpha2) && heldWeapon != rifle) {
             heldWeapon.SetActive(false);
             rifle.SetActive(true);
             heldWeapon = rifle;
