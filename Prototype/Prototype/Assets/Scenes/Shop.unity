@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &22452159 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3457666661816730292, guid: f7b2aed4fc16cfc40a2e498bc5bbb57e, type: 3}
-  m_PrefabInstance: {fileID: 649649929}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &88817686 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
@@ -253,11 +248,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dae48de511e551040a204ce091a83990, type: 3}
---- !u!1 &542728711 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 191718010981709298, guid: f7b2aed4fc16cfc40a2e498bc5bbb57e, type: 3}
-  m_PrefabInstance: {fileID: 649649929}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &550609302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -327,14 +317,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 1487130218744782926, guid: f7b2aed4fc16cfc40a2e498bc5bbb57e, type: 3}
-      propertyPath: hotbarRifle
-      value: 
-      objectReference: {fileID: 542728711}
-    - target: {fileID: 1487130218744782926, guid: f7b2aed4fc16cfc40a2e498bc5bbb57e, type: 3}
-      propertyPath: hotBarPistol
-      value: 
-      objectReference: {fileID: 22452159}
     - target: {fileID: 9214835478406400877, guid: f7b2aed4fc16cfc40a2e498bc5bbb57e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
