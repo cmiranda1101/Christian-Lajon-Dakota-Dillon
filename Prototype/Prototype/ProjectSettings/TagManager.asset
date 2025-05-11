@@ -21,6 +21,7 @@ TagManager:
   - Enemy
   - Player Bullet
   - Enemy Bullet
+  - Ignore
   - Pickup
   - 
   - 
