@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6057700830842255282}
   - component: {fileID: 1006122911617209767}
   - component: {fileID: 6983001236327158618}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ShopKeeper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 3.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3955798613874045270
 GameObject:
@@ -158,13 +158,13 @@ GameObject:
   - component: {fileID: 5361636178893062054}
   - component: {fileID: 666284976385631639}
   - component: {fileID: 6960391266279683520}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Directions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5361636178893062054
 RectTransform:
   m_ObjectHideFlags: 0
