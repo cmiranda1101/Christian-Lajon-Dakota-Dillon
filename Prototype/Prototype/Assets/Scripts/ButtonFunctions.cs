@@ -16,10 +16,27 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Quit()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
             Application.Quit();
-        #endif
+#endif
+    }
+
+    public void Close()
+    {
+        GameManager.instance.CloseShop();
+    }
+
+    public void BuyRifle()
+    {
+        if (GameManager.instance.playerScript.money >= 100) {
+            GameManager.instance.weaponScript.EquipRifle();
+        }
+    }
+
+    public void GoToShop()
+    {
+        SceneManager.LoadSceneAsync("Shop");
     }
 }

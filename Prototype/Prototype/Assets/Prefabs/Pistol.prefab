@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4901346069360667292}
   - component: {fileID: 8341134238603339338}
   - component: {fileID: 9189321465689418057}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,9 +118,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5838261704378798685}
   - component: {fileID: 1488202061103521137}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pistol
-  m_TagString: Weapon
+  m_TagString: Pistol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,6 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ba00d65ec80064d981deaae5a0ddad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rifle: {fileID: 2960120504364758208, guid: 24a9d49ca7ab275429dc4f39cdfb91b6, type: 3}
+  pistol: {fileID: 4493368667877536924}
   damage: 1
   range: 25
   magSize: 9
@@ -170,7 +172,7 @@ GameObject:
   - component: {fileID: 766171644888181195}
   - component: {fileID: 272741408506877985}
   - component: {fileID: 3772699870980055802}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

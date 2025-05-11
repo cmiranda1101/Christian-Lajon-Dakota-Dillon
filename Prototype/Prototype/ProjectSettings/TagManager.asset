@@ -8,6 +8,8 @@ TagManager:
   - Health
   - Weapon
   - Ammo
+  - Pistol
+  - Rifle
   layers:
   - Default
   - TransparentFX
@@ -19,6 +21,7 @@ TagManager:
   - Player Bullet
   - Enemy Bullet
   - Ignore
+  - Pickup
   - 
   - 
   - 

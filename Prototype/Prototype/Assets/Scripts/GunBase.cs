@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class GunBase : MonoBehaviour
 {
+    [SerializeField] GameObject rifle;
+    [SerializeField] GameObject pistol;
+
     [SerializeField] int damage;
     [SerializeField] int range;
     [SerializeField] int magSize;
@@ -10,8 +13,6 @@ public class GunBase : MonoBehaviour
     int currentBullets;
     int magCount = 3;
     float shotTimer = 0;
-
-
 
     void Start()
     {
@@ -31,7 +32,7 @@ public class GunBase : MonoBehaviour
         {
             Fire();
         }
-        if (Input.GetButton("Reload") && currentBullets != magSize && magCount > 0)
+        if (Input.GetButtonDown("Reload") && currentBullets != magSize && magCount > 0)
         {
             Reload();
         }
@@ -40,6 +41,7 @@ public class GunBase : MonoBehaviour
     public void Fire()
     {
         RaycastHit hit;
+        shotTimer = 0;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
         {
             Debug.Log(hit.collider.name);
@@ -66,5 +68,10 @@ public class GunBase : MonoBehaviour
     public void PickUpAmmo()
     {
         magCount++;
+    }
+
+    public void EquipRifle()
+    {
+        Instantiate(rifle, GameManager.instance.playerScript.rifleSpot.position, GameManager.instance.playerScript.rifleSpot.rotation, GameManager.instance.playerScript.rifleSpot);
     }
 }

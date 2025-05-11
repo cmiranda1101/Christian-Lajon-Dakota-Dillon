@@ -1,15 +1,19 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController characterController;
 
+    [SerializeField] public Transform pistolSpot;
+    [SerializeField] public Transform rifleSpot;
+    [SerializeField] public Transform Holster;
 
     [SerializeField] LayerMask ignoreLayer;
 
     [SerializeField] int speed;
-    [SerializeField] int grabDistance;
+    [SerializeField] public int grabDistance;
     [SerializeField] int HP;
+    [SerializeField] public int money;
 
     Vector3 moveDirection;
 
@@ -68,7 +72,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance, ~ignoreLayer))
         {
             Debug.Log(hit.collider.name);
-            IInteract grab = hit.collider.GetComponent<IInteract>();
+            IInteract grab = hit.collider.GetComponentInParent<IInteract>();
 
             if (grab != null)
             {
@@ -96,5 +100,16 @@ public class PlayerController : MonoBehaviour
     public void Heal(int amount)
     {
         HP += amount;
+    }
+
+    public void takeDamage(int amount)
+    {
+        HP -= amount;
+
+        //Need to check for death
+        if (HP <= 0) {
+            //TODO uncomment below when we have a lose screen
+            GameManager.instance.YouLose();
+        }
     }
 }

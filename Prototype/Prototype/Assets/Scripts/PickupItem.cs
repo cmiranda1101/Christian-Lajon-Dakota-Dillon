@@ -7,45 +7,70 @@ using System.Collections;
 public class PickUpItem : MonoBehaviour, IInteract
 {
     [SerializeField] Renderer itemModel;
+    [SerializeField] Renderer playerModel;
+    [SerializeField] GameObject pickUpText;
 
     [SerializeField] int healthAmount;
 
-    Color originColor;
+    Color originColorItem;
+    Color originColorPlayer;
+
+    float distanceFromPlayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        originColor = itemModel.material.color;
+        originColorItem = itemModel.material.color;
+        playerModel = GameObject.FindGameObjectWithTag("Player").GetComponent<Renderer>();
+        originColorPlayer = playerModel.material.color;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        distanceFromPlayer = Vector3.Distance(transform.position, GameManager.instance.player.transform.position);
+
+        if (distanceFromPlayer <= GameManager.instance.playerScript.grabDistance)
+        {
+            pickUpText.SetActive(true);
+        }
+        else
+        {
+            pickUpText.SetActive(false);
+        }
     }
 
     public void Interact()
     {
         if (gameObject.CompareTag("Health")) {
             GameManager.instance.playerScript.Heal(healthAmount);
+            StartCoroutine(PlayerHealFlash());
             Debug.Log("Healed " + healthAmount + " health.");
+            StartCoroutine(ItemPickupFlash());
         }
         else if (gameObject.CompareTag("Ammo")) {
             GameManager.instance.weaponScript.PickUpAmmo();
+            StartCoroutine(ItemPickupFlash());
         }
-
-        StartCoroutine(FlashColor());
+        
     }
 
-    IEnumerator FlashColor()
+    IEnumerator ItemPickupFlash()
     {
         //Give feedback on interaction
         itemModel.material.color = Color.white;
         yield return new WaitForSeconds(0.2f);
-        itemModel.material.color = originColor;
+        itemModel.material.color = originColorItem;
 
         //Destroy obj
         Destroy(gameObject);
+    }
+    IEnumerator PlayerHealFlash()
+    {
+        //Give feedback on interaction
+        playerModel.material.color = Color.green;
+        yield return new WaitForSeconds(0.1f);
+        playerModel.material.color = originColorPlayer;
     }
 
 

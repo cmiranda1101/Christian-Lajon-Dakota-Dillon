@@ -6,7 +6,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
+    [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject menuGameOver;
     [SerializeField] GameObject menuHotbar;
+    [SerializeField] GameObject menuShop;
 
     public GameObject player;
     public GameObject weapon;
@@ -22,19 +25,19 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
-        weapon = GameObject.FindWithTag("Weapon");
+        weapon = GameObject.FindWithTag("Pistol");
         playerScript = player.GetComponent<PlayerController>();
         weaponScript = weapon.GetComponent<GunBase>();
         timeScaleOrig = Time.timeScale;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        LevelStart();
     }
 
-    
     void Update()
     {
        if(Input.GetButtonDown("Cancel"))
-        {
+       {
             if (menuActive == null)
             {
                StatePause();
@@ -46,7 +49,7 @@ public class GameManager : MonoBehaviour
                 StateUnpause();
                 menuActive = null;
             }
-        }
+       }
     }
 
     public void StatePause()
@@ -71,7 +74,48 @@ public class GameManager : MonoBehaviour
     public void UpdateGameGoal(int amount)
     {
         gameGoalCount += amount;
-
+        if (gameGoalCount <= 0)
+        {
+            Win();
+        }
         
+    }
+
+    public void OpenShop()
+    {
+        StatePause();
+        menuShop.SetActive(true);
+        menuActive = menuShop;
+        menuActive.SetActive(isPaused);
+    }
+
+    public void CloseShop()
+    {
+        StateUnpause();
+        menuShop.SetActive(false);
+    }
+
+    public void Win()
+    {
+        StatePause();
+        menuActive = menuWin;
+        menuWin.SetActive(true);
+    }
+
+    public void YouLose()
+    {
+        StatePause();
+        menuActive = menuGameOver;
+        menuGameOver.SetActive(true);
+    }
+
+    public void LevelStart()
+    {
+        isPaused = false;
+        timeScaleOrig = 1;
+        Time.timeScale = timeScaleOrig;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        menuHotbar.SetActive(true);
     }
 }
