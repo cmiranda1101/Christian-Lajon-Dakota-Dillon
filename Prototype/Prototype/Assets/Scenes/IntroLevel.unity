@@ -659,14 +659,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8625781014668819448, guid: 3c1fca0a668a4d74b806b1466103e219, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: aa790969062688a479b36e303b0145d3, type: 2}
-    - target: {fileID: 8625781014668819448, guid: 3c1fca0a668a4d74b806b1466103e219, type: 3}
-      propertyPath: m_LayerMask.m_Bits
-      value: 513
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
