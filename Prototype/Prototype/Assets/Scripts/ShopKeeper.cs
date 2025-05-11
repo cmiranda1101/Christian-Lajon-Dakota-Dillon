@@ -5,6 +5,10 @@ public class ShopKeeper : MonoBehaviour, IInteract
     [SerializeField] GameObject directions;
     public void Interact()
     {
+        if(GameManager.instance.isPaused)
+        {
+            return;
+        }
         Debug.Log("Interacting with shopkeeper");
         GameManager.instance.OpenShop();
     }

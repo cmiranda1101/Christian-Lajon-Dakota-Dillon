@@ -8,11 +8,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuGameOver;
-    [SerializeField] GameObject menuHotbar;
     [SerializeField] GameObject menuShop;
+    [SerializeField] GameObject menuHotbar;
+
+    public GameObject hotBarPistol;
+    public GameObject hotbarRifle;
 
     public GameObject player;
-    public GameObject weapon;
+    public GameObject weapons;
     public PlayerController playerScript;
     public GunBase weaponScript;
 
@@ -25,9 +28,9 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
-        weapon = GameObject.FindWithTag("Pistol");
         playerScript = player.GetComponent<PlayerController>();
-        weaponScript = weapon.GetComponent<GunBase>();
+        weapons = GameObject.FindWithTag("Weapons");
+        weaponScript = weapons.GetComponent<GunBase>();
         timeScaleOrig = Time.timeScale;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

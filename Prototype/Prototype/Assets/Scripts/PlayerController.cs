@@ -1,12 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController characterController;
+    [SerializeField] GameObject MainCamera;
 
-    [SerializeField] public Transform pistolSpot;
-    [SerializeField] public Transform rifleSpot;
-    [SerializeField] public Transform Holster;
+    [SerializeField] public GameObject pistolSpot;
+    [SerializeField] public GameObject rifleSpot;
+    [SerializeField] public GameObject Holster;
 
     [SerializeField] LayerMask ignoreLayer;
 
@@ -17,24 +19,24 @@ public class PlayerController : MonoBehaviour, IDamage
 
     Vector3 moveDirection;
 
+    [SerializeField] GameObject pistolPrefab;
     GameObject flashlight;
     GameObject pistol;
-    GameObject rifle;
+    public GameObject rifle;
     GameObject heldWeapon;
 
     void Start()
     {
         flashlight = GameObject.Find("FlashLight");
-        pistol = transform.GetChild(1).gameObject;
-        //rifle = transform.GetChild(2).gameObject;
+        pistol = Instantiate(pistolPrefab, pistolSpot.transform.position, pistolSpot.transform.rotation, pistolSpot.transform);
         heldWeapon = pistol;
+        heldWeapon.SetActive(true);
     }
 
     void Update()
     {
         MovePlayer();
         SwapWeapons();
-
         if (Input.GetButtonDown("Toggle Flashlight"))
         {
             ToggleFlashlight();
@@ -43,7 +45,6 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             GrabObject();
         }
-
     }
 
     void MovePlayer()
@@ -89,12 +90,16 @@ public class PlayerController : MonoBehaviour, IDamage
             pistol.SetActive(true);
             heldWeapon = pistol;
         }
-        //if (Input.GetKeyDown(KeyCode.Alpha2) && heldWeapon != rifle)
-        //{
-        //    heldWeapon.SetActive(false);
-        //    rifle.SetActive(true);
-        //    heldWeapon = rifle;
-        //}
+        if (Input.GetKeyDown(KeyCode.Alpha2) && heldWeapon != rifle)
+        {
+            if(rifle == null)
+            {
+                return;
+            }
+            heldWeapon.SetActive(false);
+            rifle.SetActive(true);
+            heldWeapon = rifle;
+        }
     }
 
     public void Heal(int amount)
