@@ -69,9 +69,8 @@ public class GunBase : MonoBehaviour
     {
         magCount++;
     }
-
     public void EquipRifle()
     {
-        Instantiate(rifle, GameManager.instance.playerScript.rifleSpot.position, GameManager.instance.playerScript.rifleSpot.rotation, GameManager.instance.playerScript.rifleSpot);
+        GameManager.instance.playerScript.rifle = Instantiate(rifle, GameManager.instance.playerScript.rifleSpot.transform.position, GameManager.instance.playerScript.rifleSpot.transform.rotation, GameManager.instance.playerScript.rifleSpot.transform);
     }
 }

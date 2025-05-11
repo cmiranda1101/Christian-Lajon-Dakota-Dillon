@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuShop;
 
     public GameObject player;
-    public GameObject weapon;
+    public GameObject weapons;
     public PlayerController playerScript;
     public GunBase weaponScript;
 
@@ -25,9 +25,9 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
-        weapon = GameObject.FindWithTag("Pistol");
         playerScript = player.GetComponent<PlayerController>();
-        weaponScript = weapon.GetComponent<GunBase>();
+        weapons = GameObject.FindWithTag("Weapons");
+        weaponScript = weapons.GetComponent<GunBase>();
         timeScaleOrig = Time.timeScale;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
