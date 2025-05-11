@@ -72,5 +72,6 @@ public class GunBase : MonoBehaviour
     public void EquipRifle()
     {
         GameManager.instance.playerScript.rifle = Instantiate(rifle, GameManager.instance.playerScript.rifleSpot.transform.position, GameManager.instance.playerScript.rifleSpot.transform.rotation, GameManager.instance.playerScript.rifleSpot.transform);
+        GameManager.instance.hotbarRifle.SetActive(true);
     }
 }
