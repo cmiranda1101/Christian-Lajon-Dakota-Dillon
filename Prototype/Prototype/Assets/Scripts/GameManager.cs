@@ -35,14 +35,14 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        player = GameObject.FindWithTag("Player");
+        playerScript = player.GetComponent<PlayerController>();
+        savedStats = GameObject.Find("SavedStats").GetComponent<SavedStats>();
         miniMap = GameObject.FindWithTag("MiniMap");
-        savedStats = GameObject.FindGameObjectWithTag("SavedStats").GetComponent<SavedStats>();
         if(SceneManager.GetActiveScene().name == "Shop")
         {
             miniMap.SetActive(false);
         }
-        player = GameObject.FindWithTag("Player");
-        playerScript = player.GetComponent<PlayerController>();
         weapons = GameObject.FindWithTag("Weapons");
         weaponScript = weapons.GetComponent<GunBase>();
         timeScaleOrig = Time.timeScale;

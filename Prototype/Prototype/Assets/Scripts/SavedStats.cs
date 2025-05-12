@@ -4,7 +4,7 @@ public class SavedStats : MonoBehaviour
 {
     public float playerHP = 0;
     int playerMoney;
-    int magCount;
+    //int magCount;
 
     public void SaveStats()
     {
