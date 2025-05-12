@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour, IDamage
 {
@@ -41,8 +42,8 @@ public class PlayerController : MonoBehaviour, IDamage
         pistol = Instantiate(pistolPrefab, pistolSpot.transform.position, pistolSpot.transform.rotation, pistolSpot.transform);
         heldWeapon = pistol;
         heldWeapon.SetActive(true);
+        DontDestroyOnLoad(this.gameObject);
     }
-
     void Update()
     {
         MovePlayer();

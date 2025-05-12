@@ -22,14 +22,18 @@ public class GameManager : MonoBehaviour
     public PlayerController playerScript;
     public GunBase weaponScript;
 
+    public GameObject spawnPos;
+
     public bool isPaused;
 
     float timeScaleOrig;
     int gameGoalCount;
+    CharacterController playerCharacterController;
 
     void Awake()
     {
         instance = this;
+        spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
         miniMap = GameObject.FindWithTag("MiniMap");
         if(SceneManager.GetActiveScene().name == "Shop")
         {
@@ -37,6 +41,7 @@ public class GameManager : MonoBehaviour
         }
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        playerCharacterController = player.GetComponent<CharacterController>();
         weapons = GameObject.FindWithTag("Weapons");
         weaponScript = weapons.GetComponent<GunBase>();
         timeScaleOrig = Time.timeScale;
@@ -128,5 +133,8 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         menuHotbar.SetActive(true);
+        playerCharacterController.enabled = false;
+        player.transform.position = spawnPos.transform.position;
+        playerCharacterController.enabled = true;
     }
 }
