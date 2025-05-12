@@ -90,7 +90,6 @@ public class PlayerController : MonoBehaviour, IDamage
             }
         }
     }
-
     void SwapWeapons()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && heldWeapon != pistol) {
