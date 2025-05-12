@@ -12,6 +12,7 @@ TagManager:
   - Rifle
   - Weapons
   - MiniMap
+  - SpawnPos
   layers:
   - Default
   - TransparentFX
