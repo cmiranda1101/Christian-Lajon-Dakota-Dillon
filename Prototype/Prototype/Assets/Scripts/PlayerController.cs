@@ -1,6 +1,8 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour, IDamage
 {
@@ -19,8 +21,9 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] public LayerMask ignoreLayer;
 
     [SerializeField] int speed;
+    [SerializeField] public float maxHP;
     [SerializeField] public int grabDistance;
-    [SerializeField] float currentHP;
+    [SerializeField] public float currentHP;
     [SerializeField] public int money;
 
     Vector3 moveDirection;
@@ -31,18 +34,20 @@ public class PlayerController : MonoBehaviour, IDamage
     //Dynamic Creation DO NOT set in Inspector or unhide
     [HideInInspector] public GameObject rifle;
     GameObject heldWeapon;
-
-    float maxHP;
+    bool wasDamaged = false;
 
     void Start()
     {
-        maxHP = currentHP;
+        if (!wasDamaged)
+        {
+            currentHP = maxHP;
+        }
         flashlight = GameObject.Find("FlashLight");
         pistol = Instantiate(pistolPrefab, pistolSpot.transform.position, pistolSpot.transform.rotation, pistolSpot.transform);
         heldWeapon = pistol;
         heldWeapon.SetActive(true);
+        DontDestroyOnLoad(this.gameObject);
     }
-
     void Update()
     {
         MovePlayer();
@@ -111,12 +116,19 @@ public class PlayerController : MonoBehaviour, IDamage
         currentHP += amount;
 
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+
+        if (currentHP >= maxHP)
+        {
+            currentHP = maxHP;
+            wasDamaged = false;
+        }
     }
 
     public void takeDamage(int amount)
     {
         //lower HP
         currentHP = Mathf.Clamp(currentHP -= amount, 0, maxHP);
+        wasDamaged = true;
 
         //Need to check for death
         if (currentHP <= 0) {
