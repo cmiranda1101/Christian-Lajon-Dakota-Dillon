@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     [SerializeField] public GameObject Holster;
 
-    [SerializeField] LayerMask ignoreLayer;
+    [SerializeField] public LayerMask ignoreLayer;
 
     [SerializeField] int speed;
     [SerializeField] public int grabDistance;

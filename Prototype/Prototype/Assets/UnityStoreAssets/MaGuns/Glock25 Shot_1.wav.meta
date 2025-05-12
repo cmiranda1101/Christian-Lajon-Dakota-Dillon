@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e7cc0ce96a6a5bb43aa029ebb3bd95d8
+guid: 314a12c3a2f0d1542aee9e4157165c27
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
@@ -25,5 +25,5 @@ AssetOrigin:
   productId: 148666
   packageName: MaGuns
   packageVersion: 1.0
-  assetPath: Assets/UnityStoreAssets/MaGuns/Glock25  Shot Close_1.wav
+  assetPath: Assets/MaGuns/Glock25 Shot_1.wav
   uploadId: 316273
