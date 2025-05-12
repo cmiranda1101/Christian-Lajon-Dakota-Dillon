@@ -46,7 +46,6 @@ GameObject:
   - component: {fileID: 1319094886860805523}
   - component: {fileID: 9210626959803825126}
   - component: {fileID: 7025244039720701002}
-  - component: {fileID: 7191260173262272642}
   m_Layer: 6
   m_Name: Pistol Enemy
   m_TagString: Untagged
@@ -82,16 +81,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b59a18bc7088b849a3523d1cfeaa8b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSource: {fileID: 7191260173262272642}
-  gunSource: {fileID: 4873375889938135019}
-  walkClips:
-  - {fileID: 8300000, guid: e3edc2a270af5c04886ab9c5fa4fced6, type: 3}
-  - {fileID: 8300000, guid: c3a0d384acb5b9a4d8af0bee5d2820a6, type: 3}
-  - {fileID: 8300000, guid: 1300a1f7bbbf3f140aee0da44ba85694, type: 3}
-  gunClips:
-  - {fileID: 8300000, guid: 314a12c3a2f0d1542aee9e4157165c27, type: 3}
-  - {fileID: 8300000, guid: 912d8ed6f3e555a4f9280ef9c97aa431, type: 3}
-  - {fileID: 8300000, guid: 97a0cd8fb61855d498de20d967ea1424, type: 3}
   model: {fileID: 1319094886860805523}
   agent: {fileID: 885322976782910864}
   HP: 5
@@ -99,7 +88,6 @@ MonoBehaviour:
   shootingPos: {fileID: 1166155260729593133}
   bullet: {fileID: 2485194676518234941, guid: b486390cf48be664baa654d7bf7bc6af, type: 3}
   fireRate: 0.8
-  walkRate: 0.5
 --- !u!195 &885322976782910864
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -219,103 +207,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
---- !u!82 &7191260173262272642
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3807729452895450856}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1001 &5707322915994968200
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -392,10 +283,5 @@ PrefabInstance:
 --- !u!4 &2175757462287708885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5838261704378798685, guid: ea978309a52dc714cacb3ab0643ebcf2, type: 3}
-  m_PrefabInstance: {fileID: 5707322915994968200}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &4873375889938135019 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 906857919791011683, guid: ea978309a52dc714cacb3ab0643ebcf2, type: 3}
   m_PrefabInstance: {fileID: 5707322915994968200}
   m_PrefabAsset: {fileID: 0}
