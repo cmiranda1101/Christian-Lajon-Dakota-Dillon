@@ -325,6 +325,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -185218674243438608, guid: e395b87f7bb43224bbc330b118679630, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 6acf8873abfe518429f970e411209f72, type: 2}
     - target: {fileID: 7284475281475400309, guid: e395b87f7bb43224bbc330b118679630, type: 3}
       propertyPath: m_Name
       value: Floor
@@ -426,6 +430,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Melee Enemy (Faster)
       objectReference: {fileID: 0}
+    - target: {fileID: 6488958810235359720, guid: db9dc52abed73a44a862828338bce2b7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488958810235359720, guid: db9dc52abed73a44a862828338bce2b7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -485,7 +497,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6488958810235359720, guid: ee79671e826132f448914779c593a09b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488958810235359720, guid: ee79671e826132f448914779c593a09b, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 6520561886258666954, guid: ee79671e826132f448914779c593a09b, type: 3}
       propertyPath: HP
@@ -501,7 +517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6520561886258666954, guid: ee79671e826132f448914779c593a09b, type: 3}
       propertyPath: meleeCooldown
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6520561886258666954, guid: ee79671e826132f448914779c593a09b, type: 3}
       propertyPath: facePlayerSpeed
@@ -658,6 +674,14 @@ PrefabInstance:
       propertyPath: HP
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2762801907003335365, guid: ff5a6c0838d5aed449cd1b1ac5787126, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 2485194676518234941, guid: b83ad134937c084409cddd6fe6858ea8, type: 3}
+    - target: {fileID: 2762801907003335365, guid: ff5a6c0838d5aed449cd1b1ac5787126, type: 3}
+      propertyPath: fireRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3166084721860852146, guid: ff5a6c0838d5aed449cd1b1ac5787126, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -668,7 +692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3477131105346564050, guid: ff5a6c0838d5aed449cd1b1ac5787126, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.39
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 3477131105346564050, guid: ff5a6c0838d5aed449cd1b1ac5787126, type: 3}
       propertyPath: m_LocalPosition.y
@@ -718,13 +742,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8200245861396106238, guid: ff5a6c0838d5aed449cd1b1ac5787126, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8219318663308994932, guid: ff5a6c0838d5aed449cd1b1ac5787126, type: 3}
       propertyPath: m_Name
       value: Ranged Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8219318663308994932, guid: ff5a6c0838d5aed449cd1b1ac5787126, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8466747271417330977, guid: ff5a6c0838d5aed449cd1b1ac5787126, type: 3}
+      propertyPath: m_Radius
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -810,7 +842,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3807729452895450856, guid: 6c31dce1456e47745ba05301026a73a9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6391570118478254271, guid: 6c31dce1456e47745ba05301026a73a9, type: 3}
       propertyPath: m_LocalPosition.x
