@@ -24,27 +24,25 @@ public class GameManager : MonoBehaviour
     public GameObject weapons;
     public PlayerController playerScript;
     public GunBase weaponScript;
+    public SavedStats savedStats;
 
-    public GameObject spawnPos;
 
     public bool isPaused;
 
     float timeScaleOrig;
     int gameGoalCount;
-    CharacterController playerCharacterController;
 
     void Awake()
     {
         instance = this;
-        spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
         miniMap = GameObject.FindWithTag("MiniMap");
+        savedStats = GameObject.FindGameObjectWithTag("SavedStats").GetComponent<SavedStats>();
         if(SceneManager.GetActiveScene().name == "Shop")
         {
             miniMap.SetActive(false);
         }
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
-        playerCharacterController = player.GetComponent<CharacterController>();
         weapons = GameObject.FindWithTag("Weapons");
         weaponScript = weapons.GetComponent<GunBase>();
         timeScaleOrig = Time.timeScale;
@@ -140,9 +138,10 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         menuHotbar.SetActive(true);
-        playerCharacterController.enabled = false;
-        player.transform.position = spawnPos.transform.position;
-        playerCharacterController.enabled = true;
+        if (savedStats.playerHP > 0)
+        {
+            savedStats.LoadStats();
+        }
         healthBar.transform.localScale = new Vector3(playerScript.currentHP / playerScript.maxHP, .75f, 1);
     }
 }

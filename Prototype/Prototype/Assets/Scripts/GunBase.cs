@@ -17,7 +17,7 @@ public class GunBase : MonoBehaviour
     [SerializeField] float fireRate;
 
     int currentBullets;
-    int magCount = 3;
+    public int magCount = 3;
     float shotTimer = 0;
 
     void Start()
