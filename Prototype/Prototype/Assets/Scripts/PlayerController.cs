@@ -6,6 +6,10 @@ public class PlayerController : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController characterController;
     [SerializeField] GameObject MainCamera;
+    [SerializeField] AudioSource footStepSource; 
+    [SerializeField] AudioClip[] footStepClip;
+    [SerializeField] float walkRate;
+    float walkTimer;
 
     [SerializeField] public GameObject pistolSpot;
     [SerializeField] public GameObject rifleSpot;
@@ -55,6 +59,12 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         moveDirection = (Input.GetAxis("Horizontal") * transform.right) + (Input.GetAxis("Vertical") * transform.forward);
         characterController.Move(moveDirection * speed * Time.deltaTime);
+
+        walkTimer += Time.deltaTime;
+        if (walkTimer >= walkRate && characterController.velocity.magnitude > .01f) {
+            WalkSound();
+            walkTimer = 0f;
+        }
     }
 
 
@@ -125,5 +135,12 @@ public class PlayerController : MonoBehaviour, IDamage
         heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.01f);
         heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(false);
+    }
+
+    void WalkSound()
+    {
+        int i = Random.Range(0, footStepClip.Length);
+        footStepSource.clip = footStepClip[i];
+        footStepSource.Play();
     }
 }
