@@ -4,6 +4,10 @@ using UnityEngine.AI;
 
 public class EnemyAiRange : MonoBehaviour, IDamage
 {
+    [SerializeField] AudioSource walkSource;
+    [SerializeField] AudioSource gunSource;
+    [SerializeField] AudioClip[] walkClips;
+    [SerializeField] AudioClip[] gunClips;
 
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
@@ -19,7 +23,10 @@ public class EnemyAiRange : MonoBehaviour, IDamage
 
     Vector3 playerDir;
 
+    [SerializeField] float walkRate;
+    float walkTimer;
     float shootTimer;
+    
 
     bool playerInRange;
 
@@ -35,6 +42,8 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     void Update()
     {
         shootTimer += Time.deltaTime;
+        walkTimer += Time.deltaTime;
+
         if (playerInRange)
         {
             playerDir = (GameManager.instance.player.transform.position - transform.position);
@@ -43,10 +52,15 @@ public class EnemyAiRange : MonoBehaviour, IDamage
             if (shootTimer >= fireRate)
             {
                 shoot();
+                GunShotSound();
             }
             if (agent.remainingDistance<= agent.stoppingDistance)
             {
                 facePlayer();
+            }
+            if(walkTimer>= walkRate) {
+                WalkSound();
+                walkTimer = 0f;
             }
         }
 
@@ -95,5 +109,19 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     {
         shootTimer = 0;
         Instantiate(bullet, shootingPos.position, transform.rotation);
+    }
+
+    void WalkSound()
+    {
+        int i = Random.Range(0, walkClips.Length);
+        walkSource.clip = walkClips[i];
+        walkSource.Play();
+    }
+
+    void GunShotSound()
+    {
+        int i = Random.Range(0, gunClips.Length);
+        gunSource.clip = gunClips[i];
+        gunSource.Play();
     }
 }

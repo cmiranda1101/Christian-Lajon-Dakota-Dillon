@@ -50,7 +50,7 @@ public class GunBase : MonoBehaviour
     {
         RaycastHit hit;
         shotTimer = 0;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range, ~GameManager.instance.playerScript.ignoreLayer, QueryTriggerInteraction.Ignore)) 
         {
             Debug.Log(hit.collider.name);
             IDamage damaged = hit.collider.GetComponent<IDamage>();
