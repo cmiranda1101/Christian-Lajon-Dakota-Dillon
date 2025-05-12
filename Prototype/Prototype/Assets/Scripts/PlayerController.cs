@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     [SerializeField] GameObject pistolPrefab;
     GameObject flashlight;
-    GameObject pistol;
+    [HideInInspector] public GameObject pistol;
     //Dynamic Creation DO NOT set in Inspector or unhide
     [HideInInspector] public GameObject rifle;
     GameObject heldWeapon;

@@ -4,6 +4,12 @@ public class GunBase : MonoBehaviour
 {
     [SerializeField] GameObject rifle;
     [SerializeField] GameObject pistol;
+    [SerializeField] AudioSource pistolSource;
+    [SerializeField] AudioSource rifleSource;
+    [SerializeField] AudioClip[] pistolShotClips;
+    [SerializeField] AudioClip[] rifleShotClips;
+    [SerializeField] AudioClip reloadClip;
+
 
     [SerializeField] int damage;
     [SerializeField] int range;
@@ -32,6 +38,7 @@ public class GunBase : MonoBehaviour
         {
             Fire();
             StartCoroutine(GameManager.instance.playerScript.MuzzleFlash());
+            GunShotSound();
         }
         if (Input.GetButtonDown("Reload") && currentBullets != magSize && magCount > 0)
         {
@@ -64,6 +71,17 @@ public class GunBase : MonoBehaviour
         currentBullets = magSize;
         magCount--;
         Debug.Log("Reloaded " + magCount + " magazines remaining");
+
+        if (GameManager.instance.playerScript.pistol.activeSelf) {
+            pistolSource.clip = reloadClip;
+            pistolSource.Play();
+        }
+        else if (GameManager.instance.playerScript.rifle.activeSelf) {
+            rifleSource.clip = reloadClip;
+            rifleSource.Play();
+        }
+
+
     }
 
     public void PickUpAmmo()
@@ -74,5 +92,19 @@ public class GunBase : MonoBehaviour
     {
         GameManager.instance.playerScript.rifle = Instantiate(rifle, GameManager.instance.playerScript.rifleSpot.transform.position, GameManager.instance.playerScript.rifleSpot.transform.rotation, GameManager.instance.playerScript.rifleSpot.transform);
         GameManager.instance.hotbarRifle.SetActive(true);
+    }
+
+    void GunShotSound()
+    {
+        if (GameManager.instance.playerScript.pistol.activeSelf) {
+            int i = Random.Range(0, pistolShotClips.Length);
+            pistolSource.clip = pistolShotClips[i];
+            pistolSource.Play();
+        }
+        else if (GameManager.instance.playerScript.rifle.activeSelf) {
+            int j = Random.Range(0, rifleShotClips.Length);
+            rifleSource.clip = rifleShotClips[j];
+            rifleSource.Play();
+        }
     }
 }
