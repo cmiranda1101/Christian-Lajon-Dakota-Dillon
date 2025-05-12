@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuShop;
     [SerializeField] GameObject menuHotbar;
 
+    public GameObject miniMap;
     public GameObject hotBarPistol;
     public GameObject hotbarRifle;
     public GameObject healthBar;
@@ -28,6 +30,11 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        miniMap = GameObject.FindWithTag("MiniMap");
+        if(SceneManager.GetActiveScene().name == "Shop")
+        {
+            miniMap.SetActive(false);
+        }
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         weapons = GameObject.FindWithTag("Weapons");

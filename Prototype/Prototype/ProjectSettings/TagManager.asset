@@ -11,6 +11,7 @@ TagManager:
   - Pistol
   - Rifle
   - Weapons
+  - MiniMap
   layers:
   - Default
   - TransparentFX
