@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour, IDamage
 {
@@ -20,9 +21,9 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] LayerMask ignoreLayer;
 
     [SerializeField] int speed;
-    [SerializeField] float maxHP;
+    [SerializeField] public float maxHP;
     [SerializeField] public int grabDistance;
-    [SerializeField] float currentHP;
+    [SerializeField] public float currentHP;
     [SerializeField] public int money;
 
     Vector3 moveDirection;

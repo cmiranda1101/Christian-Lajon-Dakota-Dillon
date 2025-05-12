@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -47,6 +50,10 @@ public class GameManager : MonoBehaviour
         timeScaleOrig = Time.timeScale;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Start()
+    {
         LevelStart();
     }
 
@@ -136,5 +143,6 @@ public class GameManager : MonoBehaviour
         playerCharacterController.enabled = false;
         player.transform.position = spawnPos.transform.position;
         playerCharacterController.enabled = true;
+        healthBar.transform.localScale = new Vector3(playerScript.currentHP / playerScript.maxHP, .75f, 1);
     }
 }
