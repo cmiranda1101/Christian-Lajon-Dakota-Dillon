@@ -143,6 +143,7 @@ public class GameManager : MonoBehaviour
         playerCharacterController.enabled = false;
         player.transform.position = spawnPos.transform.position;
         playerCharacterController.enabled = true;
-        healthBar.transform.localScale = new Vector3(playerScript.currentHP / playerScript.maxHP, .75f, 1);
+        float scale = playerScript.currentHP / playerScript.maxHP;
+        healthBar.transform.localScale = new Vector3(scale, .75f, 1);
     }
 }

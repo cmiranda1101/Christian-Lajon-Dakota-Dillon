@@ -338,10 +338,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   speed: 5
+  maxHP: 10
   grabDistance: 5
   currentHP: 10
   money: 1000
   pistolPrefab: {fileID: 4493368667877536924, guid: ea978309a52dc714cacb3ab0643ebcf2, type: 3}
+  pistol: {fileID: 0}
   rifle: {fileID: 0}
 --- !u!143 &4564405297631183533
 CharacterController:
@@ -618,7 +620,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rifle: {fileID: 2960120504364758208, guid: 24a9d49ca7ab275429dc4f39cdfb91b6, type: 3}
   pistol: {fileID: 4493368667877536924, guid: ea978309a52dc714cacb3ab0643ebcf2, type: 3}
+  pistolSource: {fileID: 0}
+  rifleSource: {fileID: 0}
+  pistolShotClips: []
+  rifleShotClips: []
+  reloadClip: {fileID: 0}
   damage: 0
   range: 0
   magSize: 0
   fireRate: 0
+  magCount: 0
