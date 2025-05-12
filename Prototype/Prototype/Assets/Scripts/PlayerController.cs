@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,13 +9,14 @@ public class PlayerController : MonoBehaviour, IDamage
 
     [SerializeField] public GameObject pistolSpot;
     [SerializeField] public GameObject rifleSpot;
+
     [SerializeField] public GameObject Holster;
 
     [SerializeField] LayerMask ignoreLayer;
 
     [SerializeField] int speed;
     [SerializeField] public int grabDistance;
-    [SerializeField] int HP;
+    [SerializeField] float currentHP;
     [SerializeField] public int money;
 
     Vector3 moveDirection;
@@ -22,11 +24,15 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] GameObject pistolPrefab;
     GameObject flashlight;
     GameObject pistol;
-    public GameObject rifle;
+    //Dynamic Creation DO NOT set in Inspector or unhide
+    [HideInInspector] public GameObject rifle;
     GameObject heldWeapon;
+
+    float maxHP;
 
     void Start()
     {
+        maxHP = currentHP;
         flashlight = GameObject.Find("FlashLight");
         pistol = Instantiate(pistolPrefab, pistolSpot.transform.position, pistolSpot.transform.rotation, pistolSpot.transform);
         heldWeapon = pistol;
@@ -37,12 +43,10 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         MovePlayer();
         SwapWeapons();
-        if (Input.GetButtonDown("Toggle Flashlight"))
-        {
+        if (Input.GetButtonDown("Toggle Flashlight")) {
             ToggleFlashlight();
         }
-        if (Input.GetButtonDown("Interact"))
-        {
+        if (Input.GetButtonDown("Interact")) {
             GrabObject();
         }
     }
@@ -56,12 +60,10 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void ToggleFlashlight()
     {
-        if (flashlight.gameObject.activeSelf == true)
-        {
+        if (flashlight.gameObject.activeSelf == true) {
             flashlight.SetActive(false);
         }
-        else
-        {
+        else {
             flashlight.SetActive(true);
         }
     }
@@ -70,13 +72,11 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         //Check if something is grabbed
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance, ~ignoreLayer))
-        {
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance, ~ignoreLayer)) {
             Debug.Log(hit.collider.name);
             IInteract grab = hit.collider.GetComponentInParent<IInteract>();
 
-            if (grab != null)
-            {
+            if (grab != null) {
                 grab.Interact();
             }
         }
@@ -84,18 +84,12 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void SwapWeapons()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && heldWeapon != pistol)
-        {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && heldWeapon != pistol) {
             heldWeapon.SetActive(false);
             pistol.SetActive(true);
             heldWeapon = pistol;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && heldWeapon != rifle)
-        {
-            if(rifle == null)
-            {
-                return;
-            }
+        if (rifle != null && Input.GetKeyDown(KeyCode.Alpha2) && heldWeapon != rifle) {
             heldWeapon.SetActive(false);
             rifle.SetActive(true);
             heldWeapon = rifle;
@@ -104,17 +98,32 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Heal(int amount)
     {
-        HP += amount;
+        currentHP += amount;
+
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
     }
 
     public void takeDamage(int amount)
     {
-        HP -= amount;
+        //lower HP
+        currentHP = Mathf.Clamp(currentHP -= amount, 0, maxHP);
 
         //Need to check for death
-        if (HP <= 0) {
-            //TODO uncomment below when we have a lose screen
+        if (currentHP <= 0) {
+            GameManager.instance.healthBar.SetActive(false);
             GameManager.instance.YouLose();
         }
+        //Scale HP Bar
+        else {
+            float scale = currentHP / maxHP;
+            GameManager.instance.healthBar.transform.localScale = new Vector3(scale, .75f, 1);
+        }
+    }
+
+    public IEnumerator MuzzleFlash()
+    {
+        heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.01f);
+        heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(false);
     }
 }

@@ -33,6 +33,10 @@ public class PickUpItem : MonoBehaviour, IInteract
         if (distanceFromPlayer <= GameManager.instance.playerScript.grabDistance)
         {
             pickUpText.SetActive(true);
+
+            Vector3 playerDirection = GameManager.instance.player.transform.position - transform.position;
+            Quaternion rot = Quaternion.LookRotation(new Vector3(playerDirection.x, playerDirection.y, playerDirection.z));
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * 100);
         }
         else
         {

@@ -31,6 +31,7 @@ public class GunBase : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && currentBullets > 0 && shotTimer > fireRate)
         {
             Fire();
+            StartCoroutine(GameManager.instance.playerScript.MuzzleFlash());
         }
         if (Input.GetButtonDown("Reload") && currentBullets != magSize && magCount > 0)
         {
@@ -72,5 +73,6 @@ public class GunBase : MonoBehaviour
     public void EquipRifle()
     {
         GameManager.instance.playerScript.rifle = Instantiate(rifle, GameManager.instance.playerScript.rifleSpot.transform.position, GameManager.instance.playerScript.rifleSpot.transform.rotation, GameManager.instance.playerScript.rifleSpot.transform);
+        GameManager.instance.hotbarRifle.SetActive(true);
     }
 }
