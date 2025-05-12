@@ -4,6 +4,11 @@ using System.Collections;
 
 public class EnemyAIMelee : MonoBehaviour, IDamage
 {
+    [SerializeField] AudioSource walkSource;
+    [SerializeField] AudioSource weaponSource;
+    [SerializeField] AudioClip[] walkClips;
+    [SerializeField] AudioClip[] weaponClips;
+
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
 
@@ -13,12 +18,17 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     [SerializeField] float meleeCooldown;
     [SerializeField] int facePlayerSpeed;
 
+    [SerializeField] float walkRate;
+
+    float walkTimer;
     float nextMeleeTime;
     Color originalColor;
 
     bool playerInRange;
     Transform player;
     Vector3 playerDir;
+
+    bool isMoving;
 
     void Start()
     {
@@ -29,6 +39,9 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
 
     void Update()
     {
+        isMoving = true;
+        walkTimer += Time.deltaTime;
+
         if (player == null || !playerInRange) return;
 
         playerDir = player.position - transform.position;
@@ -39,8 +52,14 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
         // If close enough, face and attack
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
+            isMoving = false;
             FacePlayer();
             MeleeAttack();
+            WeaponSound();
+        }
+        if (walkTimer >= walkRate && isMoving) {
+            WalkSound();
+            walkTimer = 0f;
         }
     }
 
@@ -107,5 +126,19 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
         {
             playerInRange = true;
         }
+    }
+
+    void WalkSound()
+    {
+        int i = Random.Range(0, walkClips.Length);
+        walkSource.clip = walkClips[i];
+        walkSource.Play();
+    }
+
+    void WeaponSound()
+    {
+        int i = Random.Range(0, weaponClips.Length);
+        weaponSource.clip = weaponClips[i];
+        weaponSource.Play();
     }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1300a1f7bbbf3f140aee0da44ba85694
+guid: bf685e2b67465c64c8f5efdc5b241fd1
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
@@ -22,8 +22,8 @@ AudioImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 189879
-  packageName: Footsteps - Essentials
-  packageVersion: 1.3
-  assetPath: Assets/Footsteps - Essentials/Footsteps_Mud/Footsteps_Mud_Walk/Footsteps_Mud_Walk_10.wav
-  uploadId: 473093
+  productId: 177824
+  packageName: SwordSoundPack
+  packageVersion: 1.0
+  assetPath: Assets/SwordSoundPack/SWORD_14.wav
+  uploadId: 387211

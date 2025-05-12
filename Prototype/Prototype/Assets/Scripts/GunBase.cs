@@ -16,8 +16,8 @@ public class GunBase : MonoBehaviour
     [SerializeField] int magSize;
     [SerializeField] float fireRate;
 
+    [SerializeField] int magCount;
     int currentBullets;
-    int magCount = 3;
     float shotTimer = 0;
 
     void Start()
@@ -86,7 +86,12 @@ public class GunBase : MonoBehaviour
 
     public void PickUpAmmo()
     {
-        magCount++;
+        if (GameManager.instance.playerScript.pistol.activeSelf) {
+            GameManager.instance.playerScript.pistol.GetComponent<GunBase>().magCount++;
+        }
+        else if (GameManager.instance.playerScript.rifle.activeSelf) {
+            GameManager.instance.playerScript.rifle.GetComponent<GunBase>().magCount++;
+        }
     }
     public void EquipRifle()
     {
