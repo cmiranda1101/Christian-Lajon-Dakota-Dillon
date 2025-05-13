@@ -391,6 +391,7 @@ MonoBehaviour:
   range: 40
   magSize: 12
   fireRate: 0.4
+  magCount: 3
 --- !u!82 &6837057882554226897
 AudioSource:
   m_ObjectHideFlags: 0

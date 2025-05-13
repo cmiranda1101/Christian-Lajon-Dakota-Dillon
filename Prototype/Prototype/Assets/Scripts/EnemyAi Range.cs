@@ -29,6 +29,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     
 
     bool playerInRange;
+    bool isMoving;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,6 +47,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
 
         if (playerInRange)
         {
+            isMoving = true;
             playerDir = (GameManager.instance.player.transform.position - transform.position);
             agent.SetDestination(GameManager.instance.player.transform.position);
 
@@ -56,9 +58,10 @@ public class EnemyAiRange : MonoBehaviour, IDamage
             }
             if (agent.remainingDistance<= agent.stoppingDistance)
             {
+                isMoving = false;
                 facePlayer();
             }
-            if(walkTimer>= walkRate) {
+            if(walkTimer>= walkRate && isMoving) {
                 WalkSound();
                 walkTimer = 0f;
             }
