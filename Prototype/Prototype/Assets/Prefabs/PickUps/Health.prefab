@@ -227,7 +227,7 @@ MonoBehaviour:
   itemModel: {fileID: 503464093865810129}
   playerModel: {fileID: 0}
   pickUpText: {fileID: 5816595508231061401}
-  healthAmount: 10
+  healthAmount: 5
 --- !u!33 &4534623975024576809
 MeshFilter:
   m_ObjectHideFlags: 0

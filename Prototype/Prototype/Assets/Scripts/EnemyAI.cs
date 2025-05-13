@@ -55,7 +55,6 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
             isMoving = false;
             FacePlayer();
             MeleeAttack();
-            WeaponSound();
         }
         if (walkTimer >= walkRate && isMoving) {
             WalkSound();
@@ -79,6 +78,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
             {
                 damageable.takeDamage((int)meleeDamage);
                 Debug.Log($"Enemy melee hit {player.name} for {meleeDamage} damage.");
+                WeaponSound();
             }
             else
             {
