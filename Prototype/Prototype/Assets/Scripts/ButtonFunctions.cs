@@ -37,6 +37,7 @@ public class ButtonFunctions : MonoBehaviour
 
     public void GoToShop()
     {
+        GameManager.instance.savedStats.SaveStats();
         SceneManager.LoadSceneAsync("Shop");
     }
 }
