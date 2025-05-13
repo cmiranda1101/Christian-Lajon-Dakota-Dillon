@@ -109,11 +109,7 @@ public class PlayerController : MonoBehaviour, IDamage
         currentHP += amount;
 
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
-
-        if (currentHP >= maxHP)
-        {
-            currentHP = maxHP;
-        }
+        GameManager.instance.healthBar.transform.localScale = new Vector3(currentHP / maxHP, .75f, 1);
     }
 
     public void takeDamage(int amount)
