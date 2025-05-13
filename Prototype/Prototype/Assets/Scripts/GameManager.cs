@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public GameObject weapons;
     public PlayerController playerScript;
     public GunBase weaponScript;
+    //Include this prefab in your scene
     public SavedStats savedStats;
 
 
