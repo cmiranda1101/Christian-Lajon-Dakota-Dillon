@@ -296,13 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rifle: {fileID: 2960120504364758208, guid: 24a9d49ca7ab275429dc4f39cdfb91b6, type: 3}
   pistol: {fileID: 8841021181203673647}
-  pistolSource: {fileID: 0}
-  rifleSource: {fileID: 0}
-  pistolShotClips: []
-  rifleShotClips: []
-  reloadClip: {fileID: 0}
   damage: 1
   range: 25
   magSize: 9
   fireRate: 0.25
-  magCount: 3

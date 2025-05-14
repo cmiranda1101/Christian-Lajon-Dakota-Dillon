@@ -32,8 +32,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
 
     void Start()
     {
-        if (model.material.color != null)
-            originalColor = model.material.color;
+        originalColor = model.material.color;
         player = GameManager.instance.player.transform;
         GameManager.instance.UpdateGameGoal(1);
     }
@@ -51,7 +50,8 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
         agent.SetDestination(player.position);
 
         // If close enough, face and attack
-        if (agent.remainingDistance <= agent.stoppingDistance) {
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
             isMoving = false;
             FacePlayer();
             MeleeAttack();
@@ -71,14 +71,17 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     void MeleeAttack()
     {
         float distance = Vector3.Distance(transform.position, player.position);
-        if (Time.time >= nextMeleeTime && distance <= meleeRange) {
+        if (Time.time >= nextMeleeTime && distance <= meleeRange)
+        {
             IDamage damageable = player.GetComponent<IDamage>();
-            if (damageable != null) {
+            if (damageable != null)
+            {
                 damageable.takeDamage((int)meleeDamage);
                 Debug.Log($"Enemy melee hit {player.name} for {meleeDamage} damage.");
                 WeaponSound();
             }
-            else {
+            else
+            {
                 Debug.LogWarning($"Target {player.name} does not have an IDamage component.");
             }
 
@@ -90,11 +93,13 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     {
         HP -= damageAmount;
 
-        if (HP <= 0) {
+        if (HP <= 0)
+        {
             GameManager.instance.UpdateGameGoal(-1);
             Destroy(gameObject);
         }
-        else {
+        else
+        {
             StartCoroutine(FlashRed());
             agent.SetDestination(player.position);
         }
@@ -109,14 +114,16 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) {
+        if (other.CompareTag("Player"))
+        {
             playerInRange = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")) {
+        if (other.CompareTag("Player"))
+        {
             playerInRange = true;
         }
     }
