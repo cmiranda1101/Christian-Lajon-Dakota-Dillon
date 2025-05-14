@@ -452,6 +452,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6832e8cac38df6046a9d83d2b64740b2, type: 3}
+--- !u!4 &1044374758 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8531306292742516406, guid: e33ff23d802fa5e4eb7b1bc3174bfe2c, type: 3}
+  m_PrefabInstance: {fileID: 5921224487849882159}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1159672477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1609,6 +1614,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6806544554568819736, guid: 3c1fca0a668a4d74b806b1466103e219, type: 3}
       insertIndex: 77
       addedObject: {fileID: 338649967}
+    - targetCorrespondingSourceObject: {fileID: 6806544554568819736, guid: 3c1fca0a668a4d74b806b1466103e219, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1044374758}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c1fca0a668a4d74b806b1466103e219, type: 3}
 --- !u!1001 &5921224487849882159
@@ -1617,11 +1625,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1771378231}
     m_Modifications:
     - target: {fileID: 6673527744869578092, guid: e33ff23d802fa5e4eb7b1bc3174bfe2c, type: 3}
       propertyPath: m_Name
       value: FogOfWar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8531306292742516406, guid: e33ff23d802fa5e4eb7b1bc3174bfe2c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 164.99998
       objectReference: {fileID: 0}
     - target: {fileID: 8531306292742516406, guid: e33ff23d802fa5e4eb7b1bc3174bfe2c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1645,11 +1657,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8531306292742516406, guid: e33ff23d802fa5e4eb7b1bc3174bfe2c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8531306292742516406, guid: e33ff23d802fa5e4eb7b1bc3174bfe2c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8531306292742516406, guid: e33ff23d802fa5e4eb7b1bc3174bfe2c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1681,7 +1693,6 @@ SceneRoots:
   - {fileID: 1866641231052075920}
   - {fileID: 2030997106}
   - {fileID: 416438031}
-  - {fileID: 5921224487849882159}
   - {fileID: 2126196855}
   - {fileID: 200890022}
   - {fileID: 1159672477}
