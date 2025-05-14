@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 56.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -42,23 +42,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25
+      value: -18.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.70710367
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.70711
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -269.999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -436,7 +436,7 @@ MonoBehaviour:
   facePlayerSpeed: 15
   shootingPos: {fileID: 8207139114905910316}
   bullet: {fileID: 2485194676518234941, guid: b486390cf48be664baa654d7bf7bc6af, type: 3}
-  fireRate: 0.8
+  fireRate: 0.5
   walkRate: 0.4
 --- !u!195 &7992687783722063204
 NavMeshAgent:
