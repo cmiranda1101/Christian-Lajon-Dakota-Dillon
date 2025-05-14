@@ -74,6 +74,8 @@ public class GunBase : MonoBehaviour
         }
         else if (GameManager.instance.playerScript.rifle.activeSelf) {
             GameManager.instance.playerScript.rifle.GetComponent<GunBase>().magCount--;
+            GameManager.instance.playerScript.rifle.GetComponent<GunBase>().currentBullets = magSize;
+
         }
 
         Debug.Log("Reloaded " + magCount + " magazines remaining");
