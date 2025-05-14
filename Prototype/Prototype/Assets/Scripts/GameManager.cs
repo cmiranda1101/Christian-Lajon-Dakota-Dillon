@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuShop;
     [SerializeField] GameObject menuHotbar;
 
+    public GameObject DamageFlash;
     public GameObject miniMap;
     public GameObject hotBarPistol;
     public GameObject hotbarRifle;

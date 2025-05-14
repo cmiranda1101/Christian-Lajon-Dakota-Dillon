@@ -114,6 +114,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void takeDamage(int amount)
     {
+        //Flash damage screen
+        StartCoroutine(DamageScreenFlash());
+
         //lower HP
         currentHP = Mathf.Clamp(currentHP -= amount, 0, maxHP);
 
@@ -141,5 +144,12 @@ public class PlayerController : MonoBehaviour, IDamage
         int i = Random.Range(0, footStepClip.Length);
         footStepSource.clip = footStepClip[i];
         footStepSource.Play();
+    }
+
+    IEnumerator DamageScreenFlash()
+    {
+        GameManager.instance.DamageFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        GameManager.instance.DamageFlash.SetActive(false);
     }
 }
