@@ -23,7 +23,6 @@ public class EnemyAiRange : MonoBehaviour, IDamage
 
     Vector3 playerDir;
 
-    [SerializeField] LayerMask sightLine;
     [SerializeField] float walkRate;
     float walkTimer;
     float shootTimer;
@@ -49,25 +48,13 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         if (playerInRange)
         {
             isMoving = true;
-            //creating a postion on the player instead of using game manager to normalize
-            Vector3 playerPosition = GameManager.instance.player.transform.position;
-            playerDir = (playerPosition - transform.position).normalized;
-            agent.SetDestination(playerPosition);
+            playerDir = (GameManager.instance.player.transform.position - transform.position);
+            agent.SetDestination(GameManager.instance.player.transform.position);
 
-
-            //check line of sight for player
-            Ray rayLine = new Ray(shootingPos.position, playerDir);
-
-            if (Physics.Raycast(rayLine, out RaycastHit hit, Mathf.Infinity, sightLine)) 
+            if (shootTimer >= fireRate)
             {
-                if (hit.collider.CompareTag("Player"))
-                {
-                    if (shootTimer >= fireRate)
-                    {
-                        shoot();
-                        GunShotSound();
-                    }
-                }
+                shoot();
+                GunShotSound();
             }
             if (agent.remainingDistance<= agent.stoppingDistance)
             {
