@@ -4020,9 +4020,9 @@ MonoBehaviour:
   menuPause: {fileID: 1225977342762366656}
   menuWin: {fileID: 6247575073667017126}
   menuGameOver: {fileID: 541420684957081878}
-  menuShop: {fileID: 2372957891866589578}
   menuHotbar: {fileID: 8494426942481023511}
   menuMoney: {fileID: 5147901964510663631}
+  menuShop: {fileID: 2372957891866589578}
   DamageFlash: {fileID: 8126014974184903328}
   miniMap: {fileID: 0}
   hotBarPistol: {fileID: 3457666661816730292}
