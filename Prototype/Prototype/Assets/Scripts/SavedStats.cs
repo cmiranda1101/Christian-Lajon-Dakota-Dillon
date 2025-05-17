@@ -2,7 +2,14 @@ using UnityEngine;
 
 public class SavedStats : MonoBehaviour
 {
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            Debug.Log("Data deleted");
+            DeleteAllData();
+        }
+    }
     public void SaveStats()
     {
         PlayerPrefs.SetFloat("PlayerHP", GameManager.instance.playerScript.currentHP);
@@ -11,6 +18,11 @@ public class SavedStats : MonoBehaviour
 
     public void LoadStats()
     {
+        if (PlayerPrefs.GetFloat("PlayerHP") <= 0)
+        {
+            GameManager.instance.playerScript.currentHP = GameManager.instance.playerScript.maxHP;
+            GameManager.instance.playerScript.money = 1000;
+        }
         GameManager.instance.playerScript.currentHP = PlayerPrefs.GetFloat("PlayerHP");
         GameManager.instance.playerScript.money = PlayerPrefs.GetInt("PlayerMoney");
     }
