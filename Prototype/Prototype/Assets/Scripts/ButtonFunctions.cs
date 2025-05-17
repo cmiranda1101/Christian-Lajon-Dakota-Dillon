@@ -53,7 +53,7 @@ public class ButtonFunctions : MonoBehaviour
 
     public void GoToShop()
     {
-        GameManager.instance.savedStats.SaveStats();
+        GameManager.instance.savedStatsScript.SaveStats();
         SceneManager.LoadSceneAsync("Shop");
     }
 }
