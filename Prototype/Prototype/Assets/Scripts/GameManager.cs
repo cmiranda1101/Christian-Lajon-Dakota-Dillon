@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public MoneyUI moneyScript;
     public SavedStats savedStatsScript;
     public AmmoUI ammoScript;
+    public LevelExit levelExitScript;
 
 
     public bool isPaused;
@@ -51,6 +52,13 @@ public class GameManager : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "Shop")
         {
             miniMap.SetActive(false);
+            //if you need to test going to the shop or another scene make sure there is a level exit prefab in your scene
+            levelExitScript = GameObject.FindWithTag("LevelExit").GetComponent<LevelExit>();
+            levelExitScript.levelToLoad++;
+        }
+        else
+        {
+            levelExitScript = null;
         }
         weapons = GameObject.FindWithTag("Weapons");
         weaponScript = weapons.GetComponent<GunBase>();
@@ -153,6 +161,6 @@ public class GameManager : MonoBehaviour
         {
             savedStatsScript.LoadStats();
         }
-        healthBar.fillAmount = (float)playerScript.currentHP / playerScript.maxHP;
+        healthBar.fillAmount = playerScript.currentHP / playerScript.maxHP;
     }
 }

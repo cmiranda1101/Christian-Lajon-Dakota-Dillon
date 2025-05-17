@@ -5370,6 +5370,7 @@ MonoBehaviour:
   moneyScript: {fileID: 0}
   savedStatsScript: {fileID: 3032187883100351740}
   ammoScript: {fileID: 0}
+  levelExitScript: {fileID: 0}
   isPaused: 0
 --- !u!1 &5717430771037851555
 GameObject:
