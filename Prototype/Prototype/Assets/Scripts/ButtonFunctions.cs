@@ -55,4 +55,14 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.savedStatsScript.SaveStats();
         SceneManager.LoadSceneAsync("Shop");
     }
+
+    public void BuyHealth()
+    {
+        if(GameManager.instance.playerScript.money >= 100)
+        {
+            buyAudio.Play();
+            GameManager.instance.playerScript.Heal(GameManager.instance.playerScript.maxHP);
+            GameManager.instance.moneyScript.SubtractMoney(100);
+        }
+    }
 }
