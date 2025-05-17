@@ -16,7 +16,7 @@ public class GunBase : MonoBehaviour
     [SerializeField] int magSize;
     [SerializeField] float fireRate;
 
-    int currentBullets;
+    public int currentBullets;
     public int magCount = 3;
     float shotTimer = 0;
 
@@ -27,18 +27,12 @@ public class GunBase : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.instance.isPaused)
-        {
-            return;
-        }
 
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * range, Color.blue);
         shotTimer += Time.deltaTime;
         if (Input.GetButtonDown("Fire1") && currentBullets > 0 && shotTimer > fireRate)
         {
             Fire();
-            StartCoroutine(GameManager.instance.playerScript.MuzzleFlash());
-            GunShotSound();
         }
         if (Input.GetButtonDown("Reload") && currentBullets != magSize && magCount > 0)
         {
@@ -48,48 +42,58 @@ public class GunBase : MonoBehaviour
 
     public void Fire()
     {
-        RaycastHit hit;
-        shotTimer = 0;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range, ~GameManager.instance.playerScript.ignoreLayer, QueryTriggerInteraction.Ignore)) 
+        if (Time.timeScale > 0)
         {
-            Debug.Log(hit.collider.name);
-            IDamage damaged = hit.collider.GetComponent<IDamage>();
-            if (damaged != null)
+            RaycastHit hit;
+            shotTimer = 0;
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range, ~GameManager.instance.playerScript.ignoreLayer, QueryTriggerInteraction.Ignore))
             {
-                damaged.takeDamage(damage);
+                Debug.Log(hit.collider.name);
+                IDamage damaged = hit.collider.GetComponent<IDamage>();
+                if (damaged != null)
+                {
+                    damaged.takeDamage(damage);
+                }
             }
-        }
-        currentBullets--;
-        if (currentBullets <= 0)
-        {
-            Debug.Log("Out of bullets");
+            StartCoroutine(GameManager.instance.playerScript.MuzzleFlash());
+            GunShotSound();
+            currentBullets--;
+            if (currentBullets <= 0)
+            {
+                Debug.Log("Out of bullets");
+            }
         }
     }
 
     void Reload()
     {
-        if (GameManager.instance.playerScript.pistol.activeSelf) {
-            GameManager.instance.playerScript.pistol.GetComponent<GunBase>().magCount--;
-            GameManager.instance.playerScript.pistol.GetComponent<GunBase>().currentBullets = magSize;
+        if (Time.timeScale > 0)
+        {
+            if (GameManager.instance.playerScript.pistol.activeSelf)
+            {
+                GameManager.instance.playerScript.pistol.GetComponent<GunBase>().magCount--;
+                GameManager.instance.playerScript.pistol.GetComponent<GunBase>().currentBullets = magSize;
+            }
+            else if (GameManager.instance.playerScript.rifle.activeSelf)
+            {
+                GameManager.instance.playerScript.rifle.GetComponent<GunBase>().magCount--;
+                GameManager.instance.playerScript.rifle.GetComponent<GunBase>().currentBullets = magSize;
+
+            }
+
+            Debug.Log("Reloaded " + magCount + " magazines remaining");
+
+            if (GameManager.instance.playerScript.pistol.activeSelf)
+            {
+                pistolSource.clip = reloadClip;
+                pistolSource.Play();
+            }
+            else if (GameManager.instance.playerScript.rifle.activeSelf)
+            {
+                rifleSource.clip = reloadClip;
+                rifleSource.Play();
+            }
         }
-        else if (GameManager.instance.playerScript.rifle.activeSelf) {
-            GameManager.instance.playerScript.rifle.GetComponent<GunBase>().magCount--;
-            GameManager.instance.playerScript.rifle.GetComponent<GunBase>().currentBullets = magSize;
-
-        }
-
-        Debug.Log("Reloaded " + magCount + " magazines remaining");
-
-        if (GameManager.instance.playerScript.pistol.activeSelf) {
-            pistolSource.clip = reloadClip;
-            pistolSource.Play();
-        }
-        else if (GameManager.instance.playerScript.rifle.activeSelf) {
-            rifleSource.clip = reloadClip;
-            rifleSource.Play();
-        }
-
-
     }
 
     public void PickUpAmmo()

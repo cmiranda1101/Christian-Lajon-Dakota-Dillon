@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -12,9 +13,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuGameOver;
-    [SerializeField] GameObject menuShop;
     [SerializeField] GameObject menuHotbar;
+    [SerializeField] GameObject menuMoney;
+    [SerializeField] GameObject menuAmmo;
+    [SerializeField] GameObject menuShop;
+    [SerializeField] GameObject savedStats;
 
+    public GameObject DamageFlash;
     public GameObject miniMap;
     public GameObject hotBarPistol;
     public GameObject hotbarRifle;
@@ -24,8 +29,9 @@ public class GameManager : MonoBehaviour
     public GameObject weapons;
     public PlayerController playerScript;
     public GunBase weaponScript;
-    //Include this prefab in your scene
-    public SavedStats savedStats;
+    public MoneyUI moneyScript;
+    public SavedStats savedStatsScript;
+    public AmmoUI ammoScript;
 
 
     public bool isPaused;
@@ -38,7 +44,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
-        savedStats = GameObject.Find("SavedStats").GetComponent<SavedStats>();
+        savedStatsScript = savedStats.GetComponent<SavedStats>();
         miniMap = GameObject.FindWithTag("MiniMap");
         if(SceneManager.GetActiveScene().name == "Shop")
         {
@@ -46,6 +52,8 @@ public class GameManager : MonoBehaviour
         }
         weapons = GameObject.FindWithTag("Weapons");
         weaponScript = weapons.GetComponent<GunBase>();
+        moneyScript = menuMoney.GetComponentInChildren<MoneyUI>();
+        ammoScript = menuAmmo.GetComponentInChildren<AmmoUI>();
         timeScaleOrig = Time.timeScale;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -139,9 +147,9 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         menuHotbar.SetActive(true);
-        if (savedStats.playerHP > 0)
+        if (SceneManager.GetActiveScene().name != "IntroLevel")
         {
-            savedStats.LoadStats();
+            savedStatsScript.LoadStats();
         }
         healthBar.transform.localScale = new Vector3(playerScript.currentHP / playerScript.maxHP, .75f, 1);
     }
