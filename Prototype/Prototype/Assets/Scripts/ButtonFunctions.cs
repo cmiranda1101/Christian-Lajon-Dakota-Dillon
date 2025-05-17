@@ -65,4 +65,24 @@ public class ButtonFunctions : MonoBehaviour
             GameManager.instance.moneyScript.SubtractMoney(100);
         }
     }
+
+    public void BuyAmmo()
+    {
+        if (GameManager.instance.playerScript.money >= 50 && GameManager.instance.playerScript.heldWeapon == GameManager.instance.playerScript.pistol)
+        {
+            buyAudio.Play();
+            GameManager.instance.moneyScript.SubtractMoney(50);
+            GunBase pistol = GameObject.FindWithTag("Pistol").GetComponent<GunBase>();
+            pistol.magCount++;
+            pistol.UpdateAmmo();
+        }
+        else if(GameManager.instance.playerScript.money >= 50 && GameManager.instance.playerScript.heldWeapon == GameManager.instance.playerScript.rifle)
+        {
+            buyAudio.Play();
+            GameManager.instance.moneyScript.SubtractMoney(50);
+            GunBase rifle = GameObject.FindWithTag("Rifle").GetComponent<GunBase>();
+            rifle.magCount++;
+            rifle.UpdateAmmo();
+        }
+    }
 }
