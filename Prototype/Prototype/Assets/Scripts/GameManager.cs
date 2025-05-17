@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuGameOver;
     [SerializeField] GameObject menuHotbar;
     [SerializeField] GameObject menuMoney;
+    [SerializeField] GameObject menuAmmo;
     [SerializeField] GameObject menuShop;
     [SerializeField] GameObject savedStats;
 
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
     public GunBase weaponScript;
     public MoneyUI moneyScript;
     public SavedStats savedStatsScript;
+    public AmmoUI ammoScript;
 
 
     public bool isPaused;
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour
         weapons = GameObject.FindWithTag("Weapons");
         weaponScript = weapons.GetComponent<GunBase>();
         moneyScript = menuMoney.GetComponentInChildren<MoneyUI>();
+        ammoScript = menuAmmo.GetComponentInChildren<AmmoUI>();
         timeScaleOrig = Time.timeScale;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

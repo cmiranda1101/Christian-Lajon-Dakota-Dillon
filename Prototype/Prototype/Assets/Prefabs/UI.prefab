@@ -1720,6 +1720,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6510206755802823826}
+  - component: {fileID: 6920074398144263857}
   m_Layer: 5
   m_Name: AmmoUI
   m_TagString: Untagged
@@ -1749,6 +1750,20 @@ RectTransform:
   m_AnchoredPosition: {x: -196, y: 160}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6920074398144263857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998429575300316312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d816ff0283ff62947b883c48729198c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoCount: {fileID: 2035968705532935014}
+  magCount: {fileID: 1394874960083546021}
 --- !u!1 &2030601348199301029
 GameObject:
   m_ObjectHideFlags: 0
@@ -4192,6 +4207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7606181043567299955}
+  - component: {fileID: 4558945709707967803}
   m_Layer: 5
   m_Name: MoneyUI
   m_TagString: Untagged
@@ -4219,6 +4235,19 @@ RectTransform:
   m_AnchoredPosition: {x: -130, y: -53}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4558945709707967803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5147901964510663631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e717aad56a4cf041a56ae185121fd46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moneyText: {fileID: 3945322430919016516}
 --- !u!1 &5486894424860197809
 GameObject:
   m_ObjectHideFlags: 0
@@ -4409,6 +4438,7 @@ MonoBehaviour:
   menuGameOver: {fileID: 541420684957081878}
   menuHotbar: {fileID: 8494426942481023511}
   menuMoney: {fileID: 5147901964510663631}
+  menuAmmo: {fileID: 1998429575300316312}
   menuShop: {fileID: 2372957891866589578}
   savedStats: {fileID: 3641457443895511340}
   DamageFlash: {fileID: 8126014974184903328}
@@ -4422,6 +4452,7 @@ MonoBehaviour:
   weaponScript: {fileID: 0}
   moneyScript: {fileID: 0}
   savedStatsScript: {fileID: 0}
+  ammoScript: {fileID: 0}
   isPaused: 0
 --- !u!1 &5778591545738387527
 GameObject:
@@ -4432,7 +4463,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2087050465085616047}
-  - component: {fileID: 4765416142499030368}
   - component: {fileID: 1532428581122347580}
   - component: {fileID: 3945322430919016516}
   m_Layer: 5
@@ -4461,19 +4491,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4765416142499030368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5778591545738387527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e717aad56a4cf041a56ae185121fd46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moneyText: {fileID: 3945322430919016516}
 --- !u!222 &1532428581122347580
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4502,7 +4519,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 0000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b5a9dbf3be93ade409ae2e7de45c66b6, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b5a9dbf3be93ade409ae2e7de45c66b6, type: 2}

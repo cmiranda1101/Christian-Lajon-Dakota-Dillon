@@ -46,8 +46,7 @@ public class ButtonFunctions : MonoBehaviour
             buyAudio.Play();
             GameManager.instance.weaponScript.EquipRifle();
             Destroy(shopRifle);
-            GameManager.instance.playerScript.money -= 100;
-            GameManager.instance.moneyScript.UpdateMoneyText();
+            GameManager.instance.moneyScript.SubtractMoney(100);
         }
     }
 
