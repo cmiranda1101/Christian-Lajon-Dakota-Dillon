@@ -68,8 +68,16 @@ public class GunBase : MonoBehaviour
 
     void Reload()
     {
-        currentBullets = magSize;
-        magCount--;
+        if (GameManager.instance.playerScript.pistol.activeSelf) {
+            GameManager.instance.playerScript.pistol.GetComponent<GunBase>().magCount--;
+            GameManager.instance.playerScript.pistol.GetComponent<GunBase>().currentBullets = magSize;
+        }
+        else if (GameManager.instance.playerScript.rifle.activeSelf) {
+            GameManager.instance.playerScript.rifle.GetComponent<GunBase>().magCount--;
+            GameManager.instance.playerScript.rifle.GetComponent<GunBase>().currentBullets = magSize;
+
+        }
+
         Debug.Log("Reloaded " + magCount + " magazines remaining");
 
         if (GameManager.instance.playerScript.pistol.activeSelf) {
@@ -86,7 +94,12 @@ public class GunBase : MonoBehaviour
 
     public void PickUpAmmo()
     {
-        magCount++;
+        if (GameManager.instance.playerScript.pistol.activeSelf) {
+            GameManager.instance.playerScript.pistol.GetComponent<GunBase>().magCount++;
+        }
+        else if (GameManager.instance.playerScript.rifle.activeSelf) {
+            GameManager.instance.playerScript.rifle.GetComponent<GunBase>().magCount++;
+        }
     }
     public void EquipRifle()
     {

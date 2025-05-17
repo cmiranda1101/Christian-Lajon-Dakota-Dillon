@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -14,7 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuGameOver;
     [SerializeField] GameObject menuShop;
     [SerializeField] GameObject menuHotbar;
+    [SerializeField] GameObject menuMoney;
 
+    public GameObject DamageFlash;
     public GameObject miniMap;
     public GameObject hotBarPistol;
     public GameObject hotbarRifle;
@@ -24,6 +27,8 @@ public class GameManager : MonoBehaviour
     public GameObject weapons;
     public PlayerController playerScript;
     public GunBase weaponScript;
+    public MoneyUI moneyScript;
+    //Include this prefab in your scene
     public SavedStats savedStats;
 
 
@@ -45,6 +50,7 @@ public class GameManager : MonoBehaviour
         }
         weapons = GameObject.FindWithTag("Weapons");
         weaponScript = weapons.GetComponent<GunBase>();
+        moneyScript = menuMoney.GetComponentInChildren<MoneyUI>();
         timeScaleOrig = Time.timeScale;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

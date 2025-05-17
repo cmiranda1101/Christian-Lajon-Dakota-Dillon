@@ -4,6 +4,11 @@ using System.Collections;
 
 public class EnemyAIMelee : MonoBehaviour, IDamage
 {
+    [SerializeField] AudioSource walkSource;
+    [SerializeField] AudioSource weaponSource;
+    [SerializeField] AudioClip[] walkClips;
+    [SerializeField] AudioClip[] weaponClips;
+
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
 
@@ -13,6 +18,9 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     [SerializeField] float meleeCooldown;
     [SerializeField] int facePlayerSpeed;
 
+    [SerializeField] float walkRate;
+
+    float walkTimer;
     float nextMeleeTime;
     Color originalColor;
 
@@ -20,15 +28,21 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     Transform player;
     Vector3 playerDir;
 
+    bool isMoving;
+
     void Start()
     {
-        originalColor = model.material.color;
+        if (model.material.color != null)
+            originalColor = model.material.color;
         player = GameManager.instance.player.transform;
         GameManager.instance.UpdateGameGoal(1);
     }
 
     void Update()
     {
+        isMoving = true;
+        walkTimer += Time.deltaTime;
+
         if (player == null || !playerInRange) return;
 
         playerDir = player.position - transform.position;
@@ -37,10 +51,14 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
         agent.SetDestination(player.position);
 
         // If close enough, face and attack
-        if (agent.remainingDistance <= agent.stoppingDistance)
-        {
+        if (agent.remainingDistance <= agent.stoppingDistance) {
+            isMoving = false;
             FacePlayer();
             MeleeAttack();
+        }
+        if (walkTimer >= walkRate && isMoving) {
+            WalkSound();
+            walkTimer = 0f;
         }
     }
 
@@ -53,16 +71,14 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     void MeleeAttack()
     {
         float distance = Vector3.Distance(transform.position, player.position);
-        if (Time.time >= nextMeleeTime && distance <= meleeRange)
-        {
+        if (Time.time >= nextMeleeTime && distance <= meleeRange) {
             IDamage damageable = player.GetComponent<IDamage>();
-            if (damageable != null)
-            {
+            if (damageable != null) {
                 damageable.takeDamage((int)meleeDamage);
                 Debug.Log($"Enemy melee hit {player.name} for {meleeDamage} damage.");
+                WeaponSound();
             }
-            else
-            {
+            else {
                 Debug.LogWarning($"Target {player.name} does not have an IDamage component.");
             }
 
@@ -74,13 +90,11 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     {
         HP -= damageAmount;
 
-        if (HP <= 0)
-        {
+        if (HP <= 0) {
             GameManager.instance.UpdateGameGoal(-1);
             Destroy(gameObject);
         }
-        else
-        {
+        else {
             StartCoroutine(FlashRed());
             agent.SetDestination(player.position);
         }
@@ -95,17 +109,29 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
+        if (other.CompareTag("Player")) {
             playerInRange = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
+        if (other.CompareTag("Player")) {
             playerInRange = true;
         }
+    }
+
+    void WalkSound()
+    {
+        int i = Random.Range(0, walkClips.Length);
+        walkSource.clip = walkClips[i];
+        walkSource.Play();
+    }
+
+    void WeaponSound()
+    {
+        int i = Random.Range(0, weaponClips.Length);
+        weaponSource.clip = weaponClips[i];
+        weaponSource.Play();
     }
 }

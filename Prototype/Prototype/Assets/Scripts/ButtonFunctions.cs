@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonFunctions : MonoBehaviour
 {
+    [SerializeField] AudioSource buyAudio;
     public void Resume()
     {
         GameManager.instance.StateUnpause();
@@ -31,7 +32,10 @@ public class ButtonFunctions : MonoBehaviour
     public void BuyRifle()
     {
         if (GameManager.instance.playerScript.money >= 100) {
+            buyAudio.Play();
             GameManager.instance.weaponScript.EquipRifle();
+            GameManager.instance.playerScript.money -= 100;
+            GameManager.instance.moneyScript.UpdateMoneyText();
         }
     }
 
