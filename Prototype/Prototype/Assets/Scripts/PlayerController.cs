@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    public void Heal(int amount)
+    public void Heal(float amount)
     {
         currentHP += amount;
 
