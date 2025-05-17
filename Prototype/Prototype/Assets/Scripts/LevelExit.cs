@@ -8,6 +8,14 @@ public class LevelExit : MonoBehaviour
     public int levelToLoad = 1;
     bool canExit = false;
 
+    private void Awake()
+    {
+        if (levelToLoad == 0)
+        {
+            levelToLoad = 1;
+        }
+    }
+
     private void Update()
     {
         if (canExit)
