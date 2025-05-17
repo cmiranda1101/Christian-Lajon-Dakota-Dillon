@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuGameOver;
-    [SerializeField] GameObject menuShop;
     [SerializeField] GameObject menuHotbar;
     [SerializeField] GameObject menuMoney;
+    [SerializeField] public GameObject menuShop;
 
     public GameObject DamageFlash;
     public GameObject miniMap;
