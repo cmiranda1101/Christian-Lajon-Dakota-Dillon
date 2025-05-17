@@ -66,21 +66,26 @@ public class ButtonFunctions : MonoBehaviour
         }
     }
 
-    public void BuyAmmo()
+    public void BuyPistolAmmo()
     {
-        if (GameManager.instance.playerScript.money >= 50 && GameManager.instance.playerScript.heldWeapon == GameManager.instance.playerScript.pistol)
+        if (GameManager.instance.playerScript.money >= 50 && GameManager.instance.playerScript.pistol != null)
         {
             buyAudio.Play();
             GameManager.instance.moneyScript.SubtractMoney(50);
-            GunBase pistol = GameObject.FindWithTag("Pistol").GetComponent<GunBase>();
+            GunBase pistol = GameManager.instance.playerScript.pistol.GetComponent<GunBase>();
             pistol.magCount++;
             pistol.UpdateAmmo();
         }
-        else if(GameManager.instance.playerScript.money >= 50 && GameManager.instance.playerScript.heldWeapon == GameManager.instance.playerScript.rifle)
+        
+    }
+
+    public void BuyRifleAmmo()
+    {
+        if (GameManager.instance.playerScript.money >= 50 && GameManager.instance.playerScript.rifle != null)
         {
             buyAudio.Play();
             GameManager.instance.moneyScript.SubtractMoney(50);
-            GunBase rifle = GameObject.FindWithTag("Rifle").GetComponent<GunBase>();
+            GunBase rifle = GameManager.instance.playerScript.rifle.GetComponent<GunBase>();
             rifle.magCount++;
             rifle.UpdateAmmo();
         }

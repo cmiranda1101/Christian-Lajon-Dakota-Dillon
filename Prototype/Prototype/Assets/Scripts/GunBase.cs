@@ -103,9 +103,11 @@ public class GunBase : MonoBehaviour
     {
         if (GameManager.instance.playerScript.pistol.activeSelf) {
             GameManager.instance.playerScript.pistol.GetComponent<GunBase>().magCount++;
+            GameManager.instance.playerScript.pistol.GetComponent<GunBase>().UpdateAmmo();
         }
         else if (GameManager.instance.playerScript.rifle.activeSelf) {
             GameManager.instance.playerScript.rifle.GetComponent<GunBase>().magCount++;
+            GameManager.instance.playerScript.rifle.GetComponent<GunBase>().UpdateAmmo();
         }
     }
     public void EquipRifle()
