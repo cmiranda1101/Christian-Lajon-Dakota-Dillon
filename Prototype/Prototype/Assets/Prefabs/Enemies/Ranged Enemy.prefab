@@ -69,6 +69,9 @@ MonoBehaviour:
   shootingPos: {fileID: 2157638086463215259}
   bullet: {fileID: 2485194676518234941, guid: b83ad134937c084409cddd6fe6858ea8, type: 3}
   fireRate: 0.5
+  sightLine:
+    serializedVersion: 2
+    m_Bits: 9
   walkRate: 0.5
 --- !u!195 &8200245861396106238
 NavMeshAgent:
@@ -187,7 +190,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 15
+  m_Radius: 30
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &-332678538919404949
 AudioSource:
