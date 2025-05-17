@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "Shop")
         {
             miniMap.SetActive(false);
+            //if you need to test going to the shop or another scene make sure there is a level exit prefab in your scene
             levelExitScript = GameObject.FindWithTag("LevelExit").GetComponent<LevelExit>();
             levelExitScript.levelToLoad++;
         }
