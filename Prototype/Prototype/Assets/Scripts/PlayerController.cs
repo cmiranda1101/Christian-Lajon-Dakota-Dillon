@@ -21,9 +21,9 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] public LayerMask ignoreLayer;
 
     [SerializeField] int speed;
-    [SerializeField] public float maxHP;
+    [SerializeField] public int maxHP;
     [SerializeField] public int grabDistance;
-    [SerializeField] public float currentHP;
+    [SerializeField] public int currentHP;
     [SerializeField] public int money;
 
     Vector3 moveDirection;
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour, IDamage
         currentHP += amount;
 
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
-        GameManager.instance.healthBar.transform.localScale = new Vector3(currentHP / maxHP, .75f, 1);
+        GameManager.instance.healthBar.fillAmount = (float)currentHP / maxHP;
     }
 
     public void takeDamage(int amount)
@@ -122,13 +122,13 @@ public class PlayerController : MonoBehaviour, IDamage
 
         //Need to check for death
         if (currentHP <= 0) {
-            GameManager.instance.healthBar.SetActive(false);
+            GameManager.instance.healthUI.SetActive(false);
             GameManager.instance.YouLose();
         }
         //Scale HP Bar
         else {
             float scale = currentHP / maxHP;
-            GameManager.instance.healthBar.transform.localScale = new Vector3(scale, .75f, 1);
+            GameManager.instance.healthBar.fillAmount = (float)currentHP / maxHP;
         }
     }
 

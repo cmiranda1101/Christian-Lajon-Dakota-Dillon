@@ -631,4 +631,5 @@ MonoBehaviour:
   range: 0
   magSize: 0
   fireRate: 0
+  currentBullets: 0
   magCount: 0

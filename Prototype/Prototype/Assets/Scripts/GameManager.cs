@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
 
@@ -23,7 +24,8 @@ public class GameManager : MonoBehaviour
     public GameObject miniMap;
     public GameObject hotBarPistol;
     public GameObject hotbarRifle;
-    public GameObject healthBar;
+    public GameObject healthUI;
+    public UnityEngine.UI.Image healthBar;
 
     public GameObject player;
     public GameObject weapons;
@@ -151,6 +153,6 @@ public class GameManager : MonoBehaviour
         {
             savedStatsScript.LoadStats();
         }
-        healthBar.transform.localScale = new Vector3(playerScript.currentHP / playerScript.maxHP, .75f, 1);
+        healthBar.fillAmount = (float)playerScript.currentHP / playerScript.maxHP;
     }
 }
