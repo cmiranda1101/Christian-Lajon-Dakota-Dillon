@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SavedStats : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class SavedStats : MonoBehaviour
     {
         PlayerPrefs.SetFloat("PlayerHP", GameManager.instance.playerScript.currentHP);
         PlayerPrefs.SetInt("PlayerMoney", GameManager.instance.playerScript.money);
+        if (GameManager.instance.levelExitScript != null)
+        {
+            PlayerPrefs.SetInt("LevelIndex", GameManager.instance.levelExitScript.levelToLoad);
+        }
     }
 
     public void LoadStats()
@@ -27,6 +32,10 @@ public class SavedStats : MonoBehaviour
         {
             GameManager.instance.playerScript.currentHP = PlayerPrefs.GetInt("PlayerHP");
             GameManager.instance.playerScript.money = PlayerPrefs.GetInt("PlayerMoney");
+            if (SceneManager.GetActiveScene().name == "Shop")
+            {
+                GameManager.instance.levelExitScript.levelToLoad = PlayerPrefs.GetInt("LevelIndex");
+            }
         }
     }
     
