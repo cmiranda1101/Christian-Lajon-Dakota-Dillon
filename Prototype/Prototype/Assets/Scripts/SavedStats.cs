@@ -18,7 +18,6 @@ public class SavedStats : MonoBehaviour
 
     public void LoadStats()
     {
-        Debug.Log(PlayerPrefs.GetFloat("PlayerHP"));
         if (PlayerPrefs.GetFloat("PlayerHP") <= 0)
         {
             GameManager.instance.playerScript.currentHP = GameManager.instance.playerScript.maxHP;
