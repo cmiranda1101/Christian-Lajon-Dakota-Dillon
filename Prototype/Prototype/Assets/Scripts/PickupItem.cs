@@ -4,59 +4,31 @@ using System.Collections;
 
 //Put this Script on any object to be picked up by the player//
 
-public class PickUpItem : MonoBehaviour, IInteract
+//Drag Directions/Text to display onto directions in inspector//
+
+public class PickUpItem : MonoBehaviour
 {
     [SerializeField] Renderer itemModel;
-    [SerializeField] Renderer playerModel;
-    [SerializeField] GameObject pickUpText;
+    [SerializeField] public GameObject pickUpText;
 
     [SerializeField] int healthAmount;
 
     Color originColorItem;
-    Color originColorPlayer;
 
-    float distanceFromPlayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        itemModel = gameObject.GetComponentInParent<MeshRenderer>();
         originColorItem = itemModel.material.color;
-        playerModel = GameObject.FindGameObjectWithTag("Player").GetComponent<Renderer>();
-        originColorPlayer = playerModel.material.color;
     }
 
     // Update is called once per frame
     void Update()
     {
-        distanceFromPlayer = Vector3.Distance(transform.position, GameManager.instance.player.transform.position);
-
-        if (distanceFromPlayer <= GameManager.instance.playerScript.grabDistance)
-        {
-            pickUpText.SetActive(true);
-
-            Vector3 playerDirection = GameManager.instance.player.transform.position - transform.position;
-            Quaternion rot = Quaternion.LookRotation(new Vector3(playerDirection.x, playerDirection.y, playerDirection.z));
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * 100);
-        }
-        else
-        {
-            pickUpText.SetActive(false);
-        }
-    }
-
-    public void Interact()
-    {
-        if (gameObject.CompareTag("Health")) {
-            GameManager.instance.playerScript.Heal(healthAmount);
-            StartCoroutine(PlayerHealFlash());
-            Debug.Log("Healed " + healthAmount + " health.");
-            StartCoroutine(ItemPickupFlash());
-        }
-        else if (gameObject.CompareTag("Ammo")) {
-            GameManager.instance.weaponScript.PickUpAmmo();
-            StartCoroutine(ItemPickupFlash());
-        }
-        
+        Vector3 playerDirection = GameManager.instance.player.transform.position - transform.position;
+        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDirection.x, playerDirection.y, playerDirection.z));
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * 100);
     }
 
     IEnumerator ItemPickupFlash()
@@ -67,15 +39,36 @@ public class PickUpItem : MonoBehaviour, IInteract
         itemModel.material.color = originColorItem;
 
         //Destroy obj
-        Destroy(gameObject);
+        Destroy(gameObject.transform.parent.gameObject);
     }
-    IEnumerator PlayerHealFlash()
+    
+    private void OnTriggerEnter(Collider other)
     {
-        //Give feedback on interaction
-        playerModel.material.color = Color.green;
-        yield return new WaitForSeconds(0.1f);
-        playerModel.material.color = originColorPlayer;
+        if (other.CompareTag("Player")) {
+            string triggerName = gameObject.name;
+
+            if (triggerName == "DisplayTextZone") {
+                pickUpText.SetActive(true);
+            }
+            else if (triggerName == "PickupZone") {
+                if(gameObject.transform.parent.tag == "Health") {
+                    GameManager.instance.playerScript.Heal(healthAmount);
+                    Debug.Log("Healed " + healthAmount + " health.");
+                    StartCoroutine(ItemPickupFlash());
+                }
+                else if(gameObject.transform.parent.tag == "Ammo") {
+                    GameManager.instance.weaponScript.PickUpAmmo();
+                    StartCoroutine(ItemPickupFlash());
+                }
+            }
+        }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player")) {
+            pickUpText.SetActive(false);
+        }
+    }
 
 }
