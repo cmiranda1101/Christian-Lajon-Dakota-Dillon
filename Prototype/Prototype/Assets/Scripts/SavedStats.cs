@@ -2,20 +2,21 @@ using UnityEngine;
 
 public class SavedStats : MonoBehaviour
 {
-    public float playerHP = 0;
-    int playerMoney;
-    //int magCount;
 
     public void SaveStats()
     {
-        playerHP = GameManager.instance.playerScript.currentHP;
-        playerMoney = GameManager.instance.playerScript.money;
-        DontDestroyOnLoad(gameObject);
+        PlayerPrefs.SetFloat("PlayerHP", GameManager.instance.playerScript.currentHP);
+        PlayerPrefs.SetInt("PlayerMoney", GameManager.instance.playerScript.money);
     }
 
     public void LoadStats()
     {
-        GameManager.instance.playerScript.currentHP = playerHP;
-        GameManager.instance.playerScript.money = playerMoney;
+        GameManager.instance.playerScript.currentHP = PlayerPrefs.GetFloat("PlayerHP");
+        GameManager.instance.playerScript.money = PlayerPrefs.GetInt("PlayerMoney");
+    }
+    
+    public void DeleteAllData()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }
