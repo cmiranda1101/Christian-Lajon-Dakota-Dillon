@@ -15,6 +15,7 @@ public class SavedStats : MonoBehaviour
         GameManager.instance.playerScript.money = PlayerPrefs.GetInt("PlayerMoney");
     }
     
+    //Call this if you want to reset stats to default
     public void DeleteAllData()
     {
         PlayerPrefs.DeleteAll();
