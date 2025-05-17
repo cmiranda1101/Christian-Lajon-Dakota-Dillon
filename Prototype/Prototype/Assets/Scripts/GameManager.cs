@@ -54,11 +54,11 @@ public class GameManager : MonoBehaviour
         timeScaleOrig = Time.timeScale;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        LevelStart();
     }
 
     private void Start()
     {
-        LevelStart();
     }
 
     void Update()

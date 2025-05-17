@@ -18,13 +18,17 @@ public class SavedStats : MonoBehaviour
 
     public void LoadStats()
     {
+        Debug.Log(PlayerPrefs.GetFloat("PlayerHP"));
         if (PlayerPrefs.GetFloat("PlayerHP") <= 0)
         {
             GameManager.instance.playerScript.currentHP = GameManager.instance.playerScript.maxHP;
             GameManager.instance.playerScript.money = 1000;
         }
-        GameManager.instance.playerScript.currentHP = PlayerPrefs.GetFloat("PlayerHP");
-        GameManager.instance.playerScript.money = PlayerPrefs.GetInt("PlayerMoney");
+        else
+        {
+            GameManager.instance.playerScript.currentHP = PlayerPrefs.GetFloat("PlayerHP");
+            GameManager.instance.playerScript.money = PlayerPrefs.GetInt("PlayerMoney");
+        }
     }
     
     //Call this if you want to reset stats to default
