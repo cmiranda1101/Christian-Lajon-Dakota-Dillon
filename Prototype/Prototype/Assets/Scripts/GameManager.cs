@@ -153,6 +153,6 @@ public class GameManager : MonoBehaviour
         {
             savedStatsScript.LoadStats();
         }
-        healthBar.fillAmount = (float)playerScript.currentHP / playerScript.maxHP;
+        healthBar.fillAmount = playerScript.currentHP / playerScript.maxHP;
     }
 }

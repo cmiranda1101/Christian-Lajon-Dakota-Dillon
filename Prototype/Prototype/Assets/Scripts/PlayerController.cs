@@ -21,9 +21,9 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] public LayerMask ignoreLayer;
 
     [SerializeField] int speed;
-    [SerializeField] public int maxHP;
+    [SerializeField] public float maxHP;
+    [SerializeField] public float currentHP;
     [SerializeField] public int grabDistance;
-    [SerializeField] public int currentHP;
     [SerializeField] public int money;
 
     Vector3 moveDirection;
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour, IDamage
         currentHP += amount;
 
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
-        GameManager.instance.healthBar.fillAmount = (float)currentHP / maxHP;
+        GameManager.instance.healthBar.fillAmount = currentHP / maxHP;
     }
 
     public void takeDamage(int amount)
@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour, IDamage
         //Scale HP Bar
         else {
             float scale = currentHP / maxHP;
-            GameManager.instance.healthBar.fillAmount = (float)currentHP / maxHP;
+            GameManager.instance.healthBar.fillAmount = currentHP / maxHP;
         }
     }
 

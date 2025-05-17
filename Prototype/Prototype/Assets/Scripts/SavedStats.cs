@@ -25,7 +25,7 @@ public class SavedStats : MonoBehaviour
         }
         else
         {
-            GameManager.instance.playerScript.currentHP = PlayerPrefs.GetInt("PlayerHP");
+            GameManager.instance.playerScript.currentHP = PlayerPrefs.GetFloat("PlayerHP");
             GameManager.instance.playerScript.money = PlayerPrefs.GetInt("PlayerMoney");
         }
     }
