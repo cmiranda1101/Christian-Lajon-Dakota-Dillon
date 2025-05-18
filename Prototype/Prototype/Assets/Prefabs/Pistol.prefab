@@ -165,7 +165,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 46d5550ec99a9cd408be789b6ac2098a, type: 3}
   - {fileID: 8300000, guid: f0a385cbce751ac43845d62987e8c055, type: 3}
   rifleShotClips: []
-  reloadClip: {fileID: 8300000, guid: 499b359dc8e2dce47b86d7445e4f11f9, type: 3}
+  reloadClip1: {fileID: 8300000, guid: 499b359dc8e2dce47b86d7445e4f11f9, type: 3}
+  reloadClip2: {fileID: 8300000, guid: e4f0dd68077ec404080ccecf9f562e3f, type: 3}
   damage: 1
   range: 25
   magSize: 9

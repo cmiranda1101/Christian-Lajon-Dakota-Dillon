@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Diagnostics.Contracts;
 using UnityEngine;
 
@@ -9,7 +10,8 @@ public class GunBase : MonoBehaviour
     [SerializeField] AudioSource rifleSource;
     [SerializeField] AudioClip[] pistolShotClips;
     [SerializeField] AudioClip[] rifleShotClips;
-    [SerializeField] AudioClip reloadClip;
+    [SerializeField] AudioClip reloadClip1;
+    [SerializeField] AudioClip reloadClip2;
 
 
     [SerializeField] int damage;
@@ -85,16 +87,19 @@ public class GunBase : MonoBehaviour
 
             Debug.Log("Reloaded " + magCount + " magazines remaining");
 
-            if (GameManager.instance.playerScript.pistol.activeSelf)
-            {
-                pistolSource.clip = reloadClip;
-                pistolSource.Play();
-            }
-            else if (GameManager.instance.playerScript.rifle.activeSelf)
-            {
-                rifleSource.clip = reloadClip;
-                rifleSource.Play();
-            }
+            //if (GameManager.instance.playerScript.pistol.activeSelf)
+            //{
+            //    pistolSource.clip = reloadClip1;
+            //    pistolSource.Play();
+            //    pistolSource.clip = reloadClip2;
+            //    pistolSource.Play();
+            //}
+            //else if (GameManager.instance.playerScript.rifle.activeSelf)
+            //{
+            //    rifleSource.clip = reloadClip1;
+            //    rifleSource.Play();
+            //}
+            StartCoroutine(ReloadGun());
             UpdateAmmo();
         }
     }
@@ -138,6 +143,26 @@ public class GunBase : MonoBehaviour
         } else if (GameManager.instance.playerScript.heldWeapon == rifle)
         {
             GameManager.instance.ammoScript.UpdateRifleAmmoAndMagCount();
+        }
+    }
+
+    IEnumerator ReloadGun()
+    {
+        if (GameManager.instance.playerScript.pistol.activeSelf) {
+            pistolSource.clip = reloadClip1;
+            pistolSource.Play();
+            yield return new WaitWhile(() => pistolSource.isPlaying);
+            yield return new WaitForSeconds(.2f);
+            pistolSource.clip = reloadClip2;
+            pistolSource.Play();
+        }
+        else if (GameManager.instance.playerScript.rifle.activeSelf) {
+            rifleSource.clip = reloadClip1;
+            rifleSource.Play();
+            yield return new WaitWhile(() => rifleSource.isPlaying);
+            yield return new WaitForSeconds(.2f);
+            rifleSource.clip = reloadClip2;
+            rifleSource.Play();
         }
     }
 }

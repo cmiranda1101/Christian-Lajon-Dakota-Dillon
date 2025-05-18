@@ -386,7 +386,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 198ff5a67911d084b84a3f6ffa6cfc8e, type: 3}
   - {fileID: 8300000, guid: 482ec0b393dd6eb41a488741d98506bb, type: 3}
   - {fileID: 8300000, guid: c3c2685b05f6ae149bb2abfb3aa67164, type: 3}
-  reloadClip: {fileID: 8300000, guid: 499b359dc8e2dce47b86d7445e4f11f9, type: 3}
+  reloadClip1: {fileID: 8300000, guid: 499b359dc8e2dce47b86d7445e4f11f9, type: 3}
+  reloadClip2: {fileID: 8300000, guid: e4f0dd68077ec404080ccecf9f562e3f, type: 3}
   damage: 3
   range: 40
   magSize: 12
