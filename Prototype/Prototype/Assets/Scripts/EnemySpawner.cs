@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -14,12 +15,20 @@ public class EnemySpawner : MonoBehaviour
 
     
     public float spawnInterval = 2f;  //  to control spawn rate
+    public int maxSpawns; // total number of spawns before shutting down
 
-    private float timer;  
+    private int spawnCount; // tracks how many enemies have spawned
+    private float timer;
+
+    void Start()
+    {
+        GameManager.instance.UpdateGameGoal(maxSpawns);
+    }
 
     void Update()
     {
-       
+        if (spawnCount >= maxSpawns) return; // stop spawning if max spawn reached
+
         timer += Time.deltaTime;
 
         // If the timer exceeds the spawn interval, spawn an enemy
@@ -27,6 +36,7 @@ public class EnemySpawner : MonoBehaviour
         {
             SpawnEnemy();  // Call SpawnEnemy function to spawn an enemy
             timer = 0f;    // Reset the timer
+            spawnCount++; // increment after spawning
         }
     }
 
@@ -56,5 +66,12 @@ public class EnemySpawner : MonoBehaviour
 
         // Instantiate the selected enemy prefab at the spawn location
         Instantiate(prefabToSpawn, spawnPoint.position, Quaternion.identity);
+
+        StartCoroutine(DelayedGoalDecrease());
+    }
+    IEnumerator DelayedGoalDecrease()
+    {
+        yield return new WaitForSeconds(3f);
+        GameManager.instance.UpdateGameGoal(-1);
     }
 }

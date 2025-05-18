@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1507492627174614683
 Transform:
   m_ObjectHideFlags: 0
@@ -49,3 +49,4 @@ MonoBehaviour:
   riflePrefab: {fileID: 4549064880720137177, guid: 72a28075eb9dd5a4d9ee95a47ed484bd, type: 3}
   spawnPoint: {fileID: 1507492627174614683}
   spawnInterval: 3
+  maxSpawns: 3
