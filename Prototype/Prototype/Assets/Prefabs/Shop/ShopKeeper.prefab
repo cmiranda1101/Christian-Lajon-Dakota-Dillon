@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d4379337f3b56141a73b51fe6e9cb7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SCP_Form: {fileID: 290578963206711468, guid: 85e9eb28c471634498101e03e5abac6b, type: 3}
   directions: {fileID: 3955798613874045270}
 --- !u!33 &4618866254914019436
 MeshFilter:

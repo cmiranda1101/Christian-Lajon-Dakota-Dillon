@@ -184,6 +184,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 57573766547511469, guid: b0fb0fcaef7cbf042884e0c7222e8026, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 57573766547511469, guid: b0fb0fcaef7cbf042884e0c7222e8026, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 351488902974007296, guid: b0fb0fcaef7cbf042884e0c7222e8026, type: 3}
       propertyPath: m_LocalPosition.x
       value: 35.56784
@@ -395,6 +403,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 57573766547511469, guid: b0fb0fcaef7cbf042884e0c7222e8026, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 57573766547511469, guid: b0fb0fcaef7cbf042884e0c7222e8026, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 351488902974007296, guid: b0fb0fcaef7cbf042884e0c7222e8026, type: 3}
       propertyPath: m_LocalPosition.x
       value: 56.73915
@@ -958,10 +974,6 @@ PrefabInstance:
     - target: {fileID: 1129116971010470586, guid: b0fb0fcaef7cbf042884e0c7222e8026, type: 3}
       propertyPath: m_Name
       value: (Melee) monster_scavenger_Skin_Red Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 7250861735518712665, guid: b0fb0fcaef7cbf042884e0c7222e8026, type: 3}
-      propertyPath: MaxDistance
-      value: 7842.715
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
