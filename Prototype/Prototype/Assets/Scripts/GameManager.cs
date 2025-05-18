@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject savedStats;
 
     public GameObject DamageFlash;
+    public GameObject HealFlash;
     public GameObject miniMap;
     public GameObject hotBarPistol;
     public GameObject hotbarRifle;

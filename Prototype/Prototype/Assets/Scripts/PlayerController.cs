@@ -109,10 +109,14 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Heal(float amount)
     {
-        currentHP += amount;
+        if (currentHP < maxHP) {
+            currentHP += amount;
 
-        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
-        GameManager.instance.healthBar.fillAmount = currentHP / maxHP;
+            currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+            GameManager.instance.healthBar.fillAmount = currentHP / maxHP;
+
+            StartCoroutine(HealScreenFlash());
+        }
     }
 
     public void takeDamage(int amount)
@@ -154,5 +158,12 @@ public class PlayerController : MonoBehaviour, IDamage
         GameManager.instance.DamageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.DamageFlash.SetActive(false);
+    }
+
+    IEnumerator HealScreenFlash()
+    {
+        GameManager.instance.HealFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        GameManager.instance.HealFlash.SetActive(false);
     }
 }

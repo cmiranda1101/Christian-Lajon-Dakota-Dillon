@@ -52,9 +52,11 @@ public class PickUpItem : MonoBehaviour
             }
             else if (triggerName == "PickupZone") {
                 if(gameObject.transform.parent.tag == "Health") {
-                    GameManager.instance.playerScript.Heal(healthAmount);
-                    Debug.Log("Healed " + healthAmount + " health.");
-                    StartCoroutine(ItemPickupFlash());
+                    if (GameManager.instance.playerScript.currentHP < GameManager.instance.playerScript.maxHP) {
+                        GameManager.instance.playerScript.Heal(healthAmount);
+                        Debug.Log("Healed " + healthAmount + " health.");
+                        StartCoroutine(ItemPickupFlash());
+                    }
                 }
                 else if(gameObject.transform.parent.tag == "Ammo") {
                     GameManager.instance.weaponScript.PickUpAmmo();

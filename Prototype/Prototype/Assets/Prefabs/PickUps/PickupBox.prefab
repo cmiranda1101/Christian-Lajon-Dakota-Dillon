@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8088080943876971924}
   - component: {fileID: 6235126576217458060}
   - component: {fileID: 335430124169923286}
+  - component: {fileID: 8502352848001510299}
   m_Layer: 0
   m_Name: PickupBox
   m_TagString: Untagged
@@ -124,3 +125,20 @@ MonoBehaviour:
   pickupList:
   - {fileID: 5948602468889596240, guid: 3466f3e2bc4aa724985d82784b7d3be2, type: 3}
   - {fileID: 8314199857695301808, guid: a670eff4900fa8342a25f689fdbf479c, type: 3}
+  - {fileID: 6458955547078232510, guid: aa296e911bc428a48aaf1cc72d8f082f, type: 3}
+--- !u!208 &8502352848001510299
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7690773194478122231}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
