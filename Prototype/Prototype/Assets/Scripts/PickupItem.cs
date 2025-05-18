@@ -67,7 +67,10 @@ public class PickUpItem : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player")) {
-            pickUpText.SetActive(false);
+            string triggerName = gameObject.name;
+            if (triggerName == "DisplayTextZone") {
+                pickUpText.SetActive(false);
+            }
         }
     }
 
