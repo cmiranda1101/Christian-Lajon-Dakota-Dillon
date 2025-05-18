@@ -9,7 +9,9 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController characterController;
     [SerializeField] GameObject MainCamera;
     [SerializeField] AudioSource footStepSource; 
+    [SerializeField] AudioSource playerHurtSource;
     [SerializeField] AudioClip[] footStepClip;
+    [SerializeField] AudioClip[] playerHurtClips;
     [SerializeField] float walkRate;
     float walkTimer;
 
@@ -137,6 +139,10 @@ public class PlayerController : MonoBehaviour, IDamage
             float scale = currentHP / maxHP;
             GameManager.instance.healthBar.fillAmount = currentHP / maxHP;
         }
+
+        int i = Random.Range(0, playerHurtClips.Length);
+        playerHurtSource.clip = playerHurtClips[i];
+        playerHurtSource.Play();
     }
 
     public IEnumerator MuzzleFlash()
