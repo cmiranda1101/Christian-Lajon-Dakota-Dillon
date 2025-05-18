@@ -170,6 +170,7 @@ MonoBehaviour:
   range: 25
   magSize: 9
   fireRate: 0.25
+  currentBullets: 9
   magCount: 3
 --- !u!82 &906857919791011683
 AudioSource:

@@ -1,3 +1,4 @@
+using System.Diagnostics.Contracts;
 using UnityEngine;
 
 public class GunBase : MonoBehaviour
@@ -22,7 +23,7 @@ public class GunBase : MonoBehaviour
 
     void Start()
     {
-        currentBullets = magSize;
+        //currentBullets = magSize;
     }
 
     void Update()
@@ -58,6 +59,7 @@ public class GunBase : MonoBehaviour
             StartCoroutine(GameManager.instance.playerScript.MuzzleFlash());
             GunShotSound();
             currentBullets--;
+            UpdateAmmo();
             if (currentBullets <= 0)
             {
                 Debug.Log("Out of bullets");
@@ -93,6 +95,7 @@ public class GunBase : MonoBehaviour
                 rifleSource.clip = reloadClip;
                 rifleSource.Play();
             }
+            UpdateAmmo();
         }
     }
 
@@ -100,9 +103,11 @@ public class GunBase : MonoBehaviour
     {
         if (GameManager.instance.playerScript.pistol.activeSelf) {
             GameManager.instance.playerScript.pistol.GetComponent<GunBase>().magCount++;
+            GameManager.instance.playerScript.pistol.GetComponent<GunBase>().UpdateAmmo();
         }
         else if (GameManager.instance.playerScript.rifle.activeSelf) {
             GameManager.instance.playerScript.rifle.GetComponent<GunBase>().magCount++;
+            GameManager.instance.playerScript.rifle.GetComponent<GunBase>().UpdateAmmo();
         }
     }
     public void EquipRifle()
@@ -122,6 +127,17 @@ public class GunBase : MonoBehaviour
             int j = Random.Range(0, rifleShotClips.Length);
             rifleSource.clip = rifleShotClips[j];
             rifleSource.Play();
+        }
+    }
+
+    public void UpdateAmmo()
+    {
+        if(GameManager.instance.playerScript.heldWeapon == pistol)
+        {
+            GameManager.instance.ammoScript.UpdatePistolAmmoAndMagCount();
+        } else if (GameManager.instance.playerScript.heldWeapon == rifle)
+        {
+            GameManager.instance.ammoScript.UpdateRifleAmmoAndMagCount();
         }
     }
 }

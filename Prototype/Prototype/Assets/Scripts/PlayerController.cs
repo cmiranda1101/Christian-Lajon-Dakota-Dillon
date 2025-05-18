@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [HideInInspector] public GameObject pistol;
     //Dynamic Creation DO NOT set in Inspector or unhide
     [HideInInspector] public GameObject rifle;
-    GameObject heldWeapon;
+    public GameObject heldWeapon;
 
     void Start()
     {
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour, IDamage
         pistol = Instantiate(pistolPrefab, pistolSpot.transform.position, pistolSpot.transform.rotation, pistolSpot.transform);
         heldWeapon = pistol;
         heldWeapon.SetActive(true);
+        GameManager.instance.ammoScript.UpdatePistolAmmoAndMagCount();
     }
     void Update()
     {
@@ -96,11 +97,13 @@ public class PlayerController : MonoBehaviour, IDamage
             heldWeapon.SetActive(false);
             pistol.SetActive(true);
             heldWeapon = pistol;
+            GameManager.instance.ammoScript.UpdatePistolAmmoAndMagCount();
         }
         if (rifle != null && Input.GetKeyDown(KeyCode.Alpha2) && heldWeapon != rifle) {
             heldWeapon.SetActive(false);
             rifle.SetActive(true);
             heldWeapon = rifle;
+            GameManager.instance.ammoScript.UpdateRifleAmmoAndMagCount();
         }
     }
 

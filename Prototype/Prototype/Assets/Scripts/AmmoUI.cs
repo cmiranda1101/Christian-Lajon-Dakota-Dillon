@@ -2,27 +2,23 @@ using UnityEngine;
 using TMPro;
 using UnityEditor;
 
-// TODO: once weapons are scriptable objects add ammo and mag count to the UI
-
 public class AmmoUI : MonoBehaviour
 {
     public TextMeshProUGUI ammoCount;
     public TextMeshProUGUI magCount;
-    void Start()
+    public void UpdatePistolAmmoAndMagCount()
     {
-        //UpdateAmmoUI();
+        ammoCount.text = GameManager.instance.playerScript.pistol.GetComponent<GunBase>().currentBullets.ToString();
+        magCount.text = GameManager.instance.playerScript.pistol.GetComponent<GunBase>().magCount.ToString();
     }
-    public void UpdateAmmoCount()
+    public void UpdateRifleAmmoAndMagCount()
     {
-        ammoCount.text = GameManager.instance.playerScript.pistol.ToString();
+        
+        if(GameManager.instance.playerScript.rifle != null)
+        {
+            ammoCount.text = GameManager.instance.playerScript.rifle.GetComponent<GunBase>().currentBullets.ToString();
+            magCount.text = GameManager.instance.playerScript.rifle.GetComponent<GunBase>().magCount.ToString();
+        }
     }
-    public void UpdateMagCount()
-    {
-        magCount.text = GameManager.instance.weaponScript.magCount.ToString();
-    }
-    public void UpdateAmmoUI()
-    {
-        UpdateAmmoCount();
-        UpdateMagCount();
-    }
+   
 }
