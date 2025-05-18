@@ -138,11 +138,11 @@ public class PlayerController : MonoBehaviour, IDamage
         else {
             float scale = currentHP / maxHP;
             GameManager.instance.healthBar.fillAmount = currentHP / maxHP;
+            
+            int i = Random.Range(0, playerHurtClips.Length);
+            playerHurtSource.clip = playerHurtClips[i];
+            playerHurtSource.Play();
         }
-
-        int i = Random.Range(0, playerHurtClips.Length);
-        playerHurtSource.clip = playerHurtClips[i];
-        playerHurtSource.Play();
     }
 
     public IEnumerator MuzzleFlash()

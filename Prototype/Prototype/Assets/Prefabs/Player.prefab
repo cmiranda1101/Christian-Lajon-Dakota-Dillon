@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 3482579366448131116}
   - component: {fileID: 2994383251808035004}
   - component: {fileID: 1466818849623958039}
+  - component: {fileID: 6543600215759697027}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -326,12 +327,20 @@ MonoBehaviour:
   characterController: {fileID: 4564405297631183533}
   MainCamera: {fileID: 5295801228899495335}
   footStepSource: {fileID: 1466818849623958039}
+  playerHurtSource: {fileID: 6543600215759697027}
   footStepClip:
   - {fileID: 8300000, guid: 1f0199a4c6005ec4abbb302f71bc036d, type: 3}
   - {fileID: 8300000, guid: 53e2adf2ac488ef46bb2b4074de9e363, type: 3}
   - {fileID: 8300000, guid: a03a96c5d1e99b4409ddd79098abd9ab, type: 3}
   - {fileID: 8300000, guid: 7187dc81f98b8be4eb97bfc4dd9a5abf, type: 3}
   - {fileID: 8300000, guid: e3cfcb32689b274419ac73380ea96888, type: 3}
+  playerHurtClips:
+  - {fileID: 8300000, guid: 3a9cb4bdb14ae85438253ac0602a47b5, type: 3}
+  - {fileID: 8300000, guid: 49da0caf507bb6d458ed5a5225d8ed28, type: 3}
+  - {fileID: 8300000, guid: 90391db33800c6646af70b2c0fafbc2b, type: 3}
+  - {fileID: 8300000, guid: 7fe15d4db4a29d1469bd4ed990193ae5, type: 3}
+  - {fileID: 8300000, guid: 9975ae95e627b604299e43cdcf05e788, type: 3}
+  - {fileID: 8300000, guid: 84d366cecc96ddb49a2a7036586e7b61, type: 3}
   walkRate: 0.75
   pistolSpot: {fileID: 5455891234833450132}
   rifleSpot: {fileID: 7184325920738929754}
@@ -341,12 +350,13 @@ MonoBehaviour:
     m_Bits: 8
   speed: 5
   maxHP: 10
-  grabDistance: 5
   currentHP: 10
+  grabDistance: 5
   money: 1000
   pistolPrefab: {fileID: 4493368667877536924, guid: ea978309a52dc714cacb3ab0643ebcf2, type: 3}
   pistol: {fileID: 0}
   rifle: {fileID: 0}
+  heldWeapon: {fileID: 0}
 --- !u!143 &4564405297631183533
 CharacterController:
   m_ObjectHideFlags: 0
@@ -545,6 +555,103 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!82 &6543600215759697027
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6374008597755258018}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.6
+  m_Pitch: 0.8
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7184325920738929754
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,7 +733,8 @@ MonoBehaviour:
   rifleSource: {fileID: 0}
   pistolShotClips: []
   rifleShotClips: []
-  reloadClip: {fileID: 0}
+  reloadClip1: {fileID: 0}
+  reloadClip2: {fileID: 0}
   damage: 0
   range: 0
   magSize: 0
