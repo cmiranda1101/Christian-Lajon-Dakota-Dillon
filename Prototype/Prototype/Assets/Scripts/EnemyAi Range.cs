@@ -18,6 +18,10 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     [SerializeField] Transform shootingPos;
     [SerializeField] GameObject bullet;
     [SerializeField] float fireRate;
+    // patrol timer random movement
+    [SerializeField] float patrolRadius = 10f;
+    [SerializeField] float patrolInterval = 5f;
+    float patrolTimer;
 
     Color colorOrig;
 
@@ -44,6 +48,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     {
         shootTimer += Time.deltaTime;
         walkTimer += Time.deltaTime;
+        patrolTimer += Time.deltaTime;
 
         if (playerInRange)
         {
@@ -56,18 +61,25 @@ public class EnemyAiRange : MonoBehaviour, IDamage
                 shoot();
                 GunShotSound();
             }
-            if (agent.remainingDistance<= agent.stoppingDistance)
+
+            if (agent.remainingDistance <= agent.stoppingDistance)
             {
                 isMoving = false;
                 facePlayer();
             }
-            if(walkTimer>= walkRate && isMoving) {
+
+            if (walkTimer >= walkRate && isMoving)
+            {
                 WalkSound();
                 walkTimer = 0f;
             }
         }
-
+        else
+        {
+            Wander();
+        }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -127,4 +139,32 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         gunSource.clip = gunClips[i];
         gunSource.Play();
     }
+    public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
+    {
+        Vector3 randDirection = Random.insideUnitSphere * dist;
+        randDirection += origin;
+
+        NavMeshHit navHit;
+        NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
+
+        return navHit.position;
+    }
+    void Wander()
+    {
+        if (agent.remainingDistance <= agent.stoppingDistance && patrolTimer >= patrolInterval)
+        {
+            Vector3 newPos = RandomNavSphere(transform.position, patrolRadius, -1);
+            agent.SetDestination(newPos);
+            patrolTimer = 0f;
+            isMoving = true;
+        }
+
+        if (walkTimer >= walkRate && isMoving)
+        {
+            WalkSound();
+            walkTimer = 0f;
+        }
+        Debug.Log("Wandering to: " + agent.destination);
+    }
+    
 }

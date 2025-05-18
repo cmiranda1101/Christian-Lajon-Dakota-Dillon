@@ -437,6 +437,8 @@ MonoBehaviour:
   shootingPos: {fileID: 8207139114905910316}
   bullet: {fileID: 2485194676518234941, guid: b486390cf48be664baa654d7bf7bc6af, type: 3}
   fireRate: 0.5
+  patrolRadius: 30
+  patrolInterval: 5
   walkRate: 0.4
 --- !u!195 &7992687783722063204
 NavMeshAgent:

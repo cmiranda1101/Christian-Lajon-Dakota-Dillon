@@ -222,7 +222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6213075050325087084, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_Name
-      value: (Rifles) SK_Military_Survivalist (3) Variant
+      value: (Rifle) SK_Military_Survivalist (3) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6213075050325087084, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_Layer
@@ -437,6 +437,8 @@ MonoBehaviour:
   shootingPos: {fileID: 7819396951557842620}
   bullet: {fileID: 2485194676518234941, guid: b83ad134937c084409cddd6fe6858ea8, type: 3}
   fireRate: 0.8
+  patrolRadius: 30
+  patrolInterval: 5
   walkRate: 0.5
 --- !u!195 &1874890942227670813
 NavMeshAgent:
