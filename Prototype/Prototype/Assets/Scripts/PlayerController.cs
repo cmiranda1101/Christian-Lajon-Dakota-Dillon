@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] AudioClip[] playerHurtClips;
     [SerializeField] float walkRate;
     float walkTimer;
+    float dodgeTimer;
+    [SerializeField] float dodgeSpeed;
+    [SerializeField] float dodgeDuration;
+    [SerializeField] float dodgeCooldown;
 
     [SerializeField] public GameObject pistolSpot;
     [SerializeField] public GameObject rifleSpot;
@@ -22,7 +26,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     [SerializeField] public LayerMask ignoreLayer;
 
-    [SerializeField] int speed;
+    [SerializeField] float speed;
     [SerializeField] public float maxHP;
     [SerializeField] public float currentHP;
     [SerializeField] public int grabDistance;
@@ -55,6 +59,9 @@ public class PlayerController : MonoBehaviour, IDamage
         if (Input.GetButtonDown("Interact")) {
             GrabObject();
         }
+        if (Input.GetButtonDown("Dodge")) {
+            StartCoroutine(Dodge());
+        }
     }
 
     void MovePlayer()
@@ -62,6 +69,7 @@ public class PlayerController : MonoBehaviour, IDamage
         moveDirection = (Input.GetAxis("Horizontal") * transform.right) + (Input.GetAxis("Vertical") * transform.forward);
         characterController.Move(moveDirection * speed * Time.deltaTime);
 
+        dodgeTimer += Time.deltaTime;
         walkTimer += Time.deltaTime;
         if (walkTimer >= walkRate && characterController.velocity.magnitude > .01f) {
             WalkSound();
@@ -69,6 +77,17 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
+    IEnumerator Dodge()
+    {
+        if(dodgeTimer >= dodgeCooldown) 
+        {
+            dodgeTimer = 0;
+            float originalSpeed = speed;
+            speed = dodgeSpeed;
+            yield return new WaitForSeconds(dodgeDuration);
+            speed = originalSpeed;
+        }
+    }
 
     void ToggleFlashlight()
     {
