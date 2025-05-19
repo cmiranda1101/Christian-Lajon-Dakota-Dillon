@@ -24,8 +24,8 @@ public class HeartBoss : MonoBehaviour, IDamage
 
     float slowPumpSpeed;
     float fastPumpSpeed;
-    bool isShielded;
     bool enemiesSpawned;
+    public bool isShielded;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -56,16 +56,16 @@ public class HeartBoss : MonoBehaviour, IDamage
     {
         int enemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
 
-        if (enemies > 0 && !enemiesSpawned) {
+        if (enemies > 1 && !enemiesSpawned) {
             enemiesSpawned = true;  //enemies have spawned, stopping Coroutine spam;
         }
-        if (enemies == 0 && enemiesSpawned) {
+        if (enemies == 1 && enemiesSpawned) {
             enemiesSpawned = false;
             StartCoroutine(ShieldDown());
         }
     }
 
-    public void takeDamage(int amount)
+    public void takeDamage(int amount)  //Can only hurt boss in shield down mode;
     {
         if (!isShielded) {
             bossHpCurr = Mathf.Clamp(bossHpCurr -= amount, 0, bossHPMax);
@@ -79,7 +79,7 @@ public class HeartBoss : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator ShieldDown()
+    IEnumerator ShieldDown()    //Shield is down, you can hurt boss;
     {
         Debug.Log("in Shield down");
 

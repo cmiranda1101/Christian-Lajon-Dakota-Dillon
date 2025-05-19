@@ -2260,6 +2260,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1487130218744782926, guid: f7b2aed4fc16cfc40a2e498bc5bbb57e, type: 3}
+      propertyPath: heartBossScript
+      value: 
+      objectReference: {fileID: 849998279}
     - target: {fileID: 9214835478406400877, guid: f7b2aed4fc16cfc40a2e498bc5bbb57e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4451,6 +4455,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
   m_PrefabInstance: {fileID: 636136647}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &849998279 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8805363802558604546, guid: 7244ef4310be2974789226e60e52553a, type: 3}
+  m_PrefabInstance: {fileID: 1368407836}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d997c2c983dc64682511d81844520c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &855325841 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3298949808429053225, guid: 2e0ba2ad0a0132b4e84a89b7105d39d5, type: 3}
@@ -6561,6 +6576,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6979895721332236568, guid: 7244ef4310be2974789226e60e52553a, type: 3}
+      propertyPath: fireRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979895721332236568, guid: 7244ef4310be2974789226e60e52553a, type: 3}
+      propertyPath: isShieldDown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979895721332236568, guid: 7244ef4310be2974789226e60e52553a, type: 3}
+      propertyPath: spawnLocation2
+      value: 
+      objectReference: {fileID: 1936497764}
     - target: {fileID: 8805363802558604546, guid: 7244ef4310be2974789226e60e52553a, type: 3}
       propertyPath: spawner1Location
       value: 
@@ -9342,6 +9369,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
   m_PrefabInstance: {fileID: 564158803}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1936497764 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8265279103584852706, guid: 7244ef4310be2974789226e60e52553a, type: 3}
+  m_PrefabInstance: {fileID: 1368407836}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1952208285
 PrefabInstance:

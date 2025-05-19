@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     public SavedStats savedStatsScript;
     public AmmoUI ammoScript;
     public LevelExit levelExitScript;
+    public HeartBoss heartBossScript;
 
 
     public bool isPaused;
