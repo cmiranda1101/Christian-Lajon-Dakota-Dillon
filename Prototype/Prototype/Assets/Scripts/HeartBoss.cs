@@ -1,37 +1,40 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class HeartBoss : MonoBehaviour, IDamage
 {
-    [SerializeField] GameObject spawner1;
-    [SerializeField] GameObject spawner2;
-    [SerializeField] GameObject spawner3;
-    [SerializeField] GameObject spawner4;
+    [SerializeField] Transform spawner1Location;
+    [SerializeField] Transform spawner2Location;
+    [SerializeField] Transform spawner3Location;
+    [SerializeField] Transform spawner4Location;
+    [SerializeField] GameObject spawnerPrefab;
     [SerializeField] GameObject bulletSpawner;
 
     [SerializeField] AudioSource heartBeatSource;
     [SerializeField] AudioClip fastBeatClip;
     [SerializeField] AudioClip slowBeatClip;
 
+    [SerializeField] int shieldDownTime;
+
     [SerializeField] int bossHPMax;
     int bossHpCurr;
 
     Animation pumpAnim;
-    MeshRenderer model;
-    Color HPcolorOrigin;
+    Color HPColorOrigin;
 
     float slowPumpSpeed;
     float fastPumpSpeed;
     bool isShielded;
+    bool enemiesSpawned;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        bossHpCurr = bossHPMax;
         isShielded = true;
+        enemiesSpawned = false;
+        bossHpCurr = bossHPMax;
         GameManager.instance.bossHealthUI.SetActive(true);
-        HPcolorOrigin = GameManager.instance.bossHealthBar.color;
+        HPColorOrigin = GameManager.instance.bossHealthBar.color;
 
         GameManager.instance.AmbianceForLevels.SetActive(false);
         GameManager.instance.AmbianceForBoss.SetActive(true);
@@ -51,8 +54,13 @@ public class HeartBoss : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.CheckGameGoal() == 1) {
-            SpawnersOff();
+        int enemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+
+        if (enemies > 0 && !enemiesSpawned) {
+            enemiesSpawned = true;  //enemies have spawned, stopping Coroutine spam;
+        }
+        if (enemies == 0 && enemiesSpawned) {
+            enemiesSpawned = false;
             StartCoroutine(ShieldDown());
         }
     }
@@ -73,17 +81,21 @@ public class HeartBoss : MonoBehaviour, IDamage
 
     IEnumerator ShieldDown()
     {
+        Debug.Log("in Shield down");
+
+        enemiesSpawned = false;
         isShielded = false;
+        SpawnersOff();
         pumpAnim["Armature|Pumping"].speed = fastPumpSpeed;
         heartBeatSource.clip = fastBeatClip;
         GameManager.instance.bossHealthBar.color = Color.red;
 
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(shieldDownTime);
 
         isShielded = true;
         pumpAnim["Armature|Pumping"].speed = slowPumpSpeed;
         heartBeatSource.clip = slowBeatClip;
-        GameManager.instance.bossHealthBar.color = HPcolorOrigin;
+        GameManager.instance.bossHealthBar.color = HPColorOrigin;
         SpawnersOn();
     }
 
@@ -97,21 +109,17 @@ public class HeartBoss : MonoBehaviour, IDamage
 
     void SpawnersOn()
     {
-        if (isShielded) {
-            spawner1.SetActive(true);
-            spawner2.SetActive(true);
-            spawner3.SetActive(true);
-            spawner4.SetActive(true);
-        }
+        Instantiate(spawnerPrefab, spawner1Location);
+        Instantiate(spawnerPrefab, spawner2Location);
+        Instantiate(spawnerPrefab, spawner3Location);
+        Instantiate(spawnerPrefab, spawner4Location);
     }
 
     void SpawnersOff()
     {
-        if (isShielded) {
-            spawner1.SetActive(false);
-            spawner2.SetActive(false);
-            spawner3.SetActive(false);
-            spawner4.SetActive(false);
-        }
+        Destroy(spawner1Location.GetChild(0).gameObject); 
+        Destroy(spawner2Location.GetChild(0).gameObject); 
+        Destroy(spawner3Location.GetChild(0).gameObject); 
+        Destroy(spawner4Location.GetChild(0).gameObject); 
     }
 }

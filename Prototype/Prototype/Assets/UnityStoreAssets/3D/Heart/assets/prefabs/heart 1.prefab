@@ -103,14 +103,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d997c2c983dc64682511d81844520c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner1: {fileID: 0}
-  spawner2: {fileID: 0}
-  spawner3: {fileID: 0}
-  spawner4: {fileID: 0}
-  bulletSpawner: {fileID: 0}
+  spawner1Location: {fileID: 0}
+  spawner2Location: {fileID: 0}
+  spawner3Location: {fileID: 0}
+  spawner4Location: {fileID: 0}
+  spawnerPrefab: {fileID: 4991480227335756754, guid: 65a0ef6b55128384b9dd3f387859fe96, type: 3}
+  bulletSpawner: {fileID: 475601962231237764}
   heartBeatSource: {fileID: 2843002696892301498}
   fastBeatClip: {fileID: 8300000, guid: 2062560f3c53246f9b3557db5188ce64, type: 3}
   slowBeatClip: {fileID: 8300000, guid: b44a1bf6a851f426297d07773f7a7baf, type: 3}
+  shieldDownTime: 10
   bossHPMax: 10
 --- !u!65 &3053429270028631591
 BoxCollider:
