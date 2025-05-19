@@ -342,6 +342,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9975ae95e627b604299e43cdcf05e788, type: 3}
   - {fileID: 8300000, guid: 84d366cecc96ddb49a2a7036586e7b61, type: 3}
   walkRate: 0.75
+  dodgeSpeed: 10
+  dodgeDuration: 0.3
+  dodgeCooldown: 5
   pistolSpot: {fileID: 5455891234833450132}
   rifleSpot: {fileID: 7184325920738929754}
   Holster: {fileID: 1120997950688922789}

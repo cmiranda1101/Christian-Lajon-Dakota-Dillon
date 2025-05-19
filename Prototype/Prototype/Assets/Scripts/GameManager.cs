@@ -27,10 +27,7 @@ public class GameManager : MonoBehaviour
     public GameObject hotbarRifle;
     public GameObject healthUI;
     public UnityEngine.UI.Image healthBar;
-    public GameObject bossHealthUI;
-    public UnityEngine.UI.Image bossHealthBar;
-    public GameObject AmbianceForLevels;
-    public GameObject AmbianceForBoss;
+    public UnityEngine.UI.Image dodgeCooldownRadial;
 
     public GameObject player;
     public GameObject weapons;
@@ -167,10 +164,5 @@ public class GameManager : MonoBehaviour
             savedStatsScript.LoadStats();
         }
         healthBar.fillAmount = playerScript.currentHP / playerScript.maxHP;
-    }
-    
-    public int CheckGameGoal()
-    {
-        return gameGoalCount;
     }
 }
