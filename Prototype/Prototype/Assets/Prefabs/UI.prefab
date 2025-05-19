@@ -6368,7 +6368,7 @@ MonoBehaviour:
   healthBar: {fileID: 1048965434878790930}
   bossHealthUI: {fileID: 5054238152542139060}
   bossHealthBar: {fileID: 8850460559626679474}
-  dodgeCooldownRadial: {fileID: 3223768356317054017}
+  dodgeCooldownRadial: {fileID: 4025013424212928930}
   AmbianceForLevels: {fileID: 3205776186308292879}
   AmbianceForBoss: {fileID: 1015336023286091288}
   player: {fileID: 0}
@@ -6379,6 +6379,7 @@ MonoBehaviour:
   savedStatsScript: {fileID: 3032187883100351740}
   ammoScript: {fileID: 0}
   levelExitScript: {fileID: 0}
+  heartBossScript: {fileID: 0}
   isPaused: 0
 --- !u!1 &5717430771037851555
 GameObject:
