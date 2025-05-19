@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public GameObject hotbarRifle;
     public GameObject healthUI;
     public UnityEngine.UI.Image healthBar;
+    public UnityEngine.UI.Image dodgeCooldownRadial;
 
     public GameObject player;
     public GameObject weapons;

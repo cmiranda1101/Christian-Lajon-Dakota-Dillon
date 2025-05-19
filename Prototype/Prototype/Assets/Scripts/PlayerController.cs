@@ -1,6 +1,6 @@
+using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour, IDamage
         heldWeapon = pistol;
         heldWeapon.SetActive(true);
         GameManager.instance.ammoScript.UpdatePistolAmmoAndMagCount();
+        dodgeTimer = dodgeCooldown;
     }
     void Update()
     {
@@ -84,8 +85,20 @@ public class PlayerController : MonoBehaviour, IDamage
             dodgeTimer = 0;
             float originalSpeed = speed;
             speed = dodgeSpeed;
+            StartCoroutine(FillCooldownImage());
             yield return new WaitForSeconds(dodgeDuration);
             speed = originalSpeed;
+        }
+    }
+
+    IEnumerator FillCooldownImage()
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < dodgeCooldown)
+        {
+            elapsedTime += Time.deltaTime;
+            GameManager.instance.dodgeCooldownRadial.fillAmount = elapsedTime / dodgeCooldown;
+            yield return null;
         }
     }
 
