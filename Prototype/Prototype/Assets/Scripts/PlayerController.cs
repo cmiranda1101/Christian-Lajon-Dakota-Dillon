@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour, IDamage
     //Dynamic Creation DO NOT set in Inspector or unhide
     [HideInInspector] public GameObject rifle;
     public GameObject heldWeapon;
+    public ChemlightThrow chemlightThrow;
 
     void Start()
     {
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour, IDamage
         heldWeapon.SetActive(true);
         GameManager.instance.ammoScript.UpdatePistolAmmoAndMagCount();
         dodgeTimer = dodgeCooldown;
+        chemlightThrow = GetComponentInChildren<ChemlightThrow>();
     }
     void Update()
     {
@@ -62,6 +64,10 @@ public class PlayerController : MonoBehaviour, IDamage
         }
         if (Input.GetButtonDown("Dodge")) {
             StartCoroutine(Dodge());
+        }
+        if (Input.GetButtonDown("Throw Chemlight"))
+        {
+            chemlightThrow.ThrowChemlight();
         }
     }
 
