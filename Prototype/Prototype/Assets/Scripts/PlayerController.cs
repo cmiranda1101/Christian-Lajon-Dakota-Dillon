@@ -62,12 +62,12 @@ public class PlayerController : MonoBehaviour, IDamage
         if (Input.GetButtonDown("Interact")) {
             GrabObject();
         }
-        if (Input.GetButtonDown("Dodge")) {
-            StartCoroutine(Dodge());
-        }
         if (Input.GetButtonDown("Throw Chemlight"))
         {
             chemlightThrow.ThrowChemlight();
+        }
+        if (Input.GetButtonDown("Dodge")) {
+            StartCoroutine(Dodge());
         }
     }
 
