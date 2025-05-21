@@ -21,12 +21,16 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     [SerializeField] int FOV;
 
     [SerializeField] float walkRate;
+    [SerializeField] float patrolRadius;
+    [SerializeField] float patrolInterval;
+    float patrolTimer;
 
     float walkTimer;
     float nextMeleeTime;
     Color originalColor;
 
     bool playerInRange;
+    bool isChasing;
 
     float angleToPlayer;
     Transform player;
@@ -36,8 +40,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
 
     void Start()
     {
-        if (model.material.color != null)
-            originalColor = model.material.color;
+        originalColor = model.material.color;
         player = GameManager.instance.player.transform;
         GameManager.instance.UpdateGameGoal(1);
     }
@@ -46,32 +49,88 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     {
         isMoving = true;
         walkTimer += Time.deltaTime;
+        patrolTimer += Time.deltaTime;
+        if (player == null) return;
 
-        if (player == null || !playerInRange) return;
+        bool canSeePlayer = playerInRange && CanSeePlayer();
 
-        playerDir = player.position - transform.position;
-
-        // Move toward the player
-        agent.SetDestination(player.position);
-
-        // If close enough, face and attack
-        if (agent.remainingDistance <= agent.stoppingDistance) {
-            isMoving = false;
-            FacePlayer();
-            MeleeAttack();
+        if(canSeePlayer)
+        {
+            StartChasing();
         }
-        if (walkTimer >= walkRate && isMoving) {
+        else if(isChasing)
+        {
+            ContinueChasing();
+        }
+        // handles chasing and wandering
+        if(isChasing)
+        {
+            HandleChase();
+        }
+        else
+        {
+            Wander();
+        }
+        if (walkTimer >= walkRate && isMoving) 
+        {
             WalkSound();
             walkTimer = 0f;
         }
     }
-    //bool CanSeePlayer()
-    //{
-    //    playerDir = (GameManager.instance.player.transform.position - headPos.position);
-    //    angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.y), transform.forward);
+    bool CanSeePlayer()
+    {
+        if (player == null || headPos == null)
+            return false;
 
-    //    RaycastHit hit
-    //}
+        // calculate the direction to the player from the head position
+        playerDir = player.position - headPos.position;
+        angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
+
+        // show me line to player
+        Debug.DrawRay(headPos.position, playerDir.normalized * 50f, Color.red);
+
+        if (angleToPlayer <= FOV) // Check if the player is within FOV angle
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(headPos.position, playerDir.normalized, out hit, Mathf.Infinity))
+            {
+                if (hit.collider.CompareTag("Player")) // Check if the raycast hits the player
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+    // Start chasing the player
+    void StartChasing()
+    {
+        isChasing = true;
+    }
+
+    // Continue chasing after losing sight for a while
+    void ContinueChasing()
+    {
+        if (Vector3.Distance(transform.position, player.position) > patrolRadius)
+        {
+            isChasing = false;
+        }
+    }
+
+    // Handle the actual chasing logic
+    void HandleChase()
+    {
+        isMoving = true;
+        agent.SetDestination(player.position);
+
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            isMoving = false;
+            FacePlayer();
+            MeleeAttack();
+        }
+    }
     void FacePlayer()
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
@@ -127,10 +186,33 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player")) {
-            playerInRange = true;
+            playerInRange = false;
+        }
+    }
+    // Wander around the patrol area when not chasing
+    void Wander()
+    {
+        if (agent.remainingDistance <= agent.stoppingDistance && patrolTimer >= patrolInterval)
+        {
+            Vector3 newPos = RandomNavSphere(transform.position, patrolRadius, -1);
+            agent.SetDestination(newPos);
+            patrolTimer = 0f;
+            isMoving = true;
+           
         }
     }
 
+    // Get a random position within a sphere around the enemy
+    public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
+    {
+        Vector3 randDirection = Random.insideUnitSphere * dist;
+        randDirection += origin;
+
+        NavMeshHit navHit;
+        NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
+
+        return navHit.position;
+    }
     void WalkSound()
     {
         int i = Random.Range(0, walkClips.Length);
