@@ -9,6 +9,10 @@ public class ChemlightThrow : MonoBehaviour
     public int chemlightCount;
     public int chemlightDuration;
 
+    void Start()
+    {
+        GameManager.instance.chemlightCounter.text = chemlightCount.ToString();
+    }
     public void ThrowChemlight()
     {
         if(chemlightCount > 0)
@@ -18,6 +22,7 @@ public class ChemlightThrow : MonoBehaviour
             rb.AddForce(throwPoint.forward * throwForce, ForceMode.Impulse);
             StartCoroutine(DestroyChemlight(chemlight));
             chemlightCount--;
+            GameManager.instance.chemlightCounter.text = chemlightCount.ToString();
         }
     }
 

@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public GameObject bossHealthUI;
     public UnityEngine.UI.Image bossHealthBar;
     public UnityEngine.UI.Image dodgeCooldownRadial;
+    public TextMeshProUGUI chemlightCounter;
 
     public GameObject AmbianceForLevels;
     public GameObject AmbianceForBoss;
