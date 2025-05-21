@@ -117,7 +117,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5838261704378798685}
-  - component: {fileID: 1488202061103521137}
   - component: {fileID: 906857919791011683}
   m_Layer: 3
   m_Name: Pistol
@@ -144,35 +143,6 @@ Transform:
   - {fileID: 4446248499819487158}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1488202061103521137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4493368667877536924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14ba00d65ec80064d981deaae5a0ddad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rifle: {fileID: 2960120504364758208, guid: 24a9d49ca7ab275429dc4f39cdfb91b6, type: 3}
-  pistol: {fileID: 4493368667877536924}
-  pistolSource: {fileID: 906857919791011683}
-  rifleSource: {fileID: 0}
-  pistolShotClips:
-  - {fileID: 8300000, guid: e7cc0ce96a6a5bb43aa029ebb3bd95d8, type: 3}
-  - {fileID: 8300000, guid: 46d5550ec99a9cd408be789b6ac2098a, type: 3}
-  - {fileID: 8300000, guid: f0a385cbce751ac43845d62987e8c055, type: 3}
-  rifleShotClips: []
-  reloadClip1: {fileID: 8300000, guid: 499b359dc8e2dce47b86d7445e4f11f9, type: 3}
-  reloadClip2: {fileID: 8300000, guid: e4f0dd68077ec404080ccecf9f562e3f, type: 3}
-  damage: 1
-  range: 25
-  magSize: 9
-  fireRate: 0.25
-  currentBullets: 9
-  magCount: 3
 --- !u!82 &906857919791011683
 AudioSource:
   m_ObjectHideFlags: 0
