@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 4485201740644734898}
   - component: {fileID: 4884101813597980463}
   m_Layer: 0
-  m_Name: ChemlightThrow
+  m_Name: ThrowPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,7 +154,7 @@ Transform:
   m_GameObject: {fileID: 2448404636761433299}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.009, y: -0.156, z: 0.547}
+  m_LocalPosition: {x: -0.009, y: -0.156, z: 0.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9618cebb4f6da72418793de52d1c1064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  molotovPrefab: {fileID: 7850931886307771287, guid: b00309bdb025e894c9218cb76757ddfb, type: 3}
   chemlightPrefab: {fileID: 3499742981914383622, guid: 5e473a26a1da56f488d15e3e9d7b56d3, type: 3}
   throwPoint: {fileID: 4485201740644734898}
   throwForce: 20
@@ -406,11 +407,12 @@ MonoBehaviour:
   currentHP: 10
   grabDistance: 5
   money: 1000
+  molotovCount: 0
   pistolPrefab: {fileID: 4493368667877536924, guid: ea978309a52dc714cacb3ab0643ebcf2, type: 3}
   pistol: {fileID: 0}
   rifle: {fileID: 0}
   heldWeapon: {fileID: 0}
-  chemlightThrow: {fileID: 0}
+  throwConsumable: {fileID: 4884101813597980463}
 --- !u!143 &4564405297631183533
 CharacterController:
   m_ObjectHideFlags: 0
