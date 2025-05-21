@@ -3,6 +3,7 @@ using System.Collections;
 using System.Diagnostics.Contracts;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GunBase : MonoBehaviour
 {
@@ -77,7 +78,7 @@ public class GunBase : MonoBehaviour
         {
             currentBullets = magSize;
             magCount--;
-
+            gunList[gunListIndex].magCount--;
             Debug.Log("Reloaded " + magCount + " magazines remaining");
             StartCoroutine(ReloadGun());
             UpdateAmmo();
@@ -87,6 +88,7 @@ public class GunBase : MonoBehaviour
     public void PickUpAmmo()
     {
         magCount++;
+        gunList[gunListIndex].magCount++;
         UpdateAmmo();
     }
     public void EquipRifle()
@@ -144,7 +146,15 @@ public class GunBase : MonoBehaviour
         fireRate = gunList[gunListIndex].fireRate;
         currentBullets = gunList[gunListIndex].currentAmmo;
         magSize = gunList[gunListIndex].magSize;
-        magCount = gunList[gunListIndex].magCount;
+        if (SceneManager.GetActiveScene().name != "Shop" || SceneManager.GetActiveScene().name != "Level2")
+        {
+            magCount = gunList[gunListIndex].startingMagCount;
+            gunList[gunListIndex].magCount = gunList[gunListIndex].startingMagCount;
+        }
+        else
+        {
+            magCount = gunList[gunListIndex].magCount;
+        }
         shotClips = gunList[gunListIndex].shootSounds;
         reloadClip1 = gunList[gunListIndex].reloadSound1;
         reloadClip2 = gunList[gunListIndex].reloadSound2;

@@ -13,12 +13,16 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   model: {fileID: 0}
-  damage: 0
-  fireRate: 0
-  range: 0
-  currentAmmo: 0
-  magSize: 0
-  magCount: 0
-  audioSource: {fileID: 0}
-  shootSounds: []
-  reloadSound: {fileID: 0}
+  damage: 1
+  fireRate: 0.25
+  range: 25
+  currentAmmo: 9
+  magSize: 9
+  startingMagCount: 3
+  magCount: 4
+  shootSounds:
+  - {fileID: 8300000, guid: e7cc0ce96a6a5bb43aa029ebb3bd95d8, type: 3}
+  - {fileID: 8300000, guid: 46d5550ec99a9cd408be789b6ac2098a, type: 3}
+  - {fileID: 8300000, guid: f0a385cbce751ac43845d62987e8c055, type: 3}
+  reloadSound1: {fileID: 8300000, guid: e4f0dd68077ec404080ccecf9f562e3f, type: 3}
+  reloadSound2: {fileID: 0}

@@ -10,13 +10,9 @@ public class GunStats : ScriptableObject
     public int range;
     public int currentAmmo;
     public int magSize;
+    public int startingMagCount;
     public int magCount;
     public AudioClip[] shootSounds;
     public AudioClip reloadSound1;
     public AudioClip reloadSound2;
-
-    void Start()
-    {
-        currentAmmo = magSize;
-    }
 }
