@@ -1,8 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class ChemlightThrow : MonoBehaviour
+public class ThrowConsumable : MonoBehaviour
 {
+    public GameObject molotovPrefab;
     public GameObject chemlightPrefab;
     public Transform throwPoint;
     public float throwForce;
@@ -32,4 +33,14 @@ public class ChemlightThrow : MonoBehaviour
         Destroy(chemlight);
     }
 
+    public void ThrowMolotov()
+    {
+        if (GameManager.instance.playerScript.molotovCount > 0)
+        {
+            GameObject molotov = Instantiate(molotovPrefab, throwPoint.position, throwPoint.rotation);
+            Rigidbody rb = molotov.GetComponent<Rigidbody>();
+            rb.AddForce(throwPoint.forward * throwForce, ForceMode.Impulse);
+            GameManager.instance.playerScript.molotovCount--;
+        }
+    }
 }

@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] public float currentHP;
     [SerializeField] public int grabDistance;
     [SerializeField] public int money;
+    [SerializeField] public int molotovCount;
 
     Vector3 moveDirection;
 
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour, IDamage
     //Dynamic Creation DO NOT set in Inspector or unhide
     [HideInInspector] public GameObject rifle;
     public GameObject heldWeapon;
-    public ChemlightThrow chemlightThrow;
+    public ThrowConsumable throwConsumable;
 
     void Start()
     {
@@ -50,7 +51,6 @@ public class PlayerController : MonoBehaviour, IDamage
         heldWeapon.SetActive(true);
         GameManager.instance.ammoScript.UpdatePistolAmmoAndMagCount();
         dodgeTimer = dodgeCooldown;
-        chemlightThrow = GetComponentInChildren<ChemlightThrow>();
     }
     void Update()
     {
@@ -64,10 +64,14 @@ public class PlayerController : MonoBehaviour, IDamage
         }
         if (Input.GetButtonDown("Throw Chemlight"))
         {
-            chemlightThrow.ThrowChemlight();
+            throwConsumable.ThrowChemlight();
         }
         if (Input.GetButtonDown("Dodge")) {
             StartCoroutine(Dodge());
+        }
+        if (Input.GetButtonDown("Throw Molotov"))
+        {
+            throwConsumable.ThrowMolotov();
         }
     }
 
