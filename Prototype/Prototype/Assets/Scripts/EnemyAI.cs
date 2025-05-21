@@ -11,12 +11,14 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
 
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Transform headPos;
 
     [SerializeField] int HP;
     [SerializeField] float meleeRange;
     [SerializeField] float meleeDamage;
     [SerializeField] float meleeCooldown;
     [SerializeField] int facePlayerSpeed;
+    [SerializeField] int FOV;
 
     [SerializeField] float walkRate;
 
@@ -25,6 +27,8 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     Color originalColor;
 
     bool playerInRange;
+
+    float angleToPlayer;
     Transform player;
     Vector3 playerDir;
 
@@ -61,7 +65,13 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
             walkTimer = 0f;
         }
     }
+    //bool CanSeePlayer()
+    //{
+    //    playerDir = (GameManager.instance.player.transform.position - headPos.position);
+    //    angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.y), transform.forward);
 
+    //    RaycastHit hit
+    //}
     void FacePlayer()
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));

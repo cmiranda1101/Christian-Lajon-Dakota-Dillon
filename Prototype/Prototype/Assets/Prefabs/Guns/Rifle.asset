@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b793dc9ad1247c44d9f1e0c63289ca98, type: 3}
+  m_Name: Rifle
+  m_EditorClassIdentifier: 
+  model: {fileID: 0}
+  damage: 3
+  fireRate: 0.4
+  range: 40
+  currentAmmo: 12
+  magSize: 12
+  startingMagCount: 1
+  magCount: 1
+  shootSounds:
+  - {fileID: 8300000, guid: 198ff5a67911d084b84a3f6ffa6cfc8e, type: 3}
+  - {fileID: 8300000, guid: 482ec0b393dd6eb41a488741d98506bb, type: 3}
+  - {fileID: 8300000, guid: c3c2685b05f6ae149bb2abfb3aa67164, type: 3}
+  reloadSound1: {fileID: 8300000, guid: e4f0dd68077ec404080ccecf9f562e3f, type: 3}
+  reloadSound2: {fileID: 0}
