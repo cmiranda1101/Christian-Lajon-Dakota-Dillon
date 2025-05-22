@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GunBase : MonoBehaviour
 {
-    [SerializeField] GameObject rifle;
-    [SerializeField] GameObject pistol;
+    //[SerializeField] GameObject rifle;
+    //[SerializeField] GameObject pistol;
     [SerializeField] List<GunStats> gunList = new List<GunStats>();
     [SerializeField] GameObject gunModel;
     [SerializeField]AudioSource gunSource;
@@ -23,7 +23,7 @@ public class GunBase : MonoBehaviour
     [SerializeField] float fireRate;
 
     public int currentBullets;
-    public int magCount = 3;
+    public int magCount;
     float shotTimer = 0;
     int gunListIndex = 0;
 
@@ -163,6 +163,7 @@ public class GunBase : MonoBehaviour
     {
         gunList.Add(_gun);
         gunListIndex = gunList.Count - 1;
+        gunList[gunListIndex].currentAmmo = gunList[gunListIndex].magSize;
         ChangeGun();
     }
 }

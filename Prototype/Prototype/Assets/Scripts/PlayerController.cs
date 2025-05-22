@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float dodgeDuration;
     [SerializeField] float dodgeCooldown;
 
-    [SerializeField] public GameObject pistolSpot;
-    [SerializeField] public GameObject rifleSpot;
+    //[SerializeField] public GameObject pistolSpot;
+    //[SerializeField] public GameObject rifleSpot;
 
     [SerializeField] public GameObject Holster;
 
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     Vector3 moveDirection;
 
-    [SerializeField] GameObject pistolPrefab;
+    //[SerializeField] GameObject pistolPrefab;
     GameObject flashlight;
     [HideInInspector] public GameObject pistol;
     //Dynamic Creation DO NOT set in Inspector or unhide
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour, IDamage
     void Start()
     {
         flashlight = GameObject.Find("FlashLight");
-        pistol = Instantiate(pistolPrefab, pistolSpot.transform.position, pistolSpot.transform.rotation, pistolSpot.transform);
+        //pistol = Instantiate(pistolPrefab, pistolSpot.transform.position, pistolSpot.transform.rotation, pistolSpot.transform);
         heldWeapon = pistol;
         heldWeapon.SetActive(true);
         GameManager.instance.ammoScript.UpdatePistolAmmoAndMagCount();
@@ -188,9 +188,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public IEnumerator MuzzleFlash()
     {
-        heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(true);
+        //heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.01f);
-        heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(false);
+        //heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(false);
     }
 
     void WalkSound()
