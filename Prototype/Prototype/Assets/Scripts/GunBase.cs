@@ -65,7 +65,6 @@ public class GunBase : MonoBehaviour
             StartCoroutine(GameManager.instance.playerScript.MuzzleFlash());
             GunShotSound();
             currentBullets--;
-            gunList[gunListIndex].currentAmmo--;
             UpdateAmmo();
             if (currentBullets <= 0)
             {
@@ -80,7 +79,6 @@ public class GunBase : MonoBehaviour
         {
             currentBullets = magSize;
             magCount--;
-            gunList[gunListIndex].magCount--;
             Debug.Log("Reloaded " + magCount + " magazines remaining");
             StartCoroutine(ReloadGun());
             UpdateAmmo();
