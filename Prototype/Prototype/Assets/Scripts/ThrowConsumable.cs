@@ -1,17 +1,20 @@
 using System.Collections;
 using UnityEngine;
 
-public class ChemlightThrow : MonoBehaviour
+public class ThrowConsumable : MonoBehaviour
 {
+    public GameObject molotovPrefab;
     public GameObject chemlightPrefab;
     public Transform throwPoint;
     public float throwForce;
     public int chemlightCount;
     public int chemlightDuration;
+    public int molotovCount;
 
     void Start()
     {
         GameManager.instance.chemlightCounter.text = chemlightCount.ToString();
+        GameManager.instance.molotovCounter.text = molotovCount.ToString();
     }
     public void ThrowChemlight()
     {
@@ -32,4 +35,19 @@ public class ChemlightThrow : MonoBehaviour
         Destroy(chemlight);
     }
 
+    public void ThrowMolotov()
+    {
+        if (molotovCount > 0)
+        {
+            GameObject molotov = Instantiate(molotovPrefab, throwPoint.position, throwPoint.rotation);
+            Rigidbody rb = molotov.GetComponent<Rigidbody>();
+            rb.AddForce(throwPoint.forward * throwForce, ForceMode.Impulse);
+            molotovCount--;
+            GameManager.instance.molotovCounter.text = molotovCount.ToString();
+        }
+        if (molotovCount == 0)
+        {
+            GameManager.instance.MolotovUI.SetActive(false);
+        }
+    }
 }

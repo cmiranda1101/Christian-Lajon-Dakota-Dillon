@@ -229,6 +229,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6213075050325087084, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213075050325087084, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -258,15 +262,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6733609850376833494, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 93.75
+      value: 22.34073
       objectReference: {fileID: 0}
     - target: {fileID: 6733609850376833494, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000038146973
+      value: -0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: 6733609850376833494, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -29.25
+      value: -30.863575
       objectReference: {fileID: 0}
     - target: {fileID: 6733609850376833494, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_LocalRotation.w
@@ -403,6 +407,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8023246818574040956}
   m_SourcePrefab: {fileID: 100100000, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
+--- !u!4 &3178060966656452393 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4972674529104560028, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
+  m_PrefabInstance: {fileID: 7573014700984588469}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4549064880720137177 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6213075050325087084, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
@@ -432,14 +441,23 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 97a0cd8fb61855d498de20d967ea1424, type: 3}
   model: {fileID: 7946429764398687389}
   agent: {fileID: 1874890942227670813}
+  FOV: 90
+  headPos: {fileID: 3178060966656452393}
   HP: 2
   facePlayerSpeed: 12
   shootingPos: {fileID: 7819396951557842620}
   bullet: {fileID: 2485194676518234941, guid: b83ad134937c084409cddd6fe6858ea8, type: 3}
   fireRate: 0.8
+  chaseDur: 3
+  forgetDelay: 3
   patrolRadius: 30
   patrolInterval: 5
-  walkRate: 0.5
+  enableStrafe: 1
+  strafeSpeed: 10
+  strafeDis: 0.5
+  strafeDur: 0.2
+  chanceToStrafe: 0.45
+  walkRate: 0.4
 --- !u!195 &1874890942227670813
 NavMeshAgent:
   m_ObjectHideFlags: 0

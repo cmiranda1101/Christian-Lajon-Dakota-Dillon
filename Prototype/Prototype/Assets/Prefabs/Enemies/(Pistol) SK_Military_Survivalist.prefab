@@ -34,15 +34,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 56.870472
+      value: 20.51269
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000076293945
+      value: -0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.835587
+      value: -33.295116
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -249,6 +249,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -432,14 +436,23 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 97a0cd8fb61855d498de20d967ea1424, type: 3}
   model: {fileID: 8297577024250035725}
   agent: {fileID: 7992687783722063204}
+  FOV: 90
+  headPos: {fileID: 3565500772937973177}
   HP: 5
   facePlayerSpeed: 15
   shootingPos: {fileID: 8207139114905910316}
   bullet: {fileID: 2485194676518234941, guid: b486390cf48be664baa654d7bf7bc6af, type: 3}
   fireRate: 0.5
+  chaseDur: 3
+  forgetDelay: 3
   patrolRadius: 30
   patrolInterval: 5
-  walkRate: 0.4
+  enableStrafe: 1
+  strafeSpeed: 10
+  strafeDis: 0.5
+  strafeDur: 0.2
+  chanceToStrafe: 0.5
+  walkRate: 0.5
 --- !u!195 &7992687783722063204
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -700,6 +713,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!4 &3565500772937973177 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2304244481032835489, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
+  m_PrefabInstance: {fileID: 3351071929636547608}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8207139114905910316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2349476437193732044, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
