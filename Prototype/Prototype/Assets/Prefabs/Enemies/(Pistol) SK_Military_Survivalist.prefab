@@ -249,6 +249,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -432,7 +436,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 97a0cd8fb61855d498de20d967ea1424, type: 3}
   model: {fileID: 8297577024250035725}
   agent: {fileID: 7992687783722063204}
-  FOV: 45
+  FOV: 90
   headPos: {fileID: 3565500772937973177}
   HP: 5
   facePlayerSpeed: 15
@@ -443,7 +447,12 @@ MonoBehaviour:
   forgetDelay: 3
   patrolRadius: 30
   patrolInterval: 5
-  walkRate: 0.4
+  enableStrafe: 1
+  strafeSpeed: 10
+  strafeDis: 0.5
+  strafeDur: 0.2
+  chanceToStrafe: 0.5
+  walkRate: 0.5
 --- !u!195 &7992687783722063204
 NavMeshAgent:
   m_ObjectHideFlags: 0

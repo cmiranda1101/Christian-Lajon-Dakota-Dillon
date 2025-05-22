@@ -20,14 +20,28 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] float fireRate;
 
+    // chase varibles 
     [SerializeField] float chaseDur;
     [SerializeField] float forgetDelay;
     float lastSeen = Mathf.Infinity;
     bool isChasing = false;
 
+    // patrol variables 
     [SerializeField] float patrolRadius;
     [SerializeField] float patrolInterval;
     float patrolTimer;
+
+    // strafe variables
+    [SerializeField] bool enableStrafe = true;
+    [SerializeField] float strafeSpeed;
+    [SerializeField] float strafeDis;
+    [SerializeField] float strafeDur;
+    [SerializeField][Range (0f, 1f)] float chanceToStrafe;
+    
+
+    bool isStrafing = false;
+    float strafeTimer = 0f;
+    Vector3 strafeDir;
 
     Color colorOrig;
     Vector3 playerDir;
@@ -53,6 +67,19 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         shootTimer += Time.deltaTime;
         walkTimer += Time.deltaTime;
         patrolTimer += Time.deltaTime;
+
+        if(isStrafing && Random.value <= chanceToStrafe)
+        {
+            agent.Move(strafeDir * strafeSpeed * Time.deltaTime);
+            strafeTimer += Time.deltaTime;
+
+            if (strafeTimer >= strafeDur)
+            {
+                isStrafing = false;
+            }
+
+            return;
+        }
 
         // Check if player is in range and can be seen
         bool canSeePlayer = playerInRange && CanSeePlayer();
@@ -133,6 +160,11 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         {
             StartCoroutine(flashRed());
             agent.SetDestination(GameManager.instance.player.transform.position);
+
+            if(enableStrafe && Random.value <= chanceToStrafe)
+            {
+                Strafe();
+            }
         }
     }
 
@@ -255,5 +287,18 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         {
             lastSeen += Time.deltaTime;
         }
+    }
+    void Strafe()
+    {
+        Vector3 right = transform.right;
+        Vector3 left = -transform.right;
+
+        strafeDir = (Random.value > .5f ? right : left).normalized;
+        strafeDir *= strafeDis;
+
+        isStrafing = true;
+        strafeTimer = 0f;
+
+        shoot();
     }
 }

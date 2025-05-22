@@ -25,6 +25,16 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     [SerializeField] float patrolInterval;
     float patrolTimer;
 
+    [SerializeField] bool enableStrafe = true;
+    [SerializeField] float strafeSpeed;
+    [SerializeField] float strafeDis;
+    [SerializeField] float strafeDur;
+    [SerializeField][Range(0f, 1f)] float chanceToStrafe;
+
+    bool isStrafing = false;
+    float strafeTimer = 0f;
+    Vector3 strafeDir;
+
     float walkTimer;
     float nextMeleeTime;
     Color originalColor;
@@ -50,6 +60,20 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
         isMoving = true;
         walkTimer += Time.deltaTime;
         patrolTimer += Time.deltaTime;
+
+        if (isStrafing && Random.value <= 0.75f)
+        {
+            agent.Move(strafeDir * strafeSpeed * Time.deltaTime);
+            strafeTimer += Time.deltaTime;
+
+            if (strafeTimer >= strafeDur)
+            {
+                isStrafing = false;
+            }
+
+            return;
+        }
+
         if (player == null) return;
 
         bool canSeePlayer = playerInRange && CanSeePlayer();
@@ -166,6 +190,11 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
         else {
             StartCoroutine(FlashRed());
             agent.SetDestination(player.position);
+
+            if (enableStrafe && Random.value <= chanceToStrafe)
+            {
+                Strafe();
+            }
         }
     }
 
@@ -225,5 +254,18 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
         int i = Random.Range(0, weaponClips.Length);
         weaponSource.clip = weaponClips[i];
         weaponSource.Play();
+    }
+    void Strafe()
+    {
+        Vector3 right = transform.right;
+        Vector3 left = -transform.right;
+
+        strafeDir = (Random.value > .5f ? right : left).normalized;
+        strafeDir *= strafeDis;
+
+        isStrafing = true;
+        strafeTimer = 0f;
+
+        
     }
 }
