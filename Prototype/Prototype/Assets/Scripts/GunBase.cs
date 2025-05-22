@@ -10,6 +10,7 @@ public class GunBase : MonoBehaviour
     [SerializeField] GameObject rifle;
     [SerializeField] GameObject pistol;
     [SerializeField] List<GunStats> gunList = new List<GunStats>();
+    [SerializeField] GameObject gunModel;
     [SerializeField]AudioSource gunSource;
     AudioClip[] shotClips;
     AudioClip reloadClip1;
@@ -64,6 +65,7 @@ public class GunBase : MonoBehaviour
             StartCoroutine(GameManager.instance.playerScript.MuzzleFlash());
             GunShotSound();
             currentBullets--;
+            gunList[gunListIndex].currentAmmo--;
             UpdateAmmo();
             if (currentBullets <= 0)
             {
@@ -91,11 +93,6 @@ public class GunBase : MonoBehaviour
         gunList[gunListIndex].magCount++;
         UpdateAmmo();
     }
-    public void EquipRifle()
-    {
-        GameManager.instance.playerScript.rifle = Instantiate(rifle, GameManager.instance.playerScript.rifleSpot.transform.position, GameManager.instance.playerScript.rifleSpot.transform.rotation, GameManager.instance.playerScript.rifleSpot.transform);
-        GameManager.instance.hotbarRifle.SetActive(true);
-    }
 
     void GunShotSound()
     {
@@ -106,13 +103,13 @@ public class GunBase : MonoBehaviour
 
     public void UpdateAmmo()
     {
-        if(GameManager.instance.playerScript.heldWeapon == pistol)
-        {
-            GameManager.instance.ammoScript.UpdatePistolAmmoAndMagCount();
-        } else if (GameManager.instance.playerScript.heldWeapon == rifle)
-        {
-            GameManager.instance.ammoScript.UpdateRifleAmmoAndMagCount();
-        }
+        //if(GameManager.instance.playerScript.heldWeapon == pistol)
+        //{
+        //    GameManager.instance.ammoScript.UpdatePistolAmmoAndMagCount();
+        //} else if (GameManager.instance.playerScript.heldWeapon == rifle)
+        //{
+        //    GameManager.instance.ammoScript.UpdateRifleAmmoAndMagCount();
+        //}
     }
 
     IEnumerator ReloadGun()
@@ -158,6 +155,8 @@ public class GunBase : MonoBehaviour
         shotClips = gunList[gunListIndex].shootSounds;
         reloadClip1 = gunList[gunListIndex].reloadSound1;
         reloadClip2 = gunList[gunListIndex].reloadSound2;
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListIndex].model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListIndex].model.GetComponent<MeshRenderer>().sharedMaterial;
     }
 
     public void GetGunStats(GunStats _gun)

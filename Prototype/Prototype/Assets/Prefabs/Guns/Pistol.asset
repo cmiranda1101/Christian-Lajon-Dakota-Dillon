@@ -19,7 +19,7 @@ MonoBehaviour:
   currentAmmo: 9
   magSize: 9
   startingMagCount: 3
-  magCount: 4
+  magCount: 3
   shootSounds:
   - {fileID: 8300000, guid: e7cc0ce96a6a5bb43aa029ebb3bd95d8, type: 3}
   - {fileID: 8300000, guid: 46d5550ec99a9cd408be789b6ac2098a, type: 3}

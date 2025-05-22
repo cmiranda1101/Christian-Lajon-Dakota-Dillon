@@ -209,6 +209,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6718040522337337399}
   - {fileID: 4997956918360707370}
   - {fileID: 5158948174592200241}
   - {fileID: 6736218866358337670}
@@ -357,7 +358,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6718040522337337399}
   - {fileID: 1264087180538204762}
   - {fileID: 7449950252642197714}
   m_Father: {fileID: 0}
@@ -395,9 +395,6 @@ MonoBehaviour:
   dodgeSpeed: 10
   dodgeDuration: 0.3
   dodgeCooldown: 5
-  pistolSpot: {fileID: 5455891234833450132}
-  rifleSpot: {fileID: 7184325920738929754}
-  Holster: {fileID: 1120997950688922789}
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -407,9 +404,6 @@ MonoBehaviour:
   grabDistance: 5
   money: 1000
   pistolPrefab: {fileID: 4493368667877536924, guid: ea978309a52dc714cacb3ab0643ebcf2, type: 3}
-  pistol: {fileID: 0}
-  rifle: {fileID: 0}
-  heldWeapon: {fileID: 0}
   chemlightThrow: {fileID: 0}
 --- !u!143 &4564405297631183533
 CharacterController:
@@ -748,6 +742,8 @@ GameObject:
   - component: {fileID: 6718040522337337399}
   - component: {fileID: 7557412545139566117}
   - component: {fileID: 8211714519364757898}
+  - component: {fileID: 9200620695202013930}
+  - component: {fileID: 4132257206092086560}
   m_Layer: 3
   m_Name: Weapons
   m_TagString: Weapons
@@ -763,12 +759,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8434889130762307971}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.438, y: -0.381, z: 0.643}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 6243271664613544961}
+  m_Father: {fileID: 1264087180538204762}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7557412545139566117
 MonoBehaviour:
@@ -786,6 +782,8 @@ MonoBehaviour:
   pistol: {fileID: 4493368667877536924, guid: ea978309a52dc714cacb3ab0643ebcf2, type: 3}
   gunList:
   - {fileID: 11400000, guid: 79f2e042a17f2904793b177af9f0eb94, type: 2}
+  - {fileID: 0}
+  gunModel: {fileID: 8434889130762307971}
   gunSource: {fileID: 8211714519364757898}
   damage: 0
   range: 0
@@ -890,3 +888,56 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!23 &9200620695202013930
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8434889130762307971}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &4132257206092086560
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8434889130762307971}
+  m_Mesh: {fileID: 0}
