@@ -90,4 +90,19 @@ public class ButtonFunctions : MonoBehaviour
             rifle.UpdateAmmo();
         }
     }
+
+    public void BuyMolotov()
+    {
+        if (GameManager.instance.playerScript.money >= 100)
+        {
+            if (GameManager.instance.throwConsumableScript.molotovCount == 0)
+            {
+                GameManager.instance.MolotovUI.SetActive(true);
+            }
+            buyAudio.Play();
+            GameManager.instance.playerScript.throwConsumable.molotovCount++;
+            GameManager.instance.molotovCounter.text = GameManager.instance.playerScript.throwConsumable.molotovCount.ToString();
+            GameManager.instance.moneyScript.SubtractMoney(100);
+        }
+    }
 }

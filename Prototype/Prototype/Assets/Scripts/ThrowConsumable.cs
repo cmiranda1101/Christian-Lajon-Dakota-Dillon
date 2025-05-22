@@ -9,10 +9,12 @@ public class ThrowConsumable : MonoBehaviour
     public float throwForce;
     public int chemlightCount;
     public int chemlightDuration;
+    public int molotovCount;
 
     void Start()
     {
         GameManager.instance.chemlightCounter.text = chemlightCount.ToString();
+        GameManager.instance.molotovCounter.text = molotovCount.ToString();
     }
     public void ThrowChemlight()
     {
@@ -35,12 +37,17 @@ public class ThrowConsumable : MonoBehaviour
 
     public void ThrowMolotov()
     {
-        if (GameManager.instance.playerScript.molotovCount > 0)
+        if (molotovCount > 0)
         {
             GameObject molotov = Instantiate(molotovPrefab, throwPoint.position, throwPoint.rotation);
             Rigidbody rb = molotov.GetComponent<Rigidbody>();
             rb.AddForce(throwPoint.forward * throwForce, ForceMode.Impulse);
-            GameManager.instance.playerScript.molotovCount--;
+            molotovCount--;
+            GameManager.instance.molotovCounter.text = molotovCount.ToString();
+        }
+        if (molotovCount == 0)
+        {
+            GameManager.instance.MolotovUI.SetActive(false);
         }
     }
 }

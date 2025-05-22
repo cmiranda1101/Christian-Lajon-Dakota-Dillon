@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] public float currentHP;
     [SerializeField] public int grabDistance;
     [SerializeField] public int money;
-    [SerializeField] public int molotovCount;
 
     Vector3 moveDirection;
 

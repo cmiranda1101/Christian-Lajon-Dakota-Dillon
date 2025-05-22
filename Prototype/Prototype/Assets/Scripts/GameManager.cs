@@ -26,11 +26,13 @@ public class GameManager : MonoBehaviour
     public GameObject hotBarPistol;
     public GameObject hotbarRifle;
     public GameObject healthUI;
+    public GameObject MolotovUI;
     public UnityEngine.UI.Image healthBar;
     public GameObject bossHealthUI;
     public UnityEngine.UI.Image bossHealthBar;
     public UnityEngine.UI.Image dodgeCooldownRadial;
     public TextMeshProUGUI chemlightCounter;
+    public TextMeshProUGUI molotovCounter;
 
     public GameObject AmbianceForLevels;
     public GameObject AmbianceForBoss;
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
     public AmmoUI ammoScript;
     public LevelExit levelExitScript;
     public HeartBoss heartBossScript;
+    public ThrowConsumable throwConsumableScript;
 
 
     public bool isPaused;
@@ -73,6 +76,7 @@ public class GameManager : MonoBehaviour
         weaponScript = weapons.GetComponent<GunBase>();
         moneyScript = menuMoney.GetComponentInChildren<MoneyUI>();
         ammoScript = menuAmmo.GetComponentInChildren<AmmoUI>();
+        throwConsumableScript = player.GetComponentInChildren<ThrowConsumable>();
         timeScaleOrig = Time.timeScale;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

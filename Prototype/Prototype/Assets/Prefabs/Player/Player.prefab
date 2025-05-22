@@ -178,6 +178,7 @@ MonoBehaviour:
   throwForce: 20
   chemlightCount: 5
   chemlightDuration: 5
+  molotovCount: 0
 --- !u!1 &5295801228899495335
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +408,6 @@ MonoBehaviour:
   currentHP: 10
   grabDistance: 5
   money: 1000
-  molotovCount: 0
   pistolPrefab: {fileID: 4493368667877536924, guid: ea978309a52dc714cacb3ab0643ebcf2, type: 3}
   pistol: {fileID: 0}
   rifle: {fileID: 0}
