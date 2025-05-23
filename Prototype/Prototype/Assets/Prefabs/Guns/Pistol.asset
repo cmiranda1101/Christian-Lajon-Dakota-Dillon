@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b793dc9ad1247c44d9f1e0c63289ca98, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
+  model: {fileID: 2533983235376148274, guid: db076d81b537b8c4ba06af4d20a58783, type: 3}
   damage: 1
   fireRate: 0.25
   range: 25
-  currentAmmo: 9
+  currentAmmo: 4
   magSize: 9
   startingMagCount: 3
-  magCount: 4
+  magCount: 3
   shootSounds:
   - {fileID: 8300000, guid: e7cc0ce96a6a5bb43aa029ebb3bd95d8, type: 3}
   - {fileID: 8300000, guid: 46d5550ec99a9cd408be789b6ac2098a, type: 3}

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b793dc9ad1247c44d9f1e0c63289ca98, type: 3}
   m_Name: Rifle
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
+  model: {fileID: 7349764922201253128, guid: 24cb1b5acca01e0408a5fb3da5885f0c, type: 3}
   damage: 3
   fireRate: 0.4
   range: 40
-  currentAmmo: 12
+  currentAmmo: 8
   magSize: 12
   startingMagCount: 1
   magCount: 1
