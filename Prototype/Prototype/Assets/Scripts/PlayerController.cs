@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour, IDamage
         pistol = Instantiate(pistolPrefab, pistolSpot.transform.position, pistolSpot.transform.rotation, pistolSpot.transform);
         heldWeapon = pistol;
         heldWeapon.SetActive(true);
-        GameManager.instance.ammoScript.UpdatePistolAmmoAndMagCount();
+        //GameManager.instance.ammoScript.UpdatePistolAmmoAndMagCount();
         dodgeTimer = dodgeCooldown;
     }
     void Update()

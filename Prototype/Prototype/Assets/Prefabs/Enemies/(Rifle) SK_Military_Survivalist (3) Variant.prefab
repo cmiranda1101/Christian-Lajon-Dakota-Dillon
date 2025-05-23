@@ -230,7 +230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6213075050325087084, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6213075050325087084, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_TagString
@@ -441,6 +441,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 97a0cd8fb61855d498de20d967ea1424, type: 3}
   model: {fileID: 7946429764398687389}
   agent: {fileID: 1874890942227670813}
+  anim: {fileID: 7100621972384172825}
   FOV: 90
   headPos: {fileID: 3178060966656452393}
   HP: 2
@@ -457,6 +458,7 @@ MonoBehaviour:
   strafeDis: 0.5
   strafeDur: 0.2
   chanceToStrafe: 0.45
+  animTransSpeed: 10
   walkRate: 0.4
 --- !u!195 &1874890942227670813
 NavMeshAgent:
@@ -718,6 +720,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &7100621972384172825 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 833934142180004780, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
+  m_PrefabInstance: {fileID: 7573014700984588469}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7819396951557842620 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 404431876214750729, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}

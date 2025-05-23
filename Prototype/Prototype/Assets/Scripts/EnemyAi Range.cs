@@ -11,6 +11,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
 
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
     [SerializeField] int FOV;
     [SerializeField] Transform headPos;
     [SerializeField] int HP;
@@ -37,7 +38,8 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     [SerializeField] float strafeDis;
     [SerializeField] float strafeDur;
     [SerializeField][Range (0f, 1f)] float chanceToStrafe;
-    
+
+    [SerializeField] float animTransSpeed;
 
     bool isStrafing = false;
     float strafeTimer = 0f;
@@ -49,6 +51,9 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     [SerializeField] float walkRate;
     float walkTimer;
     float shootTimer;
+
+    float animationCurr;
+    float agentSpeedCurr;
 
     bool playerInRange;
     bool isMoving;
@@ -67,6 +72,8 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         shootTimer += Time.deltaTime;
         walkTimer += Time.deltaTime;
         patrolTimer += Time.deltaTime;
+
+        SetAnimParameter();
 
         if(isStrafing && Random.value <= chanceToStrafe)
         {
@@ -103,6 +110,14 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         {
             Wander();
         }
+    }
+
+    void SetAnimParameter()
+    {
+        agentSpeedCurr = agent.velocity.normalized.magnitude;
+        animationCurr = anim.GetFloat("Speed");
+
+        anim.SetFloat("Speed", Mathf.Lerp(animationCurr, agentSpeedCurr, Time.deltaTime * animTransSpeed));
     }
 
     // Check if the enemy can see the player
@@ -203,8 +218,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         // Shoot at the player if the fire rate allows
         if (shootTimer >= fireRate)
         {
-            shoot();
-            GunShotSound();
+            anim.SetTrigger("Shoot");
         }
 
         // Stop moving and face the player when close enough
@@ -299,6 +313,6 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         isStrafing = true;
         strafeTimer = 0f;
 
-        shoot();
+        anim.SetTrigger("Shoot");
     }
 }
