@@ -30,6 +30,7 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Quit()
     {
+        GameManager.instance.savedStatsScript.DeleteAllData();
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

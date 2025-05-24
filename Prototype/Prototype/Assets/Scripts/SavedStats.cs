@@ -42,6 +42,9 @@ public class SavedStats : MonoBehaviour
     //Call this if you want to reset stats to default
     public void DeleteAllData()
     {
-        PlayerPrefs.DeleteAll();
+        GameManager.instance.playerScript.currentHP = GameManager.instance.playerScript.maxHP;
+        GameManager.instance.playerScript.money = 1000;
+        GameManager.instance.levelExitScript.levelToLoad = 1;
+        SaveStats();
     }
 }

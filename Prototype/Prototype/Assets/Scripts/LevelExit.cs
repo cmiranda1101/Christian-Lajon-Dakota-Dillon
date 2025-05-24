@@ -5,14 +5,15 @@ public class LevelExit : MonoBehaviour
 {
     [SerializeField] GameObject exitText;
 
-    public int levelToLoad = 1;
+    [SerializeField] public int levelToLoad;
     bool canExit = false;
 
-    private void Awake()
+    private void Start()
     {
-        if (levelToLoad == 0)
+        if (SceneManager.GetActiveScene().name == "Shop")
         {
-            levelToLoad = 1;
+            Debug.Log("In Shop");
+            levelToLoad++;
         }
     }
 

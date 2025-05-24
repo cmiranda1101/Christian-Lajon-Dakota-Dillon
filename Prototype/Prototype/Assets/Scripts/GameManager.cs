@@ -61,12 +61,9 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         savedStatsScript = savedStats.GetComponent<SavedStats>();
         miniMap = GameObject.FindWithTag("MiniMap");
-        if(SceneManager.GetActiveScene().name == "Shop")
+        if (SceneManager.GetActiveScene().name == "Shop")
         {
             miniMap.SetActive(false);
-            //if you need to test going to the shop or another scene make sure there is a level exit prefab in your scene
-            levelExitScript = GameObject.FindWithTag("LevelExit").GetComponent<LevelExit>();
-            levelExitScript.levelToLoad++;
         }
         else
         {
@@ -169,6 +166,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = timeScaleOrig;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        levelExitScript = GameObject.FindWithTag("LevelExit").GetComponent<LevelExit>();
         menuHotbar.SetActive(true);
         if (SceneManager.GetActiveScene().name != "IntroLevel")
         {
