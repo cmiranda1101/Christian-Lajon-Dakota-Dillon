@@ -34,7 +34,7 @@ public class SavedStats : MonoBehaviour
             GameManager.instance.playerScript.money = PlayerPrefs.GetInt("PlayerMoney");
             if (SceneManager.GetActiveScene().name == "Shop")
             {
-                GameManager.instance.levelExitScript.levelToLoad = PlayerPrefs.GetInt("LevelIndex");
+                GameManager.instance.levelExitScript.levelToLoad = PlayerPrefs.GetInt("LevelIndex") + 1;
             }
         }
     }

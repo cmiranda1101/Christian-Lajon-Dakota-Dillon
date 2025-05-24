@@ -8,15 +8,6 @@ public class LevelExit : MonoBehaviour
     [SerializeField] public int levelToLoad;
     bool canExit = false;
 
-    private void Start()
-    {
-        if (SceneManager.GetActiveScene().name == "Shop")
-        {
-            Debug.Log("In Shop");
-            levelToLoad++;
-        }
-    }
-
     private void Update()
     {
         if (canExit)
