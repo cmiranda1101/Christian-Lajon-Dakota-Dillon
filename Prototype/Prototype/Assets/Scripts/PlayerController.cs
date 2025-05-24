@@ -19,9 +19,6 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float dodgeDuration;
     [SerializeField] float dodgeCooldown;
 
-    //[SerializeField] public GameObject pistolSpot;
-    //[SerializeField] public GameObject rifleSpot;
-
     [SerializeField] public GameObject Holster;
 
     [SerializeField] public LayerMask ignoreLayer;
@@ -34,21 +31,12 @@ public class PlayerController : MonoBehaviour, IDamage
 
     Vector3 moveDirection;
 
-    //[SerializeField] GameObject pistolPrefab;
     GameObject flashlight;
-    [HideInInspector] public GameObject pistol;
-    //Dynamic Creation DO NOT set in Inspector or unhide
-    [HideInInspector] public GameObject rifle;
-    //public GameObject heldWeapon;
     public ThrowConsumable throwConsumable;
 
     void Start()
     {
         flashlight = GameObject.Find("FlashLight");
-        //pistol = Instantiate(pistolPrefab, pistolSpot.transform.position, pistolSpot.transform.rotation, pistolSpot.transform);
-        //heldWeapon = pistol;
-        //heldWeapon.SetActive(true);
-        GameManager.instance.ammoScript.UpdatePistolAmmoAndMagCount();
         dodgeTimer = dodgeCooldown;
     }
     void Update()

@@ -2837,6 +2837,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buyAudio: {fileID: 5632318058449953261}
+  shopRifleAmmo: {fileID: 7086557996536803719}
+  shopRifleGunStats: {fileID: 11400000, guid: d8430723774538c43a0c3af21b65cd81, type: 2}
+  pistolStats: {fileID: 11400000, guid: 79f2e042a17f2904793b177af9f0eb94, type: 2}
 --- !u!82 &5632318058449953261
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8811,7 +8814,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2504935217180764227
 RectTransform:
   m_ObjectHideFlags: 0

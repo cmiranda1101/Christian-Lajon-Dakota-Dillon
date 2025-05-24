@@ -723,11 +723,13 @@ MonoBehaviour:
   gunModel: {fileID: 8434889130762307971}
   gunSource: {fileID: 8211714519364757898}
   damage: 0
-  range: 0
-  magSize: 0
   fireRate: 0
-  currentBullets: 0
+  range: 0
+  currentAmmo: 0
+  magSize: 0
+  startingMagCount: 0
   magCount: 0
+  gunListIndex: 0
 --- !u!82 &8211714519364757898
 AudioSource:
   m_ObjectHideFlags: 0

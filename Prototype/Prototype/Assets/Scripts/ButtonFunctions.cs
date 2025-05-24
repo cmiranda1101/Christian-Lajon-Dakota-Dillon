@@ -13,6 +13,9 @@ public class ButtonFunctions : MonoBehaviour
 {
     [SerializeField] AudioSource buyAudio;
     GameObject shopRifle;
+    [SerializeField] GameObject shopRifleAmmo;
+    [SerializeField] GunStats shopRifleGunStats;
+    [SerializeField] GunStats pistolStats;
 
     public void Resume()
     {
@@ -44,9 +47,12 @@ public class ButtonFunctions : MonoBehaviour
         shopRifle = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
         if (GameManager.instance.playerScript.money >= 100) {
             buyAudio.Play();
-            //GameManager.instance.weaponScript.EquipRifle();
+            shopRifleGunStats.currentAmmo = shopRifleGunStats.magSize;
+            shopRifleGunStats.magCount = shopRifleGunStats.startingMagCount;
+            GameManager.instance.weaponScript.GetGunStats(shopRifleGunStats);
             Destroy(shopRifle);
             GameManager.instance.moneyScript.SubtractMoney(100);
+            shopRifleAmmo.SetActive(true);
         }
     }
 
@@ -68,27 +74,26 @@ public class ButtonFunctions : MonoBehaviour
 
     public void BuyPistolAmmo()
     {
-        //if (GameManager.instance.playerScript.money >= 50 && GameManager.instance.playerScript.pistol != null)
-        //{
-        //    buyAudio.Play();
-        //    GameManager.instance.moneyScript.SubtractMoney(50);
-        //    GunBase pistol = GameManager.instance.playerScript.pistol.GetComponent<GunBase>();
-        //    pistol.magCount++;
-        //    pistol.UpdateAmmo();
-        //}
-        
+        if (GameManager.instance.playerScript.money >= 50)
+        {
+            buyAudio.Play();
+            pistolStats.magCount++;
+            GameManager.instance.weaponScript.magCount++;
+            GameManager.instance.ammoScript.UpdateAmmoAndMagCount();
+            GameManager.instance.moneyScript.SubtractMoney(50);
+        }
     }
 
     public void BuyRifleAmmo()
     {
-        //if (GameManager.instance.playerScript.money >= 50 && GameManager.instance.playerScript.rifle != null)
-        //{
-        //    buyAudio.Play();
-        //    GameManager.instance.moneyScript.SubtractMoney(50);
-        //    GunBase rifle = GameManager.instance.playerScript.rifle.GetComponent<GunBase>();
-        //    rifle.magCount++;
-        //    rifle.UpdateAmmo();
-        //}
+        if (GameManager.instance.playerScript.money >= 50)
+        {
+            buyAudio.Play();
+            shopRifleGunStats.magCount++;
+            GameManager.instance.weaponScript.magCount++;
+            GameManager.instance.ammoScript.UpdateAmmoAndMagCount();
+            GameManager.instance.moneyScript.SubtractMoney(50);
+        }
     }
 
     public void BuyMolotov()

@@ -6,19 +6,9 @@ public class AmmoUI : MonoBehaviour
 {
     public TextMeshProUGUI ammoCount;
     public TextMeshProUGUI magCount;
-    public void UpdatePistolAmmoAndMagCount()
+    public void UpdateAmmoAndMagCount()
     {
-        //ammoCount.text = GameManager.instance.playerScript.pistol.GetComponent<GunBase>().currentBullets.ToString();
-        //magCount.text = GameManager.instance.playerScript.pistol.GetComponent<GunBase>().magCount.ToString();
-    }
-    public void UpdateRifleAmmoAndMagCount()
-    {
-        
-        //if(GameManager.instance.playerScript.rifle != null)
-        //{
-        //    ammoCount.text = GameManager.instance.playerScript.rifle.GetComponent<GunBase>().currentBullets.ToString();
-        //    magCount.text = GameManager.instance.playerScript.rifle.GetComponent<GunBase>().magCount.ToString();
-        //}
-    }
-   
+        ammoCount.text = GameManager.instance.weaponScript.currentAmmo.ToString();
+        magCount.text = GameManager.instance.weaponScript.magCount.ToString();
+    }  
 }
