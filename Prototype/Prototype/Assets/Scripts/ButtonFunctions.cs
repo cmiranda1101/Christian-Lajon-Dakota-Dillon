@@ -52,6 +52,7 @@ public class ButtonFunctions : MonoBehaviour
             shopRifleGunStats.magCount = shopRifleGunStats.startingMagCount;
             GameManager.instance.weaponScript.GetGunStats(shopRifleGunStats);
             Destroy(shopRifle);
+            GameManager.instance.hotbarRifle.SetActive(true);
             GameManager.instance.moneyScript.SubtractMoney(100);
             shopRifleAmmo.SetActive(true);
         }
