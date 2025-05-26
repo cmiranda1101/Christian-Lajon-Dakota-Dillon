@@ -15,6 +15,7 @@ public class SavedStats : MonoBehaviour
     {
         PlayerPrefs.SetFloat("PlayerHP", GameManager.instance.playerScript.currentHP);
         PlayerPrefs.SetInt("PlayerMoney", GameManager.instance.playerScript.money);
+        PlayerPrefs.SetInt("Molotov", GameManager.instance.throwConsumableScript.molotovCount);
         if (SceneManager.GetActiveScene().name == "IntroLevel")
         {
             PlayerPrefs.SetString("EquippedWeapons", "");
@@ -38,6 +39,7 @@ public class SavedStats : MonoBehaviour
         {
             GameManager.instance.playerScript.currentHP = PlayerPrefs.GetFloat("PlayerHP");
             GameManager.instance.playerScript.money = PlayerPrefs.GetInt("PlayerMoney");
+            LoadConsumables();
             LoadEquippedWeapons();
             if (SceneManager.GetActiveScene().name == "Shop")
             {
@@ -87,6 +89,16 @@ public class SavedStats : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    public void LoadConsumables()
+    {
+        GameManager.instance.throwConsumableScript.molotovCount = PlayerPrefs.GetInt("Molotov");
+        if(GameManager.instance.throwConsumableScript.molotovCount > 0)
+        {
+            GameManager.instance.MolotovUI.SetActive(true);
+            GameManager.instance.ammoScript.UpdateMolotovCount();
         }
     }
 
