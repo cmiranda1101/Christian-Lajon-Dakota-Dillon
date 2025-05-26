@@ -2837,6 +2837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buyAudio: {fileID: 5632318058449953261}
+  shopRifle: {fileID: 6873767395791626592}
   shopRifleAmmo: {fileID: 7086557996536803719}
   shopRifleGunStats: {fileID: 11400000, guid: d8430723774538c43a0c3af21b65cd81, type: 2}
   pistolStats: {fileID: 11400000, guid: 79f2e042a17f2904793b177af9f0eb94, type: 2}
@@ -7152,6 +7153,7 @@ MonoBehaviour:
   menuHotbar: {fileID: 8494426942481023511}
   menuMoney: {fileID: 5147901964510663631}
   menuAmmo: {fileID: 1998429575300316312}
+  menuButtons: {fileID: 2085290690270198649}
   menuShop: {fileID: 2372957891866589578}
   savedStats: {fileID: 3641457443895511340}
   DamageFlash: {fileID: 8126014974184903328}
@@ -7176,6 +7178,7 @@ MonoBehaviour:
   moneyScript: {fileID: 0}
   savedStatsScript: {fileID: 3032187883100351740}
   ammoScript: {fileID: 0}
+  buttonScript: {fileID: 0}
   levelExitScript: {fileID: 0}
   heartBossScript: {fileID: 0}
   throwConsumableScript: {fileID: 0}

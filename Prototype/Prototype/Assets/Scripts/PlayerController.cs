@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         flashlight = GameObject.Find("FlashLight");
         dodgeTimer = dodgeCooldown;
+        GameManager.instance.moneyScript.UpdateMoneyText();
     }
     void Update()
     {

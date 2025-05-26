@@ -15,6 +15,12 @@ public class SavedStats : MonoBehaviour
     {
         PlayerPrefs.SetFloat("PlayerHP", GameManager.instance.playerScript.currentHP);
         PlayerPrefs.SetInt("PlayerMoney", GameManager.instance.playerScript.money);
+        if (SceneManager.GetActiveScene().name == "IntroLevel")
+        {
+            PlayerPrefs.SetString("EquippedWeapons", "");
+        } else {
+            SaveEquippedWeapons();
+        }
         if (GameManager.instance.levelExitScript != null)
         {
             PlayerPrefs.SetInt("LevelIndex", GameManager.instance.levelExitScript.levelToLoad);
@@ -32,6 +38,7 @@ public class SavedStats : MonoBehaviour
         {
             GameManager.instance.playerScript.currentHP = PlayerPrefs.GetFloat("PlayerHP");
             GameManager.instance.playerScript.money = PlayerPrefs.GetInt("PlayerMoney");
+            LoadEquippedWeapons();
             if (SceneManager.GetActiveScene().name == "Shop")
             {
                 GameManager.instance.levelExitScript.levelToLoad = PlayerPrefs.GetInt("LevelIndex") + 1;
@@ -46,5 +53,49 @@ public class SavedStats : MonoBehaviour
         GameManager.instance.playerScript.money = 1000;
         GameManager.instance.levelExitScript.levelToLoad = 1;
         SaveStats();
+    }
+
+    public void SaveEquippedWeapons()
+    {
+        string weapons = "";
+        foreach (GunStats gun in GameManager.instance.weaponScript.gunList)
+        {
+            weapons += gun + ",";
+        }
+        PlayerPrefs.SetString("EquippedWeapons", weapons);
+    }
+
+    public void LoadEquippedWeapons()
+    {
+        string weapons = PlayerPrefs.GetString("EquippedWeapons", "");
+        if (!string.IsNullOrEmpty(weapons))
+        {
+            string[] weaponArray = weapons.Split(',');
+            foreach (string weapon in weaponArray)
+            {
+                if (!string.IsNullOrEmpty(weapon))
+                {
+                    switch (weapon)
+                    {
+                        case "Rifle (GunStats)":
+                            GunStats gunStats = Resources.Load<GunStats>("Prefabs/Guns/Rifle");
+                            GameManager.instance.weaponScript.GetGunStats(gunStats);
+                            GameManager.instance.hotbarRifle.SetActive(true);
+                            GameManager.instance.buttonScript.shopRifle.SetActive(false);
+                            GameManager.instance.buttonScript.shopRifleAmmo.SetActive(true);
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void Restart()
+    {
+        foreach(GunStats gun in GameManager.instance.weaponScript.gunList)
+        {
+            gun.currentAmmo = gun.levelStartCurrentAmmo;
+            gun.magCount = gun.levelStartmagCount;
+        }
     }
 }

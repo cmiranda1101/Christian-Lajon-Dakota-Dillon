@@ -12,8 +12,8 @@ using UnityEngine.EventSystems;
 public class ButtonFunctions : MonoBehaviour
 {
     [SerializeField] AudioSource buyAudio;
-    GameObject shopRifle;
-    [SerializeField] GameObject shopRifleAmmo;
+    public GameObject shopRifle;
+    public GameObject shopRifleAmmo;
     [SerializeField] GunStats shopRifleGunStats;
     [SerializeField] GunStats pistolStats;
 
@@ -24,6 +24,7 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Restart()
     {
+        GameManager.instance.savedStatsScript.Restart();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.instance.StateUnpause();
     }

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuHotbar;
     [SerializeField] GameObject menuMoney;
     [SerializeField] GameObject menuAmmo;
+    [SerializeField] GameObject menuButtons;
     [SerializeField] GameObject menuShop;
     [SerializeField] GameObject savedStats;
 
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
     public MoneyUI moneyScript;
     public SavedStats savedStatsScript;
     public AmmoUI ammoScript;
+    public ButtonFunctions buttonScript;
     public LevelExit levelExitScript;
     public HeartBoss heartBossScript;
     public ThrowConsumable throwConsumableScript;
@@ -73,6 +75,7 @@ public class GameManager : MonoBehaviour
         weaponScript = weapons.GetComponent<GunBase>();
         moneyScript = menuMoney.GetComponentInChildren<MoneyUI>();
         ammoScript = menuAmmo.GetComponentInChildren<AmmoUI>();
+        buttonScript = menuButtons.GetComponent<ButtonFunctions>();
         throwConsumableScript = player.GetComponentInChildren<ThrowConsumable>();
         timeScaleOrig = Time.timeScale;
         Cursor.visible = false;

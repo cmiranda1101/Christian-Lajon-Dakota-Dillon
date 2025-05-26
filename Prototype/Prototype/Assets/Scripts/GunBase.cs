@@ -29,6 +29,7 @@ public class GunBase : MonoBehaviour
     private void Start()
     {
         ChangeGun();
+        SaveAmmoState();
     }
 
     void Update()
@@ -163,5 +164,11 @@ public class GunBase : MonoBehaviour
         gunList.Add(_gun);
         gunListIndex = gunList.Count - 1;
         ChangeGun();
+    }
+
+    public void SaveAmmoState()
+    {
+        gunList[gunListIndex].levelStartCurrentAmmo = currentAmmo;
+        gunList[gunListIndex].levelStartmagCount = magCount;
     }
 }
