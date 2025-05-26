@@ -13,7 +13,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
     [SerializeField] Transform headPos;
-    [SerializeField] GameObject meleeHitBox;
+    [SerializeField] GameObject[] meleeHitBox;
 
     [SerializeField] int HP;
     [SerializeField] float meleeRange;
@@ -199,14 +199,18 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
 
     public void MeleeColOn()
     {
-        if(meleeHitBox)
-            meleeHitBox.SetActive(true);
+        for (int i = 0; i < meleeHitBox.Length; ++i) {
+            if (meleeHitBox[i])
+                meleeHitBox[i].SetActive(true);
+        }
     }
 
     public void MeleeColOff()
     {
-        if(meleeHitBox)
-            meleeHitBox.SetActive(false);
+        for (int i = 0; i < meleeHitBox.Length; ++i) {
+            if (meleeHitBox[i])
+                meleeHitBox[i].SetActive(false);
+        }
     }
 
     public void takeDamage(int damageAmount)

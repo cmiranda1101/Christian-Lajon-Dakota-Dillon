@@ -455,7 +455,8 @@ MonoBehaviour:
   agent: {fileID: 5789947824650888727}
   anim: {fileID: 5857495479187558530}
   headPos: {fileID: 8711882414883773891}
-  meleeHitBox: {fileID: 3770972518530878303}
+  meleeHitBox:
+  - {fileID: 3770972518530878303}
   HP: 2
   meleeRange: 3
   meleeDamage: 0
@@ -550,7 +551,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 0.45
   Loop: 0
   Mute: 0
