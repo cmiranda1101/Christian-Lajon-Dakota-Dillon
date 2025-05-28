@@ -150,6 +150,7 @@ public class GameManager : MonoBehaviour
 
     public void Win()
     {
+        moneyScript.AddMoney(500);
         StatePause();
         menuActive = menuWin;
         menuWin.SetActive(true);
@@ -176,6 +177,7 @@ public class GameManager : MonoBehaviour
             savedStatsScript.LoadStats();
         }
         healthBar.fillAmount = playerScript.currentHP / playerScript.maxHP;
+        moneyScript.UpdateMoneyText();
     }
 
     public int CheckGameGoal()

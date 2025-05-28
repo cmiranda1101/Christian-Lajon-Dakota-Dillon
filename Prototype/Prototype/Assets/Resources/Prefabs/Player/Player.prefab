@@ -372,9 +372,7 @@ MonoBehaviour:
   maxHP: 10
   currentHP: 10
   grabDistance: 5
-  money: 1000
-  pistol: {fileID: 0}
-  rifle: {fileID: 0}
+  money: 0
   throwConsumable: {fileID: 4884101813597980463}
 --- !u!143 &4564405297631183533
 CharacterController:

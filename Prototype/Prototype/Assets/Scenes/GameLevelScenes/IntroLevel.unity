@@ -1153,6 +1153,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: (Melee) monster_scavenger_Skin_Red Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1129116971010470586, guid: b0fb0fcaef7cbf042884e0c7222e8026, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
