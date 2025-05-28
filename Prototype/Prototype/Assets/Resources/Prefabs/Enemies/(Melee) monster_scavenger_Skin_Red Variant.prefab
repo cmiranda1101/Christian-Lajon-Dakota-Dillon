@@ -462,10 +462,10 @@ MonoBehaviour:
   meleeDamage: 0
   meleeCooldown: 2
   facePlayerSpeed: 32
-  FOV: 45
+  FOV: 90
   walkRate: 0.7
   patrolRadius: 10
-  patrolInterval: 4
+  patrolInterval: 2
   enableStrafe: 1
   strafeSpeed: 10
   strafeDis: 0.5
