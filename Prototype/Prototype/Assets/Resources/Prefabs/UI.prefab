@@ -2837,6 +2837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9d1cc49e2665143a7d5f1f1b589fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  howToPlay: {fileID: 0}
   buyAudio: {fileID: 5632318058449953261}
   shopRifle: {fileID: 6873767395791626592}
   shopRifleAmmo: {fileID: 7086557996536803719}
@@ -4045,7 +4046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4226298399616904540
 Transform:
   m_ObjectHideFlags: 0
