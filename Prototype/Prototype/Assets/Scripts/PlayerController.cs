@@ -1,6 +1,6 @@
+using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -9,48 +9,56 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController characterController;
     [SerializeField] GameObject MainCamera;
     [SerializeField] AudioSource footStepSource; 
+    [SerializeField] AudioSource playerHurtSource;
     [SerializeField] AudioClip[] footStepClip;
+    [SerializeField] AudioClip[] playerHurtClips;
     [SerializeField] float walkRate;
     float walkTimer;
-
-    [SerializeField] public GameObject pistolSpot;
-    [SerializeField] public GameObject rifleSpot;
+    float dodgeTimer;
+    [SerializeField] float dodgeSpeed;
+    [SerializeField] float dodgeDuration;
+    [SerializeField] float dodgeCooldown;
 
     [SerializeField] public GameObject Holster;
 
     [SerializeField] public LayerMask ignoreLayer;
 
-    [SerializeField] int speed;
+    [SerializeField] float speed;
     [SerializeField] public float maxHP;
-    [SerializeField] public int grabDistance;
     [SerializeField] public float currentHP;
+    [SerializeField] public int grabDistance;
     [SerializeField] public int money;
 
     Vector3 moveDirection;
 
-    [SerializeField] GameObject pistolPrefab;
     GameObject flashlight;
-    [HideInInspector] public GameObject pistol;
-    //Dynamic Creation DO NOT set in Inspector or unhide
-    [HideInInspector] public GameObject rifle;
-    GameObject heldWeapon;
+    public ThrowConsumable throwConsumable;
 
     void Start()
     {
         flashlight = GameObject.Find("FlashLight");
-        pistol = Instantiate(pistolPrefab, pistolSpot.transform.position, pistolSpot.transform.rotation, pistolSpot.transform);
-        heldWeapon = pistol;
-        heldWeapon.SetActive(true);
+        dodgeTimer = dodgeCooldown;
+        GameManager.instance.moneyScript.UpdateMoneyText();
     }
     void Update()
     {
         MovePlayer();
-        SwapWeapons();
         if (Input.GetButtonDown("Toggle Flashlight")) {
             ToggleFlashlight();
         }
         if (Input.GetButtonDown("Interact")) {
             GrabObject();
+        }
+        if (Input.GetButtonDown("Throw Chemlight"))
+        {
+            throwConsumable.ThrowChemlight();
+        }
+        if (Input.GetButtonDown("Dodge")) {
+            StartCoroutine(Dodge());
+        }
+        if (Input.GetButtonDown("Throw Molotov"))
+        {
+            throwConsumable.ThrowMolotov();
         }
     }
 
@@ -59,6 +67,7 @@ public class PlayerController : MonoBehaviour, IDamage
         moveDirection = (Input.GetAxis("Horizontal") * transform.right) + (Input.GetAxis("Vertical") * transform.forward);
         characterController.Move(moveDirection * speed * Time.deltaTime);
 
+        dodgeTimer += Time.deltaTime;
         walkTimer += Time.deltaTime;
         if (walkTimer >= walkRate && characterController.velocity.magnitude > .01f) {
             WalkSound();
@@ -66,6 +75,29 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
+    IEnumerator Dodge()
+    {
+        if(dodgeTimer >= dodgeCooldown) 
+        {
+            dodgeTimer = 0;
+            float originalSpeed = speed;
+            speed = dodgeSpeed;
+            StartCoroutine(FillCooldownImage());
+            yield return new WaitForSeconds(dodgeDuration);
+            speed = originalSpeed;
+        }
+    }
+
+    IEnumerator FillCooldownImage()
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < dodgeCooldown)
+        {
+            elapsedTime += Time.deltaTime;
+            GameManager.instance.dodgeCooldownRadial.fillAmount = elapsedTime / dodgeCooldown;
+            yield return null;
+        }
+    }
 
     void ToggleFlashlight()
     {
@@ -90,26 +122,17 @@ public class PlayerController : MonoBehaviour, IDamage
             }
         }
     }
-    void SwapWeapons()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && heldWeapon != pistol) {
-            heldWeapon.SetActive(false);
-            pistol.SetActive(true);
-            heldWeapon = pistol;
-        }
-        if (rifle != null && Input.GetKeyDown(KeyCode.Alpha2) && heldWeapon != rifle) {
-            heldWeapon.SetActive(false);
-            rifle.SetActive(true);
-            heldWeapon = rifle;
-        }
-    }
 
-    public void Heal(int amount)
+    public void Heal(float amount)
     {
-        currentHP += amount;
+        if (currentHP < maxHP) {
+            currentHP += amount;
 
-        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
-        GameManager.instance.healthBar.transform.localScale = new Vector3(currentHP / maxHP, .75f, 1);
+            currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+            GameManager.instance.healthBar.fillAmount = currentHP / maxHP;
+
+            StartCoroutine(HealScreenFlash());
+        }
     }
 
     public void takeDamage(int amount)
@@ -122,21 +145,25 @@ public class PlayerController : MonoBehaviour, IDamage
 
         //Need to check for death
         if (currentHP <= 0) {
-            GameManager.instance.healthBar.SetActive(false);
+            GameManager.instance.healthUI.SetActive(false);
             GameManager.instance.YouLose();
         }
         //Scale HP Bar
         else {
             float scale = currentHP / maxHP;
-            GameManager.instance.healthBar.transform.localScale = new Vector3(scale, .75f, 1);
+            GameManager.instance.healthBar.fillAmount = currentHP / maxHP;
+            
+            int i = Random.Range(0, playerHurtClips.Length);
+            playerHurtSource.clip = playerHurtClips[i];
+            playerHurtSource.Play();
         }
     }
 
     public IEnumerator MuzzleFlash()
     {
-        heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(true);
+        //heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.01f);
-        heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(false);
+        //heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(false);
     }
 
     void WalkSound()
@@ -151,5 +178,12 @@ public class PlayerController : MonoBehaviour, IDamage
         GameManager.instance.DamageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.DamageFlash.SetActive(false);
+    }
+
+    IEnumerator HealScreenFlash()
+    {
+        GameManager.instance.HealFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        GameManager.instance.HealFlash.SetActive(false);
     }
 }

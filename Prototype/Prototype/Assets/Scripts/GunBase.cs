@@ -1,123 +1,174 @@
+using NUnit.Framework;
+using System.Collections;
+using System.Diagnostics.Contracts;
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GunBase : MonoBehaviour
 {
-    [SerializeField] GameObject rifle;
-    [SerializeField] GameObject pistol;
-    [SerializeField] AudioSource pistolSource;
-    [SerializeField] AudioSource rifleSource;
-    [SerializeField] AudioClip[] pistolShotClips;
-    [SerializeField] AudioClip[] rifleShotClips;
-    [SerializeField] AudioClip reloadClip;
+    [SerializeField] public List<GunStats> gunList = new List<GunStats>();
+    [SerializeField] GameObject gunModel;
+    [SerializeField]AudioSource gunSource;
+    AudioClip[] shotClips;
+    AudioClip reloadClip1;
+    AudioClip reloadClip2;
 
 
     [SerializeField] int damage;
-    [SerializeField] int range;
-    [SerializeField] int magSize;
     [SerializeField] float fireRate;
+    [SerializeField] int range;
+    [SerializeField] public int currentAmmo;
+    [SerializeField] int magSize;
+    [SerializeField] public int startingMagCount;
+    [SerializeField] public int magCount;
 
-    int currentBullets;
-    public int magCount = 3;
     float shotTimer = 0;
+    public int gunListIndex = 0;
 
-    void Start()
+    private void Start()
     {
-        currentBullets = magSize;
+        ChangeGun();
+        SaveAmmoState();
     }
 
     void Update()
     {
-        if(GameManager.instance.isPaused)
-        {
-            return;
-        }
-
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * range, Color.blue);
         shotTimer += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && currentBullets > 0 && shotTimer > fireRate)
+        if (Input.GetButtonDown("Fire1") && currentAmmo > 0 && shotTimer > fireRate)
         {
             Fire();
-            StartCoroutine(GameManager.instance.playerScript.MuzzleFlash());
-            GunShotSound();
+            UpdateAmmo();
         }
-        if (Input.GetButtonDown("Reload") && currentBullets != magSize && magCount > 0)
+        if (Input.GetButtonDown("Reload") && currentAmmo != magSize && magCount > 0)
         {
             Reload();
+            UpdateAmmo();
         }
+        SelectGun();
     }
 
     public void Fire()
     {
-        RaycastHit hit;
-        shotTimer = 0;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range, ~GameManager.instance.playerScript.ignoreLayer, QueryTriggerInteraction.Ignore)) 
+        if (Time.timeScale > 0)
         {
-            Debug.Log(hit.collider.name);
-            IDamage damaged = hit.collider.GetComponent<IDamage>();
-            if (damaged != null)
+            RaycastHit hit;
+            shotTimer = 0;
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range, ~GameManager.instance.playerScript.ignoreLayer, QueryTriggerInteraction.Ignore))
             {
-                damaged.takeDamage(damage);
+                Debug.Log(hit.collider.name);
+                IDamage damaged = hit.collider.GetComponent<IDamage>();
+                if (damaged != null)
+                {
+                    damaged.takeDamage(damage);
+                }
             }
-        }
-        currentBullets--;
-        if (currentBullets <= 0)
-        {
-            Debug.Log("Out of bullets");
+            StartCoroutine(GameManager.instance.playerScript.MuzzleFlash());
+            GunShotSound();
+            currentAmmo--;
+            gunList[gunListIndex].currentAmmo--;
+            UpdateAmmo();
+            if (currentAmmo <= 0)
+            {
+                Debug.Log("Out of bullets");
+            }
         }
     }
 
     void Reload()
     {
-        if (GameManager.instance.playerScript.pistol.activeSelf) {
-            GameManager.instance.playerScript.pistol.GetComponent<GunBase>().magCount--;
-            GameManager.instance.playerScript.pistol.GetComponent<GunBase>().currentBullets = magSize;
+        if (Time.timeScale > 0)
+        {
+            currentAmmo = magSize;
+            magCount--;
+            gunList[gunListIndex].currentAmmo = magSize;
+            gunList[gunListIndex].magCount--;
+            Debug.Log("Reloaded " + magCount + " magazines remaining");
+            StartCoroutine(ReloadGun());
+            UpdateAmmo();
         }
-        else if (GameManager.instance.playerScript.rifle.activeSelf) {
-            GameManager.instance.playerScript.rifle.GetComponent<GunBase>().magCount--;
-            GameManager.instance.playerScript.rifle.GetComponent<GunBase>().currentBullets = magSize;
-
-        }
-
-        Debug.Log("Reloaded " + magCount + " magazines remaining");
-
-        if (GameManager.instance.playerScript.pistol.activeSelf) {
-            pistolSource.clip = reloadClip;
-            pistolSource.Play();
-        }
-        else if (GameManager.instance.playerScript.rifle.activeSelf) {
-            rifleSource.clip = reloadClip;
-            rifleSource.Play();
-        }
-
-
     }
 
     public void PickUpAmmo()
     {
-        if (GameManager.instance.playerScript.pistol.activeSelf) {
-            GameManager.instance.playerScript.pistol.GetComponent<GunBase>().magCount++;
-        }
-        else if (GameManager.instance.playerScript.rifle.activeSelf) {
-            GameManager.instance.playerScript.rifle.GetComponent<GunBase>().magCount++;
-        }
-    }
-    public void EquipRifle()
-    {
-        GameManager.instance.playerScript.rifle = Instantiate(rifle, GameManager.instance.playerScript.rifleSpot.transform.position, GameManager.instance.playerScript.rifleSpot.transform.rotation, GameManager.instance.playerScript.rifleSpot.transform);
-        GameManager.instance.hotbarRifle.SetActive(true);
+        magCount++;
+        gunList[gunListIndex].magCount++;
+        UpdateAmmo();
     }
 
     void GunShotSound()
     {
-        if (GameManager.instance.playerScript.pistol.activeSelf) {
-            int i = Random.Range(0, pistolShotClips.Length);
-            pistolSource.clip = pistolShotClips[i];
-            pistolSource.Play();
+        int i = Random.Range(0, shotClips.Length);
+        gunSource.clip = shotClips[i];
+        gunSource.Play();
+    }
+
+    public void UpdateAmmo()
+    {
+        GameManager.instance.ammoScript.UpdateAmmoAndMagCount();
+    }
+
+    IEnumerator ReloadGun()
+    {
+        gunSource.clip = reloadClip1;
+        gunSource.Play();
+        yield return new WaitWhile(() => gunSource.isPlaying);
+        yield return new WaitForSeconds(0.2f);
+        gunSource.clip = reloadClip2;
+        gunSource.Play();
+    }
+
+    void SelectGun()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListIndex < gunList.Count - 1)
+        {
+            gunListIndex++;
+            ChangeGun();
         }
-        else if (GameManager.instance.playerScript.rifle.activeSelf) {
-            int j = Random.Range(0, rifleShotClips.Length);
-            rifleSource.clip = rifleShotClips[j];
-            rifleSource.Play();
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListIndex > 0)
+        {
+            gunListIndex--;
+            ChangeGun();
         }
+    }
+
+    void ChangeGun()
+    {
+        damage = gunList[gunListIndex].damage;
+        range = gunList[gunListIndex].range;
+        fireRate = gunList[gunListIndex].fireRate;
+        magSize = gunList[gunListIndex].magSize;
+        if (SceneManager.GetActiveScene().name == "IntroLevel")
+        {
+            currentAmmo = gunList[gunListIndex].magSize;
+            magCount = gunList[gunListIndex].startingMagCount;
+            gunList[gunListIndex].currentAmmo = gunList[gunListIndex].magSize;
+            gunList[gunListIndex].magCount = gunList[gunListIndex].startingMagCount;
+        }
+        else
+        {
+            magCount = gunList[gunListIndex].magCount;
+            currentAmmo = gunList[gunListIndex].currentAmmo;
+        }
+        shotClips = gunList[gunListIndex].shootSounds;
+        reloadClip1 = gunList[gunListIndex].reloadSound1;
+        reloadClip2 = gunList[gunListIndex].reloadSound2;
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListIndex].model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListIndex].model.GetComponent<MeshRenderer>().sharedMaterial;
+        UpdateAmmo();
+    }
+
+    public void GetGunStats(GunStats _gun)
+    {
+        gunList.Add(_gun);
+        gunListIndex = gunList.Count - 1;
+        ChangeGun();
+    }
+
+    public void SaveAmmoState()
+    {
+        gunList[gunListIndex].levelStartCurrentAmmo = currentAmmo;
+        gunList[gunListIndex].levelStartmagCount = magCount;
     }
 }

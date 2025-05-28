@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0d5183f07ffb46a48ac2711267246a1b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - meleePrefab: {fileID: 1129116971010470586, guid: b0fb0fcaef7cbf042884e0c7222e8026, type: 3}
+  - pistolPrefab: {fileID: 2467990169375592777, guid: 6832e8cac38df6046a9d83d2b64740b2, type: 3}
+  - riflePrefab: {fileID: 4549064880720137177, guid: 72a28075eb9dd5a4d9ee95a47ed484bd, type: 3}
+  - spawnPoint: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
 
@@ -12,24 +13,43 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject menuBossKilled;
     [SerializeField] GameObject menuGameOver;
-    [SerializeField] GameObject menuShop;
     [SerializeField] GameObject menuHotbar;
     [SerializeField] GameObject menuMoney;
+    [SerializeField] GameObject menuAmmo;
+    [SerializeField] GameObject menuButtons;
+    [SerializeField] GameObject menuShop;
+    [SerializeField] GameObject savedStats;
 
     public GameObject DamageFlash;
+    public GameObject HealFlash;
     public GameObject miniMap;
     public GameObject hotBarPistol;
     public GameObject hotbarRifle;
-    public GameObject healthBar;
+    public GameObject healthUI;
+    public GameObject MolotovUI;
+    public UnityEngine.UI.Image healthBar;
+    public GameObject bossHealthUI;
+    public UnityEngine.UI.Image bossHealthBar;
+    public UnityEngine.UI.Image dodgeCooldownRadial;
+    public TextMeshProUGUI chemlightCounter;
+    public TextMeshProUGUI molotovCounter;
+
+    public GameObject AmbianceForLevels;
+    public GameObject AmbianceForBoss;
 
     public GameObject player;
     public GameObject weapons;
     public PlayerController playerScript;
     public GunBase weaponScript;
     public MoneyUI moneyScript;
-    //Include this prefab in your scene
-    public SavedStats savedStats;
+    public SavedStats savedStatsScript;
+    public AmmoUI ammoScript;
+    public ButtonFunctions buttonScript;
+    public LevelExit levelExitScript;
+    public HeartBoss heartBossScript;
+    public ThrowConsumable throwConsumableScript;
 
 
     public bool isPaused;
@@ -42,15 +62,22 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
-        savedStats = GameObject.Find("SavedStats").GetComponent<SavedStats>();
+        savedStatsScript = savedStats.GetComponent<SavedStats>();
         miniMap = GameObject.FindWithTag("MiniMap");
-        if(SceneManager.GetActiveScene().name == "Shop")
+        if (SceneManager.GetActiveScene().name == "Shop" || SceneManager.GetActiveScene().name == "Boss Level")
         {
             miniMap.SetActive(false);
+        }
+        else
+        {
+            levelExitScript = null;
         }
         weapons = GameObject.FindWithTag("Weapons");
         weaponScript = weapons.GetComponent<GunBase>();
         moneyScript = menuMoney.GetComponentInChildren<MoneyUI>();
+        ammoScript = menuAmmo.GetComponentInChildren<AmmoUI>();
+        buttonScript = menuButtons.GetComponent<ButtonFunctions>();
+        throwConsumableScript = player.GetComponentInChildren<ThrowConsumable>();
         timeScaleOrig = Time.timeScale;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -124,9 +151,18 @@ public class GameManager : MonoBehaviour
 
     public void Win()
     {
+        moneyScript.AddMoney(500);
         StatePause();
-        menuActive = menuWin;
-        menuWin.SetActive(true);
+        if (SceneManager.GetActiveScene().name == "Boss Level")
+        {
+            menuActive = menuBossKilled;
+            menuBossKilled.SetActive(true);
+        }
+        else
+        {
+            menuActive = menuWin;
+            menuWin.SetActive(true);
+        }
     }
 
     public void YouLose()
@@ -143,11 +179,18 @@ public class GameManager : MonoBehaviour
         Time.timeScale = timeScaleOrig;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        levelExitScript = GameObject.FindWithTag("LevelExit").GetComponent<LevelExit>();
         menuHotbar.SetActive(true);
-        if (savedStats.playerHP > 0)
+        if (SceneManager.GetActiveScene().name != "IntroLevel")
         {
-            savedStats.LoadStats();
+            savedStatsScript.LoadStats();
         }
-        healthBar.transform.localScale = new Vector3(playerScript.currentHP / playerScript.maxHP, .75f, 1);
+        healthBar.fillAmount = playerScript.currentHP / playerScript.maxHP;
+        moneyScript.UpdateMoneyText();
+    }
+
+    public int CheckGameGoal()
+    {
+        return gameGoalCount;
     }
 }

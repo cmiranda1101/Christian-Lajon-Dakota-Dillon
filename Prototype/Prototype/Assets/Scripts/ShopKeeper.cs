@@ -1,8 +1,9 @@
 using UnityEngine;
 
 //Do not change the layer of the shopkeeper
-public class ShopKeeper : MonoBehaviour, IInteract
+public class ShopKeeper : MonoBehaviour, IInteract, IDamage
 {
+    [SerializeField] GameObject SCP_Form;
     [SerializeField] GameObject directions;
     public void Interact()
     {
@@ -18,7 +19,7 @@ public class ShopKeeper : MonoBehaviour, IInteract
     {
         if (other.CompareTag("Player"))
         {
-            directions.transform.localPosition = new Vector3(0, 0.3f, 0);
+            //directions.transform.localPosition = new Vector3(0, 0.3f, 0);
             directions.SetActive(true);
         }
     }
@@ -31,4 +32,9 @@ public class ShopKeeper : MonoBehaviour, IInteract
         }
     }
 
+    public void takeDamage(int amount)
+    {
+        Instantiate(SCP_Form, gameObject.transform.position, gameObject.transform.rotation);
+        Destroy(gameObject);
+    }
 }
