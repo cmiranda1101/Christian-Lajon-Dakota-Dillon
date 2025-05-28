@@ -13,10 +13,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject menuBossKilled;
     [SerializeField] GameObject menuGameOver;
     [SerializeField] GameObject menuHotbar;
     [SerializeField] GameObject menuMoney;
     [SerializeField] GameObject menuAmmo;
+    [SerializeField] GameObject menuButtons;
     [SerializeField] GameObject menuShop;
     [SerializeField] GameObject savedStats;
 
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
     public MoneyUI moneyScript;
     public SavedStats savedStatsScript;
     public AmmoUI ammoScript;
+    public ButtonFunctions buttonScript;
     public LevelExit levelExitScript;
     public HeartBoss heartBossScript;
     public ThrowConsumable throwConsumableScript;
@@ -61,12 +64,9 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         savedStatsScript = savedStats.GetComponent<SavedStats>();
         miniMap = GameObject.FindWithTag("MiniMap");
-        if(SceneManager.GetActiveScene().name == "Shop")
+        if (SceneManager.GetActiveScene().name == "Shop" || SceneManager.GetActiveScene().name == "Boss Level")
         {
             miniMap.SetActive(false);
-            //if you need to test going to the shop or another scene make sure there is a level exit prefab in your scene
-            levelExitScript = GameObject.FindWithTag("LevelExit").GetComponent<LevelExit>();
-            levelExitScript.levelToLoad++;
         }
         else
         {
@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
         weaponScript = weapons.GetComponent<GunBase>();
         moneyScript = menuMoney.GetComponentInChildren<MoneyUI>();
         ammoScript = menuAmmo.GetComponentInChildren<AmmoUI>();
+        buttonScript = menuButtons.GetComponent<ButtonFunctions>();
         throwConsumableScript = player.GetComponentInChildren<ThrowConsumable>();
         timeScaleOrig = Time.timeScale;
         Cursor.visible = false;
@@ -150,9 +151,18 @@ public class GameManager : MonoBehaviour
 
     public void Win()
     {
+        moneyScript.AddMoney(500);
         StatePause();
-        menuActive = menuWin;
-        menuWin.SetActive(true);
+        if (SceneManager.GetActiveScene().name == "Boss Level")
+        {
+            menuActive = menuBossKilled;
+            menuBossKilled.SetActive(true);
+        }
+        else
+        {
+            menuActive = menuWin;
+            menuWin.SetActive(true);
+        }
     }
 
     public void YouLose()
@@ -169,12 +179,14 @@ public class GameManager : MonoBehaviour
         Time.timeScale = timeScaleOrig;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        levelExitScript = GameObject.FindWithTag("LevelExit").GetComponent<LevelExit>();
         menuHotbar.SetActive(true);
         if (SceneManager.GetActiveScene().name != "IntroLevel")
         {
             savedStatsScript.LoadStats();
         }
         healthBar.fillAmount = playerScript.currentHP / playerScript.maxHP;
+        moneyScript.UpdateMoneyText();
     }
 
     public int CheckGameGoal()

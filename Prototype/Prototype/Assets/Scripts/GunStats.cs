@@ -12,6 +12,8 @@ public class GunStats : ScriptableObject
     public int magSize;
     public int startingMagCount;
     public int magCount;
+    public int levelStartCurrentAmmo;
+    public int levelStartmagCount;
     public AudioClip[] shootSounds;
     public AudioClip reloadSound1;
     public AudioClip reloadSound2;

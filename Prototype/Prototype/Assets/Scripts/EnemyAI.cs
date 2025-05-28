@@ -11,7 +11,9 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
 
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
     [SerializeField] Transform headPos;
+    [SerializeField] GameObject[] meleeHitBox;
 
     [SerializeField] int HP;
     [SerializeField] float meleeRange;
@@ -31,6 +33,8 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     [SerializeField] float strafeDur;
     [SerializeField][Range(0f, 1f)] float chanceToStrafe;
 
+    [SerializeField] float animTransSpeed;
+
     bool isStrafing = false;
     float strafeTimer = 0f;
     Vector3 strafeDir;
@@ -48,6 +52,9 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
 
     bool isMoving;
 
+    float animationCurr;
+    float agentSpeedCurr;
+
     void Start()
     {
         originalColor = model.material.color;
@@ -57,9 +64,12 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
 
     void Update()
     {
-        isMoving = true;
+        if(agent.velocity.magnitude >= 0.01f) 
+            isMoving = true;
         walkTimer += Time.deltaTime;
         patrolTimer += Time.deltaTime;
+
+        SetAnimParameter();
 
         if (isStrafing && Random.value <= 0.75f)
         {
@@ -100,6 +110,14 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
             WalkSound();
             walkTimer = 0f;
         }
+    }
+
+    void SetAnimParameter()
+    {
+        agentSpeedCurr = agent.velocity.normalized.magnitude;
+        animationCurr = anim.GetFloat("Speed");
+
+        anim.SetFloat("Speed", Mathf.Lerp(animationCurr, agentSpeedCurr, Time.deltaTime * animTransSpeed));
     }
     bool CanSeePlayer()
     {
@@ -165,17 +183,33 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     {
         float distance = Vector3.Distance(transform.position, player.position);
         if (Time.time >= nextMeleeTime && distance <= meleeRange) {
-            IDamage damageable = player.GetComponent<IDamage>();
-            if (damageable != null) {
-                damageable.takeDamage((int)meleeDamage);
-                Debug.Log($"Enemy melee hit {player.name} for {meleeDamage} damage.");
-                WeaponSound();
-            }
-            else {
-                Debug.LogWarning($"Target {player.name} does not have an IDamage component.");
-            }
-
+            //IDamage damageable = player.GetComponent<IDamage>();
+            //if (damageable != null) {
+            //    damageable.takeDamage((int)meleeDamage);
+            //    Debug.Log($"Enemy melee hit {player.name} for {meleeDamage} damage.");
+            //    WeaponSound();
+            //}
+            //else {
+            //    Debug.LogWarning($"Target {player.name} does not have an IDamage component.");
+            //}
+            anim.SetTrigger("meleeAtk");
             nextMeleeTime = Time.time + meleeCooldown;
+        }
+    }
+
+    public void MeleeColOn()
+    {
+        for (int i = 0; i < meleeHitBox.Length; ++i) {
+            if (meleeHitBox[i])
+                meleeHitBox[i].SetActive(true);
+        }
+    }
+
+    public void MeleeColOff()
+    {
+        for (int i = 0; i < meleeHitBox.Length; ++i) {
+            if (meleeHitBox[i])
+                meleeHitBox[i].SetActive(false);
         }
     }
 

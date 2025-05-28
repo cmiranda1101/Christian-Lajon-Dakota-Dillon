@@ -19,9 +19,6 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float dodgeDuration;
     [SerializeField] float dodgeCooldown;
 
-    [SerializeField] public GameObject pistolSpot;
-    [SerializeField] public GameObject rifleSpot;
-
     [SerializeField] public GameObject Holster;
 
     [SerializeField] public LayerMask ignoreLayer;
@@ -34,28 +31,18 @@ public class PlayerController : MonoBehaviour, IDamage
 
     Vector3 moveDirection;
 
-    [SerializeField] GameObject pistolPrefab;
     GameObject flashlight;
-    [HideInInspector] public GameObject pistol;
-    //Dynamic Creation DO NOT set in Inspector or unhide
-    [HideInInspector] public GameObject rifle;
-    public GameObject heldWeapon;
-    public ChemlightThrow chemlightThrow;
+    public ThrowConsumable throwConsumable;
 
     void Start()
     {
         flashlight = GameObject.Find("FlashLight");
-        pistol = Instantiate(pistolPrefab, pistolSpot.transform.position, pistolSpot.transform.rotation, pistolSpot.transform);
-        heldWeapon = pistol;
-        heldWeapon.SetActive(true);
-        GameManager.instance.ammoScript.UpdatePistolAmmoAndMagCount();
         dodgeTimer = dodgeCooldown;
-        chemlightThrow = GetComponentInChildren<ChemlightThrow>();
+        GameManager.instance.moneyScript.UpdateMoneyText();
     }
     void Update()
     {
         MovePlayer();
-        SwapWeapons();
         if (Input.GetButtonDown("Toggle Flashlight")) {
             ToggleFlashlight();
         }
@@ -64,10 +51,14 @@ public class PlayerController : MonoBehaviour, IDamage
         }
         if (Input.GetButtonDown("Throw Chemlight"))
         {
-            chemlightThrow.ThrowChemlight();
+            throwConsumable.ThrowChemlight();
         }
         if (Input.GetButtonDown("Dodge")) {
             StartCoroutine(Dodge());
+        }
+        if (Input.GetButtonDown("Throw Molotov"))
+        {
+            throwConsumable.ThrowMolotov();
         }
     }
 
@@ -131,21 +122,6 @@ public class PlayerController : MonoBehaviour, IDamage
             }
         }
     }
-    void SwapWeapons()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && heldWeapon != pistol) {
-            heldWeapon.SetActive(false);
-            pistol.SetActive(true);
-            heldWeapon = pistol;
-            GameManager.instance.ammoScript.UpdatePistolAmmoAndMagCount();
-        }
-        if (rifle != null && Input.GetKeyDown(KeyCode.Alpha2) && heldWeapon != rifle) {
-            heldWeapon.SetActive(false);
-            rifle.SetActive(true);
-            heldWeapon = rifle;
-            GameManager.instance.ammoScript.UpdateRifleAmmoAndMagCount();
-        }
-    }
 
     public void Heal(float amount)
     {
@@ -185,9 +161,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public IEnumerator MuzzleFlash()
     {
-        heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(true);
+        //heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.01f);
-        heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(false);
+        //heldWeapon.transform.Find("MuzzleFlash").gameObject.SetActive(false);
     }
 
     void WalkSound()

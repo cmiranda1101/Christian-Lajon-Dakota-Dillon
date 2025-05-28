@@ -5,16 +5,8 @@ public class LevelExit : MonoBehaviour
 {
     [SerializeField] GameObject exitText;
 
-    public int levelToLoad = 1;
+    [SerializeField] public int levelToLoad;
     bool canExit = false;
-
-    private void Awake()
-    {
-        if (levelToLoad == 0)
-        {
-            levelToLoad = 1;
-        }
-    }
 
     private void Update()
     {
