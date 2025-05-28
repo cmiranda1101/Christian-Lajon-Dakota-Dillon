@@ -10613,7 +10613,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2135516592}
         m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
-        m_MethodName: Restart
+        m_MethodName: ExitToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
