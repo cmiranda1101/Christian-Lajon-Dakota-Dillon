@@ -189,15 +189,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1539481679264539993, guid: 4ba5cbea767d9b54eb7a655b769517da, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.951203
+      value: -12.835306
       objectReference: {fileID: 0}
     - target: {fileID: 1539481679264539993, guid: 4ba5cbea767d9b54eb7a655b769517da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0000009536743
       objectReference: {fileID: 0}
     - target: {fileID: 1539481679264539993, guid: 4ba5cbea767d9b54eb7a655b769517da, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.436248
+      value: 18.251448
       objectReference: {fileID: 0}
     - target: {fileID: 1539481679264539993, guid: 4ba5cbea767d9b54eb7a655b769517da, type: 3}
       propertyPath: m_LocalRotation.w
@@ -457,6 +457,7 @@ MonoBehaviour:
   headPos: {fileID: 8711882414883773891}
   meleeHitBox:
   - {fileID: 3770972518530878303}
+  critSpot: {fileID: 5458104978761297798}
   HP: 5
   meleeRange: 4
   meleeDamage: 0
@@ -732,6 +733,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &5458104978761297798 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6486026422003606239, guid: 4ba5cbea767d9b54eb7a655b769517da, type: 3}
+  m_PrefabInstance: {fileID: 1278436416653167961}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8711882414883773891 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7591725110211874970, guid: 4ba5cbea767d9b54eb7a655b769517da, type: 3}
