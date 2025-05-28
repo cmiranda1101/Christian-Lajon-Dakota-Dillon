@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         savedStatsScript = savedStats.GetComponent<SavedStats>();
         miniMap = GameObject.FindWithTag("MiniMap");
-        if (SceneManager.GetActiveScene().name == "Shop")
+        if (SceneManager.GetActiveScene().name == "Shop" || SceneManager.GetActiveScene().name == "Boss Level")
         {
             miniMap.SetActive(false);
         }
