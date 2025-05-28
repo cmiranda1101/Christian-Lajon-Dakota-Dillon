@@ -34,15 +34,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.4717493
+      value: -2.6459646
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000047683716
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19.999779
+      value: -30.986866
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -437,16 +437,16 @@ MonoBehaviour:
   model: {fileID: 8297577024250035725}
   agent: {fileID: 7992687783722063204}
   anim: {fileID: 9217728809347076489}
-  FOV: 90
+  FOV: 45
   headPos: {fileID: 3565500772937973177}
   HP: 5
-  facePlayerSpeed: 15
+  facePlayerSpeed: 25
   shootingPos: {fileID: 8207139114905910316}
   bullet: {fileID: 2485194676518234941, guid: b486390cf48be664baa654d7bf7bc6af, type: 3}
-  fireRate: 0.5
+  fireRate: 0.4
   chaseDur: 3
   forgetDelay: 3
-  patrolRadius: 30
+  patrolRadius: 10
   patrolInterval: 5
   enableStrafe: 1
   strafeSpeed: 10
@@ -465,7 +465,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 6
+  m_Speed: 7
   m_Acceleration: 32
   avoidancePriority: 50
   m_AngularSpeed: 600
@@ -519,7 +519,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 15
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &1220267057192816355
 AudioSource:
@@ -578,7 +578,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.8
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -675,7 +675,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.3
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
