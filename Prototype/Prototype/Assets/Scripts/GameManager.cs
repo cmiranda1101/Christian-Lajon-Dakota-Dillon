@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject menuBossKilled;
     [SerializeField] GameObject menuGameOver;
     [SerializeField] GameObject menuHotbar;
     [SerializeField] GameObject menuMoney;
@@ -152,8 +153,16 @@ public class GameManager : MonoBehaviour
     {
         moneyScript.AddMoney(500);
         StatePause();
-        menuActive = menuWin;
-        menuWin.SetActive(true);
+        if (SceneManager.GetActiveScene().name == "Boss Level")
+        {
+            menuActive = menuBossKilled;
+            menuBossKilled.SetActive(true);
+        }
+        else
+        {
+            menuActive = menuWin;
+            menuWin.SetActive(true);
+        }
     }
 
     public void YouLose()
