@@ -470,4 +470,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemModel: {fileID: 0}
   pickUpText: {fileID: 0}
-  healthAmount: 5
+  healthAmount: 8

@@ -126,6 +126,13 @@ MonoBehaviour:
   - {fileID: 5948602468889596240, guid: 3466f3e2bc4aa724985d82784b7d3be2, type: 3}
   - {fileID: 8314199857695301808, guid: a670eff4900fa8342a25f689fdbf479c, type: 3}
   - {fileID: 6458955547078232510, guid: aa296e911bc428a48aaf1cc72d8f082f, type: 3}
+  - {fileID: 6458955547078232510, guid: aa296e911bc428a48aaf1cc72d8f082f, type: 3}
+  - {fileID: 5948602468889596240, guid: 3466f3e2bc4aa724985d82784b7d3be2, type: 3}
+  - {fileID: 6458955547078232510, guid: aa296e911bc428a48aaf1cc72d8f082f, type: 3}
+  - {fileID: 8314199857695301808, guid: a670eff4900fa8342a25f689fdbf479c, type: 3}
+  - {fileID: 6458955547078232510, guid: aa296e911bc428a48aaf1cc72d8f082f, type: 3}
+  - {fileID: 6458955547078232510, guid: aa296e911bc428a48aaf1cc72d8f082f, type: 3}
+  - {fileID: 5948602468889596240, guid: 3466f3e2bc4aa724985d82784b7d3be2, type: 3}
 --- !u!208 &8502352848001510299
 NavMeshObstacle:
   m_ObjectHideFlags: 0

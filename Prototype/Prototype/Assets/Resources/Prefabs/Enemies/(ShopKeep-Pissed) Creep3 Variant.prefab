@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2959644947307664433
 Transform:
   m_ObjectHideFlags: 0
@@ -146,7 +146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6130067044479343496
 Transform:
   m_ObjectHideFlags: 0
@@ -263,6 +263,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+      propertyPath: HP
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: FOV
       value: 45
       objectReference: {fileID: 0}
@@ -299,6 +303,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+      propertyPath: meleeCooldown
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: animTransSpeed
       value: 10
       objectReference: {fileID: 0}
@@ -309,6 +317,10 @@ PrefabInstance:
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: patrolInterval
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+      propertyPath: facePlayerSpeed
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: meleeHitBox.Array.size
@@ -340,7 +352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6634911067034380347, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 0.9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6899769094566875521, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: m_LocalPosition.x
@@ -390,6 +402,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: (ShopKeep-Pissed) Creep3 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8164784511516268735, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+      propertyPath: m_Speed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164784511516268735, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+      propertyPath: m_AutoBraking
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8897721332748466462, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: m_Pitch
       value: 0.5
@@ -408,7 +428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8897721332748466462, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 0.9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8979022353975496759, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: m_Avatar
