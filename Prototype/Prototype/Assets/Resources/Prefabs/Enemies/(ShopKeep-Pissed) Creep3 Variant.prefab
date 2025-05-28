@@ -268,7 +268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: FOV
-      value: 45
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: anim
@@ -316,7 +316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: patrolInterval
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: facePlayerSpeed

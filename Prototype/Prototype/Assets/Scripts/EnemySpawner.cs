@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
     public Transform spawnPoint;  // Position where enemies will spawn
 
     
-    public float spawnInterval = 2f;  //  to control spawn rate
+    public float spawnInterval;  //  to control spawn rate
     public int maxSpawns; // total number of spawns before shutting down
 
     private int spawnCount; // tracks how many enemies have spawned

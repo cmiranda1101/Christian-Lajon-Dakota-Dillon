@@ -11,6 +11,10 @@ using UnityEngine.EventSystems;
 
 public class ButtonFunctions : MonoBehaviour
 {
+    //Main Menu Functionality
+    [SerializeField] GameObject howToPlay;
+
+    //Shop Functionality
     [SerializeField] AudioSource buyAudio;
     public GameObject shopRifle;
     public GameObject shopRifleAmmo;
@@ -120,5 +124,15 @@ public class ButtonFunctions : MonoBehaviour
     public void NewGame()
     {
         SceneManager.LoadScene("IntroLevel");
+    }
+
+    public void HowToPlay()
+    {
+        howToPlay.SetActive(true);
+    }
+
+    public void CloseHowToPlay()
+    {
+        howToPlay.SetActive(false);
     }
 }
