@@ -369,8 +369,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   speed: 5
-  maxHP: 10
-  currentHP: 10
+  maxHP: 20
+  currentHP: 20
   grabDistance: 5
   money: 0
   throwConsumable: {fileID: 4884101813597980463}
