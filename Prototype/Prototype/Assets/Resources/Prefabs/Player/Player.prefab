@@ -361,18 +361,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9975ae95e627b604299e43cdcf05e788, type: 3}
   - {fileID: 8300000, guid: 84d366cecc96ddb49a2a7036586e7b61, type: 3}
   walkRate: 0.75
-  dodgeSpeed: 12
+  dodgeSpeed: 10
   dodgeDuration: 0.3
   dodgeCooldown: 5
   Holster: {fileID: 1120997950688922789}
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 8
-  speed: 6
-  maxHP: 20
-  currentHP: 20
+  speed: 5
+  maxHP: 10
+  currentHP: 10
   grabDistance: 5
-  money: 1000
+  money: 0
   throwConsumable: {fileID: 4884101813597980463}
 --- !u!143 &4564405297631183533
 CharacterController:
@@ -586,7 +586,7 @@ AudioSource:
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.6
-  m_Pitch: 1
+  m_Pitch: 0.8
   Loop: 0
   Mute: 0
   Spatialize: 0

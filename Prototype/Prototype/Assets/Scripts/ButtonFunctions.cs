@@ -31,7 +31,10 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Quit()
     {
-        GameManager.instance.savedStatsScript.DeleteAllData();
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            GameManager.instance.savedStatsScript.DeleteAllData();
+        }
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -112,5 +115,10 @@ public class ButtonFunctions : MonoBehaviour
             GameManager.instance.molotovCounter.text = GameManager.instance.playerScript.throwConsumable.molotovCount.ToString();
             GameManager.instance.moneyScript.SubtractMoney(100);
         }
+    }
+
+    public void NewGame()
+    {
+        SceneManager.LoadScene("IntroLevel");
     }
 }

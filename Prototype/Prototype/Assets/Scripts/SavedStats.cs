@@ -33,7 +33,7 @@ public class SavedStats : MonoBehaviour
         if (PlayerPrefs.GetFloat("PlayerHP") <= 0)
         {
             GameManager.instance.playerScript.currentHP = GameManager.instance.playerScript.maxHP;
-            GameManager.instance.playerScript.money = 1000;
+            GameManager.instance.playerScript.money = 0;
         }
         else
         {
@@ -52,7 +52,7 @@ public class SavedStats : MonoBehaviour
     public void DeleteAllData()
     {
         GameManager.instance.playerScript.currentHP = GameManager.instance.playerScript.maxHP;
-        GameManager.instance.playerScript.money = 1000;
+        GameManager.instance.playerScript.money = 0;
         GameManager.instance.levelExitScript.levelToLoad = 1;
         SaveStats();
     }
