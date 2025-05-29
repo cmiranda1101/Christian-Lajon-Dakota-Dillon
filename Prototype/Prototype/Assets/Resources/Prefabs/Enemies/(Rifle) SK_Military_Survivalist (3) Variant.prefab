@@ -442,7 +442,7 @@ MonoBehaviour:
   model: {fileID: 7946429764398687389}
   agent: {fileID: 1874890942227670813}
   anim: {fileID: 7100621972384172825}
-  FOV: 45
+  FOV: 90
   headPos: {fileID: 3178060966656452393}
   HP: 4
   facePlayerSpeed: 25
@@ -452,7 +452,7 @@ MonoBehaviour:
   chaseDur: 3
   forgetDelay: 3
   patrolRadius: 20
-  patrolInterval: 5
+  patrolInterval: 2
   enableStrafe: 1
   strafeSpeed: 10
   strafeDis: 0.5
@@ -524,7 +524,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 10
+  m_Radius: 12
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &4719762049827804161
 AudioSource:
@@ -548,7 +548,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 100
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -645,7 +645,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 100
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

@@ -454,7 +454,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1507492627174614683, guid: 743e23168f7b73b4ebce5303c3a4483e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 44.829884
+      value: 64.82
       objectReference: {fileID: 0}
     - target: {fileID: 1507492627174614683, guid: 743e23168f7b73b4ebce5303c3a4483e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -495,6 +495,10 @@ PrefabInstance:
     - target: {fileID: 2700600154987483516, guid: 743e23168f7b73b4ebce5303c3a4483e, type: 3}
       propertyPath: m_Name
       value: Enemy Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072059432049591727, guid: 743e23168f7b73b4ebce5303c3a4483e, type: 3}
+      propertyPath: maxSpawns
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -900,7 +904,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1507492627174614683, guid: 743e23168f7b73b4ebce5303c3a4483e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 46.829884
+      value: 27.65
       objectReference: {fileID: 0}
     - target: {fileID: 1507492627174614683, guid: 743e23168f7b73b4ebce5303c3a4483e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -941,6 +945,10 @@ PrefabInstance:
     - target: {fileID: 2700600154987483516, guid: 743e23168f7b73b4ebce5303c3a4483e, type: 3}
       propertyPath: m_Name
       value: Enemy Spawner (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072059432049591727, guid: 743e23168f7b73b4ebce5303c3a4483e, type: 3}
+      propertyPath: maxSpawns
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1012,6 +1020,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 630162919537611489, guid: 3f96a7fa00383004c97a0ff33c25a197, type: 3}
+      propertyPath: maxHP
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 630162919537611489, guid: 3f96a7fa00383004c97a0ff33c25a197, type: 3}
+      propertyPath: currentHP
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6243271664613544961, guid: 3f96a7fa00383004c97a0ff33c25a197, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1112,6 +1128,10 @@ PrefabInstance:
     - target: {fileID: 2700600154987483516, guid: 743e23168f7b73b4ebce5303c3a4483e, type: 3}
       propertyPath: m_Name
       value: Enemy Spawner (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072059432049591727, guid: 743e23168f7b73b4ebce5303c3a4483e, type: 3}
+      propertyPath: maxSpawns
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

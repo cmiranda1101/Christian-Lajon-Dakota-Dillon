@@ -135,4 +135,9 @@ public class ButtonFunctions : MonoBehaviour
     {
         howToPlay.SetActive(false);
     }
+
+    public void ExitToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }

@@ -7,7 +7,8 @@ public class HeartBoss : MonoBehaviour, IDamage
     [SerializeField] Transform spawner2Location;
     [SerializeField] Transform spawner3Location;
     [SerializeField] Transform spawner4Location;
-    [SerializeField] GameObject spawnerPrefab;
+    [SerializeField] GameObject enemySpawnerPrefab;
+    [SerializeField] GeneralSpawner generalSpawnerPrefab;
     [SerializeField] GameObject bulletSpawner;
 
     [SerializeField] AudioSource heartBeatSource;
@@ -32,6 +33,8 @@ public class HeartBoss : MonoBehaviour, IDamage
     {
         isShielded = true;
         enemiesSpawned = false;
+        GameManager.instance.heartBossScript.generalSpawnerPrefab.startSpawn = true;
+
         bossHpCurr = bossHPMax;
         GameManager.instance.bossHealthUI.SetActive(true);
         HPColorOrigin = GameManager.instance.bossHealthBar.color;
@@ -81,11 +84,12 @@ public class HeartBoss : MonoBehaviour, IDamage
 
     IEnumerator ShieldDown()    //Shield is down, you can hurt boss;
     {
-        Debug.Log("in Shield down");
+        //Debug.Log("in Shield down");
 
         enemiesSpawned = false;
         isShielded = false;
         SpawnersOff();
+        GameManager.instance.heartBossScript.generalSpawnerPrefab.startSpawn = true;
         pumpAnim["Armature|Pumping"].speed = fastPumpSpeed;
         heartBeatSource.clip = fastBeatClip;
         GameManager.instance.bossHealthBar.color = Color.red;
@@ -109,10 +113,10 @@ public class HeartBoss : MonoBehaviour, IDamage
 
     void SpawnersOn()
     {
-        Instantiate(spawnerPrefab, spawner1Location);
-        Instantiate(spawnerPrefab, spawner2Location);
-        Instantiate(spawnerPrefab, spawner3Location);
-        Instantiate(spawnerPrefab, spawner4Location);
+        Instantiate(enemySpawnerPrefab, spawner1Location);
+        Instantiate(enemySpawnerPrefab, spawner2Location);
+        Instantiate(enemySpawnerPrefab, spawner3Location);
+        Instantiate(enemySpawnerPrefab, spawner4Location);
     }
 
     void SpawnersOff()
