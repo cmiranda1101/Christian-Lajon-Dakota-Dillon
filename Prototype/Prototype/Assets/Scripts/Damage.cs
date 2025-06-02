@@ -43,7 +43,11 @@ public class Damage : MonoBehaviour
         IDamage dmg = other.GetComponent<IDamage>();
         if(dmg != null && (type == damageType.moving || type == damageType.homing || type == damageType.DOT || type == damageType.stationary))
         {
-            dmg.takeDamage(damageAmount);
+            //if (other.GetComponent<BoxCollider>()) {
+            //    dmg.takeDamage(100);
+            //}
+            //else
+                dmg.takeDamage(damageAmount);
         }
         if (type == damageType.moving || type == damageType.homing)
         {
