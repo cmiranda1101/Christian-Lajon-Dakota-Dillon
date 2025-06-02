@@ -59,7 +59,15 @@ public class GunBase : MonoBehaviour
             {
                 Debug.Log(hit.collider.name);
                 IDamage damaged = hit.collider.GetComponent<IDamage>();
-                if (damaged != null)
+                if (hit.collider.name == "CritSpot")
+                {
+                    IDamage critical = hit.collider.GetComponentInParent<IDamage>();
+                    if(critical != null)
+                    {
+                        critical.takeDamage(damage * 2);
+                    }
+                }
+                else if (damaged != null)
                 {
                     damaged.takeDamage(damage);
                 }
