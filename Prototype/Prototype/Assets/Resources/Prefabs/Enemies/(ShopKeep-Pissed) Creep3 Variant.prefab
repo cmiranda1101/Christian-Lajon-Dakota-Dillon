@@ -406,6 +406,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: (ShopKeep-Pissed) Creep3 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6899769094566875523, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8164784511516268735, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: m_Speed
       value: 8

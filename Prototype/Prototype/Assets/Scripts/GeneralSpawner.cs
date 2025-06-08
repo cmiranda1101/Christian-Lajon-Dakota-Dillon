@@ -35,8 +35,8 @@ public class GeneralSpawner : MonoBehaviour
 
     void Spawn()
     {
-        for(int i = 0; i < Locations.Length; ++i)
-        Instantiate(objToSpawn, Locations[i].position, Locations[i].rotation);
+        for (int i = 0; i < Locations.Length; ++i)
+            ((GameObject)Instantiate(objToSpawn, Locations[i].position, Locations[i].rotation)).SetActive(true);
         timer = 0;
     }
 }
