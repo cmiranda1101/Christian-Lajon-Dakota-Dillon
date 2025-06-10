@@ -111,7 +111,8 @@ public class ButtonFunctions : MonoBehaviour
         if (GameManager.instance.playerScript.money >= 100)
         {
             if (GameManager.instance.throwConsumableScript.molotovCount == 0)
-            { 
+            {
+                GameManager.instance.GrenadeUI.SetActive(false);
                 GameManager.instance.MolotovUI.SetActive(true);
                 ThrowConsumable.GrenadeType currentType = ThrowConsumable.GrenadeType.Molotov;
                 GameManager.instance.playerScript.throwConsumable.currentType = currentType;
@@ -119,6 +120,24 @@ public class ButtonFunctions : MonoBehaviour
             buyAudio.Play();
             GameManager.instance.playerScript.throwConsumable.molotovCount++;
             GameManager.instance.molotovCounter.text = GameManager.instance.playerScript.throwConsumable.molotovCount.ToString();
+            GameManager.instance.moneyScript.SubtractMoney(100);
+        }
+    }
+
+    public void BuyGrenade()
+    {
+        if (GameManager.instance.playerScript.money >= 100)
+        {
+            if (GameManager.instance.throwConsumableScript.grenadeCount == 0)
+            {
+                GameManager.instance.MolotovUI.SetActive(false);
+                GameManager.instance.GrenadeUI.SetActive(true);
+                ThrowConsumable.GrenadeType currentType = ThrowConsumable.GrenadeType.Frag;
+                GameManager.instance.playerScript.throwConsumable.currentType = currentType;
+            }
+            buyAudio.Play();
+            GameManager.instance.playerScript.throwConsumable.grenadeCount++;
+            GameManager.instance.grenadeCounter.text = GameManager.instance.playerScript.throwConsumable.grenadeCount.ToString();
             GameManager.instance.moneyScript.SubtractMoney(100);
         }
     }

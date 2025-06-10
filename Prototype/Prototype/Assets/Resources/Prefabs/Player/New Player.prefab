@@ -4695,13 +4695,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9618cebb4f6da72418793de52d1c1064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  molotovPrefab: {fileID: 7850931886307771287, guid: b00309bdb025e894c9218cb76757ddfb, type: 3}
-  chemlightPrefab: {fileID: 3499742981914383622, guid: 5e473a26a1da56f488d15e3e9d7b56d3, type: 3}
+  currentType: 0
   throwPoint: {fileID: 5808485820140846728}
   throwForce: 20
+  chemlightPrefab: {fileID: 3499742981914383622, guid: 5e473a26a1da56f488d15e3e9d7b56d3, type: 3}
   chemlightCount: 5
   chemlightDuration: 5
+  molotovPrefab: {fileID: 7850931886307771287, guid: b00309bdb025e894c9218cb76757ddfb, type: 3}
   molotovCount: 0
+  grenadePrefab: {fileID: 3742748739083067511, guid: 9560cfe478da148459867aa2c651f985, type: 3}
+  grenadeExplosionPrefab: {fileID: 5238538877814813142, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}
+  grenadeFuze: 3
+  grenadeCount: 0
 --- !u!1 &8797855236396386182
 GameObject:
   m_ObjectHideFlags: 0

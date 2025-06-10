@@ -56,14 +56,14 @@ public class ThrowConsumable : MonoBehaviour
             {
                 GameManager.instance.MolotovUI.SetActive(false);
                 currentType = GrenadeType.Frag;
-                //Activate Grenade UI when made
+                GameManager.instance.GrenadeUI.SetActive(true);
             }
         } 
-        if (currentType == GrenadeType.Frag)
+        else if (currentType == GrenadeType.Frag)
         {
             if(molotovCount > 0)
             {
-                //DeActivate Grenade UI when made
+                GameManager.instance.GrenadeUI.SetActive(false);
                 currentType = GrenadeType.Molotov;
                 GameManager.instance.MolotovUI.SetActive(true);
             }
@@ -101,6 +101,11 @@ public class ThrowConsumable : MonoBehaviour
         if (molotovCount == 0)
         {
             GameManager.instance.MolotovUI.SetActive(false);
+            if (grenadeCount > 0)
+            {
+                currentType = GrenadeType.Frag;
+                GameManager.instance.GrenadeUI.SetActive(true);
+            }
         }
     }
 
@@ -112,7 +117,17 @@ public class ThrowConsumable : MonoBehaviour
             Rigidbody rb = grenade.GetComponent<Rigidbody>();
             rb.AddForce(throwPoint.forward * throwForce * 2, ForceMode.Impulse);
             grenadeCount--;
+            GameManager.instance.grenadeCounter.text = grenadeCount.ToString();
             StartCoroutine(GrenadeExplosion(grenade));
+        }
+        if (grenadeCount == 0)
+        {
+            GameManager.instance.GrenadeUI.SetActive(false);
+            if (molotovCount > 0)
+            {
+                currentType = GrenadeType.Molotov;
+                GameManager.instance.MolotovUI.SetActive(true);
+            }
         }
     }
 
