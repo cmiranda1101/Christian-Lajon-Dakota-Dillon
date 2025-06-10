@@ -60,6 +60,8 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
         originalColor = model.material.color;
         player = GameManager.instance.player.transform;
         GameManager.instance.UpdateGameGoal(1);
+
+        agent.stoppingDistance = meleeRange * 0.9f; // stops a bit before melee range
     }
 
     void Update()
@@ -164,9 +166,12 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     void HandleChase()
     {
         isMoving = true;
+        Vector3 directionToPlayer = (player.position - transform.position).normalized;
+        Vector3 targetPosition = player.position - directionToPlayer * agent.stoppingDistance;
+
         agent.SetDestination(player.position);
 
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if (agent.remainingDistance <= agent.stoppingDistance + 0.1f)
         {
             isMoving = false;
             FacePlayer();
