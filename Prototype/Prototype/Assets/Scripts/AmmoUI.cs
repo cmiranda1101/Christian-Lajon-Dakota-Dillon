@@ -7,6 +7,7 @@ public class AmmoUI : MonoBehaviour
     public TextMeshProUGUI ammoCount;
     public TextMeshProUGUI magCount;
     public TextMeshProUGUI molotovCount;
+    public TextMeshProUGUI grenadeCount;
     public void UpdateAmmoAndMagCount()
     {
         ammoCount.text = GameManager.instance.weaponScript.currentAmmo.ToString();
@@ -16,5 +17,9 @@ public class AmmoUI : MonoBehaviour
     public void UpdateMolotovCount()
     {
         molotovCount.text = GameManager.instance.throwConsumableScript.molotovCount.ToString();
+    }
+    public void UpdateGrenadeCount()
+    {
+        grenadeCount.text = GameManager.instance.throwConsumableScript.grenadeCount.ToString();
     }
 }

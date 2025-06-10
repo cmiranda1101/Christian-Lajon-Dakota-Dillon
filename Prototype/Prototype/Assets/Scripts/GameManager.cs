@@ -29,12 +29,14 @@ public class GameManager : MonoBehaviour
     public GameObject hotbarRifle;
     public GameObject healthUI;
     public GameObject MolotovUI;
+    public GameObject GrenadeUI;
     public UnityEngine.UI.Image healthBar;
     public GameObject bossHealthUI;
     public UnityEngine.UI.Image bossHealthBar;
     public UnityEngine.UI.Image dodgeCooldownRadial;
     public TextMeshProUGUI chemlightCounter;
     public TextMeshProUGUI molotovCounter;
+    public TextMeshProUGUI grenadeCounter;
 
     public GameObject AmbianceForLevels;
     public GameObject AmbianceForBoss;
