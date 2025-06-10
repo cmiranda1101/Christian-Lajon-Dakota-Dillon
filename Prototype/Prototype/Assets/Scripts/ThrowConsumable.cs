@@ -3,18 +3,71 @@ using UnityEngine;
 
 public class ThrowConsumable : MonoBehaviour
 {
-    public GameObject molotovPrefab;
-    public GameObject chemlightPrefab;
+    public enum GrenadeType {Molotov, Frag}
+    public GrenadeType currentType;
+
     public Transform throwPoint;
     public float throwForce;
+
+    public GameObject chemlightPrefab;
     public int chemlightCount;
     public int chemlightDuration;
+
+    public GameObject molotovPrefab;
     public int molotovCount;
+
+    public GameObject grenadePrefab;
+    public GameObject grenadeExplosionPrefab;
+    public float grenadeFuze;
+    public int grenadeCount;
 
     void Start()
     {
         GameManager.instance.chemlightCounter.text = chemlightCount.ToString();
         GameManager.instance.molotovCounter.text = molotovCount.ToString();
+    }
+
+    void Update()
+    {
+        //PlayerController script inputs will need to be deleted to avoid running these functions twice
+
+        if (Input.GetButtonDown("Throw Chemlight"))
+        {
+            ThrowChemlight();
+        }
+        if (Input.GetButtonDown("Change Throwable"))
+        {
+            ChangeThrowable();
+        }
+        if (Input.GetButtonDown("Throw Molotov") && currentType == GrenadeType.Molotov)
+        {
+            ThrowMolotov();
+        } 
+        if (Input.GetButtonDown("Throw Molotov") && currentType == GrenadeType.Frag)
+        {
+            ThrowGrenade();
+        }
+    }
+    public void ChangeThrowable()
+    {
+        if (currentType == GrenadeType.Molotov)
+        {
+            if (grenadeCount > 0)
+            {
+                GameManager.instance.MolotovUI.SetActive(false);
+                currentType = GrenadeType.Frag;
+                //Activate Grenade UI when made
+            }
+        } 
+        if (currentType == GrenadeType.Frag)
+        {
+            if(molotovCount > 0)
+            {
+                //DeActivate Grenade UI when made
+                currentType = GrenadeType.Molotov;
+                GameManager.instance.MolotovUI.SetActive(true);
+            }
+        }
     }
     public void ThrowChemlight()
     {
@@ -50,4 +103,30 @@ public class ThrowConsumable : MonoBehaviour
             GameManager.instance.MolotovUI.SetActive(false);
         }
     }
+
+    public void ThrowGrenade()
+    {
+        if (grenadeCount > 0)
+        {
+            GameObject grenade = Instantiate(grenadePrefab, throwPoint.position, throwPoint.rotation);
+            Rigidbody rb = grenade.GetComponent<Rigidbody>();
+            rb.AddForce(throwPoint.forward * throwForce * 2, ForceMode.Impulse);
+            grenadeCount--;
+            StartCoroutine(GrenadeExplosion(grenade));
+        }
+    }
+
+    IEnumerator GrenadeExplosion(GameObject grenade)
+    {
+        float grenadeTimer = 0f;
+
+        while (grenadeTimer < grenadeFuze)
+        {
+            grenadeTimer += Time.deltaTime;
+            yield return null; 
+        }
+        GameObject explosion = Instantiate(grenadeExplosionPrefab, grenade.transform.position, grenade.transform.rotation);
+        Destroy(grenade);
+    }
+    
 }
