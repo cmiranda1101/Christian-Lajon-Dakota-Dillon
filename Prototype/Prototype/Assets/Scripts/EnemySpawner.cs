@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        GameManager.instance.UpdateGameGoal(maxSpawns);
+        
     }
 
     void Update()
@@ -72,6 +72,6 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator DelayedGoalDecrease()
     {
         yield return new WaitForSeconds(3f);
-        GameManager.instance.UpdateGameGoal(-1);
+       
     }
 }

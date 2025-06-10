@@ -49,7 +49,7 @@ public class HeartBoss : MonoBehaviour, IDamage
         slowPumpSpeed = pumpAnim["Armature|Pumping"].speed * 0.5f;  //slow the animation while shield up
         pumpAnim["Armature|Pumping"].speed = 0.5f;
 
-        GameManager.instance.UpdateGameGoal(1);
+       
         StartCoroutine(PlayBeat());
         SpawnersOn();
     }
