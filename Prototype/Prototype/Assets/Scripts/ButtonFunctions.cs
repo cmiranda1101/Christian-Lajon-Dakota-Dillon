@@ -111,8 +111,10 @@ public class ButtonFunctions : MonoBehaviour
         if (GameManager.instance.playerScript.money >= 100)
         {
             if (GameManager.instance.throwConsumableScript.molotovCount == 0)
-            {
+            { 
                 GameManager.instance.MolotovUI.SetActive(true);
+                ThrowConsumable.GrenadeType currentType = ThrowConsumable.GrenadeType.Molotov;
+                GameManager.instance.playerScript.throwConsumable.currentType = currentType;
             }
             buyAudio.Play();
             GameManager.instance.playerScript.throwConsumable.molotovCount++;
