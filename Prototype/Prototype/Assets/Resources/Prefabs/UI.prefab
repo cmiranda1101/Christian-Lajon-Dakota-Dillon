@@ -7151,6 +7151,7 @@ MonoBehaviour:
   menuActive: {fileID: 0}
   menuPause: {fileID: 1225977342762366656}
   menuWin: {fileID: 6247575073667017126}
+  menuBossKilled: {fileID: 0}
   menuGameOver: {fileID: 541420684957081878}
   menuHotbar: {fileID: 8494426942481023511}
   menuMoney: {fileID: 5147901964510663631}
@@ -7173,7 +7174,7 @@ MonoBehaviour:
   molotovCounter: {fileID: 5734252287213838254}
   AmbianceForLevels: {fileID: 3205776186308292879}
   AmbianceForBoss: {fileID: 1015336023286091288}
-  player: {fileID: 0}
+  player: {fileID: 1377714155071694394, guid: 1d6efb1f1d84e634e998633c704fe9e7, type: 3}
   weapons: {fileID: 0}
   playerScript: {fileID: 0}
   weaponScript: {fileID: 0}
