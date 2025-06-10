@@ -128,11 +128,6 @@ public class GameManager : MonoBehaviour
     public void UpdateGameGoal(int amount)
     {
         gameGoalCount += amount;
-        if (gameGoalCount <= 0)
-        {
-            Win();
-        }
-        
     }
 
     public void OpenShop()
