@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     [SerializeField] public LayerMask ignoreLayer;
 
+    [SerializeField] Animator anim;
+    [SerializeField] float animTransSpeed;
+
     [SerializeField] float speed;
     [SerializeField] public float maxHP;
     [SerializeField] public float currentHP;
@@ -33,6 +36,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     GameObject flashlight;
     public ThrowConsumable throwConsumable;
+
+    float animationCurr;
+    float controllerSpeedCurr;
 
     void Start()
     {
@@ -60,6 +66,8 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             throwConsumable.ThrowMolotov();
         }
+
+        SetAnimParameter();
     }
 
     void MovePlayer()
@@ -73,6 +81,14 @@ public class PlayerController : MonoBehaviour, IDamage
             WalkSound();
             walkTimer = 0f;
         }
+    }
+
+    void SetAnimParameter()
+    {
+        controllerSpeedCurr = characterController.velocity.magnitude;
+        animationCurr = anim.GetFloat("Speed");
+
+        anim.SetFloat("Speed", Mathf.Lerp(animationCurr, controllerSpeedCurr, Time.deltaTime * animTransSpeed));
     }
 
     IEnumerator Dodge()
