@@ -2861,6 +2861,7 @@ MonoBehaviour:
   ammoCount: {fileID: 2035968705532935014}
   magCount: {fileID: 1394874960083546021}
   molotovCount: {fileID: 5734252287213838254}
+  grenadeCount: {fileID: 5657219595049115903}
 --- !u!1 &2030601348199301029
 GameObject:
   m_ObjectHideFlags: 0
