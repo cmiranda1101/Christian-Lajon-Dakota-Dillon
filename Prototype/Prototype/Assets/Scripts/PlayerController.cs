@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController characterController;
     [SerializeField] GameObject MainCamera;
-    [SerializeField] AudioSource footStepSource; 
+    [SerializeField] AudioSource footStepSource;
     [SerializeField] AudioSource playerHurtSource;
     [SerializeField] AudioClip[] footStepClip;
     [SerializeField] AudioClip[] playerHurtClips;
@@ -58,7 +58,10 @@ public class PlayerController : MonoBehaviour, IDamage
         if (Input.GetButtonDown("Dodge")) {
             StartCoroutine(Dodge());
         }
-        
+        if (Input.GetButtonDown("Crouch")) {
+            Crouch();
+        }
+
         SetAnimParameter();
     }
 
@@ -85,8 +88,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     IEnumerator Dodge()
     {
-        if(dodgeTimer >= dodgeCooldown) 
-        {
+        if (dodgeTimer >= dodgeCooldown) {
             dodgeTimer = 0;
             float originalSpeed = speed;
             speed = dodgeSpeed;
@@ -96,11 +98,16 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
+    void Crouch()
+    {
+        bool crouching = anim.GetBool("isCrouching");
+        anim.SetBool("isCrouching", !crouching);
+    }
+
     IEnumerator FillCooldownImage()
     {
         float elapsedTime = 0f;
-        while (elapsedTime < dodgeCooldown)
-        {
+        while (elapsedTime < dodgeCooldown) {
             elapsedTime += Time.deltaTime;
             GameManager.instance.dodgeCooldownRadial.fillAmount = elapsedTime / dodgeCooldown;
             yield return null;
@@ -160,7 +167,7 @@ public class PlayerController : MonoBehaviour, IDamage
         else {
             float scale = currentHP / maxHP;
             GameManager.instance.healthBar.fillAmount = currentHP / maxHP;
-            
+
             int i = Random.Range(0, playerHurtClips.Length);
             playerHurtSource.clip = playerHurtClips[i];
             playerHurtSource.Play();
