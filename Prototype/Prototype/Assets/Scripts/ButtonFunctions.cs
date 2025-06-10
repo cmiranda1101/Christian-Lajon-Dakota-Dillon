@@ -147,9 +147,9 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene("IntroLevel");
     }
 
-    public void HowToPlay()
+    public void Tutorial()
     {
-        howToPlay.SetActive(true);
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void CloseHowToPlay()
