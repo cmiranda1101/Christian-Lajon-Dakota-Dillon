@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class LevelExit : MonoBehaviour
 {
     [SerializeField] GameObject exitText;
+    [SerializeField] int moneyEarned;
 
     [SerializeField] public int levelToLoad;
     bool canExit = false;
@@ -17,6 +18,7 @@ public class LevelExit : MonoBehaviour
             {
                 if (SceneManager.GetActiveScene().name != "Shop")
                 {
+                    GameManager.instance.playerScript.money += moneyEarned;
                     GameManager.instance.savedStatsScript.SaveStats();
                     SceneManager.LoadScene("Shop");
                 }

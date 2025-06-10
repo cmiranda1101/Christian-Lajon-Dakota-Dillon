@@ -299,4 +299,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exitText: {fileID: 4237183201948350176}
+  moneyEarned: 1000
   levelToLoad: 1
