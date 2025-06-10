@@ -22,6 +22,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     [SerializeField] int facePlayerSpeed;
     [SerializeField] int FOV;
 
+    [SerializeField] bool allowRoam = true;
     [SerializeField] float walkRate;
     [SerializeField] float patrolRadius;
     [SerializeField] float patrolInterval;
@@ -59,7 +60,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     {
         originalColor = model.material.color;
         player = GameManager.instance.player.transform;
-        GameManager.instance.UpdateGameGoal(1);
+       
 
         agent.stoppingDistance = meleeRange * 0.9f; // stops a bit before melee range
     }
@@ -126,19 +127,23 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
         if (player == null || headPos == null)
             return false;
 
-        // calculate the direction to the player from the head position
+        // Direction from enemy's head to player
         playerDir = player.position - headPos.position;
+
+        // Flat angle to player
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
-
-        // show me line to player
-        Debug.DrawRay(headPos.position, playerDir.normalized * 50f, Color.red);
-
-        if (angleToPlayer <= FOV) // Check if the player is within FOV angle
+        // Check FOV angle
+        if (angleToPlayer <= FOV)
         {
+            // Ignores EnemyPassable wall with raycast to see the player
+            int ignoreLayer = LayerMask.NameToLayer("EnemyPassable");
+            int raycastMask = ~(1 << ignoreLayer); // Invert to exclude that layer
+
             RaycastHit hit;
-            if (Physics.Raycast(headPos.position, playerDir.normalized, out hit, Mathf.Infinity))
+            if (Physics.Raycast(headPos.position, playerDir.normalized, out hit, Mathf.Infinity, raycastMask))
             {
-                if (hit.collider.CompareTag("Player")) // Check if the raycast hits the player
+                // Check if ray hits the player
+                if (hit.collider.CompareTag("Player"))
                 {
                     return true;
                 }
@@ -147,6 +152,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
 
         return false;
     }
+
     // Start chasing the player
     void StartChasing()
     {
@@ -188,15 +194,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     {
         float distance = Vector3.Distance(transform.position, player.position);
         if (Time.time >= nextMeleeTime && distance <= meleeRange) {
-            //IDamage damageable = player.GetComponent<IDamage>();
-            //if (damageable != null) {
-            //    damageable.takeDamage((int)meleeDamage);
-            //    Debug.Log($"Enemy melee hit {player.name} for {meleeDamage} damage.");
-            //    WeaponSound();
-            //}
-            //else {
-            //    Debug.LogWarning($"Target {player.name} does not have an IDamage component.");
-            //}
+           
             anim.SetTrigger("meleeAtk");
             nextMeleeTime = Time.time + meleeCooldown;
         }
@@ -223,7 +221,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
         HP -= damageAmount;
 
         if (HP <= 0) {
-            GameManager.instance.UpdateGameGoal(-1);
+           
             Destroy(gameObject);
         }
         else {
@@ -260,6 +258,8 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     // Wander around the patrol area when not chasing
     void Wander()
     {
+        if (!allowRoam) return; // doesn't roam if not checked
+
         if (agent.remainingDistance <= agent.stoppingDistance && patrolTimer >= patrolInterval)
         {
             Vector3 newPos = RandomNavSphere(transform.position, patrolRadius, -1);

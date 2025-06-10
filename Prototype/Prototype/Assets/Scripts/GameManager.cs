@@ -125,15 +125,15 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(false);
         menuActive = null;
     }
-    public void UpdateGameGoal(int amount)
-    {
-        gameGoalCount += amount;
-        if (gameGoalCount <= 0)
-        {
-            Win();
-        }
+    //public void UpdateGameGoal(int amount)
+    //{
+    //    gameGoalCount += amount;
+    //    if (gameGoalCount <= 0)
+    //    {
+    //        Win();
+    //    }
         
-    }
+    //}
 
     public void OpenShop()
     {
