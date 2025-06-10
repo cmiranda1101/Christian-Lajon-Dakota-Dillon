@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using System.Threading;
 
 public class PlayerController : MonoBehaviour, IDamage
 {
@@ -13,11 +14,14 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] AudioClip[] footStepClip;
     [SerializeField] AudioClip[] playerHurtClips;
     [SerializeField] float walkRate;
+    float walkRateOG;
     float walkTimer;
     float dodgeTimer;
     [SerializeField] float dodgeSpeed;
     [SerializeField] float dodgeDuration;
     [SerializeField] float dodgeCooldown;
+
+    [SerializeField] float crouchSpeed;
 
     [SerializeField] public GameObject Holster;
 
@@ -32,6 +36,11 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] public int grabDistance;
     [SerializeField] public int money;
 
+    float speedOG;
+
+    [SerializeField] Transform headLocal;
+    Vector3 camPosOG;
+
     Vector3 moveDirection;
 
     GameObject flashlight;
@@ -45,6 +54,10 @@ public class PlayerController : MonoBehaviour, IDamage
         flashlight = GameObject.Find("FlashLight");
         dodgeTimer = dodgeCooldown;
         GameManager.instance.moneyScript.UpdateMoneyText();
+        camPosOG = MainCamera.transform.localPosition;
+
+        speedOG = speed;
+        walkRateOG = walkRate;
     }
     void Update()
     {
@@ -80,10 +93,14 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void SetAnimParameter()
     {
-        controllerSpeedCurr = characterController.velocity.magnitude;
+        controllerSpeedCurr = characterController.velocity.normalized.magnitude;
         animationCurr = anim.GetFloat("Speed");
 
-        anim.SetFloat("Speed", Mathf.Lerp(animationCurr, controllerSpeedCurr, Time.deltaTime * animTransSpeed));
+        if (!anim.GetBool("isCrouching")) {
+            anim.SetFloat("Speed", Mathf.Lerp(animationCurr, controllerSpeedCurr, Time.deltaTime * animTransSpeed));
+        }
+        else
+            anim.SetFloat("Speed", Mathf.Lerp(Mathf.Clamp(animationCurr,0,crouchSpeed), controllerSpeedCurr, Time.deltaTime * animTransSpeed));
     }
 
     IEnumerator Dodge()
@@ -102,6 +119,25 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         bool crouching = anim.GetBool("isCrouching");
         anim.SetBool("isCrouching", !crouching);
+
+        if (anim.GetBool("isCrouching")) {
+            speed = speed * crouchSpeed;
+            walkRate = walkRate * 2;
+        }
+        else {
+            speed = speedOG;
+
+            walkRate = walkRateOG;
+        }
+    }
+
+    void FollowHead()
+    {
+        if (!anim.GetBool("isCrouching")) {
+            MainCamera.transform.localPosition = camPosOG;
+        }
+        else
+            MainCamera.transform.position = headLocal.position;
     }
 
     IEnumerator FillCooldownImage()
