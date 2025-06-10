@@ -16,6 +16,7 @@ public class SavedStats : MonoBehaviour
         PlayerPrefs.SetFloat("PlayerHP", GameManager.instance.playerScript.currentHP);
         PlayerPrefs.SetInt("PlayerMoney", GameManager.instance.playerScript.money);
         PlayerPrefs.SetInt("Molotov", GameManager.instance.throwConsumableScript.molotovCount);
+        PlayerPrefs.SetInt("Grenade", GameManager.instance.throwConsumableScript.grenadeCount);
         if (SceneManager.GetActiveScene().name == "IntroLevel")
         {
             PlayerPrefs.SetString("EquippedWeapons", "");
@@ -95,10 +96,20 @@ public class SavedStats : MonoBehaviour
     public void LoadConsumables()
     {
         GameManager.instance.throwConsumableScript.molotovCount = PlayerPrefs.GetInt("Molotov");
+        GameManager.instance.throwConsumableScript.grenadeCount = PlayerPrefs.GetInt("Grenade");
+        GameManager.instance.ammoScript.UpdateMolotovCount();
+        GameManager.instance.ammoScript.UpdateGrenadeCount();
         if(GameManager.instance.throwConsumableScript.molotovCount > 0)
         {
+            ThrowConsumable.GrenadeType currentType = ThrowConsumable.GrenadeType.Molotov;
+            GameManager.instance.throwConsumableScript.currentType = currentType;
             GameManager.instance.MolotovUI.SetActive(true);
-            GameManager.instance.ammoScript.UpdateMolotovCount();
+        } 
+        else if (GameManager.instance.throwConsumableScript.grenadeCount > 0)
+        {
+            ThrowConsumable.GrenadeType currentType = ThrowConsumable.GrenadeType.Frag;
+            GameManager.instance.throwConsumableScript.currentType = currentType;
+            GameManager.instance.GrenadeUI.SetActive(true);
         }
     }
 
