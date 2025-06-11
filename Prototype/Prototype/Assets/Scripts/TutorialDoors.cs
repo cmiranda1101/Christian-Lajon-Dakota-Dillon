@@ -2,21 +2,28 @@ using UnityEngine;
 
 public class TutorialDoors : MonoBehaviour
 {
-    enum objectiveType { pickup, kill, goTo};
+    enum objectiveType { pickup, kill, goTo, buttonInput};
 
     [SerializeField] objectiveType type;
     [SerializeField] GameObject[] objectives;
+    [SerializeField] string buttonInputString;
 
     bool objectiveCompleted;
+    bool inInputZone = false;
     private void Update()
     {
         if (type == objectiveType.pickup || type == objectiveType.kill)
         {
             objectiveCompleted = CheckObjectivesList();
-            if (objectiveCompleted)
-            {
-                OpenDoor();
-            }
+        }
+        else if (type == objectiveType.buttonInput && inInputZone)
+        {
+            objectiveCompleted = CheckInput();
+        }
+
+        if (objectiveCompleted)
+        {
+            OpenDoor();
         }
     }
 
@@ -32,9 +39,35 @@ public class TutorialDoors : MonoBehaviour
         }
         return allObjectivesCompleted;
     }
+    
+    bool CheckInput()
+    {
+        bool wasButtonPressed = false;
+        if (Input.GetButtonDown(buttonInputString))
+        {
+            wasButtonPressed = true;
+        }
+        return wasButtonPressed;
+    }
 
     void OpenDoor()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inInputZone = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inInputZone = false;
+        }
     }
 }

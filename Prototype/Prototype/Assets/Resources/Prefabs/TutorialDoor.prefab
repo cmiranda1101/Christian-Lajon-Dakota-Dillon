@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7584478597785309434}
   - component: {fileID: 2023320746970463549}
   - component: {fileID: 4763336701043823251}
+  - component: {fileID: 6166337150668485329}
   m_Layer: 0
   m_Name: TutorialDoor
   m_TagString: Untagged
@@ -121,4 +122,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0afa975a49970a743861387e5d8c8127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   objectives: []
+  buttonInputString: 
+--- !u!65 &6166337150668485329
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8623713143440221746}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 1, z: 39}
+  m_Center: {x: 0, y: 0, z: 20}
