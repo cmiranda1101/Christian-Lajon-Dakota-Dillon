@@ -7,7 +7,6 @@ public class HidableObject : MonoBehaviour, IDamage
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player") {
-            //GameManager.instance.playerScript.anim.SetBool("isCrouching", true);
             if (!GameManager.instance.playerScript.anim.GetBool("isCrouching")) {
                 GameManager.instance.playerScript.Crouch();
             }
@@ -19,7 +18,6 @@ public class HidableObject : MonoBehaviour, IDamage
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player") {
-            //GameManager.instance.playerScript.anim.SetBool("isCrouching", false);
             GameManager.instance.playerScript.isHiding = false;
             GameManager.instance.playerScript.Crouch();
             stayOut.enabled = true;
@@ -28,8 +26,8 @@ public class HidableObject : MonoBehaviour, IDamage
 
     public void takeDamage(int amount)
     {
-        GameManager.instance.playerScript.anim.SetBool("isCrouching", false);
-        GameManager.instance.playerScript.isHiding = false;
         Destroy(gameObject);
+        GameManager.instance.playerScript.isHiding = false;
+        GameManager.instance.playerScript.Crouch();
     }
 }
