@@ -27,6 +27,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     [SerializeField] float patrolRadius;
     [SerializeField] float patrolInterval;
     float patrolTimer;
+    private Vector3 patrolOrigin;
 
     [SerializeField] bool enableStrafe = true;
     [SerializeField] float strafeSpeed;
@@ -60,8 +61,8 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
     {
         originalColor = model.material.color;
         player = GameManager.instance.player.transform;
-       
 
+        patrolOrigin = transform.position;
         agent.stoppingDistance = meleeRange * 0.9f; // stops a bit before melee range
     }
 
@@ -262,7 +263,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
 
         if (agent.remainingDistance <= agent.stoppingDistance && patrolTimer >= patrolInterval)
         {
-            Vector3 newPos = RandomNavSphere(transform.position, patrolRadius, -1);
+            Vector3 newPos = RandomNavSphere(patrolOrigin, patrolRadius, -1);
             agent.SetDestination(newPos);
             patrolTimer = 0f;
             isMoving = true;

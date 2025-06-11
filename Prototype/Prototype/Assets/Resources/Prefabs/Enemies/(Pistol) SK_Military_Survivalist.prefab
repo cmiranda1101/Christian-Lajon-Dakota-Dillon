@@ -87,15 +87,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.3417184
+      value: 9.31
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000023841858
+      value: -0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.480839
+      value: 7.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0e55d5c42cc96404f872b45455603f8b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -502,8 +502,8 @@ MonoBehaviour:
   fireRate: 0.4
   chaseDur: 3
   forgetDelay: 3
-  patrolRadius: 10
-  patrolInterval: 2
+  patrolRadius: 20
+  patrolInterval: 4
   enableStrafe: 1
   strafeSpeed: 10
   strafeDis: 0.5
