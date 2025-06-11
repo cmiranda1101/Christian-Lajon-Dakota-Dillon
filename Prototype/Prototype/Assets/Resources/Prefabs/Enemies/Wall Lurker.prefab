@@ -17,6 +17,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
