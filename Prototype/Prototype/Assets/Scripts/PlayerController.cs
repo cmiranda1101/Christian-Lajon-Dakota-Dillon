@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float dodgeCooldown;
 
     [SerializeField] float crouchSpeed;
+    [SerializeField] float sprintSpeed;
 
     [SerializeField] public GameObject Holster;
 
@@ -33,6 +34,10 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float speed;
     [SerializeField] public float maxHP;
     [SerializeField] public float currentHP;
+    [SerializeField] public float maxStamina;
+    [SerializeField] public float currentStamina;
+    [SerializeField] public float staminaDrain;
+    [SerializeField] public float staminaRegenDelay;
     [SerializeField] public int grabDistance;
     [SerializeField] public int money;
 
@@ -74,6 +79,10 @@ public class PlayerController : MonoBehaviour, IDamage
         if (Input.GetButtonDown("Crouch")) {
             Crouch();
         }
+        if (Input.GetButtonDown("Sprint"))
+        {
+            Sprint();
+        }
 
         SetAnimParameter();
     }
@@ -112,6 +121,45 @@ public class PlayerController : MonoBehaviour, IDamage
             StartCoroutine(FillCooldownImage());
             yield return new WaitForSeconds(dodgeDuration);
             speed = originalSpeed;
+        }
+    }
+
+    void Sprint()
+    {
+        bool sprinting = anim.GetBool("isSprinting");
+        anim.SetBool("isSprinting", !sprinting);
+
+        if (anim.GetBool("isSprinting"))
+        {
+            speed = speed * sprintSpeed;
+            StartCoroutine(Stamina());
+        }
+        else
+        {
+            speed = speedOG;
+        }
+    }
+
+    IEnumerator Stamina()
+    {
+        while (anim.GetBool("isSprinting"))
+        {
+            if (currentStamina <= 0)
+            {
+                anim.SetBool("isSprinting", false);
+                speed = speedOG;
+            }
+            currentStamina = Mathf.Clamp(currentStamina -= staminaDrain, 0, maxStamina);
+            GameManager.instance.staminaBar.fillAmount = currentStamina / maxStamina;
+            yield return null;
+        }
+        yield return new WaitForSeconds(staminaRegenDelay);
+
+        while (anim.GetBool("isSprinting") == false)
+        {
+            currentStamina = Mathf.Clamp(currentStamina += staminaDrain, 0, maxStamina);
+            GameManager.instance.staminaBar.fillAmount = currentStamina / maxStamina;
+            yield return null;
         }
     }
 

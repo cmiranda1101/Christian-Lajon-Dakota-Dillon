@@ -31,6 +31,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     [SerializeField] float patrolRadius;
     [SerializeField] float patrolInterval;
     float patrolTimer;
+    private Vector3 patrolOrigin; // stores spawn position to roam around
 
     // strafe variables
     [SerializeField] bool enableStrafe = true;
@@ -62,6 +63,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = model.material.color;
+        patrolOrigin = transform.position; // stores the original spawn point
        
     }
 
@@ -283,7 +285,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     {
         if (agent.remainingDistance <= agent.stoppingDistance && patrolTimer >= patrolInterval)
         {
-            Vector3 newPos = RandomNavSphere(transform.position, patrolRadius, -1);
+            Vector3 newPos = RandomNavSphere(patrolOrigin, patrolRadius, -1);
             agent.SetDestination(newPos);
             patrolTimer = 0f;
             isMoving = true;

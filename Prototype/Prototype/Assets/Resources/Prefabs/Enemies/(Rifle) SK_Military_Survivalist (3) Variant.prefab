@@ -230,7 +230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6213075050325087084, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6213075050325087084, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_TagString
@@ -262,15 +262,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6733609850376833494, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1336136
+      value: 22.34073
       objectReference: {fileID: 0}
     - target: {fileID: 6733609850376833494, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000019073486
+      value: -0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: 6733609850376833494, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.652503
+      value: -30.863575
       objectReference: {fileID: 0}
     - target: {fileID: 6733609850376833494, guid: 863c031a8670d3e4d8708b005a77bc33, type: 3}
       propertyPath: m_LocalRotation.w
@@ -468,7 +468,7 @@ MonoBehaviour:
   chaseDur: 3
   forgetDelay: 3
   patrolRadius: 20
-  patrolInterval: 2
+  patrolInterval: 4
   enableStrafe: 1
   strafeSpeed: 10
   strafeDis: 0.5
