@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         savedStatsScript = savedStats.GetComponent<SavedStats>();
         miniMap = GameObject.FindWithTag("MiniMap");
-        if (SceneManager.GetActiveScene().name == "Shop" || SceneManager.GetActiveScene().name == "Boss Level")
+        if (SceneManager.GetActiveScene().name == "Shop" || SceneManager.GetActiveScene().name == "Boss Level" || SceneManager.GetActiveScene().name == "Tutorial")
         {
             miniMap.SetActive(false);
         }
@@ -179,7 +179,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         levelExitScript = GameObject.FindWithTag("LevelExit").GetComponent<LevelExit>();
         menuHotbar.SetActive(true);
-        if (SceneManager.GetActiveScene().name != "IntroLevel")
+        if (SceneManager.GetActiveScene().name != "IntroLevel" && SceneManager.GetActiveScene().name != "Tutorial")
         {
             savedStatsScript.LoadStats();
         }
