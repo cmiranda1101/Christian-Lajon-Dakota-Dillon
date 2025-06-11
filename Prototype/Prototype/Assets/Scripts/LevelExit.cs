@@ -27,6 +27,11 @@ public class LevelExit : MonoBehaviour
                     GameManager.instance.savedStatsScript.SaveStats();
                     SceneManager.LoadScene(levelToLoad);
                 }
+                if (levelToLoad == 0)
+                {
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                }
             }
         }
     }
