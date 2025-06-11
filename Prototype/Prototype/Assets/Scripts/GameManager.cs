@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public GameObject MolotovUI;
     public GameObject GrenadeUI;
     public UnityEngine.UI.Image healthBar;
+    public UnityEngine.UI.Image staminaBar;
     public GameObject bossHealthUI;
     public UnityEngine.UI.Image bossHealthBar;
     public UnityEngine.UI.Image dodgeCooldownRadial;

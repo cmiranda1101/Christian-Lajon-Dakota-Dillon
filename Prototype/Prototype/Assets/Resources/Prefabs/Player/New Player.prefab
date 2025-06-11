@@ -607,6 +607,8 @@ MonoBehaviour:
   dodgeSpeed: 12
   dodgeDuration: 0.3
   dodgeCooldown: 5.5
+  crouchSpeed: 0.5
+  sprintSpeed: 2
   Holster: {fileID: 3497936574257273495}
   ignoreLayer:
     serializedVersion: 2
@@ -616,6 +618,10 @@ MonoBehaviour:
   speed: 5
   maxHP: 20
   currentHP: 20
+  maxStamina: 100
+  currentStamina: 100
+  staminaDrain: 1
+  staminaRegenDelay: 5
   grabDistance: 5
   money: 0
   headLocal: {fileID: 660827249640380043}
