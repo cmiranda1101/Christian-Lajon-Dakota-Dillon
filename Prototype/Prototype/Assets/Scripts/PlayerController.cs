@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using System.Threading;
+using Unity.Collections;
 
 public class PlayerController : MonoBehaviour, IDamage
 {
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float dodgeDuration;
     [SerializeField] float dodgeCooldown;
 
+    [SerializeField] float cameraSmoothness;
     [SerializeField] float crouchSpeed;
     [SerializeField] float sprintSpeed;
 
@@ -28,7 +30,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     [SerializeField] public LayerMask ignoreLayer;
 
-    [SerializeField] Animator anim;
+    [SerializeField] public Animator anim;
     [SerializeField] float animTransSpeed;
 
     [SerializeField] float speed;
@@ -54,6 +56,8 @@ public class PlayerController : MonoBehaviour, IDamage
     float animationCurr;
     float controllerSpeedCurr;
 
+    public bool isHiding;
+
     void Start()
     {
         flashlight = GameObject.Find("FlashLight");
@@ -67,6 +71,7 @@ public class PlayerController : MonoBehaviour, IDamage
     void Update()
     {
         MovePlayer();
+        FollowHead();
         if (Input.GetButtonDown("Toggle Flashlight")) {
             ToggleFlashlight();
         }
@@ -126,17 +131,17 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void Sprint()
     {
-        bool sprinting = anim.GetBool("isSprinting");
-        anim.SetBool("isSprinting", !sprinting);
+        if (characterController.velocity.magnitude > .1f){
+            bool sprinting = anim.GetBool("isSprinting");
+            anim.SetBool("isSprinting", !sprinting);
 
-        if (anim.GetBool("isSprinting"))
-        {
-            speed = speed * sprintSpeed;
-            StartCoroutine(Stamina());
-        }
-        else
-        {
-            speed = speedOG;
+            if (anim.GetBool("isSprinting")) {
+                speed = speed * sprintSpeed;
+                StartCoroutine(Stamina());
+            }
+            else {
+                speed = speedOG;
+            }
         }
     }
 
@@ -155,7 +160,7 @@ public class PlayerController : MonoBehaviour, IDamage
         }
         yield return new WaitForSeconds(staminaRegenDelay);
 
-        while (anim.GetBool("isSprinting") == false)
+        while (anim.GetBool("isSprinting") == false && currentStamina < maxStamina)
         {
             currentStamina = Mathf.Clamp(currentStamina += staminaDrain, 0, maxStamina);
             GameManager.instance.staminaBar.fillAmount = currentStamina / maxStamina;
@@ -163,29 +168,30 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    void Crouch()
+    public void Crouch()
     {
-        bool crouching = anim.GetBool("isCrouching");
-        anim.SetBool("isCrouching", !crouching);
+        if (!isHiding) {
+            bool crouching = anim.GetBool("isCrouching");
+            anim.SetBool("isCrouching", !crouching);
 
-        if (anim.GetBool("isCrouching")) {
-            speed = speed * crouchSpeed;
-            walkRate = walkRate * 2;
-        }
-        else {
-            speed = speedOG;
-
-            walkRate = walkRateOG;
+            if (anim.GetBool("isCrouching")) {
+                speed = speed * crouchSpeed;
+                walkRate = walkRate * 2;
+                characterController.height = .2f;
+                characterController.center = new Vector3(0, .4f, 0);
+            }
+            else {
+                speed = speedOG;
+                walkRate = walkRateOG;
+                characterController.height = 2f;
+                characterController.center = new Vector3(0, 1, 0);
+            }
         }
     }
 
     void FollowHead()
     {
-        if (!anim.GetBool("isCrouching")) {
-            MainCamera.transform.localPosition = camPosOG;
-        }
-        else
-            MainCamera.transform.position = headLocal.position;
+            MainCamera.transform.position = Vector3.Lerp(MainCamera.transform.position, headLocal.position, cameraSmoothness);
     }
 
     IEnumerator FillCooldownImage()
