@@ -144,11 +144,6 @@ public class ButtonFunctions : MonoBehaviour
 
     public void NewGame()
     {
-        SceneManager.LoadScene("IntroLevel");
-    }
-
-    public void Tutorial()
-    {
         SceneManager.LoadScene("Tutorial");
     }
 
