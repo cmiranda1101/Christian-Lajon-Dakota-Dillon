@@ -2740,6 +2740,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: New Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4224989102128887783, guid: 1d6efb1f1d84e634e998633c704fe9e7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6396201086158887688, guid: 1d6efb1f1d84e634e998633c704fe9e7, type: 3}
       propertyPath: m_ClearFlags
       value: 1
