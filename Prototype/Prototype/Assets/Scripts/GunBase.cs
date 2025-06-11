@@ -154,6 +154,13 @@ public class GunBase : MonoBehaviour
             gunList[gunListIndex].currentAmmo = gunList[gunListIndex].magSize;
             gunList[gunListIndex].magCount = gunList[gunListIndex].startingMagCount;
         }
+        else if (SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            currentAmmo = 0;
+            magCount = 0;
+            gunList[gunListIndex].currentAmmo = 0;
+            gunList[gunListIndex].magCount = 0;
+        }
         else
         {
             magCount = gunList[gunListIndex].magCount;
