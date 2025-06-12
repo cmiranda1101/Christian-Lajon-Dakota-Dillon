@@ -59,7 +59,14 @@ public class TutorialDoors : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            inInputZone = true;
+            if (type == objectiveType.goTo)
+            {
+                OpenDoor();
+            }
+            else
+            {
+                inInputZone = true;
+            }
         }
     }
 
