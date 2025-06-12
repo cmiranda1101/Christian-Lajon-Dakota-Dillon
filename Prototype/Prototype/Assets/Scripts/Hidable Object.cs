@@ -4,7 +4,7 @@ public class HidableObject : MonoBehaviour, IDamage
 {
     //Always make the object a child of an empty object
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player") {
             if (!GameManager.instance.playerScript.anim.GetBool("isCrouching")) {
