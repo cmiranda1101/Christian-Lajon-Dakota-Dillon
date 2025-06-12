@@ -108,8 +108,7 @@ public class GunBase : MonoBehaviour
     void GunShotSound()
     {
         int i = Random.Range(0, shotClips.Length);
-        gunSource.clip = shotClips[i];
-        gunSource.Play();
+        AudioManager.PlaySFX(gunSource, shotClips[i]);
     }
 
     public void UpdateAmmo()
