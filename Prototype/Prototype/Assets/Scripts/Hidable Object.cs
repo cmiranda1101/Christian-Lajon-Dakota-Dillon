@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HidableObject : MonoBehaviour, IDamage
 {
-    [SerializeField] Collider stayOut;
+    //Always make the object a child of an empty object
 
     private void OnTriggerStay(Collider other)
     {
@@ -10,7 +10,6 @@ public class HidableObject : MonoBehaviour, IDamage
             if (!GameManager.instance.playerScript.anim.GetBool("isCrouching")) {
                 GameManager.instance.playerScript.Crouch();
             }
-            stayOut.enabled = false;
             GameManager.instance.playerScript.isHiding = true;
         }
     }
@@ -20,14 +19,15 @@ public class HidableObject : MonoBehaviour, IDamage
         if (other.tag == "Player") {
             GameManager.instance.playerScript.isHiding = false;
             GameManager.instance.playerScript.Crouch();
-            stayOut.enabled = true;
         }
     }
 
     public void takeDamage(int amount)
     {
-        Destroy(gameObject);
+        if (gameObject.GetComponentInParent<HidableObject>() != null) 
+            Destroy(gameObject.transform.parent.gameObject);
+
         GameManager.instance.playerScript.isHiding = false;
-        GameManager.instance.playerScript.Crouch();
+        
     }
 }
