@@ -614,6 +614,12 @@ MonoBehaviour:
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 8
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  leftFootSoundPosition: {fileID: 4527409345103497999}
+  rightFootSoundPosition: {fileID: 2125602785587585735}
+  footstepSoundRadius: 10
   anim: {fileID: 4959806952395917875}
   animTransSpeed: 12
   speed: 5
