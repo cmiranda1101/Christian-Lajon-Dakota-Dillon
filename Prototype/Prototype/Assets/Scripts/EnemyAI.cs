@@ -45,6 +45,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
     float nextMeleeTime;
     Color originalColor;
 
+    bool isPlayerInSightline;
     bool playerInRange;
     bool isChasing;
 
@@ -90,7 +91,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
 
         if (player == null) return;
 
-        bool canSeePlayer = playerInRange && CanSeePlayer();
+        bool canSeePlayer = playerInRange && CanSeePlayer() && !GameManager.instance.playerScript.isHiding;
 
         if(canSeePlayer)
         {
@@ -131,6 +132,8 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
         // Direction from enemy's head to player
         playerDir = player.position - headPos.position;
 
+        IsPlayerInSightline();
+
         // Flat angle to player
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
         // Check FOV angle
@@ -150,8 +153,19 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
                 }
              }
         }
-
         return false;
+    }
+
+    void IsPlayerInSightline()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(headPos.position, playerDir.normalized, out hit, Mathf.Infinity))
+        {
+            if(hit.collider.CompareTag("Player"))
+            {
+                isPlayerInSightline = true;
+            }
+        }
     }
 
     // Start chasing the player
@@ -226,6 +240,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
             Destroy(gameObject);
         }
         else {
+            GameManager.instance.playerScript.isHiding = false;
             StartCoroutine(FlashRed());
             agent.SetDestination(player.position);
 
@@ -312,14 +327,18 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
     {
         if (CanSeePlayer() && playerInRange) { return; }
         agent.SetDestination(soundPosition);
-        if(CanSeePlayer() == false || agent.remainingDistance > soundRadius)
-        {
-            agent.SetDestination(patrolOrigin);
-        }
-        else
+        if(agent.remainingDistance < soundRadius)
         {
             allowRoam = false;
             StartCoroutine(WaitToRoam());
+        } 
+        else if (isPlayerInSightline == false || agent.remainingDistance > soundRadius)
+        {
+            agent.SetDestination(patrolOrigin);
+        } 
+        if (isPlayerInSightline == true && agent.remainingDistance < agent.stoppingDistance)
+        {
+            FacePlayer();
         }
     }
 
