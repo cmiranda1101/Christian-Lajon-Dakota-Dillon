@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public class EnemyAIMelee : MonoBehaviour, IDamage
+public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
 {
     [SerializeField] AudioSource walkSource;
     [SerializeField] AudioSource weaponSource;
@@ -148,7 +148,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
                 {
                     return true;
                 }
-            }
+             }
         }
 
         return false;
@@ -307,5 +307,25 @@ public class EnemyAIMelee : MonoBehaviour, IDamage
         strafeTimer = 0f;
 
         
+    }
+    public void OnHeardSomething(Vector3 soundPosition, float soundRadius)
+    {
+        if (CanSeePlayer() && playerInRange) { return; }
+        agent.SetDestination(soundPosition);
+        if(CanSeePlayer() == false || agent.remainingDistance > soundRadius)
+        {
+            agent.SetDestination(patrolOrigin);
+        }
+        else
+        {
+            allowRoam = false;
+            StartCoroutine(WaitToRoam());
+        }
+    }
+
+    IEnumerator WaitToRoam()
+    {
+        yield return new WaitUntil(() => CanSeePlayer() == false);
+        allowRoam = true;
     }
 }

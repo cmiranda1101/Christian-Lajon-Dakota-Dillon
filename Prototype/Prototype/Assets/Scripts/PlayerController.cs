@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 using System.Threading;
 using Unity.Collections;
 
-public class PlayerController : MonoBehaviour, IDamage
+public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 {
     [SerializeField] CharacterController characterController;
     [SerializeField] GameObject MainCamera;
@@ -29,6 +29,12 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] public GameObject Holster;
 
     [SerializeField] public LayerMask ignoreLayer;
+
+    [SerializeField] public LayerMask enemyLayer;
+    [SerializeField] public GameObject leftFootSoundPosition;
+    [SerializeField] public GameObject rightFootSoundPosition;
+    [SerializeField] public float footstepSoundRadius;
+    bool firstStep = false;
 
     [SerializeField] public Animator anim;
     [SerializeField] float animTransSpeed;
@@ -90,6 +96,36 @@ public class PlayerController : MonoBehaviour, IDamage
         }
 
         SetAnimParameter();
+    }
+
+    public void EmitSound()
+    {
+        if(firstStep == false)
+        {
+            firstStep = true;
+            Collider[] enemies = Physics.OverlapSphere(leftFootSoundPosition.transform.position, footstepSoundRadius, enemyLayer);
+            foreach (var enemy in enemies)
+            {
+                IHeardSomething listener = enemy.GetComponent<IHeardSomething>();
+                if (listener != null)
+                {
+                listener.OnHeardSomething(leftFootSoundPosition.transform.position, footstepSoundRadius);
+                }
+            }
+        } 
+        else
+        {
+            firstStep = false;
+            Collider[] enemies = Physics.OverlapSphere(rightFootSoundPosition.transform.position, footstepSoundRadius, enemyLayer);
+            foreach (var enemy in enemies)
+            {
+                IHeardSomething listener = enemy.GetComponent<IHeardSomething>();
+                if (listener != null)
+                {
+                    listener.OnHeardSomething(rightFootSoundPosition.transform.position, footstepSoundRadius);
+                }
+            }
+        }
     }
 
     void MovePlayer()
