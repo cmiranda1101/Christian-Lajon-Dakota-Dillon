@@ -256,16 +256,14 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     void WalkSound()
     {
         int i = Random.Range(0, walkClips.Length);
-        walkSource.clip = walkClips[i];
-        walkSource.Play();
+        AudioManager.PlaySFX(walkSource, walkClips[i]);
     }
 
     // Play gunshot sound
     void GunShotSound()
     {
         int i = Random.Range(0, gunClips.Length);
-        gunSource.clip = gunClips[i];
-        gunSource.Play();
+        AudioManager.PlaySFX(gunSource, gunClips[i]);
     }
 
     // Randomly choose a position within a given radius

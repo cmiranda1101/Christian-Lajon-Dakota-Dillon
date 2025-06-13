@@ -11,16 +11,16 @@ using Cursor = UnityEngine.Cursor;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
-    [SerializeField] GameObject menuActive;
-    [SerializeField] GameObject menuPause;
+    [SerializeField] public GameObject menuOptions;
+    [SerializeField] public GameObject menuActive;
+    [SerializeField] public GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuBossKilled;
     [SerializeField] GameObject menuGameOver;
     [SerializeField] GameObject menuHotbar;
     [SerializeField] GameObject menuMoney;
     [SerializeField] GameObject menuAmmo;
-    [SerializeField] GameObject menuButtons;
+    [SerializeField] public GameObject menuButtons;
     [SerializeField] GameObject menuShop;
     [SerializeField] GameObject savedStats;
 
@@ -58,6 +58,9 @@ public class GameManager : MonoBehaviour
 
 
     public bool isPaused;
+
+    public enum PreviousMenu { None, Start, Pause }
+    public PreviousMenu previousMenu = PreviousMenu.None;
 
     float timeScaleOrig;
     int gameGoalCount;
@@ -193,4 +196,5 @@ public class GameManager : MonoBehaviour
     {
         return gameGoalCount;
     }
+
 }

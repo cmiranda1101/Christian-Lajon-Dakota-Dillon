@@ -300,15 +300,13 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
     void WalkSound()
     {
         int i = Random.Range(0, walkClips.Length);
-        walkSource.clip = walkClips[i];
-        walkSource.Play();
+        AudioManager.PlaySFX(walkSource, walkClips[i]);
     }
 
     void WeaponSound()
     {
         int i = Random.Range(0, weaponClips.Length);
-        weaponSource.clip = weaponClips[i];
-        weaponSource.Play();
+        AudioManager.PlaySFX(weaponSource, weaponClips[i]);
     }
     void Strafe()
     {
