@@ -200,4 +200,39 @@ public class ButtonFunctions : MonoBehaviour
         UISoundSource.Play();
         yield return new WaitWhile(() => UISoundSource.isPlaying);
     }
+    public void OpenOptionsFromStart()
+    {
+        GameManager.instance.previousMenu = GameManager.PreviousMenu.Start;
+        GameManager.instance.menuButtons.SetActive(false); // Hide Start Menu
+        GameManager.instance.menuOptions.SetActive(true);  // Show Options Menu
+        GameManager.instance.menuActive = GameManager.instance.menuOptions;
+    }
+
+    public void OpenOptionsFromPause()
+    {
+        GameManager.instance.previousMenu = GameManager.PreviousMenu.Pause;
+        GameManager.instance.menuPause.SetActive(false);   // Hide Pause Menu
+        GameManager.instance.menuOptions.SetActive(true);  // Show Options Menu
+        GameManager.instance.menuActive = GameManager.instance.menuOptions;
+    }
+
+    public void BackFromOptions()
+    {
+        GameManager.instance.menuOptions.SetActive(false); // Hide Options
+
+        switch (GameManager.instance.previousMenu)
+        {
+            case GameManager.PreviousMenu.Start:
+                GameManager.instance.menuButtons.SetActive(true);
+                GameManager.instance.menuActive = GameManager.instance.menuButtons;
+                break;
+
+            case GameManager.PreviousMenu.Pause:
+                GameManager.instance.menuPause.SetActive(true);
+                GameManager.instance.menuActive = GameManager.instance.menuPause;
+                break;
+        }
+
+        GameManager.instance.previousMenu = GameManager.PreviousMenu.None;
+    }
 }
