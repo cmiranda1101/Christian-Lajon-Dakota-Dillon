@@ -18,7 +18,7 @@ public class HidableObject : MonoBehaviour, IDamage
     {
         if (other.tag == "Player") {
             GameManager.instance.playerScript.isHiding = false;
-            GameManager.instance.playerScript.Crouch();
+            //GameManager.instance.playerScript.Crouch();
         }
     }
 
