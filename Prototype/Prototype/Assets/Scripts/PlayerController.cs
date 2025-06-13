@@ -33,7 +33,9 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     [SerializeField] public LayerMask enemyLayer;
     [SerializeField] public GameObject leftFootSoundPosition;
     [SerializeField] public GameObject rightFootSoundPosition;
-    [SerializeField] public float footstepSoundRadius;
+    [SerializeField] public float crouchSoundRadius;
+    [SerializeField] public float walkSoundRadius;
+    [SerializeField] public float runSoundRadius;
     bool firstStep = false;
 
     [SerializeField] public Animator anim;
@@ -103,26 +105,80 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
         if(firstStep == false)
         {
             firstStep = true;
-            Collider[] enemies = Physics.OverlapSphere(leftFootSoundPosition.transform.position, footstepSoundRadius, enemyLayer);
-            foreach (var enemy in enemies)
+            if (anim.GetBool("isCrouching"))
             {
-                IHeardSomething listener = enemy.GetComponent<IHeardSomething>();
-                if (listener != null)
+                Collider[] enemies = Physics.OverlapSphere(leftFootSoundPosition.transform.position, crouchSoundRadius, enemyLayer);
+                foreach (var enemy in enemies)
                 {
-                listener.OnHeardSomething(leftFootSoundPosition.transform.position, footstepSoundRadius);
+                    IHeardSomething listener = enemy.GetComponent<IHeardSomething>();
+                    if (listener != null)
+                    {
+                        listener.OnHeardSomething(leftFootSoundPosition.transform.position, crouchSoundRadius);
+                    }
+                }
+            }
+            else if (anim.GetBool("isSprinting"))
+            {
+                Collider[] enemies = Physics.OverlapSphere(leftFootSoundPosition.transform.position, runSoundRadius, enemyLayer);
+                foreach (var enemy in enemies)
+                {
+                    IHeardSomething listener = enemy.GetComponent<IHeardSomething>();
+                    if (listener != null)
+                    {
+                        listener.OnHeardSomething(leftFootSoundPosition.transform.position, runSoundRadius);
+                    }
+                }
+            }
+            else
+            {
+                Collider[] enemies = Physics.OverlapSphere(leftFootSoundPosition.transform.position, walkSoundRadius, enemyLayer);
+                foreach (var enemy in enemies)
+                {
+                    IHeardSomething listener = enemy.GetComponent<IHeardSomething>();
+                    if (listener != null)
+                    {
+                        listener.OnHeardSomething(leftFootSoundPosition.transform.position, walkSoundRadius);
+                    }
                 }
             }
         } 
         else
         {
             firstStep = false;
-            Collider[] enemies = Physics.OverlapSphere(rightFootSoundPosition.transform.position, footstepSoundRadius, enemyLayer);
-            foreach (var enemy in enemies)
+            if (anim.GetBool("isCrouching"))
             {
-                IHeardSomething listener = enemy.GetComponent<IHeardSomething>();
-                if (listener != null)
+                Collider[] enemies = Physics.OverlapSphere(rightFootSoundPosition.transform.position, crouchSoundRadius, enemyLayer);
+                foreach (var enemy in enemies)
                 {
-                    listener.OnHeardSomething(rightFootSoundPosition.transform.position, footstepSoundRadius);
+                    IHeardSomething listener = enemy.GetComponent<IHeardSomething>();
+                    if (listener != null)
+                    {
+                        listener.OnHeardSomething(rightFootSoundPosition.transform.position, crouchSoundRadius);
+                    }
+                }
+            }
+            else if (anim.GetBool("isSprinting"))
+            {
+                Collider[] enemies = Physics.OverlapSphere(rightFootSoundPosition.transform.position, runSoundRadius, enemyLayer);
+                foreach (var enemy in enemies)
+                {
+                    IHeardSomething listener = enemy.GetComponent<IHeardSomething>();
+                    if (listener != null)
+                    {
+                        listener.OnHeardSomething(rightFootSoundPosition.transform.position, runSoundRadius);
+                    }
+                }
+            }
+            else
+            {
+                Collider[] enemies = Physics.OverlapSphere(rightFootSoundPosition.transform.position, walkSoundRadius, enemyLayer);
+                foreach (var enemy in enemies)
+                {
+                    IHeardSomething listener = enemy.GetComponent<IHeardSomething>();
+                    if (listener != null)
+                    {
+                        listener.OnHeardSomething(rightFootSoundPosition.transform.position, walkSoundRadius);
+                    }
                 }
             }
         }
