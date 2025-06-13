@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 {
     [SerializeField] CharacterController characterController;
     [SerializeField] GameObject MainCamera;
+    [SerializeField] private AudioManager audioManager;
     [SerializeField] AudioSource footStepSource;
     [SerializeField] AudioSource playerHurtSource;
     [SerializeField] AudioClip[] footStepClip;
@@ -351,8 +352,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             GameManager.instance.healthBar.fillAmount = currentHP / maxHP;
 
             int i = Random.Range(0, playerHurtClips.Length);
-            playerHurtSource.clip = playerHurtClips[i];
-            playerHurtSource.Play();
+            AudioManager.PlaySFX(playerHurtSource, playerHurtClips[i]);
         }
     }
 
@@ -366,8 +366,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     void WalkSound()
     {
         int i = Random.Range(0, footStepClip.Length);
-        footStepSource.clip = footStepClip[i];
-        footStepSource.Play();
+        AudioManager.PlaySFX(footStepSource, footStepClip[i]);
+
     }
 
     IEnumerator DamageScreenFlash()
