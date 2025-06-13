@@ -65,8 +65,13 @@ public class ButtonFunctions : MonoBehaviour
 #endif
     }
 
-    public void Close()
+    public void OnCloseButton()
     {
+        StartCoroutine(Close());
+    }
+    IEnumerator Close()
+    {
+        yield return StartCoroutine(UISound());
         GameManager.instance.CloseShop();
     }
 
