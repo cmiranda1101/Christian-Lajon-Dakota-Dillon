@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 using UnityEngine.EventSystems;
+using System.Collections;
 // Note For Future - UnityEngine.EventSystems allows event listener behavior,
 // to be used with mouse clicks in game to dynamically grab the clicked object or parent object.
 // This is extremely useful for any shop manipulation since almost every game shop has a buy button.
@@ -21,27 +22,45 @@ public class ButtonFunctions : MonoBehaviour
     [SerializeField] GunStats shopRifleGunStats;
     [SerializeField] GunStats pistolStats;
 
-    public void Resume()
+    [SerializeField] AudioSource UISoundSource;
+
+    public void OnResumeButton()
     {
+        StartCoroutine(Resume());
+    }
+    IEnumerator Resume()
+    {
+        yield return StartCoroutine(UISound());
         GameManager.instance.StateUnpause();
     }
 
-    public void Restart()
+    public void OnRestartButton()
     {
+        StartCoroutine(Restart());
+    }
+    IEnumerator Restart()
+    {
+        yield return StartCoroutine(UISound());
         GameManager.instance.savedStatsScript.Restart();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.instance.StateUnpause();
     }
 
-    public void Quit()
+    public void OnQuitButton()
+    {
+        StartCoroutine(Quit());
+    }
+    IEnumerator Quit()
     {
         if (SceneManager.GetActiveScene().name != "MainMenu")
         {
             GameManager.instance.savedStatsScript.DeleteAllData();
         }
 #if UNITY_EDITOR
+        yield return StartCoroutine(UISound());
         UnityEditor.EditorApplication.isPlaying = false;
 #else
+            yield return StartCoroutine(UISound());
             Application.Quit();
 #endif
     }
@@ -142,18 +161,38 @@ public class ButtonFunctions : MonoBehaviour
         }
     }
 
-    public void NewGame()
+    public void OnNewGameButton()
     {
+        StartCoroutine(NewGame());
+    }
+    IEnumerator NewGame()
+    {
+        yield return StartCoroutine(UISound());
         SceneManager.LoadScene("Tutorial");
     }
 
-    public void CloseHowToPlay()
+    public void OnCloseHowToPlayButton()
     {
+        StartCoroutine(CloseHowToPlay());
+    }
+    IEnumerator CloseHowToPlay()
+    {
+        yield return StartCoroutine(UISound());
         howToPlay.SetActive(false);
     }
-
-    public void ExitToMenu()
+    public void OnExitToMenuButton()
     {
+        StartCoroutine(ExitToMenu());
+    }
+    IEnumerator ExitToMenu()
+    {
+        yield return StartCoroutine(UISound());
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public IEnumerator UISound()
+    {
+        UISoundSource.Play();
+        yield return new WaitWhile(() => UISoundSource.isPlaying);
     }
 }
