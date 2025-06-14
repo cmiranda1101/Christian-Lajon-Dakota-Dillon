@@ -16,7 +16,7 @@ public class LevelExit : MonoBehaviour
             exitText.transform.rotation = GameManager.instance.player.transform.rotation;
             if (Input.GetButtonDown("Interact"))
             {
-                if (SceneManager.GetActiveScene().name != "Shop" && SceneManager.GetActiveScene().name != "Tutorial")
+                if (SceneManager.GetActiveScene().name != "Shop" && SceneManager.GetActiveScene().name != "Tutorial" && SceneManager.GetActiveScene().name != "Showcase")
                 {
                     GameManager.instance.playerScript.money += moneyEarned;
                     GameManager.instance.savedStatsScript.SaveStats();
