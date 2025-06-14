@@ -344,11 +344,17 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
 
     IEnumerator HandleHeardSomething(Vector3 soundPosition, float soundRadius)
     {
+        if (agent == null || !agent.enabled || !agent.isOnNavMesh)
+            yield break;
+
         agent.SetDestination(soundPosition);
         patrolTimer = 0;
         isMoving = true;
 
         yield return new WaitUntil(() => agent.pathPending == false);
+
+        if (agent == null || !agent.enabled || !agent.isOnNavMesh)
+            yield break;
 
         if (isPlayerInSightline == true && agent.remainingDistance <= agent.stoppingDistance && agent.remainingDistance < soundRadius)
         {
@@ -356,6 +362,8 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
         }
         else if (isPlayerInSightline == false || agent.remainingDistance > soundRadius)
         {
+            if (agent == null || !agent.enabled || !agent.isOnNavMesh)
+                yield break;
             agent.SetDestination(patrolOrigin);
         }
     }
