@@ -114,6 +114,10 @@ public class GameManager : MonoBehaviour
                 menuActive = null;
             }
        }
+       if (Input.GetButtonDown("Debug Level"))
+       {
+            SceneManager.LoadScene("Showcase");
+       }
     }
 
     public void StatePause()
@@ -186,11 +190,15 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         levelExitScript = GameObject.FindWithTag("LevelExit").GetComponent<LevelExit>();
         menuHotbar.SetActive(true);
-        if (SceneManager.GetActiveScene().name != "IntroLevel" && SceneManager.GetActiveScene().name != "Tutorial")
+        if (SceneManager.GetActiveScene().name != "IntroLevel" && SceneManager.GetActiveScene().name != "Tutorial" && SceneManager.GetActiveScene().name != "Showcase")
         {
             savedStatsScript.LoadStats();
         }
         healthBar.fillAmount = playerScript.currentHP / playerScript.maxHP;
+        if (SceneManager.GetActiveScene().name == "Showcase")
+        {
+            moneyScript.AddMoney(9999);
+        }
         moneyScript.UpdateMoneyText();
     }
 
