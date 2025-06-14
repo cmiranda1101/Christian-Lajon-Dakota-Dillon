@@ -467,14 +467,14 @@ MonoBehaviour:
   fireRate: 0.8
   chaseDur: 3
   forgetDelay: 3
-  patrolRadius: 20
-  patrolInterval: 4
+  patrolRadius: 10
+  patrolInterval: 6
   enableStrafe: 1
   strafeSpeed: 10
   strafeDis: 0.5
   strafeDur: 0.2
   chanceToStrafe: 0.45
-  animTransSpeed: 10
+  animTransSpeed: 12
   walkRate: 0.4
 --- !u!195 &1874890942227670813
 NavMeshAgent:
@@ -486,7 +486,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

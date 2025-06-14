@@ -493,17 +493,17 @@ MonoBehaviour:
   model: {fileID: 8297577024250035725}
   agent: {fileID: 7992687783722063204}
   anim: {fileID: 9217728809347076489}
-  FOV: 90
+  FOV: 60
   headPos: {fileID: 3565500772937973177}
-  HP: 5
+  HP: 6
   facePlayerSpeed: 25
   shootingPos: {fileID: 8207139114905910316}
   bullet: {fileID: 2485194676518234941, guid: b486390cf48be664baa654d7bf7bc6af, type: 3}
   fireRate: 0.4
   chaseDur: 3
   forgetDelay: 3
-  patrolRadius: 20
-  patrolInterval: 4
+  patrolRadius: 10
+  patrolInterval: 6
   enableStrafe: 1
   strafeSpeed: 10
   strafeDis: 0.5
@@ -521,7 +521,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 7
+  m_Speed: 4
   m_Acceleration: 32
   avoidancePriority: 50
   m_AngularSpeed: 600

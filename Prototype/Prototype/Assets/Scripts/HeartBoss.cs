@@ -8,8 +8,8 @@ public class HeartBoss : MonoBehaviour, IDamage
     [SerializeField] Transform spawner3Location;
     [SerializeField] Transform spawner4Location;
     [SerializeField] GameObject enemySpawnerPrefab;
-    [SerializeField] GeneralSpawner generalSpawnerPrefab;
     [SerializeField] GameObject itemSpawners;
+    GeneralSpawner generalSpawnerPrefab;
 
     [SerializeField] AudioSource heartBeatSource;
     [SerializeField] AudioClip fastBeatClip;
@@ -103,6 +103,7 @@ public class HeartBoss : MonoBehaviour, IDamage
             heartBeatSource.clip = slowBeatClip;
             GameManager.instance.bossHealthBar.color = HPColorOrigin;
             SpawnersOn();
+            generalSpawnerPrefab = itemSpawners.GetComponent<GeneralSpawner>();
             generalSpawnerPrefab.startSpawn = true;
             phaseNum++;
         }
