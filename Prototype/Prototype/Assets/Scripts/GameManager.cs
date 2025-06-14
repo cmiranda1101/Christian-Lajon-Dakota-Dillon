@@ -114,6 +114,10 @@ public class GameManager : MonoBehaviour
                 menuActive = null;
             }
        }
+       if (Input.GetButtonDown("Debug Level"))
+       {
+            SceneManager.LoadScene("Showcase");
+       }
     }
 
     public void StatePause()
