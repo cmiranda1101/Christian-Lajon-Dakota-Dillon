@@ -709,7 +709,7 @@ MonoBehaviour:
   allowRoam: 0
   walkRate: 0.7
   patrolRadius: 10
-  patrolInterval: 2
+  patrolInterval: 5
   enableStrafe: 1
   strafeSpeed: 10
   strafeDis: 0.5
