@@ -9,13 +9,11 @@ public class HeartBoss : MonoBehaviour, IDamage
     [SerializeField] Transform spawner4Location;
     [SerializeField] GameObject enemySpawnerPrefab;
     [SerializeField] GeneralSpawner generalSpawnerPrefab;
-    [SerializeField] GameObject bulletSpawner;
+    [SerializeField] GameObject itemSpawners;
 
     [SerializeField] AudioSource heartBeatSource;
     [SerializeField] AudioClip fastBeatClip;
     [SerializeField] AudioClip slowBeatClip;
-
-    [SerializeField] int shieldDownTime;
 
     [SerializeField] int bossHPMax;
     int bossHpCurr;
@@ -23,6 +21,7 @@ public class HeartBoss : MonoBehaviour, IDamage
     Animation pumpAnim;
     Color HPColorOrigin;
 
+    int phaseNum;
     float slowPumpSpeed;
     float fastPumpSpeed;
     bool enemiesSpawned;
@@ -31,6 +30,7 @@ public class HeartBoss : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        phaseNum = 0;
         isShielded = true;
         enemiesSpawned = false;
         GameManager.instance.heartBossScript.generalSpawnerPrefab.startSpawn = true;
@@ -47,9 +47,9 @@ public class HeartBoss : MonoBehaviour, IDamage
         pumpAnim = GetComponent<Animation>();
         fastPumpSpeed = pumpAnim["Armature|Pumping"].speed;
         slowPumpSpeed = pumpAnim["Armature|Pumping"].speed * 0.5f;  //slow the animation while shield up
-        pumpAnim["Armature|Pumping"].speed = 0.5f;
+        pumpAnim["Armature|Pumping"].speed = slowPumpSpeed;
 
-        GameManager.instance.UpdateGameGoal(1);
+       
         StartCoroutine(PlayBeat());
         SpawnersOn();
     }
@@ -64,7 +64,7 @@ public class HeartBoss : MonoBehaviour, IDamage
         }
         if (enemies == 1 && enemiesSpawned) {
             enemiesSpawned = false;
-            StartCoroutine(ShieldDown());
+            ShieldDown();
         }
     }
 
@@ -72,7 +72,8 @@ public class HeartBoss : MonoBehaviour, IDamage
     {
         if (!isShielded) {
             bossHpCurr = Mathf.Clamp(bossHpCurr -= amount, 0, bossHPMax);
-            GameManager.instance.bossHealthBar.fillAmount = (float)bossHpCurr / bossHPMax;
+            GameManager.instance.bossHealthBar.fillAmount = Mathf.Lerp(bossHpCurr,((float)bossHpCurr / bossHPMax), 9);
+            ShieldUp();
 
             if (bossHpCurr <= 0) {
                 GameManager.instance.bossHealthUI.SetActive(false);
@@ -82,25 +83,29 @@ public class HeartBoss : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator ShieldDown()    //Shield is down, you can hurt boss;
+    void ShieldDown()    //Shield is down, you can hurt boss;
     {
         //Debug.Log("in Shield down");
 
-        enemiesSpawned = false;
         isShielded = false;
         SpawnersOff();
         GameManager.instance.heartBossScript.generalSpawnerPrefab.startSpawn = true;
         pumpAnim["Armature|Pumping"].speed = fastPumpSpeed;
         heartBeatSource.clip = fastBeatClip;
         GameManager.instance.bossHealthBar.color = Color.red;
+    }
 
-        yield return new WaitForSeconds(shieldDownTime);
-
-        isShielded = true;
-        pumpAnim["Armature|Pumping"].speed = slowPumpSpeed;
-        heartBeatSource.clip = slowBeatClip;
-        GameManager.instance.bossHealthBar.color = HPColorOrigin;
-        SpawnersOn();
+    void ShieldUp()
+    {
+        if (bossHpCurr <= bossHPMax * .75f && phaseNum == 0 || bossHpCurr <= bossHPMax * .5f && phaseNum == 1 || bossHpCurr <= bossHPMax * .25f && phaseNum == 2) {
+            isShielded = true;
+            pumpAnim["Armature|Pumping"].speed = slowPumpSpeed;
+            heartBeatSource.clip = slowBeatClip;
+            GameManager.instance.bossHealthBar.color = HPColorOrigin;
+            SpawnersOn();
+            generalSpawnerPrefab.startSpawn = true;
+            phaseNum++;
+        }
     }
 
     IEnumerator PlayBeat()

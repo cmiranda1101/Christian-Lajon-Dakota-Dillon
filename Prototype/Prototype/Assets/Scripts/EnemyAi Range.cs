@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 
-public class EnemyAiRange : MonoBehaviour, IDamage
+public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
 {
     [SerializeField] AudioSource walkSource;
     [SerializeField] AudioSource gunSource;
@@ -31,6 +31,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     [SerializeField] float patrolRadius;
     [SerializeField] float patrolInterval;
     float patrolTimer;
+    private Vector3 patrolOrigin; // stores spawn position to roam around
 
     // strafe variables
     [SerializeField] bool enableStrafe = true;
@@ -55,6 +56,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     float animationCurr;
     float agentSpeedCurr;
 
+    bool isPlayerInSightline;
     bool playerInRange;
     bool isMoving;
 
@@ -62,7 +64,8 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = model.material.color;
-        GameManager.instance.UpdateGameGoal(1);
+        patrolOrigin = transform.position; // stores the original spawn point
+       
     }
 
     // Update is called once per frame
@@ -89,7 +92,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         }
 
         // Check if player is in range and can be seen
-        bool canSeePlayer = playerInRange && CanSeePlayer();
+        bool canSeePlayer = playerInRange && CanSeePlayer() && !GameManager.instance.playerScript.isHiding;
 
         // Handle chasing and movement
         if (canSeePlayer)
@@ -131,6 +134,8 @@ public class EnemyAiRange : MonoBehaviour, IDamage
 
         Debug.DrawRay(headPos.position, directionToPlayer.normalized , Color.red);
 
+        IsPlayerInSightline(directionToPlayer);
+
         if (angleToPlayer <= FOV)
         {
             RaycastHit hit;
@@ -168,12 +173,13 @@ public class EnemyAiRange : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            GameManager.instance.UpdateGameGoal(-1);
+          
             Destroy(gameObject);
         }
         else
         {
             StartCoroutine(flashRed());
+            GameManager.instance.playerScript.isHiding = false;
             agent.SetDestination(GameManager.instance.player.transform.position);
 
             if(enableStrafe && Random.value <= chanceToStrafe)
@@ -254,16 +260,14 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     void WalkSound()
     {
         int i = Random.Range(0, walkClips.Length);
-        walkSource.clip = walkClips[i];
-        walkSource.Play();
+        AudioManager.PlaySFX(walkSource, walkClips[i]);
     }
 
     // Play gunshot sound
     void GunShotSound()
     {
         int i = Random.Range(0, gunClips.Length);
-        gunSource.clip = gunClips[i];
-        gunSource.Play();
+        AudioManager.PlaySFX(gunSource, gunClips[i]);
     }
 
     // Randomly choose a position within a given radius
@@ -283,7 +287,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     {
         if (agent.remainingDistance <= agent.stoppingDistance && patrolTimer >= patrolInterval)
         {
-            Vector3 newPos = RandomNavSphere(transform.position, patrolRadius, -1);
+            Vector3 newPos = RandomNavSphere(patrolOrigin, patrolRadius, -1);
             agent.SetDestination(newPos);
             patrolTimer = 0f;
             isMoving = true;
@@ -314,5 +318,45 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         strafeTimer = 0f;
 
         anim.SetTrigger("Shoot");
+    }
+
+    void IsPlayerInSightline(Vector3 directionToPlayer)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(headPos.position, directionToPlayer, out hit, Mathf.Infinity))
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                isPlayerInSightline = true;
+            }
+            else
+            {
+                isPlayerInSightline = false;
+            }
+        }
+    }
+
+    public void OnHeardSomething(Vector3 soundPosition, float soundRadius)
+    {
+        if (CanSeePlayer() && playerInRange) { return; }
+        StartCoroutine(HandleHeardSomething(soundPosition, soundRadius));
+    }
+
+    IEnumerator HandleHeardSomething(Vector3 soundPosition, float soundRadius)
+    {
+        agent.SetDestination(soundPosition);
+        patrolTimer = 0;
+        isMoving = true;
+
+        yield return new WaitUntil(() => agent.pathPending == false);
+
+        if (isPlayerInSightline == true && agent.remainingDistance <= agent.stoppingDistance && agent.remainingDistance < soundRadius)
+        {
+            StartChasing();
+        }
+        else if (isPlayerInSightline == false || agent.remainingDistance > soundRadius)
+        {
+            agent.SetDestination(patrolOrigin);
+        }
     }
 }

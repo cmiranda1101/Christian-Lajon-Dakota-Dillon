@@ -1,4 +1,6 @@
+using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,18 +11,20 @@ using Cursor = UnityEngine.Cursor;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
-    [SerializeField] GameObject menuActive;
-    [SerializeField] GameObject menuPause;
+    [SerializeField] public GameObject menuOptions;
+    [SerializeField] public GameObject menuActive;
+    [SerializeField] public GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuBossKilled;
     [SerializeField] GameObject menuGameOver;
     [SerializeField] GameObject menuHotbar;
     [SerializeField] GameObject menuMoney;
     [SerializeField] GameObject menuAmmo;
-    [SerializeField] GameObject menuButtons;
+    [SerializeField] public GameObject menuButtons;
     [SerializeField] GameObject menuShop;
     [SerializeField] GameObject savedStats;
+    [SerializeField] public GameObject dialogueBox;
+    [SerializeField] public TextMeshProUGUI dialogueText;
 
     public GameObject DamageFlash;
     public GameObject HealFlash;
@@ -29,12 +33,15 @@ public class GameManager : MonoBehaviour
     public GameObject hotbarRifle;
     public GameObject healthUI;
     public GameObject MolotovUI;
+    public GameObject GrenadeUI;
     public UnityEngine.UI.Image healthBar;
+    public UnityEngine.UI.Image staminaBar;
     public GameObject bossHealthUI;
     public UnityEngine.UI.Image bossHealthBar;
     public UnityEngine.UI.Image dodgeCooldownRadial;
     public TextMeshProUGUI chemlightCounter;
     public TextMeshProUGUI molotovCounter;
+    public TextMeshProUGUI grenadeCounter;
 
     public GameObject AmbianceForLevels;
     public GameObject AmbianceForBoss;
@@ -54,6 +61,9 @@ public class GameManager : MonoBehaviour
 
     public bool isPaused;
 
+    public enum PreviousMenu { None, Start, Pause }
+    public PreviousMenu previousMenu = PreviousMenu.None;
+
     float timeScaleOrig;
     int gameGoalCount;
 
@@ -64,7 +74,7 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         savedStatsScript = savedStats.GetComponent<SavedStats>();
         miniMap = GameObject.FindWithTag("MiniMap");
-        if (SceneManager.GetActiveScene().name == "Shop" || SceneManager.GetActiveScene().name == "Boss Level")
+        if (SceneManager.GetActiveScene().name == "Shop" || SceneManager.GetActiveScene().name == "Boss Level" || SceneManager.GetActiveScene().name == "Tutorial")
         {
             miniMap.SetActive(false);
         }
@@ -104,6 +114,10 @@ public class GameManager : MonoBehaviour
                 menuActive = null;
             }
        }
+       if (Input.GetButtonDown("Debug Level"))
+       {
+            SceneManager.LoadScene("Showcase");
+       }
     }
 
     public void StatePause()
@@ -128,11 +142,6 @@ public class GameManager : MonoBehaviour
     public void UpdateGameGoal(int amount)
     {
         gameGoalCount += amount;
-        if (gameGoalCount <= 0)
-        {
-            Win();
-        }
-        
     }
 
     public void OpenShop()
@@ -181,11 +190,15 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         levelExitScript = GameObject.FindWithTag("LevelExit").GetComponent<LevelExit>();
         menuHotbar.SetActive(true);
-        if (SceneManager.GetActiveScene().name != "IntroLevel")
+        if (SceneManager.GetActiveScene().name != "IntroLevel" && SceneManager.GetActiveScene().name != "Tutorial" && SceneManager.GetActiveScene().name != "Showcase")
         {
             savedStatsScript.LoadStats();
         }
         healthBar.fillAmount = playerScript.currentHP / playerScript.maxHP;
+        if (SceneManager.GetActiveScene().name == "Showcase")
+        {
+            moneyScript.AddMoney(9999);
+        }
         moneyScript.UpdateMoneyText();
     }
 
@@ -193,4 +206,5 @@ public class GameManager : MonoBehaviour
     {
         return gameGoalCount;
     }
+
 }

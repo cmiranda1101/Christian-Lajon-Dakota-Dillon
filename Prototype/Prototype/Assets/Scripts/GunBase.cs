@@ -59,7 +59,15 @@ public class GunBase : MonoBehaviour
             {
                 Debug.Log(hit.collider.name);
                 IDamage damaged = hit.collider.GetComponent<IDamage>();
-                if (damaged != null)
+                if (hit.collider.name == "CritSpot")
+                {
+                    IDamage critical = hit.collider.GetComponentInParent<IDamage>();
+                    if(critical != null)
+                    {
+                        critical.takeDamage(damage * 2);
+                    }
+                }
+                else if (damaged != null)
                 {
                     damaged.takeDamage(damage);
                 }
@@ -100,8 +108,7 @@ public class GunBase : MonoBehaviour
     void GunShotSound()
     {
         int i = Random.Range(0, shotClips.Length);
-        gunSource.clip = shotClips[i];
-        gunSource.Play();
+        AudioManager.PlaySFX(gunSource, shotClips[i]);
     }
 
     public void UpdateAmmo()
@@ -145,6 +152,13 @@ public class GunBase : MonoBehaviour
             magCount = gunList[gunListIndex].startingMagCount;
             gunList[gunListIndex].currentAmmo = gunList[gunListIndex].magSize;
             gunList[gunListIndex].magCount = gunList[gunListIndex].startingMagCount;
+        }
+        else if (SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            currentAmmo = 0;
+            magCount = 0;
+            gunList[gunListIndex].currentAmmo = 0;
+            gunList[gunListIndex].magCount = 0;
         }
         else
         {
