@@ -1112,6 +1112,10 @@ PrefabInstance:
       value: Dialogue Trigger
       objectReference: {fileID: 0}
     - target: {fileID: 3645656659943643436, guid: 1bba38fa799522e41b9421c7a2fd9f6a, type: 3}
+      propertyPath: typeSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645656659943643436, guid: 1bba38fa799522e41b9421c7a2fd9f6a, type: 3}
       propertyPath: dialogueText
       value: 
       objectReference: {fileID: 182235625}

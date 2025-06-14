@@ -208,16 +208,27 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.menuActive = GameManager.instance.menuOptions;
     }
 
-    public void OpenOptionsFromPause()
+    public void OnOpenOptionsFromPauseButton()
     {
+        StartCoroutine(OpenOptionsFromPause());
+    }
+    IEnumerator OpenOptionsFromPause()
+    {
+        yield return StartCoroutine(UISound());
         GameManager.instance.previousMenu = GameManager.PreviousMenu.Pause;
         GameManager.instance.menuPause.SetActive(false);   // Hide Pause Menu
         GameManager.instance.menuOptions.SetActive(true);  // Show Options Menu
         GameManager.instance.menuActive = GameManager.instance.menuOptions;
     }
 
-    public void BackFromOptions()
+    public void OnBackFromOptionsButton()
     {
+        StartCoroutine(BackFromOptions());
+    }
+    IEnumerator BackFromOptions()
+    {
+        yield return StartCoroutine(UISound());
+
         GameManager.instance.menuOptions.SetActive(false); // Hide Options
 
         switch (GameManager.instance.previousMenu)
