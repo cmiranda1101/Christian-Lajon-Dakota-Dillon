@@ -6,6 +6,7 @@ public class DialogueSystem : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] TextMeshPro textToShow;
+    [SerializeField] AudioSource radioSquelch;
 
     [SerializeField] float typeSpeed;
 
@@ -15,7 +16,7 @@ public class DialogueSystem : MonoBehaviour
         if (other.CompareTag("Player")) {
             dialogueText.text = "";
             GameManager.instance.dialogueBox.SetActive(true);
-
+           
             StartCoroutine(TypeWriter());
         }
     }
@@ -27,14 +28,12 @@ public class DialogueSystem : MonoBehaviour
 
     IEnumerator TypeWriter()
     {
+        radioSquelch.Play();
+        yield return new WaitWhile(() => radioSquelch.isPlaying);
+
         foreach (char letter in textToShow.text.ToCharArray()) {
             dialogueText.text += letter;
             yield return new WaitForSeconds(typeSpeed);
         }
     }
-
-
-
-
-
 }
