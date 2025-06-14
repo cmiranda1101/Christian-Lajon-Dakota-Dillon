@@ -333,20 +333,29 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
 
     IEnumerator HandleHeardSomething(Vector3 soundPosition, float soundRadius)
     {
+        if (agent == null || !agent.enabled || !agent.isOnNavMesh)
+            yield break;
+
         agent.SetDestination(soundPosition);
 
-        yield return new WaitUntil(() => agent.pathPending == false);
+        yield return new WaitUntil(() => !agent.pathPending);
+        
+        if (agent == null || !agent.enabled || !agent.isOnNavMesh)
+            yield break;
 
         if (agent.remainingDistance < soundRadius)
         {
             allowRoam = false;
             StartCoroutine(WaitToRoam());
         }
-        else if (isPlayerInSightline == false || agent.remainingDistance > soundRadius)
+        else if (!isPlayerInSightline || agent.remainingDistance > soundRadius)
         {
+            if (agent == null || !agent.enabled || !agent.isOnNavMesh)
+                yield break;
+
             agent.SetDestination(patrolOrigin);
         }
-        if (isPlayerInSightline == true && agent.remainingDistance < agent.stoppingDistance)
+        if (isPlayerInSightline && agent.remainingDistance < agent.stoppingDistance)
         {
             FacePlayer();
         }
