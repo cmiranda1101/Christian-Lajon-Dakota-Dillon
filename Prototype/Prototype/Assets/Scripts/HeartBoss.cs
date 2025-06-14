@@ -33,7 +33,7 @@ public class HeartBoss : MonoBehaviour, IDamage
         phaseNum = 0;
         isShielded = true;
         enemiesSpawned = false;
-        GameManager.instance.heartBossScript.generalSpawnerPrefab.startSpawn = true;
+        generalSpawnerPrefab = itemSpawners.GetComponent<GeneralSpawner>();
 
         bossHpCurr = bossHPMax;
         GameManager.instance.bossHealthUI.SetActive(true);
@@ -103,7 +103,7 @@ public class HeartBoss : MonoBehaviour, IDamage
             heartBeatSource.clip = slowBeatClip;
             GameManager.instance.bossHealthBar.color = HPColorOrigin;
             SpawnersOn();
-            generalSpawnerPrefab = itemSpawners.GetComponent<GeneralSpawner>();
+            //generalSpawnerPrefab = itemSpawners.GetComponent<GeneralSpawner>();
             generalSpawnerPrefab.startSpawn = true;
             phaseNum++;
         }
