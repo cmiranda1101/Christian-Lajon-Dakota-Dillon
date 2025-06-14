@@ -23,8 +23,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject menuButtons;
     [SerializeField] GameObject menuShop;
     [SerializeField] GameObject savedStats;
-    [SerializeField] GameObject dialogueBox;
-    [SerializeField] GameObject dialogueText;
+    [SerializeField] public GameObject dialogueBox;
+    [SerializeField] public TextMeshProUGUI dialogueText;
 
     public GameObject DamageFlash;
     public GameObject HealFlash;
