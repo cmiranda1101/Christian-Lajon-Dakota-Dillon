@@ -165,6 +165,10 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
             {
                 isPlayerInSightline = true;
             }
+            else
+            {
+                isPlayerInSightline = false;
+            }
         }
     }
 
@@ -300,15 +304,13 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
     void WalkSound()
     {
         int i = Random.Range(0, walkClips.Length);
-        walkSource.clip = walkClips[i];
-        walkSource.Play();
+        AudioManager.PlaySFX(walkSource, walkClips[i]);
     }
 
     void WeaponSound()
     {
         int i = Random.Range(0, weaponClips.Length);
-        weaponSource.clip = weaponClips[i];
-        weaponSource.Play();
+        AudioManager.PlaySFX(weaponSource, weaponClips[i]);
     }
     void Strafe()
     {
@@ -326,22 +328,29 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
     public void OnHeardSomething(Vector3 soundPosition, float soundRadius)
     {
         if (CanSeePlayer() && playerInRange) { return; }
+        StartCoroutine(HandleHeardSomething(soundPosition, soundRadius));
+    }
+
+    IEnumerator HandleHeardSomething(Vector3 soundPosition, float soundRadius)
+    {
         agent.SetDestination(soundPosition);
-        if(agent.remainingDistance < soundRadius)
+
+        yield return new WaitUntil(() => agent.pathPending == false);
+
+        if (agent.remainingDistance < soundRadius)
         {
             allowRoam = false;
             StartCoroutine(WaitToRoam());
-        } 
+        }
         else if (isPlayerInSightline == false || agent.remainingDistance > soundRadius)
         {
             agent.SetDestination(patrolOrigin);
-        } 
+        }
         if (isPlayerInSightline == true && agent.remainingDistance < agent.stoppingDistance)
         {
             FacePlayer();
         }
     }
-
     IEnumerator WaitToRoam()
     {
         yield return new WaitUntil(() => CanSeePlayer() == false);

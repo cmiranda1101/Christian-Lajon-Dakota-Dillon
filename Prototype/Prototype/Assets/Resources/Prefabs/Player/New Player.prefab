@@ -619,7 +619,9 @@ MonoBehaviour:
     m_Bits: 64
   leftFootSoundPosition: {fileID: 4527409345103497999}
   rightFootSoundPosition: {fileID: 2125602785587585735}
-  footstepSoundRadius: 10
+  crouchSoundRadius: 5
+  walkSoundRadius: 10
+  runSoundRadius: 15
   anim: {fileID: 4959806952395917875}
   animTransSpeed: 12
   speed: 5
