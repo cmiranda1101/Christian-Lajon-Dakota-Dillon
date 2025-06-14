@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 
-public class EnemyAiRange : MonoBehaviour, IDamage
+public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
 {
     [SerializeField] AudioSource walkSource;
     [SerializeField] AudioSource gunSource;
@@ -56,6 +56,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
     float animationCurr;
     float agentSpeedCurr;
 
+    bool isPlayerInSightline;
     bool playerInRange;
     bool isMoving;
 
@@ -91,7 +92,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         }
 
         // Check if player is in range and can be seen
-        bool canSeePlayer = playerInRange && CanSeePlayer();
+        bool canSeePlayer = playerInRange && CanSeePlayer() && !GameManager.instance.playerScript.isHiding;
 
         // Handle chasing and movement
         if (canSeePlayer)
@@ -132,6 +133,8 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         float angleToPlayer = Vector3.Angle(new Vector3(directionToPlayer.x, 0, directionToPlayer.z), transform.forward);
 
         Debug.DrawRay(headPos.position, directionToPlayer.normalized , Color.red);
+
+        IsPlayerInSightline(directionToPlayer);
 
         if (angleToPlayer <= FOV)
         {
@@ -176,6 +179,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         else
         {
             StartCoroutine(flashRed());
+            GameManager.instance.playerScript.isHiding = false;
             agent.SetDestination(GameManager.instance.player.transform.position);
 
             if(enableStrafe && Random.value <= chanceToStrafe)
@@ -314,5 +318,45 @@ public class EnemyAiRange : MonoBehaviour, IDamage
         strafeTimer = 0f;
 
         anim.SetTrigger("Shoot");
+    }
+
+    void IsPlayerInSightline(Vector3 directionToPlayer)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(headPos.position, directionToPlayer, out hit, Mathf.Infinity))
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                isPlayerInSightline = true;
+            }
+            else
+            {
+                isPlayerInSightline = false;
+            }
+        }
+    }
+
+    public void OnHeardSomething(Vector3 soundPosition, float soundRadius)
+    {
+        if (CanSeePlayer() && playerInRange) { return; }
+        StartCoroutine(HandleHeardSomething(soundPosition, soundRadius));
+    }
+
+    IEnumerator HandleHeardSomething(Vector3 soundPosition, float soundRadius)
+    {
+        agent.SetDestination(soundPosition);
+        patrolTimer = 0;
+        isMoving = true;
+
+        yield return new WaitUntil(() => agent.pathPending == false);
+
+        if (isPlayerInSightline == true && agent.remainingDistance <= agent.stoppingDistance && agent.remainingDistance < soundRadius)
+        {
+            StartChasing();
+        }
+        else if (isPlayerInSightline == false || agent.remainingDistance > soundRadius)
+        {
+            agent.SetDestination(patrolOrigin);
+        }
     }
 }

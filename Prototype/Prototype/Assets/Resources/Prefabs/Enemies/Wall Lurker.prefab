@@ -144,7 +144,7 @@ MonoBehaviour:
   meleeHitBox: []
   HP: 5
   meleeRange: 4
-  meleeDamage: 0
+  meleeDamage: 2
   meleeCooldown: 2
   facePlayerSpeed: 32
   FOV: 90
