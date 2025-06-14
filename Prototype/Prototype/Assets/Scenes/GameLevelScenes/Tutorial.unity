@@ -612,19 +612,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6166337150668485329, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
       propertyPath: m_Size.x
-      value: 0.1323357
+      value: 0.10163459
       objectReference: {fileID: 0}
     - target: {fileID: 6166337150668485329, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
       propertyPath: m_Size.z
-      value: 6.0708313
+      value: 4.507065
       objectReference: {fileID: 0}
     - target: {fileID: 6166337150668485329, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
       propertyPath: m_Center.x
-      value: -0.016041206
+      value: -0.00069045625
       objectReference: {fileID: 0}
     - target: {fileID: 6166337150668485329, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
       propertyPath: m_Center.z
-      value: 19.535416
+      value: 19.54676
       objectReference: {fileID: 0}
     - target: {fileID: 8623713143440221746, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
       propertyPath: m_Name
@@ -635,7 +635,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8938827319757092762, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
@@ -724,7 +725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5408762463792848218, guid: 2abf3e707cf9e454aa11ba1fe03c7c13, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5408762463792848218, guid: 2abf3e707cf9e454aa11ba1fe03c7c13, type: 3}
       propertyPath: m_LocalPosition.z
@@ -941,7 +942,8 @@ PrefabInstance:
       value: TutorialDoor (9)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8938827319757092762, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
@@ -1216,7 +1218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5408762463792848218, guid: 2abf3e707cf9e454aa11ba1fe03c7c13, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5408762463792848218, guid: 2abf3e707cf9e454aa11ba1fe03c7c13, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1385,7 +1387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5408762463792848218, guid: 2abf3e707cf9e454aa11ba1fe03c7c13, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5408762463792848218, guid: 2abf3e707cf9e454aa11ba1fe03c7c13, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2986,7 +2988,8 @@ PrefabInstance:
       value: TutorialDoor (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8938827319757092762, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
@@ -3191,7 +3194,8 @@ PrefabInstance:
       value: TutorialDoor (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8938827319757092762, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
@@ -4046,7 +4050,8 @@ PrefabInstance:
       value: TutorialDoor (8)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8938827319757092762, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
@@ -4457,7 +4462,8 @@ PrefabInstance:
       value: TutorialDoor (6)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8938827319757092762, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
@@ -4755,7 +4761,8 @@ PrefabInstance:
       value: TutorialDoor (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8938827319757092762, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
@@ -5186,7 +5193,8 @@ PrefabInstance:
       value: TutorialDoor (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8938827319757092762, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
@@ -5791,7 +5799,8 @@ PrefabInstance:
       value: TutorialDoor (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8938827319757092762, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
@@ -5923,7 +5932,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8938827319757092762, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9a2b78abaa5ed14ca8e8731c174a0cc, type: 3}
