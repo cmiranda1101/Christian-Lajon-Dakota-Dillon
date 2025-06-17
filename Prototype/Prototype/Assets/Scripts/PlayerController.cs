@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     [SerializeField] GameObject MainCamera;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] AudioSource footStepSource;
-    [SerializeField] AudioSource playerHurtSource;
+    [SerializeField] public AudioSource playerHurtSource;
     [SerializeField] AudioClip[] footStepClip;
     [SerializeField] AudioClip[] playerHurtClips;
     [SerializeField] float walkRate;

@@ -8,13 +8,10 @@ using System.Collections;
 
 public class PickUpItem : MonoBehaviour
 {
-    [SerializeField] AudioSource itemPickupSource;
     [SerializeField] AudioClip[] itemPickupClips;
     [SerializeField] public GameObject pickUpText;
 
     [SerializeField] int healthAmount;
-
-    Color originColorItem;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -36,10 +33,8 @@ public class PickUpItem : MonoBehaviour
     {
         int i = Random.Range(0, itemPickupClips.Length);
 
-        AudioManager.PlaySFX(itemPickupSource, itemPickupClips[i]);
-        yield return new WaitWhile(() => itemPickupSource.isPlaying);
-
-        Destroy(gameObject.transform.parent.gameObject);
+        AudioManager.PlaySFX(GameManager.instance.playerScript.playerHurtSource, itemPickupClips[i]);
+        yield return new WaitWhile(() => GameManager.instance.playerScript.playerHurtSource.isPlaying);
     }
     
     private void OnTriggerEnter(Collider other)
@@ -54,13 +49,15 @@ public class PickUpItem : MonoBehaviour
                 if(gameObject.transform.parent.tag == "Health") {
                     if (GameManager.instance.playerScript.currentHP < GameManager.instance.playerScript.maxHP) {
                         GameManager.instance.playerScript.Heal(healthAmount);
-                        Debug.Log("Healed " + healthAmount + " health.");
+                        //Debug.Log("Healed " + healthAmount + " health.");
                         StartCoroutine(ItemPickupSound());
+                        Destroy(gameObject.transform.parent.gameObject);
                     }
                 }
                 else if(gameObject.transform.parent.tag == "Ammo") {
                     GameManager.instance.weaponScript.PickUpAmmo();
                     StartCoroutine(ItemPickupSound());
+                    Destroy(gameObject.transform.parent.gameObject);
                 }
             }
         }
