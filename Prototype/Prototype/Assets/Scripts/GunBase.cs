@@ -102,6 +102,22 @@ public class GunBase : MonoBehaviour
         isReloading = false;
     }
 
+    //IEnumerator Reload()
+    //{
+    //    isReloading = true;
+    //    AudioManager.PlaySFX(gunSource, reloadClip1);
+    //    yield return new WaitForSeconds(.3f);
+    //    AudioManager.PlaySFX(gunSource, reloadClip2);
+    //    yield return new WaitForSeconds(.3f);
+    //    currentAmmo = magSize;
+    //    magCount--;
+    //    gunList[gunListIndex].currentAmmo = magSize;
+    //    gunList[gunListIndex].magCount--;
+
+    //    UpdateAmmo();
+    //    isReloading = false;
+    //}
+
     public void PickUpAmmo()
     {
         magCount++;
