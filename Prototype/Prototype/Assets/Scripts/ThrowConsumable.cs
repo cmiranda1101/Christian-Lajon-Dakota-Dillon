@@ -15,6 +15,7 @@ public class ThrowConsumable : MonoBehaviour
     public int chemlightDuration;
 
     public GameObject molotovPrefab;
+    public AudioClip molotovThrowClip;
     public int molotovCount;
 
     public GameObject grenadePrefab;
@@ -98,6 +99,7 @@ public class ThrowConsumable : MonoBehaviour
             GameObject molotov = Instantiate(molotovPrefab, throwPoint.position, throwPoint.rotation);
             Rigidbody rb = molotov.GetComponent<Rigidbody>();
             rb.AddForce(throwPoint.forward * throwForce, ForceMode.Impulse);
+            AudioManager.PlaySFX(throwingAudioSource, molotovThrowClip);
             molotovCount--;
             GameManager.instance.molotovCounter.text = molotovCount.ToString();
         }
