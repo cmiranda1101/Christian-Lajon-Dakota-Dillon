@@ -118,12 +118,10 @@ public class GunBase : MonoBehaviour
 
     IEnumerator ReloadGun()
     {
-        gunSource.clip = reloadClip1;
-        gunSource.Play();
+        AudioManager.PlaySFX(gunSource, reloadClip1);
         yield return new WaitWhile(() => gunSource.isPlaying);
-        yield return new WaitForSeconds(0.2f);
-        gunSource.clip = reloadClip2;
-        gunSource.Play();
+       // yield return new WaitForSeconds(0.2f);
+        AudioManager.PlaySFX(gunSource, reloadClip2);
     }
 
     void SelectGun()
