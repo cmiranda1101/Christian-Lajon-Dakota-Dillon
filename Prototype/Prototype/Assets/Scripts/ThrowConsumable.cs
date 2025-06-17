@@ -43,7 +43,7 @@ public class ThrowConsumable : MonoBehaviour
         {
             ThrowMolotov();
         } 
-        if (Input.GetButtonDown("Throw Molotov") && currentType == GrenadeType.Frag)
+        else if (Input.GetButtonDown("Throw Molotov") && currentType == GrenadeType.Frag)
         {
             ThrowGrenade();
         }
