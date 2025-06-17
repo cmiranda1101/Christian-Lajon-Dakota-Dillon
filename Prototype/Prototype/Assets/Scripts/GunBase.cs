@@ -23,6 +23,8 @@ public class GunBase : MonoBehaviour
     [SerializeField] public int startingMagCount;
     [SerializeField] public int magCount;
 
+    bool isReloading = false;
+
     float shotTimer = 0;
     public int gunListIndex = 0;
 
@@ -36,15 +38,14 @@ public class GunBase : MonoBehaviour
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * range, Color.blue);
         shotTimer += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && currentAmmo > 0 && shotTimer > fireRate)
+        if (Input.GetButtonDown("Fire1") && currentAmmo > 0 && shotTimer > fireRate && !isReloading)
         {
             Fire();
             UpdateAmmo();
         }
-        if (Input.GetButtonDown("Reload") && currentAmmo != magSize && magCount > 0)
+        if (Input.GetButtonDown("Reload") && currentAmmo != magSize && magCount > 0 && !isReloading)
         {
-            Reload();
-            UpdateAmmo();
+            StartCoroutine(Reload());
         }
         SelectGun();
     }
@@ -84,18 +85,21 @@ public class GunBase : MonoBehaviour
         }
     }
 
-    void Reload()
+    IEnumerator Reload()
     {
-        if (Time.timeScale > 0)
-        {
-            currentAmmo = magSize;
-            magCount--;
-            gunList[gunListIndex].currentAmmo = magSize;
-            gunList[gunListIndex].magCount--;
-            Debug.Log("Reloaded " + magCount + " magazines remaining");
-            StartCoroutine(ReloadGun());
-            UpdateAmmo();
-        }
+        isReloading = true;
+        AudioManager.PlaySFX(gunSource, reloadClip1);
+        yield return new WaitWhile(() => gunSource.isPlaying);
+        AudioManager.PlaySFX(gunSource, reloadClip2);
+        yield return new WaitWhile(() => gunSource.isPlaying);
+
+        currentAmmo = magSize;
+        magCount--;
+        gunList[gunListIndex].currentAmmo = magSize;
+        gunList[gunListIndex].magCount--;
+        
+        UpdateAmmo();
+        isReloading = false;
     }
 
     public void PickUpAmmo()
@@ -116,13 +120,13 @@ public class GunBase : MonoBehaviour
         GameManager.instance.ammoScript.UpdateAmmoAndMagCount();
     }
 
-    IEnumerator ReloadGun()
-    {
-        AudioManager.PlaySFX(gunSource, reloadClip1);
-        yield return new WaitWhile(() => gunSource.isPlaying);
-       // yield return new WaitForSeconds(0.2f);
-        AudioManager.PlaySFX(gunSource, reloadClip2);
-    }
+    //IEnumerator ReloadGun()
+    //{
+        
+    //    yield return new WaitWhile(() => gunSource.isPlaying);
+    //   // yield return new WaitForSeconds(0.2f);
+    //    AudioManager.PlaySFX(gunSource, reloadClip2);
+    //}
 
     void SelectGun()
     {
