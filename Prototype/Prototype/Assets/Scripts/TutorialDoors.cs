@@ -7,21 +7,32 @@ public class TutorialDoors : MonoBehaviour
     [SerializeField] objectiveType type;
     [SerializeField] GameObject[] objectives;
     [SerializeField] string buttonInputString;
+    [SerializeField] float moveSpeed;
 
     bool objectiveCompleted;
     bool inInputZone = false;
+
+    Vector3 startingPos;
+
+    private void Start()
+    {
+        startingPos = transform.position;
+    }
     private void Update()
     {
-        if (type == objectiveType.pickup || type == objectiveType.kill)
+        if (!objectiveCompleted)
         {
-            objectiveCompleted = CheckObjectivesList();
-        }
-        else if (type == objectiveType.buttonInput && inInputZone)
-        {
-            objectiveCompleted = CheckInput();
-        }
+            if (type == objectiveType.pickup || type == objectiveType.kill)
+            {
+                objectiveCompleted = CheckObjectivesList();
+            }
+            else if (type == objectiveType.buttonInput && inInputZone)
+            {
+                objectiveCompleted = CheckInput();
+            }
 
-        if (objectiveCompleted)
+        }
+        else
         {
             OpenDoor();
         }
@@ -52,7 +63,7 @@ public class TutorialDoors : MonoBehaviour
 
     void OpenDoor()
     {
-        Destroy(gameObject);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(startingPos.x + 15, startingPos.y, startingPos.z), moveSpeed);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,7 +72,7 @@ public class TutorialDoors : MonoBehaviour
         {
             if (type == objectiveType.goTo)
             {
-                OpenDoor();
+                objectiveCompleted = true;
             }
             else
             {
