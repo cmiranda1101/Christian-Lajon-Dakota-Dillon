@@ -329,6 +329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall Lurker (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2249002442975255027, guid: cfd3dedd9fd0bcb449d254b47ba5292d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7612829516938586570, guid: cfd3dedd9fd0bcb449d254b47ba5292d, type: 3}
       propertyPath: walkSource
       value: 
@@ -349,6 +353,10 @@ PrefabInstance:
     - target: {fileID: 612491468190442513, guid: f7b2aed4fc16cfc40a2e498bc5bbb57e, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 612491468190442513, guid: f7b2aed4fc16cfc40a2e498bc5bbb57e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9214835478406400877, guid: f7b2aed4fc16cfc40a2e498bc5bbb57e, type: 3}
       propertyPath: m_Pivot.x
@@ -621,7 +629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7838232156644079281, guid: 1d6efb1f1d84e634e998633c704fe9e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -19.52
       objectReference: {fileID: 0}
     - target: {fileID: 7838232156644079281, guid: 1d6efb1f1d84e634e998633c704fe9e7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -629,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7838232156644079281, guid: 1d6efb1f1d84e634e998633c704fe9e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 13.16
       objectReference: {fileID: 0}
     - target: {fileID: 7838232156644079281, guid: 1d6efb1f1d84e634e998633c704fe9e7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -664,6 +672,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d6efb1f1d84e634e998633c704fe9e7, type: 3}
+--- !u!1001 &952719943
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6398045975617966071, guid: e2f40ec711fa7994b9eb258b8045f8ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.119938
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398045975617966071, guid: e2f40ec711fa7994b9eb258b8045f8ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000009536743
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398045975617966071, guid: e2f40ec711fa7994b9eb258b8045f8ed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.633695
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398045975617966071, guid: e2f40ec711fa7994b9eb258b8045f8ed, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398045975617966071, guid: e2f40ec711fa7994b9eb258b8045f8ed, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398045975617966071, guid: e2f40ec711fa7994b9eb258b8045f8ed, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398045975617966071, guid: e2f40ec711fa7994b9eb258b8045f8ed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398045975617966071, guid: e2f40ec711fa7994b9eb258b8045f8ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398045975617966071, guid: e2f40ec711fa7994b9eb258b8045f8ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398045975617966071, guid: e2f40ec711fa7994b9eb258b8045f8ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8678811498785501805, guid: e2f40ec711fa7994b9eb258b8045f8ed, type: 3}
+      propertyPath: m_Name
+      value: LevelExit
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e2f40ec711fa7994b9eb258b8045f8ed, type: 3}
 --- !u!1001 &976495913
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1200,6 +1265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: (Melee) monster_scavenger_Skin_Red Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1129116971010470586, guid: b0fb0fcaef7cbf042884e0c7222e8026, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1597,3 +1666,4 @@ SceneRoots:
   - {fileID: 1689995981}
   - {fileID: 2155185036010482205}
   - {fileID: 262361770}
+  - {fileID: 952719943}
