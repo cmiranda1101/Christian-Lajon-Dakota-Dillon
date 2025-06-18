@@ -10,6 +10,7 @@ public class GunBase : MonoBehaviour
     [SerializeField] public List<GunStats> gunList = new List<GunStats>();
     [SerializeField] GameObject gunModel;
     [SerializeField]AudioSource gunSource;
+    [SerializeField] AudioClip emptyClip;
     AudioClip[] shotClips;
     AudioClip reloadClip1;
     AudioClip reloadClip2;
@@ -42,6 +43,10 @@ public class GunBase : MonoBehaviour
         {
             Fire();
             UpdateAmmo();
+        } 
+        else if (Input.GetButtonDown("Fire1") && currentAmmo <= 0)
+        {
+            AudioManager.PlaySFX(gunSource, emptyClip);
         }
         if (Input.GetButtonDown("Reload") && currentAmmo != magSize && magCount > 0 && !isReloading)
         {
@@ -89,34 +94,17 @@ public class GunBase : MonoBehaviour
     {
         isReloading = true;
         AudioManager.PlaySFX(gunSource, reloadClip1);
-        yield return new WaitWhile(() => gunSource.isPlaying);
+        yield return new WaitForSeconds(.3f);
         AudioManager.PlaySFX(gunSource, reloadClip2);
-        yield return new WaitWhile(() => gunSource.isPlaying);
-
+        yield return new WaitForSeconds(.3f);
         currentAmmo = magSize;
         magCount--;
         gunList[gunListIndex].currentAmmo = magSize;
         gunList[gunListIndex].magCount--;
-        
+
         UpdateAmmo();
         isReloading = false;
     }
-
-    //IEnumerator Reload()
-    //{
-    //    isReloading = true;
-    //    AudioManager.PlaySFX(gunSource, reloadClip1);
-    //    yield return new WaitForSeconds(.3f);
-    //    AudioManager.PlaySFX(gunSource, reloadClip2);
-    //    yield return new WaitForSeconds(.3f);
-    //    currentAmmo = magSize;
-    //    magCount--;
-    //    gunList[gunListIndex].currentAmmo = magSize;
-    //    gunList[gunListIndex].magCount--;
-
-    //    UpdateAmmo();
-    //    isReloading = false;
-    //}
 
     public void PickUpAmmo()
     {
@@ -135,14 +123,6 @@ public class GunBase : MonoBehaviour
     {
         GameManager.instance.ammoScript.UpdateAmmoAndMagCount();
     }
-
-    //IEnumerator ReloadGun()
-    //{
-        
-    //    yield return new WaitWhile(() => gunSource.isPlaying);
-    //   // yield return new WaitForSeconds(0.2f);
-    //    AudioManager.PlaySFX(gunSource, reloadClip2);
-    //}
 
     void SelectGun()
     {
