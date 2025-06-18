@@ -546,7 +546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -10.34
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       propertyPath: m_LocalPosition.y
@@ -554,11 +554,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 8.68
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       propertyPath: m_LocalRotation.x
@@ -566,7 +566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       propertyPath: m_LocalRotation.z
@@ -578,7 +578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -610,7 +610,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       insertIndex: 1
-      addedObject: {fileID: 8295707683518796768}
+      addedObject: {fileID: 7612829516938586570}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       insertIndex: -1
       addedObject: {fileID: 44973147664353270}
@@ -642,11 +642,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400196, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
   m_PrefabInstance: {fileID: 2249002442975289171}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2249002442974889065 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400186, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
-  m_PrefabInstance: {fileID: 2249002442975289171}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2249002442974889115 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400328, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
@@ -662,12 +657,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400256, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
   m_PrefabInstance: {fileID: 2249002442975289171}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &2249002442974889435 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400008, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
+  m_PrefabInstance: {fileID: 2249002442975289171}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2249002442975255027 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
   m_PrefabInstance: {fileID: 2249002442975289171}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8295707683518796768
+--- !u!114 &7612829516938586570
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -676,30 +676,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 2249002442975255027}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6678a3c60fa78e54bbc4f6cb1f79115a, type: 3}
+  m_Script: {fileID: 11500000, guid: abb1905aaa64a23458e604107314a1a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSource: {fileID: 7215820869170678332}
-  weaponSource: {fileID: 1870856001506740206}
+  walkSource: {fileID: 0}
+  weaponSource: {fileID: 7215820869170678332}
   walkClips:
   - {fileID: 8300000, guid: 1f0199a4c6005ec4abbb302f71bc036d, type: 3}
   - {fileID: 8300000, guid: 53e2adf2ac488ef46bb2b4074de9e363, type: 3}
   - {fileID: 8300000, guid: a03a96c5d1e99b4409ddd79098abd9ab, type: 3}
   - {fileID: 8300000, guid: 7187dc81f98b8be4eb97bfc4dd9a5abf, type: 3}
   - {fileID: 8300000, guid: e3cfcb32689b274419ac73380ea96888, type: 3}
-  weaponClips:
-  - {fileID: 8300000, guid: c5955b1ca51d47245ae5e5e10395d910, type: 3}
-  - {fileID: 8300000, guid: d8bf57a57cb4a7e4a97d06ab4b136fca, type: 3}
-  - {fileID: 8300000, guid: bf685e2b67465c64c8f5efdc5b241fd1, type: 3}
+  weaponClips: []
   model: {fileID: 2249002442972075251}
   agent: {fileID: 44973147664353270}
   anim: {fileID: 2249002442968001075}
-  headPos: {fileID: 2249002442974889065}
-  meleeHitBox:
-  - {fileID: 8834694915500639346}
-  - {fileID: 2086163288778012976}
-  - {fileID: 1986793200428360387}
-  - {fileID: 5657398236903189491}
+  headPos: {fileID: 2249002442974889435}
+  meleeHitBox: []
   HP: 6
   meleeRange: 4
   meleeDamage: 0

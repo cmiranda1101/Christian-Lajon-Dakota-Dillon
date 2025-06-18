@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
+public class EnemyAILurker : MonoBehaviour, IDamage, IHeardSomething
 {
     [SerializeField] AudioSource walkSource;
     [SerializeField] AudioSource weaponSource;
@@ -64,7 +64,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
         player = GameManager.instance.player.transform;
 
         patrolOrigin = transform.position;
-        agent.stoppingDistance = meleeRange * 0.9f; // stops a bit before melee range
+        agent.stoppingDistance = 0f; 
     }
 
     void Update()
@@ -191,9 +191,23 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
     void HandleChase()
     {
         isMoving = true;
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
-        Vector3 targetPosition = player.position - directionToPlayer * agent.stoppingDistance;
 
+        Vector3 directionToPlayer = (player.position - transform.position).normalized;
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        
+        if (distanceToPlayer <= meleeRange)
+        {
+            
+            agent.stoppingDistance = meleeRange * 0.9f;
+        }
+        else
+        {
+            
+            agent.stoppingDistance = 0f;
+        }
+
+        
         agent.SetDestination(player.position);
 
         if (agent.remainingDistance <= agent.stoppingDistance + 0.1f)
@@ -203,6 +217,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
             MeleeAttack();
         }
     }
+
     void FacePlayer()
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
