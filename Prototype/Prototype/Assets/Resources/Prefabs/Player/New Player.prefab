@@ -87,6 +87,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 79f2e042a17f2904793b177af9f0eb94, type: 2}
   gunModel: {fileID: 230331229482220029}
   gunSource: {fileID: 2256670992295475231}
+  emptyClip: {fileID: 8300000, guid: 526eefc86463358579585529cc578a9c, type: 3}
   damage: 0
   fireRate: 0
   range: 0
@@ -604,6 +605,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7fe15d4db4a29d1469bd4ed990193ae5, type: 3}
   - {fileID: 8300000, guid: 9975ae95e627b604299e43cdcf05e788, type: 3}
   - {fileID: 8300000, guid: 84d366cecc96ddb49a2a7036586e7b61, type: 3}
+  playerDodgeClip: {fileID: 8300000, guid: 9b1bc083263bf094c93513f04dd6fb30, type: 3}
   walkRate: 0.75
   dodgeSpeed: 12
   dodgeDuration: 0.3
@@ -4754,6 +4756,7 @@ MonoBehaviour:
   chemlightCount: 5
   chemlightDuration: 5
   molotovPrefab: {fileID: 7850931886307771287, guid: b00309bdb025e894c9218cb76757ddfb, type: 3}
+  molotovThrowClip: {fileID: 8300000, guid: 74a0a32737ea48741aafc04d79bdead6, type: 3}
   molotovCount: 0
   grenadePrefab: {fileID: 3742748739083067511, guid: 9560cfe478da148459867aa2c651f985, type: 3}
   grenadeExplosionPrefab: {fileID: 5238538877814813142, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}

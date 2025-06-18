@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     [SerializeField] public AudioSource playerHurtSource;
     [SerializeField] AudioClip[] footStepClip;
     [SerializeField] AudioClip[] playerHurtClips;
+    [SerializeField] AudioClip playerDodgeClip;
     [SerializeField] float walkRate;
     float walkRateOG;
     float walkTimer;
@@ -213,6 +214,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     IEnumerator Dodge()
     {
         if (dodgeTimer >= dodgeCooldown) {
+            AudioManager.PlaySFX(playerHurtSource, playerDodgeClip);
             dodgeTimer = 0;
             float originalSpeed = speed;
             speed = dodgeSpeed;
@@ -229,11 +231,13 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             anim.SetBool("isSprinting", !sprinting);
 
             if (anim.GetBool("isSprinting")) {
+                walkRate = walkRate / 2;
                 speed = speed * sprintSpeed;
                 StartCoroutine(Stamina());
             }
             else {
                 speed = speedOG;
+                walkRate = walkRateOG;
             }
         }
     }
@@ -246,6 +250,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             {
                 anim.SetBool("isSprinting", false);
                 speed = speedOG;
+                walkRate = walkRateOG;
             }
             currentStamina = Mathf.Clamp(currentStamina -= staminaDrain, 0, maxStamina);
             GameManager.instance.staminaBar.fillAmount = currentStamina / maxStamina;

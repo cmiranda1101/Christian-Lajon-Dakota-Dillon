@@ -1,13 +1,16 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System.Security.Cryptography;
 
-public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
+public class EnemyAILurker : MonoBehaviour, IDamage, IHeardSomething
 {
     [SerializeField] AudioSource walkSource;
     [SerializeField] AudioSource weaponSource;
+    [SerializeField] AudioSource screechSource;
     [SerializeField] AudioClip[] walkClips;
     [SerializeField] AudioClip[] weaponClips;
+    [SerializeField] AudioClip screechClip;
 
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
@@ -58,13 +61,15 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
     float animationCurr;
     float agentSpeedCurr;
 
+    bool hasScreeched = false;
+
     void Start()
     {
         originalColor = model.material.color;
         player = GameManager.instance.player.transform;
 
         patrolOrigin = transform.position;
-        agent.stoppingDistance = meleeRange * 0.9f; // stops a bit before melee range
+        agent.stoppingDistance = 0f; 
     }
 
     void Update()
@@ -175,7 +180,16 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
     // Start chasing the player
     void StartChasing()
     {
-        isChasing = true;
+        if (!isChasing)
+        {
+            isChasing = true;
+
+            if (!hasScreeched && screechSource != null && screechClip != null)
+            {
+                AudioManager.PlaySFX(screechSource, screechClip);
+                hasScreeched = true;
+            }
+        }
     }
 
     // Continue chasing after losing sight for a while
@@ -184,16 +198,32 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
         if (Vector3.Distance(transform.position, player.position) > patrolRadius)
         {
             isChasing = false;
+            hasScreeched = false; // reset for losing characters
         }
     }
+
 
     // Handle the actual chasing logic
     void HandleChase()
     {
         isMoving = true;
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
-        Vector3 targetPosition = player.position - directionToPlayer * agent.stoppingDistance;
 
+        Vector3 directionToPlayer = (player.position - transform.position).normalized;
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        
+        if (distanceToPlayer <= meleeRange)
+        {
+            
+            agent.stoppingDistance = meleeRange * 0.9f;
+        }
+        else
+        {
+            
+            agent.stoppingDistance = 0f;
+        }
+
+        
         agent.SetDestination(player.position);
 
         if (agent.remainingDistance <= agent.stoppingDistance + 0.1f)
@@ -203,6 +233,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
             MeleeAttack();
         }
     }
+
     void FacePlayer()
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
@@ -215,6 +246,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
         if (Time.time >= nextMeleeTime && distance <= meleeRange) {
            
             anim.SetTrigger("meleeAtk");
+            WeaponSound();
             nextMeleeTime = Time.time + meleeCooldown;
         }
     }
