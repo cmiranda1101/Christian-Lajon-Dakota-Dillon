@@ -6,6 +6,7 @@ public class ThrowConsumable : MonoBehaviour
     public enum GrenadeType {Molotov, Frag}
     public GrenadeType currentType;
 
+    public AudioSource throwingAudioSource;
     public Transform throwPoint;
     public float throwForce;
 
@@ -14,10 +15,13 @@ public class ThrowConsumable : MonoBehaviour
     public int chemlightDuration;
 
     public GameObject molotovPrefab;
+    public AudioClip molotovThrowClip;
     public int molotovCount;
 
     public GameObject grenadePrefab;
     public GameObject grenadeExplosionPrefab;
+    public AudioClip grenadeExplosionClip;
+    public AudioClip grenadeThrowClip;
     public float grenadeFuze;
     public int grenadeCount;
 
@@ -95,6 +99,7 @@ public class ThrowConsumable : MonoBehaviour
             GameObject molotov = Instantiate(molotovPrefab, throwPoint.position, throwPoint.rotation);
             Rigidbody rb = molotov.GetComponent<Rigidbody>();
             rb.AddForce(throwPoint.forward * throwForce, ForceMode.Impulse);
+            AudioManager.PlaySFX(throwingAudioSource, molotovThrowClip);
             molotovCount--;
             GameManager.instance.molotovCounter.text = molotovCount.ToString();
         }
@@ -116,6 +121,7 @@ public class ThrowConsumable : MonoBehaviour
             GameObject grenade = Instantiate(grenadePrefab, throwPoint.position, throwPoint.rotation);
             Rigidbody rb = grenade.GetComponent<Rigidbody>();
             rb.AddForce(throwPoint.forward * throwForce * 2, ForceMode.Impulse);
+            AudioManager.PlaySFX(throwingAudioSource, grenadeThrowClip);
             grenadeCount--;
             GameManager.instance.grenadeCounter.text = grenadeCount.ToString();
             StartCoroutine(GrenadeExplosion(grenade));
@@ -141,6 +147,8 @@ public class ThrowConsumable : MonoBehaviour
             yield return null; 
         }
         GameObject explosion = Instantiate(grenadeExplosionPrefab, grenade.transform.position, grenade.transform.rotation);
+        AudioSource audioSource = explosion.GetComponent<AudioSource>();
+        AudioManager.PlaySFX(audioSource, grenadeExplosionClip);
         Destroy(grenade);
     }
     

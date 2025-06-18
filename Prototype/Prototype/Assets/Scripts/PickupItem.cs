@@ -8,19 +8,17 @@ using System.Collections;
 
 public class PickUpItem : MonoBehaviour
 {
-    [SerializeField] Renderer itemModel;
+    [SerializeField] AudioClip[] itemPickupClips;
     [SerializeField] public GameObject pickUpText;
 
     [SerializeField] int healthAmount;
-
-    Color originColorItem;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        itemModel = gameObject.GetComponentInParent<MeshRenderer>();
-        originColorItem = itemModel.material.color;
+        //aitemModel = gameObject.GetComponentInParent<MeshRenderer>();
+        //aoriginColorItem = itemModel.material.color;
     }
 
     // Update is called once per frame
@@ -31,15 +29,12 @@ public class PickUpItem : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * 100);
     }
 
-    IEnumerator ItemPickupFlash()
+    IEnumerator ItemPickupSound()
     {
-        //Give feedback on interaction
-        itemModel.material.color = Color.white;
-        yield return new WaitForSeconds(0.2f);
-        itemModel.material.color = originColorItem;
+        int i = Random.Range(0, itemPickupClips.Length);
 
-        //Destroy obj
-        Destroy(gameObject.transform.parent.gameObject);
+        AudioManager.PlaySFX(GameManager.instance.playerScript.playerHurtSource, itemPickupClips[i]);
+        yield return new WaitWhile(() => GameManager.instance.playerScript.playerHurtSource.isPlaying);
     }
     
     private void OnTriggerEnter(Collider other)
@@ -54,13 +49,15 @@ public class PickUpItem : MonoBehaviour
                 if(gameObject.transform.parent.tag == "Health") {
                     if (GameManager.instance.playerScript.currentHP < GameManager.instance.playerScript.maxHP) {
                         GameManager.instance.playerScript.Heal(healthAmount);
-                        Debug.Log("Healed " + healthAmount + " health.");
-                        StartCoroutine(ItemPickupFlash());
+                        //Debug.Log("Healed " + healthAmount + " health.");
+                        StartCoroutine(ItemPickupSound());
+                        Destroy(gameObject.transform.parent.gameObject);
                     }
                 }
                 else if(gameObject.transform.parent.tag == "Ammo") {
                     GameManager.instance.weaponScript.PickUpAmmo();
-                    StartCoroutine(ItemPickupFlash());
+                    StartCoroutine(ItemPickupSound());
+                    Destroy(gameObject.transform.parent.gameObject);
                 }
             }
         }

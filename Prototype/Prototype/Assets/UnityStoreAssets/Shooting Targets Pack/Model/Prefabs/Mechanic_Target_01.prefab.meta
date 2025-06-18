@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ce2a725dbdbb6ae4f88537a9bc266d8c
+timeCreated: 1534689674
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 126292
+  packageName: Shooting Targets Pack
+  packageVersion: 1.0
+  assetPath: Assets/Shooting Targets Pack/Model/Prefabs/Mechanic_Target_01.prefab
+  uploadId: 261964

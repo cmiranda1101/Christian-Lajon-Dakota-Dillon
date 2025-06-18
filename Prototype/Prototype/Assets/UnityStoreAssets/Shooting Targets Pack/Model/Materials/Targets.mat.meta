@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 47a6886861d95cc4d9e0880f9c898c52
+timeCreated: 1534508680
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 126292
+  packageName: Shooting Targets Pack
+  packageVersion: 1.0
+  assetPath: Assets/Shooting Targets Pack/Model/Materials/Targets.mat
+  uploadId: 261964
