@@ -1139,10 +1139,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: (Melee) monster_scavenger_Skin_Red Variant (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1129116971010470586, guid: b0fb0fcaef7cbf042884e0c7222e8026, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1459,7 +1455,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2249002442974889427, guid: cfd3dedd9fd0bcb449d254b47ba5292d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.084409
+      value: -10.34
       objectReference: {fileID: 0}
     - target: {fileID: 2249002442974889427, guid: cfd3dedd9fd0bcb449d254b47ba5292d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1467,7 +1463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2249002442974889427, guid: cfd3dedd9fd0bcb449d254b47ba5292d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.2093554
+      value: 8.68
       objectReference: {fileID: 0}
     - target: {fileID: 2249002442974889427, guid: cfd3dedd9fd0bcb449d254b47ba5292d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1501,11 +1497,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall Lurker
       objectReference: {fileID: 0}
-    - target: {fileID: 2249002442975255027, guid: cfd3dedd9fd0bcb449d254b47ba5292d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8295707683518796768, guid: cfd3dedd9fd0bcb449d254b47ba5292d, type: 3}
+    - target: {fileID: 7612829516938586570, guid: cfd3dedd9fd0bcb449d254b47ba5292d, type: 3}
       propertyPath: walkSource
       value: 
       objectReference: {fileID: 1867049894}
