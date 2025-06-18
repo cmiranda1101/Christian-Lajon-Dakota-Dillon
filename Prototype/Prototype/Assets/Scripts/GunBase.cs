@@ -15,6 +15,8 @@ public class GunBase : MonoBehaviour
     AudioClip reloadClip1;
     AudioClip reloadClip2;
 
+    [SerializeField] GameObject bloodSplatter;
+    [SerializeField] GameObject debrisSplatter;
 
     [SerializeField] int damage;
     [SerializeField] float fireRate;
@@ -67,6 +69,7 @@ public class GunBase : MonoBehaviour
                 IDamage damaged = hit.collider.GetComponent<IDamage>();
                 if (hit.collider.name == "CritSpot")
                 {
+                    Instantiate(bloodSplatter, hit.point, Quaternion.identity);
                     IDamage critical = hit.collider.GetComponentInParent<IDamage>();
                     if(critical != null)
                     {
@@ -75,7 +78,16 @@ public class GunBase : MonoBehaviour
                 }
                 else if (damaged != null)
                 {
+                    if(hit.collider.CompareTag("Enemy"))
+                    {
+                        Instantiate(bloodSplatter, hit.point, Quaternion.identity);
+                    }
+                    Instantiate(debrisSplatter, hit.point, Quaternion.identity);
                     damaged.takeDamage(damage);
+                } 
+                else
+                {
+                    Instantiate(debrisSplatter, hit.point, Quaternion.identity);
                 }
             }
             StartCoroutine(GameManager.instance.playerScript.MuzzleFlash());

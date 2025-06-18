@@ -4907,7 +4907,7 @@ GameObject:
   - component: {fileID: 8799392112732218546}
   - component: {fileID: -407117672707927760}
   m_Layer: 0
-  m_Name: 'Basic Hit '
+  m_Name: Grenade Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
