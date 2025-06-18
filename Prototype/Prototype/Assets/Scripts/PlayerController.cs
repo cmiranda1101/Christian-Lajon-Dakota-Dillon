@@ -229,11 +229,13 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             anim.SetBool("isSprinting", !sprinting);
 
             if (anim.GetBool("isSprinting")) {
+                walkRate = walkRate / 2;
                 speed = speed * sprintSpeed;
                 StartCoroutine(Stamina());
             }
             else {
                 speed = speedOG;
+                walkRate = walkRateOG;
             }
         }
     }
@@ -246,6 +248,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             {
                 anim.SetBool("isSprinting", false);
                 speed = speedOG;
+                walkRate = walkRateOG;
             }
             currentStamina = Mathf.Clamp(currentStamina -= staminaDrain, 0, maxStamina);
             GameManager.instance.staminaBar.fillAmount = currentStamina / maxStamina;
