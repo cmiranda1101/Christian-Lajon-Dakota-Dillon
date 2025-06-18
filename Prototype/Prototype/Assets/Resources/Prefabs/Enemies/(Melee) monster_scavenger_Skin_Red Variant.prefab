@@ -448,9 +448,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 19d07bb6bdfbaae43acf30893876bba4, type: 3}
   - {fileID: 8300000, guid: e97a8da4003210f41ab64be2f49d795e, type: 3}
   weaponClips:
-  - {fileID: 8300000, guid: c5955b1ca51d47245ae5e5e10395d910, type: 3}
-  - {fileID: 8300000, guid: d8bf57a57cb4a7e4a97d06ab4b136fca, type: 3}
-  - {fileID: 8300000, guid: bf685e2b67465c64c8f5efdc5b241fd1, type: 3}
+  - {fileID: 8300000, guid: 5ce9f31363bddee4db259f847d373c78, type: 3}
+  - {fileID: 8300000, guid: 4ac1f6675faabfc4a85d669386cfe983, type: 3}
   model: {fileID: 671024806778216571}
   agent: {fileID: 5789947824650888727}
   anim: {fileID: 5857495479187558530}

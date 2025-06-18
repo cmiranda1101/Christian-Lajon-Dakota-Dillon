@@ -227,6 +227,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
         if (Time.time >= nextMeleeTime && distance <= meleeRange) {
            
             anim.SetTrigger("meleeAtk");
+            WeaponSound();
             nextMeleeTime = Time.time + meleeCooldown;
         }
     }
