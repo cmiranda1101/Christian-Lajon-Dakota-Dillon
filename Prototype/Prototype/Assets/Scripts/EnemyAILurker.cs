@@ -1,13 +1,16 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System.Security.Cryptography;
 
 public class EnemyAILurker : MonoBehaviour, IDamage, IHeardSomething
 {
     [SerializeField] AudioSource walkSource;
     [SerializeField] AudioSource weaponSource;
+    [SerializeField] AudioSource screechSource;
     [SerializeField] AudioClip[] walkClips;
     [SerializeField] AudioClip[] weaponClips;
+    [SerializeField] AudioClip screechClip;
 
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
@@ -57,6 +60,8 @@ public class EnemyAILurker : MonoBehaviour, IDamage, IHeardSomething
 
     float animationCurr;
     float agentSpeedCurr;
+
+    bool hasScreeched = false;
 
     void Start()
     {
@@ -175,7 +180,16 @@ public class EnemyAILurker : MonoBehaviour, IDamage, IHeardSomething
     // Start chasing the player
     void StartChasing()
     {
-        isChasing = true;
+        if (!isChasing)
+        {
+            isChasing = true;
+
+            if (!hasScreeched && screechSource != null && screechClip != null)
+            {
+                AudioManager.PlaySFX(screechSource, screechClip);
+                hasScreeched = true;
+            }
+        }
     }
 
     // Continue chasing after losing sight for a while
@@ -184,8 +198,10 @@ public class EnemyAILurker : MonoBehaviour, IDamage, IHeardSomething
         if (Vector3.Distance(transform.position, player.position) > patrolRadius)
         {
             isChasing = false;
+            hasScreeched = false; // reset for losing characters
         }
     }
+
 
     // Handle the actual chasing logic
     void HandleChase()
@@ -230,6 +246,7 @@ public class EnemyAILurker : MonoBehaviour, IDamage, IHeardSomething
         if (Time.time >= nextMeleeTime && distance <= meleeRange) {
            
             anim.SetTrigger("meleeAtk");
+            WeaponSound();
             nextMeleeTime = Time.time + meleeCooldown;
         }
     }
