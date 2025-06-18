@@ -4,6 +4,7 @@ using UnityEngine;
 public class PickupBoxes : MonoBehaviour, IDamage, IInteract
 {
     [SerializeField] GameObject[] pickupList;
+    [SerializeField] GameObject breakEffect;
 
     Transform spawnSpot;
 
@@ -13,17 +14,21 @@ public class PickupBoxes : MonoBehaviour, IDamage, IInteract
     }
     public void takeDamage(int amount)
     {
-        Destroy(gameObject);
+        Instantiate(breakEffect, spawnSpot.position, Quaternion.identity);
 
         int i = Random.Range(0, pickupList.Length);
         Instantiate(pickupList[i], spawnSpot.position, Quaternion.identity);
+
+        Destroy(gameObject);
     }
 
     public void Interact()
     {
-        Destroy(gameObject);
+        Instantiate(breakEffect, spawnSpot.position, Quaternion.identity);
 
         int i = Random.Range(0, pickupList.Length);
         Instantiate(pickupList[i], spawnSpot.position, Quaternion.identity);
+
+        Destroy(gameObject);
     }
 }
