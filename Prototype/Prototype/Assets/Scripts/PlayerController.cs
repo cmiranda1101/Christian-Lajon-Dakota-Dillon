@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     [SerializeField] public AudioSource playerHurtSource;
     [SerializeField] AudioClip[] footStepClip;
     [SerializeField] AudioClip[] playerHurtClips;
+    [SerializeField] AudioClip playerDodgeClip;
     [SerializeField] float walkRate;
     float walkRateOG;
     float walkTimer;
@@ -213,6 +214,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     IEnumerator Dodge()
     {
         if (dodgeTimer >= dodgeCooldown) {
+            AudioManager.PlaySFX(playerHurtSource, playerDodgeClip);
             dodgeTimer = 0;
             float originalSpeed = speed;
             speed = dodgeSpeed;

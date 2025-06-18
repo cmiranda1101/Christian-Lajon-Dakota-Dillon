@@ -604,6 +604,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7fe15d4db4a29d1469bd4ed990193ae5, type: 3}
   - {fileID: 8300000, guid: 9975ae95e627b604299e43cdcf05e788, type: 3}
   - {fileID: 8300000, guid: 84d366cecc96ddb49a2a7036586e7b61, type: 3}
+  playerDodgeClip: {fileID: 8300000, guid: 9b1bc083263bf094c93513f04dd6fb30, type: 3}
   walkRate: 0.75
   dodgeSpeed: 12
   dodgeDuration: 0.3
