@@ -133,6 +133,7 @@ MonoBehaviour:
   - {fileID: 6458955547078232510, guid: aa296e911bc428a48aaf1cc72d8f082f, type: 3}
   - {fileID: 6458955547078232510, guid: aa296e911bc428a48aaf1cc72d8f082f, type: 3}
   - {fileID: 4415346642384442089, guid: fcb21ce053602b5499b0670813fc2318, type: 3}
+  breakEffect: {fileID: 683309054317219416, guid: 31339753ac21c674ba99dbb5e4340575, type: 3}
 --- !u!208 &8502352848001510299
 NavMeshObstacle:
   m_ObjectHideFlags: 0
