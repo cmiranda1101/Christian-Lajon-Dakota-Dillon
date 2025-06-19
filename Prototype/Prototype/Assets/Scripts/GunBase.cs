@@ -81,9 +81,13 @@ public class GunBase : MonoBehaviour
                     if(hit.collider.CompareTag("Enemy"))
                     {
                         Instantiate(bloodSplatter, hit.point, Quaternion.identity);
+                        damaged.takeDamage(damage);
                     }
-                    Instantiate(debrisSplatter, hit.point, Quaternion.identity);
-                    damaged.takeDamage(damage);
+                    else
+                    {
+                        Instantiate(debrisSplatter, hit.point, Quaternion.identity);
+                        damaged.takeDamage(damage);
+                    }
                 } 
                 else
                 {
