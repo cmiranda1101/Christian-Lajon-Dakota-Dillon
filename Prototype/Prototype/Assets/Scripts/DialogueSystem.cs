@@ -7,10 +7,14 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] TextMeshPro textToShow;
     [SerializeField] AudioSource radioSquelch;
-    AudioClip radioChirp;
+    //AudioClip radioChirp;
 
     [SerializeField] float typeSpeed;
 
+    private void Start()
+    {
+        dialogueText = GameManager.instance.dialogueText;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
