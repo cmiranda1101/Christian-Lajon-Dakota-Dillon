@@ -14,6 +14,7 @@ public class ButtonFunctions : MonoBehaviour
 {
     //Main Menu Functionality
     [SerializeField] GameObject howToPlay;
+    [SerializeField] GameObject credits;
 
     //Shop Functionality
     [SerializeField] AudioSource buyAudio;
@@ -164,6 +165,28 @@ public class ButtonFunctions : MonoBehaviour
             GameManager.instance.grenadeCounter.text = GameManager.instance.playerScript.throwConsumable.grenadeCount.ToString();
             GameManager.instance.moneyScript.SubtractMoney(100);
         }
+    }
+
+    public void OnCreditsButton()
+    {
+        StartCoroutine(Credits());
+    }
+
+    IEnumerator Credits()
+    {
+        yield return StartCoroutine(UISound());
+        credits.SetActive(true);
+    }
+
+    public void OnCloseCreditsButton()
+    {
+        StartCoroutine(CloseCredits());
+    }
+
+    IEnumerator CloseCredits()
+    {
+        yield return StartCoroutine(UISound());
+        credits.SetActive(false);
     }
 
     public void OnNewGameButton()
