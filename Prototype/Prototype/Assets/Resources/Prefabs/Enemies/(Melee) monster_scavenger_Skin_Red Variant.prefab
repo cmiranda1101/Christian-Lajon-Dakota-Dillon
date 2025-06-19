@@ -456,7 +456,7 @@ MonoBehaviour:
   headPos: {fileID: 8711882414883773891}
   meleeHitBox:
   - {fileID: 3770972518530878303}
-  HP: 6
+  HP: 10
   meleeRange: 4
   meleeDamage: 0
   meleeCooldown: 2
