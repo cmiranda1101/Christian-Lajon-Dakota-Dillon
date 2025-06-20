@@ -324,7 +324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: facePlayerSpeed
-      value: 90
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: meleeHitBox.Array.size

@@ -462,6 +462,7 @@ MonoBehaviour:
   headPos: {fileID: 3178060966656452393}
   HP: 4
   facePlayerSpeed: 25
+  deadTime: 5
   shootingPos: {fileID: 7819396951557842620}
   bullet: {fileID: 2485194676518234941, guid: b83ad134937c084409cddd6fe6858ea8, type: 3}
   fireRate: 0.8
