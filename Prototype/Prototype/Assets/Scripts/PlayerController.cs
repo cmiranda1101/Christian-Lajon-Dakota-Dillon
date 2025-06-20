@@ -56,7 +56,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     float speedOG;
 
     [SerializeField] Transform headLocal;
-    Vector3 camPosOG;
+    [SerializeField] Transform altHeadLocal;
+    Transform headLocalOG;
 
     Vector3 moveDirection;
 
@@ -73,7 +74,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
         flashlight = GameObject.Find("FlashLight");
         dodgeTimer = dodgeCooldown;
         GameManager.instance.moneyScript.UpdateMoneyText();
-        camPosOG = MainCamera.transform.localPosition;
+        headLocalOG = headLocal;
 
         speedOG = speed;
         walkRateOG = walkRate;
@@ -277,12 +278,14 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
                 walkRate = walkRate * 2;
                 characterController.height = .2f;
                 characterController.center = new Vector3(0, .4f, 0);
+                headLocal = altHeadLocal;
             }
             else {
                 speed = speedOG;
                 walkRate = walkRateOG;
                 characterController.height = 2f;
                 characterController.center = new Vector3(0, 1, 0);
+                headLocal = headLocalOG;
             }
         }
     }
