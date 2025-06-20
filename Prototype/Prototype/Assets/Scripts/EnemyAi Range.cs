@@ -16,6 +16,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
     [SerializeField] Transform headPos;
     [SerializeField] int HP;
     [SerializeField] int facePlayerSpeed;
+    [SerializeField] int deadTime;
 
     [SerializeField] Transform shootingPos;
     [SerializeField] GameObject bullet;
@@ -59,6 +60,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
     bool isPlayerInSightline;
     bool playerInRange;
     bool isMoving;
+    bool isDead;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -71,6 +73,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
     // Update is called once per frame
     void Update()
     {
+        if (isDead) return;
         // Increment timers
         shootTimer += Time.deltaTime;
         walkTimer += Time.deltaTime;
@@ -169,12 +172,12 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
 
     public void takeDamage(int amount)
     {
+        if (isDead) return;
         HP -= amount;
 
         if (HP <= 0)
         {
-          
-            Destroy(gameObject);
+            StartCoroutine(Death());
         }
         else
         {
@@ -187,6 +190,38 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
                 Strafe();
             }
         }
+    }
+
+    IEnumerator Death()
+    {
+        isDead = true;
+        anim.SetBool("isDead", true);
+
+        agent.ResetPath();
+        agent.isStopped = true;
+        agent.enabled = false;
+
+        foreach (Collider col in GetComponentsInChildren<Collider>()) {
+            col.enabled = false;
+        }
+        StartCoroutine(AddLayerFadeOut(1, 1));
+
+        yield return new WaitForSeconds(deadTime);
+        Destroy(gameObject);
+    }
+
+    IEnumerator AddLayerFadeOut(int index, float fadeTime)
+    {
+        float timer = 0f;
+        float weight = anim.GetLayerWeight(index);
+
+        while (timer < fadeTime) {
+            float newWeight = Mathf.Lerp(weight, 0, timer / fadeTime);
+            anim.SetLayerWeight(index, newWeight);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        anim.SetLayerWeight(index, 0);
     }
 
     IEnumerator flashRed()
@@ -252,6 +287,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
     // Shoot at the player
     void shoot()
     {
+        if (isDead) return;
         shootTimer = 0;
         Instantiate(bullet, shootingPos.position, transform.rotation);
     }
