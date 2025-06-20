@@ -189,15 +189,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1539481679264539993, guid: 4ba5cbea767d9b54eb7a655b769517da, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.86
+      value: -1.6099987
       objectReference: {fileID: 0}
     - target: {fileID: 1539481679264539993, guid: 4ba5cbea767d9b54eb7a655b769517da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1539481679264539993, guid: 4ba5cbea767d9b54eb7a655b769517da, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.59
+      value: 9.339999
       objectReference: {fileID: 0}
     - target: {fileID: 1539481679264539993, guid: 4ba5cbea767d9b54eb7a655b769517da, type: 3}
       propertyPath: m_LocalRotation.w
@@ -456,12 +456,13 @@ MonoBehaviour:
   headPos: {fileID: 8711882414883773891}
   meleeHitBox:
   - {fileID: 3770972518530878303}
-  HP: 6
+  HP: 10
   meleeRange: 4
   meleeDamage: 0
   meleeCooldown: 2
   facePlayerSpeed: 32
   FOV: 60
+  deadTime: 5
   allowRoam: 1
   walkRate: 0.7
   patrolRadius: 15

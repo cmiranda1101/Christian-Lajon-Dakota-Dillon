@@ -546,7 +546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.34
+      value: -0.18350697
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       propertyPath: m_LocalPosition.y
@@ -554,7 +554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.68
+      value: 10.643501
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1af740f30dfdb14a9cbcc62f6e78120, type: 3}
       propertyPath: m_LocalRotation.w
@@ -704,12 +704,13 @@ MonoBehaviour:
   - {fileID: 1986793200428360387}
   - {fileID: 2086163288778012976}
   - {fileID: 5657398236903189491}
-  HP: 6
+  HP: 4
   meleeRange: 4
   meleeDamage: 0
   meleeCooldown: 3
-  facePlayerSpeed: 32
+  facePlayerSpeed: 50
   FOV: 45
+  deadTime: 5
   allowRoam: 0
   walkRate: 0.7
   patrolRadius: 10

@@ -24,6 +24,7 @@ public class EnemyAILurker : MonoBehaviour, IDamage, IHeardSomething
     [SerializeField] float meleeCooldown;
     [SerializeField] int facePlayerSpeed;
     [SerializeField] int FOV;
+    [SerializeField] int deadTime;
 
     [SerializeField] bool allowRoam = true;
     [SerializeField] float walkRate;
@@ -57,6 +58,7 @@ public class EnemyAILurker : MonoBehaviour, IDamage, IHeardSomething
     Vector3 playerDir;
 
     bool isMoving;
+    bool isDead;
 
     float animationCurr;
     float agentSpeedCurr;
@@ -74,6 +76,8 @@ public class EnemyAILurker : MonoBehaviour, IDamage, IHeardSomething
 
     void Update()
     {
+        if (isDead) return;
+
         if(agent.velocity.magnitude >= 0.01f) 
             isMoving = true;
         walkTimer += Time.deltaTime;
@@ -253,6 +257,7 @@ public class EnemyAILurker : MonoBehaviour, IDamage, IHeardSomething
 
     public void MeleeColOn()
     {
+        if (isDead) return;
         for (int i = 0; i < meleeHitBox.Length; ++i) {
             if (meleeHitBox[i])
                 meleeHitBox[i].SetActive(true);
@@ -269,11 +274,13 @@ public class EnemyAILurker : MonoBehaviour, IDamage, IHeardSomething
 
     public void takeDamage(int damageAmount)
     {
+        if (isDead) return;
+
         HP -= damageAmount;
 
         if (HP <= 0) {
-           
-            Destroy(gameObject);
+
+            StartCoroutine(Death());
         }
         else {
             GameManager.instance.playerScript.isHiding = false;
@@ -285,6 +292,38 @@ public class EnemyAILurker : MonoBehaviour, IDamage, IHeardSomething
                 Strafe();
             }
         }
+    }
+
+    IEnumerator Death()
+    {
+        isDead = true;
+        anim.SetBool("isDead", true);
+
+        agent.ResetPath();
+        agent.isStopped = true;
+        agent.enabled = false;
+
+        foreach (Collider col in GetComponentsInChildren<Collider>()) {
+            col.enabled = false;
+        }
+        StartCoroutine(AddLayerFadeOut(1, 1));
+
+        yield return new WaitForSeconds(deadTime);
+        Destroy(gameObject);
+    }
+
+    IEnumerator AddLayerFadeOut(int index, float fadeTime)
+    {
+        float timer = 0f;
+        float weight = anim.GetLayerWeight(index);
+
+        while (timer < fadeTime) {
+            float newWeight = Mathf.Lerp(weight, 0, timer / fadeTime);
+            anim.SetLayerWeight(index, newWeight);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        anim.SetLayerWeight(index, 0);
     }
 
     IEnumerator FlashRed()
