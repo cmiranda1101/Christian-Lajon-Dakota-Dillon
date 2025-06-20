@@ -4329,6 +4329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howToPlay: {fileID: 0}
+  credits: {fileID: 0}
   buyAudio: {fileID: 5632318058449953261}
   shopRifle: {fileID: 6873767395791626592}
   shopRifleAmmo: {fileID: 7086557996536803719}
@@ -9972,7 +9973,7 @@ MonoBehaviour:
   menuShop: {fileID: 2372957891866589578}
   savedStats: {fileID: 3641457443895511340}
   dialogueBox: {fileID: 1761364215764284195}
-  dialogueText: {fileID: 7061892162192226234}
+  dialogueText: {fileID: 3734777372404778954}
   DamageFlash: {fileID: 8126014974184903328}
   HealFlash: {fileID: 5787620105047729595}
   miniMap: {fileID: 0}
@@ -12024,7 +12025,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: You didn't set something up right
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
