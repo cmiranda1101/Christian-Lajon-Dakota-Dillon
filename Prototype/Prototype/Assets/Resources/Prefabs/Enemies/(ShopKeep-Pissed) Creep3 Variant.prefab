@@ -264,7 +264,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: HP
-      value: 30
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: FOV
@@ -278,6 +278,10 @@ PrefabInstance:
       propertyPath: headPos
       value: 
       objectReference: {fileID: 8793367759085229855}
+    - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+      propertyPath: deadTime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: walkRate
       value: 0.6
@@ -320,10 +324,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: facePlayerSpeed
-      value: 80
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: meleeHitBox.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+      propertyPath: weaponClips.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
@@ -334,6 +342,14 @@ PrefabInstance:
       propertyPath: 'meleeHitBox.Array.data[1]'
       value: 
       objectReference: {fileID: 4745197978121024983}
+    - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+      propertyPath: 'weaponClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4ac1f6675faabfc4a85d669386cfe983, type: 3}
+    - target: {fileID: 3666870709229732517, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+      propertyPath: 'weaponClips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 5ce9f31363bddee4db259f847d373c78, type: 3}
     - target: {fileID: 6634911067034380347, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: m_Pitch
       value: 0.5
@@ -360,7 +376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6899769094566875521, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.3583612
+      value: -0.17661572
       objectReference: {fileID: 0}
     - target: {fileID: 6899769094566875521, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: m_LocalPosition.y
@@ -368,7 +384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6899769094566875521, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19.265947
+      value: 9.565342
       objectReference: {fileID: 0}
     - target: {fileID: 6899769094566875521, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: m_LocalRotation.w
@@ -412,11 +428,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8164784511516268735, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: m_Speed
-      value: 8
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 8164784511516268735, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: m_AutoBraking
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164784511516268735, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164784511516268735, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8897721332748466462, guid: f3978c44f7fb36246b698fdea7f77528, type: 3}
       propertyPath: m_Pitch
