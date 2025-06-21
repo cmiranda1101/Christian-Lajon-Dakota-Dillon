@@ -39,7 +39,7 @@ public class GunBase : MonoBehaviour
 
     void Update()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * range, Color.blue);
+        //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * range, Color.blue);
         shotTimer += Time.deltaTime;
         if (Input.GetButtonDown("Fire1") && currentAmmo > 0 && shotTimer > fireRate && !isReloading)
         {
@@ -65,7 +65,7 @@ public class GunBase : MonoBehaviour
             shotTimer = 0;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range, ~GameManager.instance.playerScript.ignoreLayer, QueryTriggerInteraction.Ignore))
             {
-                Debug.Log(hit.collider.name);
+                //Debug.Log(hit.collider.name);
                 IDamage damaged = hit.collider.GetComponent<IDamage>();
                 if (hit.collider.name == "CritSpot")
                 {
@@ -101,7 +101,7 @@ public class GunBase : MonoBehaviour
             UpdateAmmo();
             if (currentAmmo <= 0)
             {
-                Debug.Log("Out of bullets");
+                //Debug.Log("Out of bullets");
             }
         }
     }
