@@ -342,7 +342,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
         //Check if something is grabbed
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance, ~ignoreLayer)) {
-            Debug.Log(hit.collider.name);
+            //Debug.Log(hit.collider.name);
             IInteract grab = hit.collider.GetComponentInParent<IInteract>();
 
             if (grab != null) {

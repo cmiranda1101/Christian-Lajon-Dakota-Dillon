@@ -135,7 +135,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
         Vector3 directionToPlayer = GameManager.instance.player.transform.position - headPos.position;
         float angleToPlayer = Vector3.Angle(new Vector3(directionToPlayer.x, 0, directionToPlayer.z), transform.forward);
 
-        Debug.DrawRay(headPos.position, directionToPlayer.normalized , Color.red);
+        //Debug.DrawRay(headPos.position, directionToPlayer.normalized , Color.red);
 
         IsPlayerInSightline(directionToPlayer);
 

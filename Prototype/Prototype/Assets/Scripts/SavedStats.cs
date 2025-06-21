@@ -7,7 +7,7 @@ public class SavedStats : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            Debug.Log("Data deleted");
+            //Debug.Log("Data deleted");
             DeleteAllData();
         }
     }

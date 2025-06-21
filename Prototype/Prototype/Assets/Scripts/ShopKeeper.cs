@@ -11,7 +11,7 @@ public class ShopKeeper : MonoBehaviour, IInteract, IDamage
         {
             return;
         }
-        Debug.Log("Interacting with shopkeeper");
+        //Debug.Log("Interacting with shopkeeper");
         GameManager.instance.OpenShop();
     }
 
