@@ -16,10 +16,10 @@ MonoBehaviour:
   damage: 2
   fireRate: 0.4
   range: 50
-  currentAmmo: 0
-  magSize: 9
+  currentAmmo: 11
+  magSize: 12
   startingMagCount: 3
-  magCount: 0
+  magCount: -1
   levelStartCurrentAmmo: 0
   levelStartmagCount: 0
   shootSounds:

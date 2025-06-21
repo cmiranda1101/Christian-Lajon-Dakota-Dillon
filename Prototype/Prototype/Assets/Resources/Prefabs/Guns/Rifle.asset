@@ -17,7 +17,7 @@ MonoBehaviour:
   fireRate: 0.7
   range: 80
   currentAmmo: 5
-  magSize: 12
+  magSize: 8
   startingMagCount: 1
   magCount: 0
   levelStartCurrentAmmo: 0
