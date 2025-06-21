@@ -14,6 +14,7 @@ public class ButtonFunctions : MonoBehaviour
 {
     //Main Menu Functionality
     [SerializeField] GameObject howToPlay;
+    [SerializeField] GameObject credits;
 
     //Shop Functionality
     [SerializeField] AudioSource buyAudio;
@@ -166,6 +167,28 @@ public class ButtonFunctions : MonoBehaviour
         }
     }
 
+    public void OnCreditsButton()
+    {
+        StartCoroutine(Credits());
+    }
+
+    IEnumerator Credits()
+    {
+        yield return StartCoroutine(UISound());
+        credits.SetActive(true);
+    }
+
+    public void OnCloseCreditsButton()
+    {
+        StartCoroutine(CloseCredits());
+    }
+
+    IEnumerator CloseCredits()
+    {
+        yield return StartCoroutine(UISound());
+        credits.SetActive(false);
+    }
+
     public void OnNewGameButton()
     {
         StartCoroutine(NewGame());
@@ -200,13 +223,13 @@ public class ButtonFunctions : MonoBehaviour
         UISoundSource.Play();
         yield return new WaitWhile(() => UISoundSource.isPlaying);
     }
-    public void OpenOptionsFromStart()
-    {
-        GameManager.instance.previousMenu = GameManager.PreviousMenu.Start;
-        GameManager.instance.menuButtons.SetActive(false); // Hide Start Menu
-        GameManager.instance.menuOptions.SetActive(true);  // Show Options Menu
-        GameManager.instance.menuActive = GameManager.instance.menuOptions;
-    }
+    //public void OpenOptionsFromStart()
+    //{
+    //    GameManager.instance.previousMenu = GameManager.PreviousMenu.Start;
+    //    GameManager.instance.menuButtons.SetActive(false); // Hide Start Menu
+    //    GameManager.instance.menuOptions.SetActive(true);  // Show Options Menu
+    //    GameManager.instance.menuActive = GameManager.instance.menuOptions;
+    //}
 
     public void OnOpenOptionsFromPauseButton()
     {

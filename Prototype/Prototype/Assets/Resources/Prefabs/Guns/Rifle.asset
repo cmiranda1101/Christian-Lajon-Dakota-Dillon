@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 7349764922201253128, guid: 24cb1b5acca01e0408a5fb3da5885f0c, type: 3}
   damage: 4
-  fireRate: 0.4
-  range: 40
-  currentAmmo: 0
-  magSize: 12
+  fireRate: 0.7
+  range: 80
+  currentAmmo: 5
+  magSize: 8
   startingMagCount: 1
   magCount: 0
   levelStartCurrentAmmo: 0

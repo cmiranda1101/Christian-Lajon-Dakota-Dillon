@@ -189,15 +189,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1539481679264539993, guid: 4ba5cbea767d9b54eb7a655b769517da, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.86
+      value: -1.6099987
       objectReference: {fileID: 0}
     - target: {fileID: 1539481679264539993, guid: 4ba5cbea767d9b54eb7a655b769517da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1539481679264539993, guid: 4ba5cbea767d9b54eb7a655b769517da, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.59
+      value: 9.339999
       objectReference: {fileID: 0}
     - target: {fileID: 1539481679264539993, guid: 4ba5cbea767d9b54eb7a655b769517da, type: 3}
       propertyPath: m_LocalRotation.w
@@ -448,21 +448,21 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 19d07bb6bdfbaae43acf30893876bba4, type: 3}
   - {fileID: 8300000, guid: e97a8da4003210f41ab64be2f49d795e, type: 3}
   weaponClips:
-  - {fileID: 8300000, guid: c5955b1ca51d47245ae5e5e10395d910, type: 3}
-  - {fileID: 8300000, guid: d8bf57a57cb4a7e4a97d06ab4b136fca, type: 3}
-  - {fileID: 8300000, guid: bf685e2b67465c64c8f5efdc5b241fd1, type: 3}
+  - {fileID: 8300000, guid: 5ce9f31363bddee4db259f847d373c78, type: 3}
+  - {fileID: 8300000, guid: 4ac1f6675faabfc4a85d669386cfe983, type: 3}
   model: {fileID: 671024806778216571}
   agent: {fileID: 5789947824650888727}
   anim: {fileID: 5857495479187558530}
   headPos: {fileID: 8711882414883773891}
   meleeHitBox:
   - {fileID: 3770972518530878303}
-  HP: 6
+  HP: 10
   meleeRange: 4
   meleeDamage: 0
   meleeCooldown: 2
   facePlayerSpeed: 32
   FOV: 60
+  deadTime: 5
   allowRoam: 1
   walkRate: 0.7
   patrolRadius: 15

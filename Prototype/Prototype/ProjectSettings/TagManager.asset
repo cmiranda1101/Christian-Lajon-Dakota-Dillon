@@ -15,6 +15,7 @@ TagManager:
   - SpawnPos
   - SavedStats
   - LevelExit
+  - Objective
   layers:
   - Default
   - TransparentFX

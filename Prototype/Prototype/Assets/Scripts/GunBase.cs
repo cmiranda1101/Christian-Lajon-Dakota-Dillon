@@ -10,10 +10,13 @@ public class GunBase : MonoBehaviour
     [SerializeField] public List<GunStats> gunList = new List<GunStats>();
     [SerializeField] GameObject gunModel;
     [SerializeField]AudioSource gunSource;
+    [SerializeField] AudioClip emptyClip;
     AudioClip[] shotClips;
     AudioClip reloadClip1;
     AudioClip reloadClip2;
 
+    [SerializeField] GameObject bloodSplatter;
+    [SerializeField] GameObject debrisSplatter;
 
     [SerializeField] int damage;
     [SerializeField] float fireRate;
@@ -22,6 +25,8 @@ public class GunBase : MonoBehaviour
     [SerializeField] int magSize;
     [SerializeField] public int startingMagCount;
     [SerializeField] public int magCount;
+
+    bool isReloading = false;
 
     float shotTimer = 0;
     public int gunListIndex = 0;
@@ -34,17 +39,20 @@ public class GunBase : MonoBehaviour
 
     void Update()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * range, Color.blue);
+        //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * range, Color.blue);
         shotTimer += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && currentAmmo > 0 && shotTimer > fireRate)
+        if (Input.GetButtonDown("Fire1") && currentAmmo > 0 && shotTimer > fireRate && !isReloading)
         {
             Fire();
             UpdateAmmo();
-        }
-        if (Input.GetButtonDown("Reload") && currentAmmo != magSize && magCount > 0)
+        } 
+        else if (Input.GetButtonDown("Fire1") && currentAmmo <= 0)
         {
-            Reload();
-            UpdateAmmo();
+            AudioManager.PlaySFX(gunSource, emptyClip);
+        }
+        if (Input.GetButtonDown("Reload") && currentAmmo != magSize && magCount > 0 && !isReloading)
+        {
+            StartCoroutine(Reload());
         }
         SelectGun();
     }
@@ -57,10 +65,11 @@ public class GunBase : MonoBehaviour
             shotTimer = 0;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range, ~GameManager.instance.playerScript.ignoreLayer, QueryTriggerInteraction.Ignore))
             {
-                Debug.Log(hit.collider.name);
+                //Debug.Log(hit.collider.name);
                 IDamage damaged = hit.collider.GetComponent<IDamage>();
                 if (hit.collider.name == "CritSpot")
                 {
+                    Instantiate(bloodSplatter, hit.point, Quaternion.identity);
                     IDamage critical = hit.collider.GetComponentInParent<IDamage>();
                     if(critical != null)
                     {
@@ -69,7 +78,20 @@ public class GunBase : MonoBehaviour
                 }
                 else if (damaged != null)
                 {
-                    damaged.takeDamage(damage);
+                    if(hit.collider.CompareTag("Enemy"))
+                    {
+                        Instantiate(bloodSplatter, hit.point, Quaternion.identity);
+                        damaged.takeDamage(damage);
+                    }
+                    else
+                    {
+                        Instantiate(debrisSplatter, hit.point, Quaternion.identity);
+                        damaged.takeDamage(damage);
+                    }
+                } 
+                else
+                {
+                    Instantiate(debrisSplatter, hit.point, Quaternion.identity);
                 }
             }
             StartCoroutine(GameManager.instance.playerScript.MuzzleFlash());
@@ -79,23 +101,25 @@ public class GunBase : MonoBehaviour
             UpdateAmmo();
             if (currentAmmo <= 0)
             {
-                Debug.Log("Out of bullets");
+                //Debug.Log("Out of bullets");
             }
         }
     }
 
-    void Reload()
+    IEnumerator Reload()
     {
-        if (Time.timeScale > 0)
-        {
-            currentAmmo = magSize;
-            magCount--;
-            gunList[gunListIndex].currentAmmo = magSize;
-            gunList[gunListIndex].magCount--;
-            Debug.Log("Reloaded " + magCount + " magazines remaining");
-            StartCoroutine(ReloadGun());
-            UpdateAmmo();
-        }
+        isReloading = true;
+        AudioManager.PlaySFX(gunSource, reloadClip1);
+        yield return new WaitForSeconds(.3f);
+        AudioManager.PlaySFX(gunSource, reloadClip2);
+        yield return new WaitForSeconds(.3f);
+        currentAmmo = magSize;
+        magCount--;
+        gunList[gunListIndex].currentAmmo = magSize;
+        gunList[gunListIndex].magCount--;
+
+        UpdateAmmo();
+        isReloading = false;
     }
 
     public void PickUpAmmo()
@@ -114,16 +138,6 @@ public class GunBase : MonoBehaviour
     public void UpdateAmmo()
     {
         GameManager.instance.ammoScript.UpdateAmmoAndMagCount();
-    }
-
-    IEnumerator ReloadGun()
-    {
-        gunSource.clip = reloadClip1;
-        gunSource.Play();
-        yield return new WaitWhile(() => gunSource.isPlaying);
-        yield return new WaitForSeconds(0.2f);
-        gunSource.clip = reloadClip2;
-        gunSource.Play();
     }
 
     void SelectGun()

@@ -3,12 +3,15 @@ using System.Collections;
 
 public class HeartBoss : MonoBehaviour, IDamage
 {
+    BossBulletHell bulletHell;
+
     [SerializeField] Transform spawner1Location;
     [SerializeField] Transform spawner2Location;
     [SerializeField] Transform spawner3Location;
     [SerializeField] Transform spawner4Location;
     [SerializeField] GameObject enemySpawnerPrefab;
     [SerializeField] GameObject itemSpawners;
+    [SerializeField] GameObject[] mazeArray;
     GeneralSpawner generalSpawnerPrefab;
 
     [SerializeField] AudioSource heartBeatSource;
@@ -22,9 +25,10 @@ public class HeartBoss : MonoBehaviour, IDamage
     Color HPColorOrigin;
 
     int phaseNum;
+    int objectives;
     float slowPumpSpeed;
     float fastPumpSpeed;
-    bool enemiesSpawned;
+    bool wallsUP;
     public bool isShielded;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,7 +36,7 @@ public class HeartBoss : MonoBehaviour, IDamage
     {
         phaseNum = 0;
         isShielded = true;
-        enemiesSpawned = false;
+        wallsUP = false;
         generalSpawnerPrefab = itemSpawners.GetComponent<GeneralSpawner>();
 
         bossHpCurr = bossHPMax;
@@ -49,7 +53,10 @@ public class HeartBoss : MonoBehaviour, IDamage
         slowPumpSpeed = pumpAnim["Armature|Pumping"].speed * 0.5f;  //slow the animation while shield up
         pumpAnim["Armature|Pumping"].speed = slowPumpSpeed;
 
-       
+        mazeArray[phaseNum].SetActive(true);
+
+        bulletHell = GetComponentInParent<BossBulletHell>();
+
         StartCoroutine(PlayBeat());
         SpawnersOn();
     }
@@ -57,13 +64,13 @@ public class HeartBoss : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        int enemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        int objectives = GameObject.FindGameObjectsWithTag("Objective").Length;
 
-        if (enemies > 1 && !enemiesSpawned) {
-            enemiesSpawned = true;  //enemies have spawned, stopping Coroutine spam;
+        if (objectives > 1 && !wallsUP) {
+            wallsUP = true;  //enemies have spawned, stopping Coroutine spam;
         }
-        if (enemies == 1 && enemiesSpawned) {
-            enemiesSpawned = false;
+        if (objectives == 0 && wallsUP) {
+            wallsUP = false;
             ShieldDown();
         }
     }
@@ -93,6 +100,12 @@ public class HeartBoss : MonoBehaviour, IDamage
         pumpAnim["Armature|Pumping"].speed = fastPumpSpeed;
         heartBeatSource.clip = fastBeatClip;
         GameManager.instance.bossHealthBar.color = Color.red;
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject enemy in enemies) Destroy(enemy);
+
+        mazeArray[phaseNum].SetActive(false);
+        bulletHell.activate = true;
     }
 
     void ShieldUp()
@@ -105,7 +118,9 @@ public class HeartBoss : MonoBehaviour, IDamage
             SpawnersOn();
             //generalSpawnerPrefab = itemSpawners.GetComponent<GeneralSpawner>();
             generalSpawnerPrefab.startSpawn = true;
+            bulletHell.activate = false;
             phaseNum++;
+            mazeArray[phaseNum].SetActive(true);
         }
     }
 

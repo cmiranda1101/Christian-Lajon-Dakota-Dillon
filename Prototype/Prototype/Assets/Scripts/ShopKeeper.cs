@@ -11,7 +11,7 @@ public class ShopKeeper : MonoBehaviour, IInteract, IDamage
         {
             return;
         }
-        Debug.Log("Interacting with shopkeeper");
+        //Debug.Log("Interacting with shopkeeper");
         GameManager.instance.OpenShop();
     }
 
@@ -34,7 +34,8 @@ public class ShopKeeper : MonoBehaviour, IInteract, IDamage
 
     public void takeDamage(int amount)
     {
-        Instantiate(SCP_Form, gameObject.transform.position, gameObject.transform.rotation);
+        GameObject temp = Instantiate(SCP_Form, gameObject.transform.position, gameObject.transform.rotation);
+        temp.SetActive(true);
         Destroy(gameObject);
     }
 }

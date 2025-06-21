@@ -12,9 +12,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     [SerializeField] GameObject MainCamera;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] AudioSource footStepSource;
-    [SerializeField] AudioSource playerHurtSource;
+    [SerializeField] public AudioSource playerHurtSource;
     [SerializeField] AudioClip[] footStepClip;
     [SerializeField] AudioClip[] playerHurtClips;
+    [SerializeField] AudioClip playerDodgeClip;
     [SerializeField] float walkRate;
     float walkRateOG;
     float walkTimer;
@@ -55,7 +56,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     float speedOG;
 
     [SerializeField] Transform headLocal;
-    Vector3 camPosOG;
+    [SerializeField] Transform altHeadLocal;
+    Transform headLocalOG;
 
     Vector3 moveDirection;
 
@@ -64,6 +66,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 
     float animationCurr;
     float controllerSpeedCurr;
+    float fallVelocity;
+    float gravity = -9.81f;
 
     public bool isHiding;
 
@@ -72,7 +76,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
         flashlight = GameObject.Find("FlashLight");
         dodgeTimer = dodgeCooldown;
         GameManager.instance.moneyScript.UpdateMoneyText();
-        camPosOG = MainCamera.transform.localPosition;
+        headLocalOG = headLocal;
 
         speedOG = speed;
         walkRateOG = walkRate;
@@ -196,6 +200,26 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             WalkSound();
             walkTimer = 0f;
         }
+        Gravity();
+    }
+
+    void Gravity()
+    {
+        if (Grounded()) {
+            fallVelocity = 0;
+        }
+        else {
+            fallVelocity += gravity * Time.deltaTime;
+            Vector3 fall = new Vector3(0, fallVelocity, 0);
+            characterController.Move(fall * Time.deltaTime);
+        }
+        //Debug.Log($"isGrounded: {characterController.isGrounded} | Y Velocity: {characterController.velocity.y}");
+    }
+
+    bool Grounded()
+    {
+        if (characterController.transform.position.y <= .1) return true;
+        else return false;
     }
 
     void SetAnimParameter()
@@ -213,6 +237,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     IEnumerator Dodge()
     {
         if (dodgeTimer >= dodgeCooldown) {
+            AudioManager.PlaySFX(playerHurtSource, playerDodgeClip);
             dodgeTimer = 0;
             float originalSpeed = speed;
             speed = dodgeSpeed;
@@ -229,11 +254,13 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             anim.SetBool("isSprinting", !sprinting);
 
             if (anim.GetBool("isSprinting")) {
+                walkRate = walkRate / 2;
                 speed = speed * sprintSpeed;
                 StartCoroutine(Stamina());
             }
             else {
                 speed = speedOG;
+                walkRate = walkRateOG;
             }
         }
     }
@@ -246,6 +273,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             {
                 anim.SetBool("isSprinting", false);
                 speed = speedOG;
+                walkRate = walkRateOG;
             }
             currentStamina = Mathf.Clamp(currentStamina -= staminaDrain, 0, maxStamina);
             GameManager.instance.staminaBar.fillAmount = currentStamina / maxStamina;
@@ -272,12 +300,14 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
                 walkRate = walkRate * 2;
                 characterController.height = .2f;
                 characterController.center = new Vector3(0, .4f, 0);
+                headLocal = altHeadLocal;
             }
             else {
                 speed = speedOG;
                 walkRate = walkRateOG;
                 characterController.height = 2f;
                 characterController.center = new Vector3(0, 1, 0);
+                headLocal = headLocalOG;
             }
         }
     }
@@ -312,7 +342,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
         //Check if something is grabbed
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance, ~ignoreLayer)) {
-            Debug.Log(hit.collider.name);
+            //Debug.Log(hit.collider.name);
             IInteract grab = hit.collider.GetComponentInParent<IInteract>();
 
             if (grab != null) {

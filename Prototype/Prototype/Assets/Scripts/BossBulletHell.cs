@@ -12,6 +12,8 @@ public class BossBulletHell : MonoBehaviour
 
     float fireTimer;
 
+    public bool activate = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,12 +25,12 @@ public class BossBulletHell : MonoBehaviour
         if (!GameManager.instance.isPaused) {
             fireTimer += Time.deltaTime;
 
-            if (!GameManager.instance.heartBossScript.isShielded) {
+            if (activate) {
                 if (fireRate <= fireTimer) {
                     shootAtPlayer();
                 }
+                SpawnBullet();
             }
-            SpawnBullet();
         }
     }
 

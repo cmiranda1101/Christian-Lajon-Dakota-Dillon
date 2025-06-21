@@ -121,7 +121,7 @@ MonoBehaviour:
   dialogueText: {fileID: 0}
   textToShow: {fileID: 2291991439081949742}
   radioSquelch: {fileID: 9156839869958346480}
-  typeSpeed: 0.04
+  typeSpeed: 0.03
 --- !u!114 &2291991439081949742
 MonoBehaviour:
   m_ObjectHideFlags: 0
