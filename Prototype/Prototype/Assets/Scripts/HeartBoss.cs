@@ -101,6 +101,9 @@ public class HeartBoss : MonoBehaviour, IDamage
         heartBeatSource.clip = fastBeatClip;
         GameManager.instance.bossHealthBar.color = Color.red;
 
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject enemy in enemies) Destroy(enemy);
+
         mazeArray[phaseNum].SetActive(false);
         bulletHell.activate = true;
     }
