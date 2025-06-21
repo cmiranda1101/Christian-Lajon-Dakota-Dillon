@@ -2383,8 +2383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2291991439081949742, guid: 1bba38fa799522e41b9421c7a2fd9f6a, type: 3}
       propertyPath: m_text
-      value: Press G to throw grenades/molotovs. You can use v to swap between the
-        two if you have both
+      value: Press V to swap to your grenade. Then press G to throw it
       objectReference: {fileID: 0}
     - target: {fileID: 2477111691087893607, guid: 1bba38fa799522e41b9421c7a2fd9f6a, type: 3}
       propertyPath: m_Name
