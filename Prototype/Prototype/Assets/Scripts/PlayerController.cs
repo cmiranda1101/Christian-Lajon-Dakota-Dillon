@@ -66,6 +66,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 
     float animationCurr;
     float controllerSpeedCurr;
+    float fallVelocity;
+    float gravity = -9.81f;
 
     public bool isHiding;
 
@@ -198,6 +200,26 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             WalkSound();
             walkTimer = 0f;
         }
+        Gravity();
+    }
+
+    void Gravity()
+    {
+        if (Grounded()) {
+            fallVelocity = 0;
+        }
+        else {
+            fallVelocity += gravity * Time.deltaTime;
+            Vector3 fall = new Vector3(0, fallVelocity, 0);
+            characterController.Move(fall * Time.deltaTime);
+        }
+        //Debug.Log($"isGrounded: {characterController.isGrounded} | Y Velocity: {characterController.velocity.y}");
+    }
+
+    bool Grounded()
+    {
+        if (characterController.transform.position.y <= .1) return true;
+        else return false;
     }
 
     void SetAnimParameter()
