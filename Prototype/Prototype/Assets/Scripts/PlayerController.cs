@@ -238,6 +238,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 
     IEnumerator Dodge()
     {
+        if (!PlayerHasMovement()) { yield break; }
+
         if (dodgeTimer >= dodgeCooldown) {
             AudioManager.PlaySFX(playerHurtSource, playerDodgeClip);
             dodgeTimer = 0;
@@ -435,5 +437,17 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
         GameManager.instance.HealFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.HealFlash.SetActive(false);
+    }
+
+    bool PlayerHasMovement()
+    {
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
