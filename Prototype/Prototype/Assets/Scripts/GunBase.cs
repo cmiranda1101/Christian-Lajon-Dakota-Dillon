@@ -39,6 +39,8 @@ public class GunBase : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.instance.isPaused) { return; }
+
         //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * range, Color.blue);
         shotTimer += Time.deltaTime;
         if (Input.GetButtonDown("Fire1") && currentAmmo > 0 && shotTimer > fireRate && !isReloading)
