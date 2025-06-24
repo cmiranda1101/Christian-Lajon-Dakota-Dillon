@@ -634,9 +634,9 @@ MonoBehaviour:
   speed: 5
   maxHP: 20
   currentHP: 20
-  maxStamina: 100
-  currentStamina: 100
-  staminaDrain: 0.5
+  maxStamina: 5
+  currentStamina: 5
+  staminaDrain: 1
   staminaRegenDelay: 5
   grabDistance: 5
   money: 0

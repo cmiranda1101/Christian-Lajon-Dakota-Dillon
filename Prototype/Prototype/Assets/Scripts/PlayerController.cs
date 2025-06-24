@@ -294,7 +294,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
                 walkRate = walkRateOG;
                 break;
             }
-            currentStamina = Mathf.Clamp(currentStamina -= staminaDrain, 0, maxStamina);
+            currentStamina = Mathf.Clamp(currentStamina -= staminaDrain * Time.deltaTime, 0, maxStamina);
             GameManager.instance.staminaBar.fillAmount = currentStamina / maxStamina;
             yield return null;
         }
@@ -306,7 +306,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             {
                 yield return null;
             }
-            currentStamina = Mathf.Clamp(currentStamina += staminaDrain, 0, maxStamina);
+            currentStamina = Mathf.Clamp(currentStamina += staminaDrain * Time.deltaTime, 0, maxStamina);
             GameManager.instance.staminaBar.fillAmount = currentStamina / maxStamina;
             yield return null;
         }
