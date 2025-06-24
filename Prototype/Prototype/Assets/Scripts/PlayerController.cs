@@ -286,11 +286,13 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             {
                 yield return null;
             }
-            if (currentStamina <= 0)
+
+            if (!PlayerHasMovement() || currentStamina <= 0)
             {
                 anim.SetBool("isSprinting", false);
                 speed = speedOG;
                 walkRate = walkRateOG;
+                break;
             }
             currentStamina = Mathf.Clamp(currentStamina -= staminaDrain, 0, maxStamina);
             GameManager.instance.staminaBar.fillAmount = currentStamina / maxStamina;
