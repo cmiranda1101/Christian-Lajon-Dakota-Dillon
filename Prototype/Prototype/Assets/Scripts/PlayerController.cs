@@ -251,19 +251,28 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 
     void Sprint()
     {
-        if (characterController.velocity.magnitude > .1f){
-            bool sprinting = anim.GetBool("isSprinting");
+        bool sprinting = anim.GetBool("isSprinting");
+        if (characterController.velocity.magnitude > .1f)
+        {
             anim.SetBool("isSprinting", !sprinting);
 
-            if (anim.GetBool("isSprinting")) {
+            if (anim.GetBool("isSprinting"))
+            {
                 walkRate = walkRate / 2;
                 speed = speed * sprintSpeed;
                 StartCoroutine(Stamina());
             }
-            else {
+            else
+            {
                 speed = speedOG;
                 walkRate = walkRateOG;
             }
+        }
+        else if (characterController.velocity.magnitude <= 0 && sprinting == true)
+        {
+            anim.SetBool("isSprinting", false);
+            speed = speedOG;
+            walkRate = walkRateOG;
         }
     }
 
