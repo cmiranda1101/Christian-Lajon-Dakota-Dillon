@@ -29,6 +29,7 @@ public class ThrowConsumable : MonoBehaviour
     {
         GameManager.instance.chemlightCounter.text = chemlightCount.ToString();
         GameManager.instance.molotovCounter.text = molotovCount.ToString();
+        GameManager.instance.grenadeCounter.text = grenadeCount.ToString();
     }
 
     void Update()
