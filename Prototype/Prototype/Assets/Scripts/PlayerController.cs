@@ -83,6 +83,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     }
     void Update()
     {
+        if (GameManager.instance.isPaused) return;
+
         MovePlayer();
         FollowHead();
         if (Input.GetButtonDown("Toggle Flashlight")) {
@@ -269,6 +271,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     {
         while (anim.GetBool("isSprinting"))
         {
+            while (GameManager.instance.isPaused)
+            {
+                yield return null;
+            }
             if (currentStamina <= 0)
             {
                 anim.SetBool("isSprinting", false);
@@ -283,6 +289,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 
         while (anim.GetBool("isSprinting") == false && currentStamina < maxStamina)
         {
+            while (GameManager.instance.isPaused)
+            {
+                yield return null;
+            }
             currentStamina = Mathf.Clamp(currentStamina += staminaDrain, 0, maxStamina);
             GameManager.instance.staminaBar.fillAmount = currentStamina / maxStamina;
             yield return null;
@@ -321,6 +331,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     {
         float elapsedTime = 0f;
         while (elapsedTime < dodgeCooldown) {
+            while (GameManager.instance.isPaused) 
+            {
+                yield return null;
+            }
             elapsedTime += Time.deltaTime;
             GameManager.instance.dodgeCooldownRadial.fillAmount = elapsedTime / dodgeCooldown;
             yield return null;

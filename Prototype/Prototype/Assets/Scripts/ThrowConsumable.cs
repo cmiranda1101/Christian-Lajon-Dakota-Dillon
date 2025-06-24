@@ -33,7 +33,7 @@ public class ThrowConsumable : MonoBehaviour
 
     void Update()
     {
-        //PlayerController script inputs will need to be deleted to avoid running these functions twice
+        if (GameManager.instance.isPaused) return;
 
         if (Input.GetButtonDown("Throw Chemlight"))
         {
