@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 {
     [SerializeField] CharacterController characterController;
     [SerializeField] GameObject MainCamera;
+    [SerializeField] GameObject WeaponCamera;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] AudioSource footStepSource;
     [SerializeField] public AudioSource playerHurtSource;
@@ -338,6 +339,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     void FollowHead()
     {
             MainCamera.transform.position = Vector3.Lerp(MainCamera.transform.position, headLocal.position, cameraSmoothness);
+            WeaponCamera.transform.position = Vector3.Lerp(WeaponCamera.transform.position, headLocal.position, cameraSmoothness);
     }
 
     IEnumerator FillCooldownImage()
