@@ -244,11 +244,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
         if (dodgeTimer >= dodgeCooldown) {
             AudioManager.PlaySFX(playerHurtSource, playerDodgeClip);
             dodgeTimer = 0;
-            float originalSpeed = speed;
             speed = dodgeSpeed;
             StartCoroutine(FillCooldownImage());
             yield return new WaitForSeconds(dodgeDuration);
-            speed = originalSpeed;
+            speed = speedOG;
         }
     }
 
