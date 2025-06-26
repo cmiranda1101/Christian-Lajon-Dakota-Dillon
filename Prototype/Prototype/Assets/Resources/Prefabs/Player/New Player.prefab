@@ -932,7 +932,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59de84142c233c846a127a828062a0a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sens: 360
+  sensSlider: {fileID: 0}
+  sensDefault: 250
   lockVertMin: -90
   lockVertMax: 90
   invertY: 0
@@ -1444,7 +1445,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59de84142c233c846a127a828062a0a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sens: 360
+  sensSlider: {fileID: 0}
+  sensDefault: 250
   lockVertMin: -90
   lockVertMax: 90
   invertY: 0
