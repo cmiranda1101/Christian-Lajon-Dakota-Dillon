@@ -113,7 +113,10 @@ public class ButtonFunctions : MonoBehaviour
         {
             buyAudio.Play();
             pistolStats.magCount++;
-            GameManager.instance.weaponScript.magCount++;
+            if (GameManager.instance.weaponScript.gunList[GameManager.instance.weaponScript.gunListIndex] == pistolStats)
+            {
+                GameManager.instance.weaponScript.magCount++;
+            }
             GameManager.instance.ammoScript.UpdateAmmoAndMagCount();
             GameManager.instance.moneyScript.SubtractMoney(50);
         }
@@ -125,7 +128,10 @@ public class ButtonFunctions : MonoBehaviour
         {
             buyAudio.Play();
             shopRifleGunStats.magCount++;
-            GameManager.instance.weaponScript.magCount++;
+            if (GameManager.instance.weaponScript.gunList[GameManager.instance.weaponScript.gunListIndex] == shopRifleGunStats)
+            {
+                GameManager.instance.weaponScript.magCount++;
+            }
             GameManager.instance.ammoScript.UpdateAmmoAndMagCount();
             GameManager.instance.moneyScript.SubtractMoney(50);
         }
