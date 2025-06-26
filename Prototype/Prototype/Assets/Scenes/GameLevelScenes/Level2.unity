@@ -4539,8 +4539,12 @@ PrefabInstance:
       value: Wall Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3298949808429053225, guid: 2e0ba2ad0a0132b4e84a89b7105d39d5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3298949808429053225, guid: 2e0ba2ad0a0132b4e84a89b7105d39d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.5
+      value: 7.75
       objectReference: {fileID: 0}
     - target: {fileID: 3298949808429053225, guid: 2e0ba2ad0a0132b4e84a89b7105d39d5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7848,7 +7852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3298949808429053225, guid: 2e0ba2ad0a0132b4e84a89b7105d39d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.345
+      value: 12.75
       objectReference: {fileID: 0}
     - target: {fileID: 3298949808429053225, guid: 2e0ba2ad0a0132b4e84a89b7105d39d5, type: 3}
       propertyPath: m_LocalPosition.y
