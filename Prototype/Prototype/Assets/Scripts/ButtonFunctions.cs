@@ -99,7 +99,7 @@ public class ButtonFunctions : MonoBehaviour
 
     public void BuyHealth()
     {
-        if(GameManager.instance.playerScript.money >= 100)
+        if(GameManager.instance.playerScript.money >= 100 && GameManager.instance.playerScript.currentHP < GameManager.instance.playerScript.maxHP)
         {
             buyAudio.Play();
             GameManager.instance.playerScript.Heal(GameManager.instance.playerScript.maxHP);

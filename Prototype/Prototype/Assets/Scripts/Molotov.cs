@@ -15,7 +15,8 @@ public class Molotov : MonoBehaviour
             Vector3 hitPoint = contact.point;
             Quaternion hitRotation = Quaternion.FromToRotation(Vector3.forward, contact.normal);
             GameObject fireEffect = Instantiate(fireEffectPrefab, hitPoint, hitRotation);
-            
+            AudioSource fireAudioSource = fireEffect.GetComponent<AudioSource>();
+            fireAudioSource.volume = AudioManager.GlobalSFXVolume;
         }
     }
     IEnumerator DestroyObject()

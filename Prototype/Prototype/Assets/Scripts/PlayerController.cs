@@ -314,6 +314,12 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 
     public void Crouch()
     {
+        if(anim.GetBool("isSprinting"))
+        {
+            anim.SetBool("isSprinting", false);
+            speed = speedOG;
+            walkRate = walkRateOG;
+        }
         if (!isHiding) {
             bool crouching = anim.GetBool("isCrouching");
             anim.SetBool("isCrouching", !crouching);
