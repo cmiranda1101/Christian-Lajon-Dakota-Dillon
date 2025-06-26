@@ -239,9 +239,17 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 
     IEnumerator Dodge()
     {
-        if (!PlayerHasMovement()) { yield break; }
+        if (!PlayerHasMovement()) 
+        { 
+            yield break; 
+        } 
+        else if (anim.GetBool("isCrouching") || anim.GetBool("isSprinting"))
+        {
+            yield break;
+        }
 
-        if (dodgeTimer >= dodgeCooldown) {
+        if (dodgeTimer >= dodgeCooldown)
+        {
             AudioManager.PlaySFX(playerHurtSource, playerDodgeClip);
             dodgeTimer = 0;
             speed = dodgeSpeed;
