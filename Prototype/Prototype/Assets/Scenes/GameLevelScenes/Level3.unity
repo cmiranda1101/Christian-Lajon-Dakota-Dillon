@@ -4791,7 +4791,6 @@ Transform:
   - {fileID: 439124280}
   - {fileID: 1489475282}
   - {fileID: 846810253}
-  - {fileID: 1111250327}
   - {fileID: 2110258652}
   - {fileID: 1217677323}
   - {fileID: 1138130026}
@@ -10159,11 +10158,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dae48de511e551040a204ce091a83990, type: 3}
---- !u!4 &1111250327 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
-  m_PrefabInstance: {fileID: 1126561271}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1111708973 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
@@ -10231,63 +10225,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
   m_PrefabInstance: {fileID: 1788697136}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1126561271
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 512994522}
-    m_Modifications:
-    - target: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 104.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8098132367635039537, guid: dae48de511e551040a204ce091a83990, type: 3}
-      propertyPath: m_Name
-      value: Large Wall (100)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: dae48de511e551040a204ce091a83990, type: 3}
 --- !u!4 &1138130026 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6495743204171163821, guid: dae48de511e551040a204ce091a83990, type: 3}
@@ -17975,6 +17912,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 512994522}
     m_Modifications:
+    - target: {fileID: 8773985355914146424, guid: 499448b7608a91a4d875bbf328a4b5c2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8773985355914146424, guid: 499448b7608a91a4d875bbf328a4b5c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 75
