@@ -25,6 +25,11 @@ public class ButtonFunctions : MonoBehaviour
 
     [SerializeField] AudioSource UISoundSource;
 
+    private void Start()
+    {
+        UISoundSource.ignoreListenerPause = true;
+    }
+
     public void OnResumeButton()
     {
         StartCoroutine(Resume());
@@ -226,8 +231,8 @@ public class ButtonFunctions : MonoBehaviour
 
     public IEnumerator UISound()
     {
-        UISoundSource.Play();
-        yield return new WaitWhile(() => UISoundSource.isPlaying);
+        AudioManager.PlaySFX(UISoundSource, UISoundSource.clip);
+        yield return new WaitForSecondsRealtime(.2f);
     }
     //public void OpenOptionsFromStart()
     //{
