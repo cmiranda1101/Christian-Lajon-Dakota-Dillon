@@ -11,6 +11,8 @@ public class LevelExit : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.instance.isPaused) { return; }
+
         if (canExit)
         {
             exitText.transform.rotation = GameManager.instance.player.transform.rotation;
