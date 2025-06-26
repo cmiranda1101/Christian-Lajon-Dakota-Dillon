@@ -287,9 +287,14 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
     // Shoot at the player
     void shoot()
     {
-        if (isDead) return;
-        shootTimer = 0;
-        Instantiate(bullet, shootingPos.position, transform.rotation);
+        //if (isDead) return;
+        //shootTimer = 0;
+        //Instantiate(bullet, shootingPos.position, transform.rotation);
+        Vector3 playerPos = GameManager.instance.player.transform.position + Vector3.up * 1.0f; 
+        Vector3 dirToPlayer = (playerPos - shootingPos.position).normalized;
+        Quaternion lookRot = Quaternion.LookRotation(dirToPlayer);
+
+        Instantiate(bullet, shootingPos.position, lookRot);
     }
 
     // Play walk sound
