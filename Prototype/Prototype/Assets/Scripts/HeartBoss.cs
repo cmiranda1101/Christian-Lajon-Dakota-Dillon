@@ -7,7 +7,6 @@ public class HeartBoss : MonoBehaviour, IDamage
 
     [SerializeField] GameObject enemySpawnerPrefab;
     [SerializeField] GameObject[] mazeArray;
-    GeneralSpawner generalSpawnerPrefab;
 
     [SerializeField] AudioSource heartBeatSource;
     [SerializeField] AudioClip fastBeatClip;
@@ -88,7 +87,6 @@ public class HeartBoss : MonoBehaviour, IDamage
         //Debug.Log("in Shield down");
 
         isShielded = false;
-        GameManager.instance.heartBossScript.generalSpawnerPrefab.startSpawn = true;
         pumpAnim["Armature|Pumping"].speed = fastPumpSpeed;
         heartBeatSource.clip = fastBeatClip;
         GameManager.instance.bossHealthBar.color = Color.red;
@@ -107,7 +105,6 @@ public class HeartBoss : MonoBehaviour, IDamage
             pumpAnim["Armature|Pumping"].speed = slowPumpSpeed;
             heartBeatSource.clip = slowBeatClip;
             GameManager.instance.bossHealthBar.color = HPColorOrigin;
-            generalSpawnerPrefab.startSpawn = true;
             bulletHell.activate = false;
             phaseNum++;
             mazeArray[phaseNum].SetActive(true);
