@@ -66,7 +66,7 @@ public class EnemyAIMelee : MonoBehaviour, IDamage, IHeardSomething
         player = GameManager.instance.player.transform;
 
         patrolOrigin = transform.position;
-        agent.stoppingDistance = 0f;
+        //agent.stoppingDistance = 0f;
     }
 
     void Update()
