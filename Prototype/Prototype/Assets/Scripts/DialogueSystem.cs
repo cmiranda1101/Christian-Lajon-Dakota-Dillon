@@ -33,7 +33,7 @@ public class DialogueSystem : MonoBehaviour
 
     IEnumerator TypeWriter()
     {
-        radioSquelch.Play();
+        AudioManager.PlaySFX(radioSquelch, radioSquelch.clip);
         yield return new WaitWhile(() => radioSquelch.isPlaying);
 
         foreach (char letter in textToShow.text.ToCharArray()) {
