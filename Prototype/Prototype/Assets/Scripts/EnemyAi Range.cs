@@ -287,9 +287,8 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
     // Shoot at the player
     void shoot()
     {
-        //if (isDead) return;
-        //shootTimer = 0;
-        //Instantiate(bullet, shootingPos.position, transform.rotation);
+        if (isDead) return;
+        
         Vector3 playerPos = GameManager.instance.player.transform.position + Vector3.up * 1.0f; 
         Vector3 dirToPlayer = (playerPos - shootingPos.position).normalized;
         Quaternion lookRot = Quaternion.LookRotation(dirToPlayer);
@@ -307,6 +306,8 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
     // Play gunshot sound
     void GunShotSound()
     {
+        if (isDead) return;
+
         int i = Random.Range(0, gunClips.Length);
         AudioManager.PlaySFX(gunSource, gunClips[i]);
     }
