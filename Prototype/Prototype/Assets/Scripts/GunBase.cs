@@ -144,6 +144,16 @@ public class GunBase : MonoBehaviour
 
     void SelectGun()
     {
+        if (Input.GetButtonDown("Hotbar1"))
+        {
+            gunListIndex = 0;
+            ChangeGun();
+        } 
+        else if (Input.GetButtonDown("Hotbar2") && gunList.Count > 1)
+        {
+            gunListIndex = 1;
+            ChangeGun();
+        }
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListIndex < gunList.Count - 1)
         {
             gunListIndex++;
