@@ -27,7 +27,10 @@ public class ButtonFunctions : MonoBehaviour
 
     private void Start()
     {
-        buyAudio.ignoreListenerPause = true;
+        if(SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            buyAudio.ignoreListenerPause = true;  
+        }
         UISoundSource.ignoreListenerPause = true;
     }
 
