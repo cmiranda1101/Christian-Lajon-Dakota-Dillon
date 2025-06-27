@@ -1,44 +1,44 @@
-using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
 using System.Collections;
 
 public class DialogueSystem : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI dialogueText;
-    [SerializeField] TextMeshPro textToShow;
     [SerializeField] AudioSource radioSquelch;
-    //AudioClip radioChirp;
 
+    [SerializeField] float displayTime;
     [SerializeField] float typeSpeed;
+
+    TextMeshProUGUI dialogueText;
 
     private void Start()
     {
         dialogueText = GameManager.instance.dialogueText;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public IEnumerator TypeWriter()
     {
-        if (other.CompareTag("Player")) {
-            dialogueText.text = "";
-            GameManager.instance.dialogueBox.SetActive(true);
-           
-            StartCoroutine(TypeWriter());
-        }
-    }
+        GameManager.instance.isDialoguePlaying = true;
 
-    private void OnTriggerExit(Collider other)
-    {
-        GameManager.instance.dialogueBox.SetActive(false);
-    }
-
-    IEnumerator TypeWriter()
-    {
         AudioManager.PlaySFX(radioSquelch, radioSquelch.clip);
         yield return new WaitWhile(() => radioSquelch.isPlaying);
 
-        foreach (char letter in textToShow.text.ToCharArray()) {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(typeSpeed);
+        while (GameManager.instance.dialogueArray.Count > 0) {
+            TextMeshPro temp = GameManager.instance.dialogueArray[0];
+
+            foreach (char letter in temp.text.ToCharArray()) {
+                dialogueText.text += letter;
+                yield return new WaitForSeconds(typeSpeed);
+            }
+            yield return new WaitForSeconds(displayTime);
+            dialogueText.text = "";
+            GameManager.instance.dialogueArray.RemoveAt(0);
         }
+        dialogueText.text = "";
+        GameManager.instance.dialogueBox.SetActive(false);
+        GameManager.instance.isDialoguePlaying = false;
     }
+
+
 }
