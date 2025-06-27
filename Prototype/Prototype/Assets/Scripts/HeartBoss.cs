@@ -113,13 +113,12 @@ public class HeartBoss : MonoBehaviour, IDamage
 
     IEnumerator PlayBeat()
     {
-        while (true) 
+        if (heartBeatSource.clip == null)
         {
-            if (heartBeatSource.clip == null)
-            {
-                heartBeatSource.clip = slowBeatClip;
-            }
-
+            heartBeatSource.clip = slowBeatClip;
+        }
+        while (bossHpCurr > 0) 
+        {
             AudioManager.PlaySFX(heartBeatSource, heartBeatSource.clip);
             yield return new WaitWhile(() => heartBeatSource.isPlaying);
         }
