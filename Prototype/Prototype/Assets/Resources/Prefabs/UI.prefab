@@ -12921,7 +12921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radioSquelch: {fileID: 3459498712969295976}
   displayTime: 2.5
-  typeSpeed: 0.05
+  typeSpeed: 0.03
 --- !u!82 &3459498712969295976
 AudioSource:
   m_ObjectHideFlags: 0
