@@ -324,32 +324,28 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 
     public void Crouch()
     {
-        if (!isChangingCrouch) {
-            isChangingCrouch = true;
+        if (anim.GetBool("isSprinting") && !isChangingCrouch) {
+            anim.SetBool("isSprinting", false);
+            speed = speedOG;
+            walkRate = walkRateOG;
+        }
+        if (!isHiding && !isChangingCrouch) {
+            bool crouching = anim.GetBool("isCrouching");
+            anim.SetBool("isCrouching", !crouching);
 
-            if (anim.GetBool("isSprinting")) {
-                anim.SetBool("isSprinting", false);
+            if (anim.GetBool("isCrouching")) {
+                speed = speed * crouchSpeed;
+                walkRate = walkRate * 2;
+                characterController.height = .2f;
+                characterController.center = new Vector3(0, .4f, 0);
+                headLocal = altHeadLocal;
+            }
+            else {
                 speed = speedOG;
                 walkRate = walkRateOG;
-            }
-            if (!isHiding) {
-                bool crouching = anim.GetBool("isCrouching");
-                anim.SetBool("isCrouching", !crouching);
-
-                if (anim.GetBool("isCrouching")) {
-                    speed = speed * crouchSpeed;
-                    walkRate = walkRate * 2;
-                    characterController.height = .2f;
-                    characterController.center = new Vector3(0, .4f, 0);
-                    headLocal = altHeadLocal;
-                }
-                else {
-                    speed = speedOG;
-                    walkRate = walkRateOG;
-                    characterController.height = 2f;
-                    characterController.center = new Vector3(0, 1, 0);
-                    headLocal = headLocalOG;
-                }
+                characterController.height = 2f;
+                characterController.center = new Vector3(0, 1, 0);
+                headLocal = headLocalOG;
             }
         }
     }
