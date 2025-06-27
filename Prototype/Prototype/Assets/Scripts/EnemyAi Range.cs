@@ -260,6 +260,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
         if (shootTimer >= fireRate)
         {
             anim.SetTrigger("Shoot");
+            shootTimer = 0;
         }
 
         // Stop moving and face the player when close enough

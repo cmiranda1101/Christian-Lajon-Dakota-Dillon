@@ -932,10 +932,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59de84142c233c846a127a828062a0a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensSlider: {fileID: 0}
-  sensDefault: 250
   lockVertMin: -90
-  lockVertMax: 90
+  lockVertMax: 75
   invertY: 0
 --- !u!20 &7221329194577061255
 Camera:
@@ -1445,10 +1443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59de84142c233c846a127a828062a0a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensSlider: {fileID: 0}
-  sensDefault: 250
   lockVertMin: -90
-  lockVertMax: 90
+  lockVertMax: 75
   invertY: 0
 --- !u!20 &6396201086158887688
 Camera:
