@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     float gravity = -9.81f;
 
     public bool isHiding;
+    bool isChangingCrouch { get; set; } = false;
 
     void Start()
     {
@@ -234,7 +235,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             anim.SetFloat("Speed", Mathf.Lerp(animationCurr, controllerSpeedCurr, Time.deltaTime * animTransSpeed));
         }
         else
-            anim.SetFloat("Speed", Mathf.Lerp(Mathf.Clamp(animationCurr,0,crouchSpeed), controllerSpeedCurr, Time.deltaTime * animTransSpeed));
+            anim.SetFloat("Speed", Mathf.Lerp(animationCurr, controllerSpeedCurr, Time.deltaTime * animTransSpeed));
+            //anim.SetFloat("Speed", Mathf.Lerp(Mathf.Clamp(animationCurr,0,crouchSpeed), controllerSpeedCurr, Time.deltaTime * animTransSpeed));
     }
 
     IEnumerator Dodge()
@@ -322,31 +324,39 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 
     public void Crouch()
     {
-        if(anim.GetBool("isSprinting"))
-        {
-            anim.SetBool("isSprinting", false);
-            speed = speedOG;
-            walkRate = walkRateOG;
-        }
-        if (!isHiding) {
-            bool crouching = anim.GetBool("isCrouching");
-            anim.SetBool("isCrouching", !crouching);
+        if (!isChangingCrouch) {
+            isChangingCrouch = true;
 
-            if (anim.GetBool("isCrouching")) {
-                speed = speed * crouchSpeed;
-                walkRate = walkRate * 2;
-                characterController.height = .2f;
-                characterController.center = new Vector3(0, .4f, 0);
-                headLocal = altHeadLocal;
-            }
-            else {
+            if (anim.GetBool("isSprinting")) {
+                anim.SetBool("isSprinting", false);
                 speed = speedOG;
                 walkRate = walkRateOG;
-                characterController.height = 2f;
-                characterController.center = new Vector3(0, 1, 0);
-                headLocal = headLocalOG;
+            }
+            if (!isHiding) {
+                bool crouching = anim.GetBool("isCrouching");
+                anim.SetBool("isCrouching", !crouching);
+
+                if (anim.GetBool("isCrouching")) {
+                    speed = speed * crouchSpeed;
+                    walkRate = walkRate * 2;
+                    characterController.height = .2f;
+                    characterController.center = new Vector3(0, .4f, 0);
+                    headLocal = altHeadLocal;
+                }
+                else {
+                    speed = speedOG;
+                    walkRate = walkRateOG;
+                    characterController.height = 2f;
+                    characterController.center = new Vector3(0, 1, 0);
+                    headLocal = headLocalOG;
+                }
             }
         }
+    }
+
+    void IsChangingCrouch()
+    {
+        isChangingCrouch = false;
     }
 
     void FollowHead()
