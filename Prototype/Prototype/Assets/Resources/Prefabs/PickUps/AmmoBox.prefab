@@ -289,7 +289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4415346642384442089}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.5272548, y: 0.24999952, z: 5.432763}
   m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
   m_ConstrainProportionsScale: 0
@@ -310,12 +310,12 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 2
-  m_Color: {r: 0.49803922, g: 0.20784314, b: 0.015686275, a: 1}
-  m_Intensity: 1
-  m_Range: 7
+  m_Color: {r: 0.14116393, g: 0.49803922, b: 0.015686266, a: 1}
+  m_Intensity: 4
+  m_Range: 4
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize: 4
   m_Shadows:
     m_Type: 1
     m_Resolution: -1
@@ -352,7 +352,7 @@ Light:
   m_RenderingLayerMask: 1
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
+  m_AreaSize: {x: 4, y: 4}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
@@ -432,7 +432,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdb328925ffaf64a98eade9dbe3e2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPickupSource: {fileID: 0}
   itemPickupClips: []
   pickUpText: {fileID: 3285275795965807292}
   healthAmount: 0
@@ -589,7 +588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdb328925ffaf64a98eade9dbe3e2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPickupSource: {fileID: 9121728022095273063}
   itemPickupClips:
   - {fileID: 8300000, guid: 4470841ec36ac0a4aad0fc345b0185ce, type: 3}
   - {fileID: 8300000, guid: 804e8aef1c55e8441a29eab00ed1a263, type: 3}
