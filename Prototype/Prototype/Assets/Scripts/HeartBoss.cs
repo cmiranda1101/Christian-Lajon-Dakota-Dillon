@@ -5,14 +5,8 @@ public class HeartBoss : MonoBehaviour, IDamage
 {
     BossBulletHell bulletHell;
 
-    [SerializeField] Transform spawner1Location;
-    [SerializeField] Transform spawner2Location;
-    [SerializeField] Transform spawner3Location;
-    [SerializeField] Transform spawner4Location;
     [SerializeField] GameObject enemySpawnerPrefab;
-    [SerializeField] GameObject itemSpawners;
     [SerializeField] GameObject[] mazeArray;
-    GeneralSpawner generalSpawnerPrefab;
 
     [SerializeField] AudioSource heartBeatSource;
     [SerializeField] AudioClip fastBeatClip;
@@ -37,7 +31,6 @@ public class HeartBoss : MonoBehaviour, IDamage
         phaseNum = 0;
         isShielded = true;
         wallsUP = false;
-        generalSpawnerPrefab = itemSpawners.GetComponent<GeneralSpawner>();
 
         bossHpCurr = bossHPMax;
         GameManager.instance.bossHealthUI.SetActive(true);
@@ -58,7 +51,6 @@ public class HeartBoss : MonoBehaviour, IDamage
         bulletHell = GetComponentInParent<BossBulletHell>();
 
         StartCoroutine(PlayBeat());
-        SpawnersOn();
     }
 
     // Update is called once per frame
@@ -95,8 +87,6 @@ public class HeartBoss : MonoBehaviour, IDamage
         //Debug.Log("in Shield down");
 
         isShielded = false;
-        SpawnersOff();
-        GameManager.instance.heartBossScript.generalSpawnerPrefab.startSpawn = true;
         pumpAnim["Armature|Pumping"].speed = fastPumpSpeed;
         heartBeatSource.clip = fastBeatClip;
         GameManager.instance.bossHealthBar.color = Color.red;
@@ -115,9 +105,6 @@ public class HeartBoss : MonoBehaviour, IDamage
             pumpAnim["Armature|Pumping"].speed = slowPumpSpeed;
             heartBeatSource.clip = slowBeatClip;
             GameManager.instance.bossHealthBar.color = HPColorOrigin;
-            SpawnersOn();
-            //generalSpawnerPrefab = itemSpawners.GetComponent<GeneralSpawner>();
-            generalSpawnerPrefab.startSpawn = true;
             bulletHell.activate = false;
             phaseNum++;
             mazeArray[phaseNum].SetActive(true);
@@ -126,25 +113,14 @@ public class HeartBoss : MonoBehaviour, IDamage
 
     IEnumerator PlayBeat()
     {
-        while (true) {
-            heartBeatSource.Play();
+        if (heartBeatSource.clip == null)
+        {
+            heartBeatSource.clip = slowBeatClip;
+        }
+        while (bossHpCurr > 0) 
+        {
+            AudioManager.PlaySFX(heartBeatSource, heartBeatSource.clip);
             yield return new WaitWhile(() => heartBeatSource.isPlaying);
         }
-    }
-
-    void SpawnersOn()
-    {
-        Instantiate(enemySpawnerPrefab, spawner1Location);
-        Instantiate(enemySpawnerPrefab, spawner2Location);
-        Instantiate(enemySpawnerPrefab, spawner3Location);
-        Instantiate(enemySpawnerPrefab, spawner4Location);
-    }
-
-    void SpawnersOff()
-    {
-        Destroy(spawner1Location.GetChild(0).gameObject); 
-        Destroy(spawner2Location.GetChild(0).gameObject); 
-        Destroy(spawner3Location.GetChild(0).gameObject); 
-        Destroy(spawner4Location.GetChild(0).gameObject); 
     }
 }

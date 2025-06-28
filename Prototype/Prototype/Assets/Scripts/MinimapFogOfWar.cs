@@ -9,9 +9,16 @@ public class MinimapFogOfWar : MonoBehaviour
     [SerializeField] int radius; // The radius of the area to uncover around the player
     void Start()
     {
+        //fogOfWarRenderer = GetComponent<Renderer>();
+        //fogTexture = fogOfWarRenderer.material.mainTexture as Texture2D;
+        //copy = Instantiate(fogTexture);
+        //fogOfWarRenderer.material.mainTexture = copy;
+
         fogOfWarRenderer = GetComponent<Renderer>();
         fogTexture = fogOfWarRenderer.material.mainTexture as Texture2D;
-        copy = Instantiate(fogTexture);
+        copy = new Texture2D(fogTexture.width, fogTexture.height, TextureFormat.RGBA32, false);
+        copy.SetPixels(fogTexture.GetPixels());
+        copy.Apply();
         fogOfWarRenderer.material.mainTexture = copy;
     }
 

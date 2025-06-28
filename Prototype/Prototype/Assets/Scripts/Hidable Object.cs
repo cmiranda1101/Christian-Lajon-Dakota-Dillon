@@ -1,8 +1,17 @@
+using System.Collections;
 using UnityEngine;
 
 public class HidableObject : MonoBehaviour, IDamage
 {
+    [SerializeField] GameObject breakEffect;
+    Transform spawnSpot;
+
     //Always make the object a child of an empty object
+
+    private void Start()
+    {
+        spawnSpot = gameObject.transform.parent.transform;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,10 +33,10 @@ public class HidableObject : MonoBehaviour, IDamage
 
     public void takeDamage(int amount)
     {
-        if (gameObject.GetComponentInParent<HidableObject>() != null) 
-            Destroy(gameObject.transform.parent.gameObject);
+        Destroy(gameObject.transform.parent.gameObject);
 
         GameManager.instance.playerScript.isHiding = false;
-        
+
+        Instantiate(breakEffect, spawnSpot.position, Quaternion.identity);
     }
 }

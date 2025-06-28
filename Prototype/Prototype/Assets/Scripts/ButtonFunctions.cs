@@ -25,6 +25,15 @@ public class ButtonFunctions : MonoBehaviour
 
     [SerializeField] AudioSource UISoundSource;
 
+    private void Start()
+    {
+        if(SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            buyAudio.ignoreListenerPause = true;  
+        }
+        UISoundSource.ignoreListenerPause = true;
+    }
+
     public void OnResumeButton()
     {
         StartCoroutine(Resume());
@@ -66,6 +75,8 @@ public class ButtonFunctions : MonoBehaviour
 #endif
     }
 
+    /// SHOP FUNCTIONALITY ////////////////////////////////////////////////////////////////////
+
     public void OnCloseButton()
     {
         StartCoroutine(Close());
@@ -80,7 +91,7 @@ public class ButtonFunctions : MonoBehaviour
     {
         shopRifle = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
         if (GameManager.instance.playerScript.money >= 100) {
-            buyAudio.Play();
+            AudioManager.PlaySFX(buyAudio, buyAudio.clip);
             shopRifleGunStats.currentAmmo = shopRifleGunStats.magSize;
             shopRifleGunStats.magCount = shopRifleGunStats.startingMagCount;
             GameManager.instance.weaponScript.GetGunStats(shopRifleGunStats);
@@ -99,9 +110,9 @@ public class ButtonFunctions : MonoBehaviour
 
     public void BuyHealth()
     {
-        if(GameManager.instance.playerScript.money >= 100)
+        if(GameManager.instance.playerScript.money >= 100 && GameManager.instance.playerScript.currentHP < GameManager.instance.playerScript.maxHP)
         {
-            buyAudio.Play();
+            AudioManager.PlaySFX(buyAudio, buyAudio.clip);
             GameManager.instance.playerScript.Heal(GameManager.instance.playerScript.maxHP);
             GameManager.instance.moneyScript.SubtractMoney(100);
         }
@@ -111,9 +122,12 @@ public class ButtonFunctions : MonoBehaviour
     {
         if (GameManager.instance.playerScript.money >= 50)
         {
-            buyAudio.Play();
+            AudioManager.PlaySFX(buyAudio, buyAudio.clip);
             pistolStats.magCount++;
-            GameManager.instance.weaponScript.magCount++;
+            if (GameManager.instance.weaponScript.gunList[GameManager.instance.weaponScript.gunListIndex] == pistolStats)
+            {
+                GameManager.instance.weaponScript.magCount++;
+            }
             GameManager.instance.ammoScript.UpdateAmmoAndMagCount();
             GameManager.instance.moneyScript.SubtractMoney(50);
         }
@@ -123,9 +137,12 @@ public class ButtonFunctions : MonoBehaviour
     {
         if (GameManager.instance.playerScript.money >= 50)
         {
-            buyAudio.Play();
+            AudioManager.PlaySFX(buyAudio, buyAudio.clip);
             shopRifleGunStats.magCount++;
-            GameManager.instance.weaponScript.magCount++;
+            if (GameManager.instance.weaponScript.gunList[GameManager.instance.weaponScript.gunListIndex] == shopRifleGunStats)
+            {
+                GameManager.instance.weaponScript.magCount++;
+            }
             GameManager.instance.ammoScript.UpdateAmmoAndMagCount();
             GameManager.instance.moneyScript.SubtractMoney(50);
         }
@@ -142,7 +159,7 @@ public class ButtonFunctions : MonoBehaviour
                 ThrowConsumable.GrenadeType currentType = ThrowConsumable.GrenadeType.Molotov;
                 GameManager.instance.playerScript.throwConsumable.currentType = currentType;
             }
-            buyAudio.Play();
+            AudioManager.PlaySFX(buyAudio, buyAudio.clip);
             GameManager.instance.playerScript.throwConsumable.molotovCount++;
             GameManager.instance.molotovCounter.text = GameManager.instance.playerScript.throwConsumable.molotovCount.ToString();
             GameManager.instance.moneyScript.SubtractMoney(100);
@@ -160,12 +177,13 @@ public class ButtonFunctions : MonoBehaviour
                 ThrowConsumable.GrenadeType currentType = ThrowConsumable.GrenadeType.Frag;
                 GameManager.instance.playerScript.throwConsumable.currentType = currentType;
             }
-            buyAudio.Play();
+            AudioManager.PlaySFX(buyAudio, buyAudio.clip);
             GameManager.instance.playerScript.throwConsumable.grenadeCount++;
             GameManager.instance.grenadeCounter.text = GameManager.instance.playerScript.throwConsumable.grenadeCount.ToString();
             GameManager.instance.moneyScript.SubtractMoney(100);
         }
     }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void OnCreditsButton()
     {
@@ -220,8 +238,8 @@ public class ButtonFunctions : MonoBehaviour
 
     public IEnumerator UISound()
     {
-        UISoundSource.Play();
-        yield return new WaitWhile(() => UISoundSource.isPlaying);
+        AudioManager.PlaySFX(UISoundSource, UISoundSource.clip);
+        yield return new WaitForSecondsRealtime(.2f);
     }
     //public void OpenOptionsFromStart()
     //{

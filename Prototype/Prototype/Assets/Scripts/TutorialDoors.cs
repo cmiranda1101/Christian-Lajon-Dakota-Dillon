@@ -1,13 +1,17 @@
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class TutorialDoors : MonoBehaviour
 {
-    enum objectiveType { pickup, kill, goTo, buttonInput};
+    enum objectiveType { pickup, kill, goTo, buttonInput, instantiateObj};
 
     [SerializeField] objectiveType type;
     [SerializeField] GameObject[] objectives;
+    [SerializeField] GameObject tutorialItem;
     [SerializeField] string buttonInputString;
     [SerializeField] float moveSpeed;
+
+    string tutorialItemName;
 
     bool objectiveCompleted;
     bool inInputZone = false;
@@ -17,6 +21,8 @@ public class TutorialDoors : MonoBehaviour
     private void Start()
     {
         startingPos = transform.position;
+
+        if (tutorialItem != null) tutorialItemName = tutorialItem.name;
     }
     private void Update()
     {
@@ -29,6 +35,10 @@ public class TutorialDoors : MonoBehaviour
             else if (type == objectiveType.buttonInput && inInputZone)
             {
                 objectiveCompleted = CheckInput();
+            }
+            else if(type == objectiveType.instantiateObj) 
+            {
+                objectiveCompleted = WasInstantiated();
             }
 
         }
@@ -61,9 +71,17 @@ public class TutorialDoors : MonoBehaviour
         return wasButtonPressed;
     }
 
+    bool WasInstantiated()
+    {
+        if (GameObject.Find(tutorialItemName + "(Clone)")) {
+            return true;
+        }
+        else return false;
+    }
+
     void OpenDoor()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(startingPos.x + 15, startingPos.y, startingPos.z), moveSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(startingPos.x + 15, startingPos.y, startingPos.z), moveSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)

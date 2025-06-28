@@ -39,6 +39,8 @@ public class GunBase : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.instance.isPaused) { return; }
+
         //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * range, Color.blue);
         shotTimer += Time.deltaTime;
         if (Input.GetButtonDown("Fire1") && currentAmmo > 0 && shotTimer > fireRate && !isReloading)
@@ -142,6 +144,16 @@ public class GunBase : MonoBehaviour
 
     void SelectGun()
     {
+        if (Input.GetButtonDown("Hotbar1"))
+        {
+            gunListIndex = 0;
+            ChangeGun();
+        } 
+        else if (Input.GetButtonDown("Hotbar2") && gunList.Count > 1)
+        {
+            gunListIndex = 1;
+            ChangeGun();
+        }
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListIndex < gunList.Count - 1)
         {
             gunListIndex++;

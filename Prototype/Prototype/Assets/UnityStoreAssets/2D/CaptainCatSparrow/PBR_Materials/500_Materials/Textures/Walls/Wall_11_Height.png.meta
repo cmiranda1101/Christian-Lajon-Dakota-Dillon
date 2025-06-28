@@ -5,7 +5,7 @@ AssetOrigin:
   productId: 242760
   packageName: 50 Free PBR Materials
   packageVersion: 1.0
-  assetPath: Assets/CaptainCatSparrow/PBR_Materials/500_Materials/Textures/Walls/Wall_11_Height.png
+  assetPath: Assets/UnityStoreAssets/2D/CaptainCatSparrow/PBR_Materials/500_Materials/Textures/Walls/Wall_11_Height.png
   uploadId: 554676
 TextureImporter:
   internalIDToNameTable: []
@@ -78,7 +78,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -115,6 +115,19 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1

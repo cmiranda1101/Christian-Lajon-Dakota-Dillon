@@ -260,6 +260,7 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
         if (shootTimer >= fireRate)
         {
             anim.SetTrigger("Shoot");
+            shootTimer = 0;
         }
 
         // Stop moving and face the player when close enough
@@ -288,8 +289,12 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
     void shoot()
     {
         if (isDead) return;
-        shootTimer = 0;
-        Instantiate(bullet, shootingPos.position, transform.rotation);
+        
+        Vector3 playerPos = GameManager.instance.player.transform.position + Vector3.up * 1.0f; 
+        Vector3 dirToPlayer = (playerPos - shootingPos.position).normalized;
+        Quaternion lookRot = Quaternion.LookRotation(dirToPlayer);
+
+        Instantiate(bullet, shootingPos.position, lookRot);
     }
 
     // Play walk sound
@@ -302,6 +307,8 @@ public class EnemyAiRange : MonoBehaviour, IDamage, IHeardSomething
     // Play gunshot sound
     void GunShotSound()
     {
+        if (isDead) return;
+
         int i = Random.Range(0, gunClips.Length);
         AudioManager.PlaySFX(gunSource, gunClips[i]);
     }

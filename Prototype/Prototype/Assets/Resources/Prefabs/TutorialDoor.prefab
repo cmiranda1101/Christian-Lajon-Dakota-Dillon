@@ -262,7 +262,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   objectives: []
+  tutorialItem: {fileID: 0}
   buttonInputString: 
+  moveSpeed: 5
 --- !u!65 &6166337150668485329
 BoxCollider:
   m_ObjectHideFlags: 0

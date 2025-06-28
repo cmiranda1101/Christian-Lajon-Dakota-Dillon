@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -25,7 +26,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject savedStats;
     [SerializeField] public GameObject dialogueBox;
     [SerializeField] public TextMeshProUGUI dialogueText;
+    [SerializeField] public DialogueSystem dialogueSystem;
 
+    public List<TextMeshPro> dialogueArray;
     public GameObject DamageFlash;
     public GameObject HealFlash;
     public GameObject miniMap;
@@ -60,6 +63,7 @@ public class GameManager : MonoBehaviour
 
 
     public bool isPaused;
+    public bool isDialoguePlaying = false;
 
     public enum PreviousMenu { None, Start, Pause }
     public PreviousMenu previousMenu = PreviousMenu.None;
@@ -88,6 +92,7 @@ public class GameManager : MonoBehaviour
         ammoScript = menuAmmo.GetComponentInChildren<AmmoUI>();
         buttonScript = menuButtons.GetComponent<ButtonFunctions>();
         throwConsumableScript = player.GetComponentInChildren<ThrowConsumable>();
+        dialogueArray = new List<TextMeshPro>();
         timeScaleOrig = Time.timeScale;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -108,10 +113,9 @@ public class GameManager : MonoBehaviour
                menuActive = menuPause;
                menuActive.SetActive(isPaused);
             }
-            else if (menuActive == menuPause)
+            else if (menuActive == menuPause || menuActive == menuOptions)
             {
                 StateUnpause();
-                menuActive = null;
             }
        }
        if (Input.GetButtonDown("Debug Level"))
@@ -123,6 +127,7 @@ public class GameManager : MonoBehaviour
     public void StatePause()
     {
         isPaused = !isPaused;
+        AudioListener.pause = true;
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -132,6 +137,7 @@ public class GameManager : MonoBehaviour
     public void StateUnpause()
     {
         isPaused = !isPaused;
+        AudioListener.pause = false;
         Time.timeScale = timeScaleOrig;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

@@ -29,11 +29,12 @@ public class ThrowConsumable : MonoBehaviour
     {
         GameManager.instance.chemlightCounter.text = chemlightCount.ToString();
         GameManager.instance.molotovCounter.text = molotovCount.ToString();
+        GameManager.instance.grenadeCounter.text = grenadeCount.ToString();
     }
 
     void Update()
     {
-        //PlayerController script inputs will need to be deleted to avoid running these functions twice
+        if (GameManager.instance.isPaused) return;
 
         if (Input.GetButtonDown("Throw Chemlight"))
         {

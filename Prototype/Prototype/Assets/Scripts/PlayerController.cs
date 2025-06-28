@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 {
     [SerializeField] CharacterController characterController;
     [SerializeField] GameObject MainCamera;
+    [SerializeField] GameObject WeaponCamera;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] AudioSource footStepSource;
     [SerializeField] public AudioSource playerHurtSource;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     [SerializeField] float cameraSmoothness;
     [SerializeField] float crouchSpeed;
     [SerializeField] float sprintSpeed;
+    [SerializeField,InspectorRange(float.MinValue, 0)] float gravity;
 
     [SerializeField] public GameObject Holster;
 
@@ -67,9 +69,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     float animationCurr;
     float controllerSpeedCurr;
     float fallVelocity;
-    float gravity = -9.81f;
+    
 
     public bool isHiding;
+    bool isChangingCrouch { get; set; } = false;
 
     void Start()
     {
@@ -83,6 +86,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     }
     void Update()
     {
+        if (GameManager.instance.isPaused) return;
+
         MovePlayer();
         FollowHead();
         if (Input.GetButtonDown("Toggle Flashlight")) {
@@ -209,7 +214,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             fallVelocity = 0;
         }
         else {
-            fallVelocity += gravity * Time.deltaTime;
+            fallVelocity = gravity;
             Vector3 fall = new Vector3(0, fallVelocity, 0);
             characterController.Move(fall * Time.deltaTime);
         }
@@ -231,37 +236,56 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             anim.SetFloat("Speed", Mathf.Lerp(animationCurr, controllerSpeedCurr, Time.deltaTime * animTransSpeed));
         }
         else
-            anim.SetFloat("Speed", Mathf.Lerp(Mathf.Clamp(animationCurr,0,crouchSpeed), controllerSpeedCurr, Time.deltaTime * animTransSpeed));
+            anim.SetFloat("Speed", Mathf.Lerp(animationCurr, controllerSpeedCurr, Time.deltaTime * animTransSpeed));
+            //anim.SetFloat("Speed", Mathf.Lerp(Mathf.Clamp(animationCurr,0,crouchSpeed), controllerSpeedCurr, Time.deltaTime * animTransSpeed));
     }
 
     IEnumerator Dodge()
     {
-        if (dodgeTimer >= dodgeCooldown) {
+        if (!PlayerHasMovement()) 
+        { 
+            yield break; 
+        } 
+        else if (anim.GetBool("isCrouching") || anim.GetBool("isSprinting"))
+        {
+            yield break;
+        }
+
+        if (dodgeTimer >= dodgeCooldown)
+        {
             AudioManager.PlaySFX(playerHurtSource, playerDodgeClip);
             dodgeTimer = 0;
-            float originalSpeed = speed;
             speed = dodgeSpeed;
             StartCoroutine(FillCooldownImage());
             yield return new WaitForSeconds(dodgeDuration);
-            speed = originalSpeed;
+            speed = speedOG;
         }
     }
 
     void Sprint()
     {
-        if (characterController.velocity.magnitude > .1f){
-            bool sprinting = anim.GetBool("isSprinting");
+        bool sprinting = anim.GetBool("isSprinting");
+        if (characterController.velocity.magnitude > .1f)
+        {
             anim.SetBool("isSprinting", !sprinting);
 
-            if (anim.GetBool("isSprinting")) {
+            if (anim.GetBool("isSprinting"))
+            {
                 walkRate = walkRate / 2;
                 speed = speed * sprintSpeed;
                 StartCoroutine(Stamina());
             }
-            else {
+            else
+            {
                 speed = speedOG;
                 walkRate = walkRateOG;
             }
+        }
+        else if (characterController.velocity.magnitude <= 0 && sprinting == true)
+        {
+            anim.SetBool("isSprinting", false);
+            speed = speedOG;
+            walkRate = walkRateOG;
         }
     }
 
@@ -269,13 +293,19 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     {
         while (anim.GetBool("isSprinting"))
         {
-            if (currentStamina <= 0)
+            while (GameManager.instance.isPaused)
+            {
+                yield return null;
+            }
+
+            if (!PlayerHasMovement() || currentStamina <= 0)
             {
                 anim.SetBool("isSprinting", false);
                 speed = speedOG;
                 walkRate = walkRateOG;
+                break;
             }
-            currentStamina = Mathf.Clamp(currentStamina -= staminaDrain, 0, maxStamina);
+            currentStamina = Mathf.Clamp(currentStamina -= staminaDrain * Time.deltaTime, 0, maxStamina);
             GameManager.instance.staminaBar.fillAmount = currentStamina / maxStamina;
             yield return null;
         }
@@ -283,7 +313,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 
         while (anim.GetBool("isSprinting") == false && currentStamina < maxStamina)
         {
-            currentStamina = Mathf.Clamp(currentStamina += staminaDrain, 0, maxStamina);
+            while (GameManager.instance.isPaused)
+            {
+                yield return null;
+            }
+            currentStamina = Mathf.Clamp(currentStamina += staminaDrain * Time.deltaTime, 0, maxStamina);
             GameManager.instance.staminaBar.fillAmount = currentStamina / maxStamina;
             yield return null;
         }
@@ -291,7 +325,12 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
 
     public void Crouch()
     {
-        if (!isHiding) {
+        if (anim.GetBool("isSprinting") && !isChangingCrouch) {
+            anim.SetBool("isSprinting", false);
+            speed = speedOG;
+            walkRate = walkRateOG;
+        }
+        if (!isHiding && !isChangingCrouch) {
             bool crouching = anim.GetBool("isCrouching");
             anim.SetBool("isCrouching", !crouching);
 
@@ -312,15 +351,25 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
         }
     }
 
+    void IsChangingCrouch()
+    {
+        isChangingCrouch = false;
+    }
+
     void FollowHead()
     {
             MainCamera.transform.position = Vector3.Lerp(MainCamera.transform.position, headLocal.position, cameraSmoothness);
+            WeaponCamera.transform.position = Vector3.Lerp(WeaponCamera.transform.position, headLocal.position, cameraSmoothness);
     }
 
     IEnumerator FillCooldownImage()
     {
         float elapsedTime = 0f;
         while (elapsedTime < dodgeCooldown) {
+            while (GameManager.instance.isPaused) 
+            {
+                yield return null;
+            }
             elapsedTime += Time.deltaTime;
             GameManager.instance.dodgeCooldownRadial.fillAmount = elapsedTime / dodgeCooldown;
             yield return null;
@@ -412,5 +461,17 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
         GameManager.instance.HealFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.HealFlash.SetActive(false);
+    }
+
+    bool PlayerHasMovement()
+    {
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
