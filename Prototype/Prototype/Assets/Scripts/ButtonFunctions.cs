@@ -25,6 +25,8 @@ public class ButtonFunctions : MonoBehaviour
 
     [SerializeField] AudioSource UISoundSource;
 
+    bool isClickedAlready = false;
+
     private void Start()
     {
         if(SceneManager.GetActiveScene().name != "MainMenu")
@@ -37,11 +39,14 @@ public class ButtonFunctions : MonoBehaviour
     public void OnResumeButton()
     {
         StartCoroutine(Resume());
+        isClickedAlready = true;
     }
     IEnumerator Resume()
     {
+        if (isClickedAlready) yield break; // Prevent multiple clicks from resuming
         yield return StartCoroutine(UISound());
         GameManager.instance.StateUnpause();
+        isClickedAlready = false; // Reset the flag after resuming
     }
 
     public void OnRestartButton()
