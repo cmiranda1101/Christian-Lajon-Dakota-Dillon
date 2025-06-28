@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     [SerializeField] float cameraSmoothness;
     [SerializeField] float crouchSpeed;
     [SerializeField] float sprintSpeed;
+    [SerializeField,InspectorRange(float.MinValue, 0)] float gravity;
 
     [SerializeField] public GameObject Holster;
 
@@ -68,7 +69,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
     float animationCurr;
     float controllerSpeedCurr;
     float fallVelocity;
-    float gravity = -9.81f;
+    
 
     public bool isHiding;
     bool isChangingCrouch { get; set; } = false;
@@ -213,7 +214,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEmitSound
             fallVelocity = 0;
         }
         else {
-            fallVelocity += gravity * Time.deltaTime;
+            fallVelocity = gravity;
             Vector3 fall = new Vector3(0, fallVelocity, 0);
             characterController.Move(fall * Time.deltaTime);
         }

@@ -617,6 +617,7 @@ MonoBehaviour:
   cameraSmoothness: 0.5
   crouchSpeed: 0.5
   sprintSpeed: 2
+  gravity: -10.5
   Holster: {fileID: 3497936574257273495}
   ignoreLayer:
     serializedVersion: 2
