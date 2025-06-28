@@ -26,9 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameLevelScenes/Tutorial.unity
     guid: 6708baa6b8825d749be42fc02ae93ca2
-  - enabled: 1
-    path: Assets/Scenes/Showcase.unity
-    guid: 2d3c89dab187f094b932b8eb184410b9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
