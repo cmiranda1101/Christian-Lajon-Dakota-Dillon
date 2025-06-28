@@ -3099,7 +3099,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2291991439081949742, guid: 1bba38fa799522e41b9421c7a2fd9f6a, type: 3}
       propertyPath: m_text
-      value: Press R to reload
+      value: Press R to reload, reloading drops your currents mag in place of one
+        of your spares. Don't waste your rounds.
       objectReference: {fileID: 0}
     - target: {fileID: 2477111691087893607, guid: 1bba38fa799522e41b9421c7a2fd9f6a, type: 3}
       propertyPath: m_Name
