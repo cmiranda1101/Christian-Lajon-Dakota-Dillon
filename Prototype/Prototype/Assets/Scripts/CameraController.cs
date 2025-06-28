@@ -11,6 +11,10 @@ public class CameraController : MonoBehaviour
     float xRot = 0f;
     void Start()
     {
+        #if UNITY_WEBGL
+            sensitivity *= .3f;
+        #endif
+
         sensitivity = PlayerPrefs.GetFloat("Sensitivity", 250f);
 
         Cursor.visible = false;
