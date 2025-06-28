@@ -43,6 +43,7 @@ public class AudioManager : MonoBehaviour
         {
             if (music != null)
                 music.volume = value;
+                music.ignoreListenerPause = true;
         }
 
         PlayerPrefs.SetFloat("MusicVolume", value);
